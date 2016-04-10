@@ -1,6 +1,7 @@
 # Aliases
 alias most 'most -c +u'
 alias lsports 'netstat -pelnut'
+alias git 'hub'
 
 # Functions
 function fish_greeting

@@ -17,7 +17,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'valloric/youcompleteme'
+" Plugin 'valloric/youcompleteme'
 
 call vundle#end()
 
@@ -155,9 +155,6 @@ let g:syntastic_check_on_wq = 0
 
 " NERDTree settings
 map <C-n> :NERDTreeToggle<CR>
-
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | else | NERDTree % | endif | :wincmd l
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 

@@ -1,6 +1,6 @@
-Arch Config
+Dotfiles
 ===========
-Here's a bunch of useless configuration files for my Arch Linux installation.
+Here's a bunch of useless configuration files for my Linux installation.
 
 I have config files for stuff like fish shell, i3, and xinitrc.
 

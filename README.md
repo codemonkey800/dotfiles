@@ -4,6 +4,8 @@ Here's a bunch of useless configuration files for my Linux installation.
 
 I have config files for stuff like fish shell, i3, and xinitrc.
 
+I also have random scripts that are not actually configuration files, but scripts. So yeah.
+
 License
 =======
 The MIT License (MIT)

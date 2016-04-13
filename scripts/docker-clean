@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+echo "Removing exited containers"
+if docker ps -a | grep Exited; then
+    docker ps -a | grep Exited | awk '{print $1}' | xargs docker rm -f
+else
+    echo "No containers to remove"
+fi
+
+echo "Removing <none> images"
+if docker images | grep "<none>"; then
+    docker images | grep "<none>" | awk '{print $3}' | xargs docker rmi -f
+else
+    echo "No images to remove"
+fi
+
+echo "Removing volumes"
+if docker volume ls | grep local; then
+    docker volume ls | grep local | awk '{print $2}' | xargs docker volume rm
+else
+    echo "No volumes to remove"
+fi
+
+echo "All done!"
+

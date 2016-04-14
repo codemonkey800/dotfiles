@@ -9,7 +9,7 @@ end
 set gpu_path /sys/kernel/debug/vgaswitcheroo/switch
 
 if test ! -f "$gpu_path"
-    echo "File does not exist. Maybe you're not using nouveau"
+    echo "File does not exist. Maybe you don't have switchable GPUs"
     exit -1
 end
 

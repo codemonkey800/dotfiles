@@ -12,7 +12,8 @@ end
 
 function l
     if test -f "$argv"
-        pygmentize -g "$argv" | cat -n
+        less -n "$argv"
+        # pygmentize -g "$argv" | cat -n
 	else
 		ls -CAF --color=auto $argv
 	end

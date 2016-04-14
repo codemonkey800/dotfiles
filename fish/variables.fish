@@ -1,7 +1,7 @@
 set -gx EDITOR /usr/bin/vim
 set -gx PAGER /usr/bin/less
 set -gx LESS '-R'
-set -gx LESSOPEN '|pygmentize %s'
+set -gx LESSOPEN '|pygmentize -g %s'
 set -gx GTK_SCALE 2
 set -gx LANG en_US.UTF-8
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1

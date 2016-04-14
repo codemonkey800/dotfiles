@@ -2,6 +2,7 @@
 alias most 'most -c +u'
 alias lsports 'netstat -pelnut'
 alias git 'hub'
+alias sudo 'sudo -E'
 
 # Functions
 function fish_greeting

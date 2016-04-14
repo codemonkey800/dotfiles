@@ -1,3 +1,3 @@
-#!/usr/bin/env fish
-rsync -raP $argv
+#!/bin/bash
+rsync -raP "$@"
 

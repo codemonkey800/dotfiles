@@ -6,6 +6,13 @@ I have config files for stuff like fish shell, i3, and xinitrc.
 
 I also have random scripts that are not actually configuration files, but scripts. So yeah.
 
+Scripts
+=======
+To install the scripts and shit, you should run:
+```bash
+sudo install scripts/* /usr/local/bin
+```
+
 License
 =======
 The MIT License (MIT)

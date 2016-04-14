@@ -18,6 +18,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Plugin 'valloric/youcompleteme'
+Plugin 'gitignore'
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
 

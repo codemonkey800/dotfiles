@@ -1,4 +1,7 @@
 # Aliases
+alias atom 'atom-beta'
+alias apm 'apm-beta'
+alias chrome 'google-chrome-unstable'
 alias lsports 'netstat -pelnut'
 alias git 'hub'
 alias sudo 'sudo -E'

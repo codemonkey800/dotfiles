@@ -1,5 +1,4 @@
 # Aliases
-alias most 'most -c +u'
 alias lsports 'netstat -pelnut'
 alias git 'hub'
 alias sudo 'sudo -E'
@@ -60,7 +59,7 @@ function reboot-required
 end
 
 function tree
-   eval  (which tree) -C $argv | most
+   eval  (which tree) -C $argv | less
 end
 
 

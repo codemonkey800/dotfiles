@@ -6,11 +6,30 @@ I have config files for stuff like fish shell, i3, and xinitrc.
 
 I also have random scripts that are not actually configuration files, but scripts. So yeah.
 
-Scripts
-=======
-To install the scripts and shit, you should run:
+Structure
+=========
+So I structured my files to resemble my Linux OS sort of. So files and directories that go in
+`~/.config` are located in the `config` directory. 
+
+The `scripts` directory should be placed in wherever user binaries are placed. For Linux,
+this would be `/usr/local/bin`. For OSX, I tend to create a directory in `$HOME` named
+bin and add it to my `PATH` environment variable.
+
+The packages directories contains text files that list my installed packages at the time.
+So far it has my Arch packages and Atom packages.
+
+Setup
+=====
+For the `config` directory, simply copy the files over to your `~/.config` directory:
+```bash
+cp -r config ~/.config
+```
+
+For the scripts, you can copy them or run `install` to your user binaries:
 ```bash
 sudo install scripts/* /usr/local/bin
+# or
+sudo cp scripts/* /usr/local/bin
 ```
 
 License

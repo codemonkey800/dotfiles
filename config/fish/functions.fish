@@ -1,8 +1,9 @@
 # Aliases
+alias apm 'apm-beta'
+alias atom 'atom-beta'
 alias chrome 'google-chrome-unstable'
 alias lsports 'netstat -pelnut'
 alias git 'hub'
-alias sudo 'sudo -E'
 
 # Functions
 function fish_greeting

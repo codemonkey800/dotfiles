@@ -1,25 +1,23 @@
-set shell=/bin/bash
-filetype off
+call plug#begin('~/.config/nvim/plugins')
 
-set rtp+=~/.config/nvim/plugins/Vundle.vim
-call vundle#begin('~/.config/nvim/plugins')
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'bling/vim-bufferline'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'gitignore'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'kassio/neoterm'
+Plug 'benekastah/neomake'
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'bling/vim-bufferline'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'gitignore'
-Plugin 'editorconfig/editorconfig-vim'
-
-call vundle#end()
+filetype indent plugin on     " Load file type plugins and indent
+call plug#end()
+filetype indent plugin on     " Load file type plugins and indent
 
 filetype indent plugin on
 
@@ -144,4 +142,8 @@ let g:syntastic_check_on_wq = 0
 map <C-n> :NERDTreeToggle<CR>
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Neomake settings
+autocmd! BufWritePost * Neomake
+
 

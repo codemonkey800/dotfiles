@@ -2,6 +2,7 @@
 alias apm 'apm-beta'
 alias atom 'atom-beta'
 alias chrome 'google-chrome-unstable'
+alias e "$EDITOR"
 alias lsports 'netstat -pelnut'
 alias git 'hub'
 
@@ -13,8 +14,7 @@ end
 
 function l
     if test -f "$argv"
-        less -n "$argv"
-        # pygmentize -g "$argv" | cat -n
+        less -N "$argv"
 	else
 		ls -CAF --color=auto $argv
 	end

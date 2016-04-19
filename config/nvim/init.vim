@@ -1,8 +1,8 @@
 set shell=/bin/bash
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+set rtp+=~/.config/nvim/plugins/Vundle.vim
+call vundle#begin('~/.config/nvim/plugins')
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
@@ -12,23 +12,20 @@ Plugin 'tpope/vim-commentary'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-bufferline'
-" Plugin 'fholgado/minibufexpl.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-" Plugin 'valloric/youcompleteme'
 Plugin 'gitignore'
 Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
 
+filetype indent plugin on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible               " Fuck Vi ;)
-set history=50                 " Set history to some number thing
 set ignorecase smartcase       " Case insensitive search
 set modeline                   " Allow Vim mode lines to change Vim settings
 set hidden                     " Allow change to buffer without saving
@@ -44,30 +41,20 @@ set secure                     " Do the above securely
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 
-set wildmenu                   " Show suggestions on TAB for some commands
 set ruler                      " Always show current positions along the bottom
 set cmdheight=1                " Command bar is 1 unit high
 set number                     " Show line numbers
 set lazyredraw                 " Do not redraw while running macros
-set backspace=indent,eol,start " Less shitty backspace
-" set whichwrap+=<,>,h,l         " It does something I think
 set report=0                   " Always report how many lines changed
-set laststatus=2               " Always show the status line
-" set cursorline               " Shows a horizontal line for the current line
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text Formatting/Tab Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set formatoptions=tcrqn        " autowrap and comments or something
-set autoindent                 " Auto indent or some shit
 set smartindent                " Smart indent or some shit
 set cindent                    " C indent or some shit
-set smarttab                   " Fuck you tabs. Work with spaces
 set showmatch                  " Show matching brackets
 set matchtime=5                " BLINK THE FUCKING BRACKETS
-set hlsearch                   " Highlight search phrases that matches
-set incsearch                  " Do highlight as you type
-" set list                     " show tabs, trailing spaces
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File settings
@@ -77,8 +64,6 @@ set fileencoding=utf-8        " Default for new files
 set termencoding=utf-8        " Terminal encoding
 set fileformats=unix,dos,mac  " Supports all three in this order
 set fileformat=unix           " Default file format
-
-filetype indent plugin on     " Load file type plugins and indent
 
 set tabstop=4                 " 4 spaces
 set softtabstop=4             " 4 spaces

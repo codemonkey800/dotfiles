@@ -1,0 +1,10 @@
+[Unit]
+Description=Runs Reflector to update the pacman database
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/update-pacman-db
+
+[Install]
+WantedBy=multi-user.target
+

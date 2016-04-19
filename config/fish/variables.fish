@@ -2,6 +2,7 @@ set -gx EDITOR /usr/bin/nvim
 set -gx PAGER /usr/bin/less
 set -gx LESS '-R'
 set -gx LESSOPEN '|pygmentize -g %s'
+set -gx LANG en_US.UTF-8
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 set -gx USR_LOCAL /usr/local/bin /usr/local/sbin
 set -gx JAVA_HOME /usr/lib/jvm/default

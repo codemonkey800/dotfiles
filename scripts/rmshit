@@ -6,6 +6,8 @@ import shutil
 
 
 shittyfiles = [
+    '~/.lesshst',
+    '~/.wget-hsts',
     '~/.node-gyp',
     '~/.xsel.log',
     '~/.cache',

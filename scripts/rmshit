@@ -6,8 +6,6 @@ import shutil
 
 
 shittyfiles = [
-    '~/.ipython',
-    '~/.jupyter',
     '~/.node-gyp',
     '~/.xsel.log',
     '~/.cache',

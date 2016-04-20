@@ -14,10 +14,12 @@ Plug 'gitignore'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'kassio/neoterm'
 Plug 'benekastah/neomake'
+Plug 'mhinz/vim-grepper'
+Plug 'vim-utils/vim-man'
+Plug 'janko-m/vim-test'
+Plug 'airblade/vim-gitgutter'
 
-filetype indent plugin on     " Load file type plugins and indent
 call plug#end()
-filetype indent plugin on     " Load file type plugins and indent
 
 filetype indent plugin on
 
@@ -57,7 +59,6 @@ set matchtime=5                " BLINK THE FUCKING BRACKETS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set encoding=utf-8            " Let Vim use UTF-8 encoding
 set fileencoding=utf-8        " Default for new files
 set termencoding=utf-8        " Terminal encoding
 set fileformats=unix,dos,mac  " Supports all three in this order
@@ -111,15 +112,20 @@ noremap o o<esc>k
 noremap O O<esc>j
 
 " Maps window split navigation to saner shortcuts
-nmap <silent> <Up>    :wincmd k<CR>
-nmap <silent> <Down>  :wincmd j<CR>
-nmap <silent> <Left>  :wincmd h<CR>
-nmap <silent> <Right> :wincmd l<CR>
+nmap <Up>    :wincmd k<CR>
+nmap <Down>  :wincmd j<CR>
+nmap <Left>  :wincmd h<CR>
+nmap <Right> :wincmd l<CR>
 
-nmap <silent> <C-Up>    :wincmd +<CR>
-nmap <silent> <C-Down>  :wincmd -<CR>
-nmap <silent> <C-Left>  :wincmd <<CR>
-nmap <silent> <C-Right> :wincmd ><CR>
+nmap <C-Up>    :wincmd +<CR>
+nmap <C-Down>  :wincmd -<CR>
+nmap <C-Left>  :wincmd <<CR>
+nmap <C-Right> :wincmd ><CR>
+
+" Shortcut to switch between buffers
+map <leader>n :bn<CR>
+map <leader>p :bp<CR>
+map <leader>w :bd<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
@@ -128,16 +134,6 @@ nmap <silent> <C-Right> :wincmd ><CR>
 " Airline settings
 let g:airline#extensions#tabline#enabled = 1 
 
-" Syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 " NERDTree settings
 map <C-n> :NERDTreeToggle<CR>
 
@@ -145,5 +141,4 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " Neomake settings
 autocmd! BufWritePost * Neomake
-
 

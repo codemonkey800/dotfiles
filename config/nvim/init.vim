@@ -40,12 +40,16 @@ set secure                     " Do the above securely
 " UI Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
+colorscheme obsidian
 
 set ruler                      " Always show current positions along the bottom
 set cmdheight=1                " Command bar is 1 unit high
 set number                     " Show line numbers
 set lazyredraw                 " Do not redraw while running macros
 set report=0                   " Always report how many lines changed
+
+hi Normal ctermbg=None
+hi NonText ctermbg=None
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text Formatting/Tab Settings
@@ -135,9 +139,9 @@ map <leader>w :bd<CR>
 let g:airline#extensions#tabline#enabled = 1 
 
 " NERDTree settings
-map <C-n> :NERDTreeToggle<CR>
+map <F1> :NERDTreeToggle<CR>
 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Neomake settings
 autocmd! BufWritePost * Neomake

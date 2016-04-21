@@ -117,28 +117,29 @@ noremap o o<esc>k
 noremap O O<esc>j
 
 " Maps window split navigation to saner shortcuts
-nmap <C-w> :wincmd k<CR>
-nmap <C-s> :wincmd j<CR>
-nmap <C-a> :wincmd h<CR>
-nmap <C-d> :wincmd l<CR>
+nmap <Up>    :wincmd k<CR>
+nmap <Down>  :wincmd j<CR>
+nmap <Left>  :wincmd h<CR>
+nmap <Right> :wincmd l<CR>
 
 " Resizes windows using control and arrow key
-nmap <C-S-w> :wincmd +<CR>
-nmap <C-S-s> :wincmd -<CR>
-nmap <C-S-a> :wincmd <<CR>
-nmap <C-S-d> :wincmd ><CR>
+nmap <S-Up>   :wincmd +<CR>
+nmap <S-Down> :wincmd -<CR>
+nmap <S-Left> :wincmd <<CR>
+nmap <S-Right>:wincmd ><CR>
 
 " Shortcuts for buffer related stuff
-nmap <leader>n :bn<CR>
-nmap <leader>p :bp<CR>
+nmap <leader>m :bn<CR>
+nmap <leader>n :bp<CR>
 nmap <leader>w :bd<CR>
 nmap <leader>l :ls<CR>
 
 " Shortcuts to for tab related stuff
-nmap <leader>N :bn<CR>
-nmap <leader>P :bp<CR>
+nmap <leader>M :bn<CR>
+nmap <leader>N :bp<CR>
 nmap <leader>W :bd<CR>
 nmap <leader>L :tabs<CR>
+nmap <leader>T :tabnew<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings

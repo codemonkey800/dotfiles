@@ -12,7 +12,7 @@
   broadcast_group = None
   broadcast_off = None
   close_term = <Primary>w
-  close_window = <Primary>q
+  close_window = <Primary><Shift>w
   cycle_next = None
   cycle_prev = None
   edit_window_title = <Primary>r

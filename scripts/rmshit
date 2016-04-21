@@ -6,6 +6,8 @@ import shutil
 
 
 shittyfiles = [
+    '~/.node_repl_history',
+    '~/.java',
     '~/.lesshst',
     '~/.wget-hsts',
     '~/.node-gyp',

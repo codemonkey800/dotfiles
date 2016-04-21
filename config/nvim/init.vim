@@ -1,24 +1,28 @@
 call plug#begin('~/.config/nvim/plugins')
 
+Plug 'airblade/vim-gitgutter'
+Plug 'benekastah/neomake'
+Plug 'bling/vim-bufferline'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'elzr/vim-json'
+Plug 'gitignore'
+Plug 'godlygeek/tabular'
+Plug 'janko-m/vim-test'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'kassio/neoterm'
 Plug 'kien/ctrlp.vim'
+Plug 'mhinz/vim-grepper'
+Plug 'plasticboy/vim-markdown'
+Plug 'scrooloose/nerdtree'
+Plug 'shime/vim-livedown'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'bling/vim-bufferline'
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'gitignore'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'kassio/neoterm'
-Plug 'benekastah/neomake'
-Plug 'mhinz/vim-grepper'
 Plug 'vim-utils/vim-man'
-Plug 'janko-m/vim-test'
-Plug 'airblade/vim-gitgutter'
-Plug 'bronson/vim-trailing-whitespace'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
 
@@ -89,6 +93,7 @@ let mapleader = ","
 
 " Escape insert mode
 imap jk <esc>
+tmap jk <C-\><C-n>
 
 " Move vertically by visual line
 noremap j gj
@@ -116,6 +121,11 @@ nmap <leader>v "+p
 noremap o o<esc>k
 noremap O O<esc>j
 
+" Sorts the line case insensitive
+vmap <leader>s :%!sort -f<CR>
+" Same but reverse
+vmap <leader>S :%!sort -fr<CR>
+
 " Maps window split navigation to saner shortcuts
 nmap <Up>    :wincmd k<CR>
 nmap <Down>  :wincmd j<CR>
@@ -131,13 +141,16 @@ nmap <S-Right>:wincmd ><CR>
 " Shortcuts for buffer related stuff
 nmap <leader>m :bn<CR>
 nmap <leader>n :bp<CR>
-nmap <leader>w :bd<CR>
+nmap <leader>w :bd!<CR>
 nmap <leader>l :ls<CR>
+nmap <leader>t :new<CR>
+nmap <leader>E :vs<CR>
+nmap <leader>O :sp<CR>
 
 " Shortcuts to for tab related stuff
-nmap <leader>M :bn<CR>
-nmap <leader>N :bp<CR>
-nmap <leader>W :bd<CR>
+nmap <leader>M :tabn<CR>
+nmap <leader>N :tabp<CR>
+nmap <leader>W :tabc!<CR>
 nmap <leader>L :tabs<CR>
 nmap <leader>T :tabnew<CR>
 
@@ -155,4 +168,9 @@ map <F1> :NERDTreeToggle<CR>
 
 " Neomake settings
 autocmd! BufWritePost * Neomake
+
+" vim-markdown settings
+let g:vim_markdown_math = 1
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_new_list_item_indent = 2
 

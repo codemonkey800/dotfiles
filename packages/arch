@@ -1,3 +1,4 @@
+abiword
 acpi
 adwaita-icon-theme
 atom-editor-beta-bin
@@ -20,7 +21,6 @@ docker
 docker-compose-bin
 e2fsprogs
 eog
-epiphany
 ethtool
 evince
 exfat-utils
@@ -52,6 +52,7 @@ gnome-shell-extension-dash-to-dock
 gnome-shell-extension-mediaplayer-git
 gnome-shell-extension-middleclickclose-git
 gnome-shell-extension-pixel-saver-git
+gnome-shell-extension-topicons
 gnome-shell-extensions
 gnome-system-monitor
 gnome-themes-standard
@@ -95,6 +96,7 @@ make
 man-db
 man-pages
 mars-mips
+mbpfan-git
 mdadm
 mousetweaks
 mutter
@@ -102,11 +104,13 @@ nautilus
 neovim
 net-tools
 netctl
+networkmanager-openvpn
 nodejs
 npm
 openjdk8-doc
 openjdk8-src
 openssh
+openvpn
 package-query
 pacman
 paper-icon-theme-git
@@ -129,8 +133,10 @@ reflector
 reiserfsprogs
 rsync
 s-nail
+screenkey
 sed
 shadow
+simplescreenrecorder
 smartmontools
 spotify
 sublime-text-dev
@@ -167,14 +173,17 @@ ttf-roboto-slab
 unzip
 usbutils
 util-linux
+vlc
 watchman
 wget
 which
+words
 xdg-user-dirs-gtk
 xf86-input-libinput
 xf86-video-intel
 xf86-video-nouveau
 xfsprogs
+xorg-xbacklight
 xsel
 yaourt
 yelp

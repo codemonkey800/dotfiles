@@ -14,6 +14,9 @@ Plug 'kassio/neoterm'
 Plug 'kien/ctrlp.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'plasticboy/vim-markdown'
+Plug 'reedes/vim-lexical'
+Plug 'reedes/vim-pencil'
+Plug 'reedes/vim-wordy'
 Plug 'scrooloose/nerdtree'
 Plug 'shime/vim-livedown'
 Plug 'tpope/vim-commentary'
@@ -126,6 +129,9 @@ vmap <leader>s :%!sort -f<CR>
 " Same but reverse
 vmap <leader>S :%!sort -fr<CR>
 
+" Redo last thing
+nmap U :redo<CR>
+
 " Maps window split navigation to saner shortcuts
 nmap <Up>    :wincmd k<CR>
 nmap <Down>  :wincmd j<CR>
@@ -173,4 +179,26 @@ autocmd! BufWritePost * Neomake
 let g:vim_markdown_math = 1
 let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_new_list_item_indent = 2
+
+" vim-lexical settings
+augroup lexical
+    autocmd!
+    autocmd FileType markdown,mkd call lexical#init()
+    autocmd FileType textile call lexical#init()
+    autocmd FileType text call lexical#init({ 'spell': 0 })jjjj
+augroup END
+
+let g:lexical#thesaurus = ['~/.config/nvim/thesaurus.txt']
+let g:lexical#dictionary = ['/usr/share/dict/american-english']
+
+let g:lexical#spell_key = '<leader>s'
+let g:lexical#thesaurus_key = '<leader>t'
+let g:lexical#dictionary_key = '<leader>k'
+
+" vim-pencil settings
+augroup pencil
+    autocmd!
+    autocmd FileType markdown,mkd call pencil#init()
+    autocmd FileType text call pencil#init()
+augroup END
 

@@ -18,6 +18,7 @@ Plug 'mhinz/vim-grepper'
 Plug 'vim-utils/vim-man'
 Plug 'janko-m/vim-test'
 Plug 'airblade/vim-gitgutter'
+Plug 'bronson/vim-trailing-whitespace'
 
 call plug#end()
 
@@ -116,27 +117,35 @@ noremap o o<esc>k
 noremap O O<esc>j
 
 " Maps window split navigation to saner shortcuts
-nmap <Up>    :wincmd k<CR>
-nmap <Down>  :wincmd j<CR>
-nmap <Left>  :wincmd h<CR>
-nmap <Right> :wincmd l<CR>
+nmap <C-w> :wincmd k<CR>
+nmap <C-s> :wincmd j<CR>
+nmap <C-a> :wincmd h<CR>
+nmap <C-d> :wincmd l<CR>
 
-nmap <C-Up>    :wincmd +<CR>
-nmap <C-Down>  :wincmd -<CR>
-nmap <C-Left>  :wincmd <<CR>
-nmap <C-Right> :wincmd ><CR>
+" Resizes windows using control and arrow key
+nmap <C-S-w> :wincmd +<CR>
+nmap <C-S-s> :wincmd -<CR>
+nmap <C-S-a> :wincmd <<CR>
+nmap <C-S-d> :wincmd ><CR>
 
-" Shortcut to switch between buffers
-map <leader>n :bn<CR>
-map <leader>p :bp<CR>
-map <leader>w :bd<CR>
+" Shortcuts for buffer related stuff
+nmap <leader>n :bn<CR>
+nmap <leader>p :bp<CR>
+nmap <leader>w :bd<CR>
+nmap <leader>l :ls<CR>
+
+" Shortcuts to for tab related stuff
+nmap <leader>N :bn<CR>
+nmap <leader>P :bp<CR>
+nmap <leader>W :bd<CR>
+nmap <leader>L :tabs<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Airline settings
-let g:airline#extensions#tabline#enabled = 1 
+let g:airline#extensions#tabline#enabled = 1
 
 " NERDTree settings
 map <F1> :NERDTreeToggle<CR>

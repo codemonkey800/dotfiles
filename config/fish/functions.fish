@@ -1,6 +1,4 @@
 # Aliases
-alias apm 'apm-beta'
-alias atom 'atom-beta'
 alias chrome 'google-chrome-unstable'
 alias e "$EDITOR"
 alias lsports 'netstat -pelnut'

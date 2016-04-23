@@ -1,7 +1,6 @@
-abiword
 acpi
 adwaita-icon-theme
-atom-editor-beta-bin
+atom-editor-bin
 autoconf
 automake
 bash
@@ -105,8 +104,6 @@ neovim
 net-tools
 netctl
 networkmanager-openvpn
-nodejs
-npm
 openjdk8-doc
 openjdk8-src
 openssh
@@ -184,6 +181,7 @@ xf86-video-intel
 xf86-video-nouveau
 xfsprogs
 xorg-xbacklight
+xorg-xinput
 xsel
 yaourt
 yelp

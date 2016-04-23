@@ -116,9 +116,9 @@ nnoremap <leader><space> :nohlsearch<CR>
 " Space open/closes folds
 nnoremap <space> za
 
-" Copy/Paste to X11 clipboard
-vmap <leader>c "+y
-nmap <leader>v "+p
+" Copy/Paste to X11 clipboard using xsel
+vmap <leader>c :%!xsel -b
+nmap <leader>v :r !xsel -b<CR>
 
 " Adds a new line below or above without entering insert mode
 noremap o o<esc>k
@@ -132,6 +132,11 @@ vmap <leader>S :%!sort -fr<CR>
 " Redo last thing
 nmap U :redo<CR>
 
+" Runs make
+nmap <leader>b :!make<CR>
+" Runs make clean
+nmap <leader>C :!make clean<CR>
+
 " Maps window split navigation to saner shortcuts
 nmap <Up>    :wincmd k<CR>
 nmap <Down>  :wincmd j<CR>
@@ -139,15 +144,15 @@ nmap <Left>  :wincmd h<CR>
 nmap <Right> :wincmd l<CR>
 
 " Resizes windows using control and arrow key
-nmap <S-Up>   :wincmd +<CR>
-nmap <S-Down> :wincmd -<CR>
-nmap <S-Left> :wincmd <<CR>
-nmap <S-Right>:wincmd ><CR>
+nmap <S-Up>    :wincmd +<CR>
+nmap <S-Down>  :wincmd -<CR>
+nmap <S-Left>  :wincmd <<CR>
+nmap <S-Right> :wincmd ><CR>
 
 " Shortcuts for buffer related stuff
 nmap <leader>m :bn<CR>
 nmap <leader>n :bp<CR>
-nmap <leader>w :bd!<CR>
+nmap <leader>w :bd<CR>
 nmap <leader>l :ls<CR>
 nmap <leader>t :new<CR>
 nmap <leader>E :vs<CR>
@@ -156,7 +161,7 @@ nmap <leader>O :sp<CR>
 " Shortcuts to for tab related stuff
 nmap <leader>M :tabn<CR>
 nmap <leader>N :tabp<CR>
-nmap <leader>W :tabc!<CR>
+nmap <leader>W :tabc<CR>
 nmap <leader>L :tabs<CR>
 nmap <leader>T :tabnew<CR>
 
@@ -168,7 +173,7 @@ nmap <leader>T :tabnew<CR>
 let g:airline#extensions#tabline#enabled = 1
 
 " NERDTree settings
-map <F1> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
 
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 

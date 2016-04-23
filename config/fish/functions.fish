@@ -5,10 +5,6 @@ alias lsports 'netstat -pelnut'
 alias git 'hub'
 
 # Functions
-function cat
-    pygmentize -g "$argv"
-end
-
 function fish_greeting
     fortune 50% myfortunes 30% off 20% ascii-art | cowsay -n
     echo

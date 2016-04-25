@@ -1,5 +1,5 @@
 Sublime-Style-Column-Selection@1.5.1
-atom-beautify@0.28.26
+atom-beautify@0.29.7
 atom-django@0.3.2
 atom-jade@0.3.0
 atom-material-syntax@0.4.6
@@ -13,7 +13,7 @@ color-picker@2.1.1
 csscomb@0.3.1
 docblockr@0.7.3
 editorconfig@1.4.0
-file-icons@1.7.6
+file-icons@1.7.7
 haskell-grammar@0.4.0
 highlight-line@0.11.1
 highlight-selected@0.11.2
@@ -46,7 +46,7 @@ linter-jsonlint@1.2.5
 linter-kotlin@0.1.0
 linter-lua@1.0.2
 linter-markdown@1.5.0
-linter-shellcheck@1.1.0
+linter-shellcheck@1.2.0
 linter-swiftc@2.0.0
 merge-conflicts@1.4.1
 minimap@4.22.1
@@ -57,7 +57,7 @@ minimap-linter@1.1.1
 nuclide@0.132.0
 pdf-view@0.50.0
 pigments@0.26.0
-preview@0.16.6
+preview@0.16.7
 release-notes@0.53.0
 sort-lines@0.14.0
 sync-settings@0.7.2

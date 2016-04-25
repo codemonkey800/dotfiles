@@ -130,11 +130,11 @@ reflector
 reiserfsprogs
 rsync
 s-nail
-screenkey
 sed
 shadow
 simplescreenrecorder
 smartmontools
+speedtest-cli
 spotify
 sublime-text-dev
 sudo
@@ -161,6 +161,7 @@ texlive-pstricks
 texlive-publishers
 texlive-science
 tlp
+tmux
 tracker
 tree
 ttf-chromeosextra-font

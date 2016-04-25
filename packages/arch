@@ -104,6 +104,8 @@ neovim
 net-tools
 netctl
 networkmanager-openvpn
+nodejs
+npm
 openjdk8-doc
 openjdk8-src
 openssh

@@ -18,7 +18,7 @@ haskell-grammar@0.4.0
 highlight-line@0.11.1
 highlight-selected@0.11.2
 jade-beautify@0.1.4
-language-babel@2.17.3
+language-babel@2.18.0
 language-cmake@0.1.4
 language-docker@1.1.6
 language-fish-shell@1.0.3
@@ -48,7 +48,7 @@ linter-lua@1.0.2
 linter-markdown@1.5.0
 linter-shellcheck@1.2.0
 linter-swiftc@2.0.0
-merge-conflicts@1.4.1
+merge-conflicts@1.4.2
 minimap@4.22.1
 minimap-cursorline@0.1.0
 minimap-find-and-replace@4.5.1

@@ -39,7 +39,7 @@ function my-public-ip -d "Gets the public ip using an external service"
 end
 
 function r -d "An alias for rm -rf"
-    rm -rf "$argv"
+    rm -rf $argv
 end
 
 function tree -d "Runs the tree command with color enabled and pipes it to less for paging"

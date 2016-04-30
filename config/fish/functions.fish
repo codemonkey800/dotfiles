@@ -1,8 +1,9 @@
 # Aliases
 alias chrome 'google-chrome-unstable'
 alias e "$EDITOR"
-alias lsports 'netstat -pelnut'
 alias git 'hub'
+alias git-root 'cd (git rev-parse --show-toplevel)'
+alias lsports 'netstat -pelnut'
 alias subl 'subl3'
 
 # Functions

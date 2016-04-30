@@ -132,7 +132,7 @@ nmap U :redo<CR>
 " Runs make
 nmap <leader>b :!make<CR>
 " Runs make clean
-nmap <leader>C :!make clean<CR>
+nmap <leader>B :!make clean<CR>
 
 " Maps window split navigation to saner shortcuts
 nmap <Up>    :wincmd k<CR>

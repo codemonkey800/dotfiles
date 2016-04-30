@@ -119,17 +119,12 @@ nnoremap <leader><space> :nohlsearch<CR>
 nnoremap <space> za
 
 " Copy/Paste to X11 clipboard using xsel
-vmap <leader>c :%!xsel -b
+vmap <leader>c :%!xsel -b<CR>
 nmap <leader>v :r !xsel -b<CR>
 
 " Adds a new line below or above without entering insert mode
 noremap o o<esc>k
 noremap O O<esc>j
-
-" Sorts the line case insensitive
-vmap <leader>s :%!sort -f<CR>
-" Same but reverse
-vmap <leader>S :%!sort -fr<CR>
 
 " Redo last thing
 nmap U :redo<CR>
@@ -154,7 +149,7 @@ nmap <S-Right> :wincmd ><CR>
 " Shortcuts for buffer related stuff
 nmap <leader>m :bn<CR>
 nmap <leader>n :bp<CR>
-nmap <leader>w :bd<CR>
+nmap <leader>w :bd!<CR>
 nmap <leader>l :ls<CR>
 nmap <leader>t :new<CR>
 nmap <leader>E :vs<CR>

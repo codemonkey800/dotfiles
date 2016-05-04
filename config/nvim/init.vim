@@ -1,5 +1,6 @@
 call plug#begin('~/.config/nvim/plugins')
 
+Plug 'felixhummel/setcolors.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'amirh/html-autoclosetag'
 Plug 'ap/vim-css-color'
@@ -56,7 +57,7 @@ set secure                     " Do the above securely
 " UI Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-colorscheme molokai
+colorscheme 0x7A69_dark
 
 set ruler                      " Always show current positions along the bottom
 set cmdheight=1                " Command bar is 1 unit high
@@ -171,12 +172,17 @@ nnoremap <leader>T :tabnew<CR>
 nnoremap <C-p> :FZF<CR>
 nnoremap <F8> :TagbarToggle<CR>
 
+nnoremap <F9> :call NextColor(1)<CR>
+nnoremap <S-F9> :call NextColor(-1)<CR>
+nnoremap <A-F9> :call NextColor(0)<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Airline settings
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 
 " NERDTree settings
 nnoremap <F1> :NERDTreeToggle<CR>

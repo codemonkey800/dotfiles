@@ -11,11 +11,11 @@
   broadcast_all = None
   broadcast_group = None
   broadcast_off = None
-  close_term = <Primary>w
-  close_window = <Primary><Shift>w
+  close_term = <Primary><Shift>w
+  close_window = <Primary><Shift>q
   cycle_next = None
   cycle_prev = None
-  edit_window_title = <Primary>r
+  edit_window_title = None
   go_down = <Alt>j
   go_left = <Alt>h
   go_next = None
@@ -31,7 +31,7 @@
   layout_launcher = None
   move_tab_left = None
   move_tab_right = None
-  new_tab = <Primary>t
+  new_tab = <Primary><Shift>t
   new_terminator = None
   new_window = None
   next_tab = <Primary>Tab

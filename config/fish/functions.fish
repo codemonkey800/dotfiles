@@ -2,7 +2,7 @@
 alias chrome 'google-chrome-unstable'
 alias e "$EDITOR"
 alias git 'hub'
-alias git-root 'cd (git rev-parse --show-toplevel)'
+alias git-root 'git rev-parse --show-toplevel'
 alias lsports 'netstat -pelnut'
 alias subl 'subl3'
 
@@ -10,6 +10,13 @@ alias subl 'subl3'
 function fish_greeting
     fortune 50% myfortunes 30% off 20% ascii-art | cowsay -n
     echo
+end
+
+if functions -q gitignore
+    function mkgitignore -d "Wrapper over gitignore function in gitignore fisher plugin"
+        mkdir -p ~/.cache/
+        gitignore $argv
+    end
 end
 
 function l -d "Lists all files in a directory or reads a file"

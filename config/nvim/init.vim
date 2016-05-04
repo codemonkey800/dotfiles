@@ -1,27 +1,33 @@
 call plug#begin('~/.config/nvim/plugins')
 
 Plug 'airblade/vim-gitgutter'
+Plug 'amirh/html-autoclosetag'
+Plug 'ap/vim-css-color'
 Plug 'benekastah/neomake'
-Plug 'bling/vim-bufferline'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'elzr/vim-json'
 Plug 'ervandew/supertab'
+Plug 'fatih/vim-go'
+Plug 'flazz/vim-colorschemes'
 Plug 'gitignore'
 Plug 'godlygeek/tabular'
 Plug 'janko-m/vim-test'
-Plug 'jistr/vim-nerdtree-tabs'
+Plug 'junegunn/fzf'
 Plug 'kassio/neoterm'
-Plug 'kien/ctrlp.vim'
-Plug 'mhinz/vim-grepper'
+Plug 'majutsushi/tagbar'
+Plug 'mips.vim'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
+Plug 'raimondi/delimitmate'
 Plug 'reedes/vim-lexical'
 Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
-Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'shime/vim-livedown'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -50,7 +56,7 @@ set secure                     " Do the above securely
 " UI Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-colorscheme obsidian
+colorscheme molokai
 
 set ruler                      " Always show current positions along the bottom
 set cmdheight=1                " Command bar is 1 unit high
@@ -58,8 +64,8 @@ set number                     " Show line numbers
 set lazyredraw                 " Do not redraw while running macros
 set report=0                   " Always report how many lines changed
 
-hi Normal ctermbg=None
-hi NonText ctermbg=None
+" hi Normal ctermbg=None
+" hi NonText ctermbg=None
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text Formatting/Tab Settings
@@ -97,8 +103,8 @@ set foldnestmax=10            " TOO MANY FOLDS D=<
 let mapleader = ","
 
 " Escape insert mode
-imap jk <esc>
-tmap jk <C-\><C-n>
+inoremap jk <esc>
+tnoremap jk <C-\><C-n>
 
 " Move vertically by visual line
 noremap j gj
@@ -119,48 +125,51 @@ nnoremap <leader><space> :nohlsearch<CR>
 nnoremap <space> za
 
 " Copy/Paste to X11 clipboard using xsel
-vmap <leader>c :%!xsel -b<CR>
-nmap <leader>v :r !xsel -b<CR>
+vnoremap <leader>c "+y<CR>
+noremap <leader>v "+p<CR>
 
 " Adds a new line below or above without entering insert mode
 noremap o o<esc>k
 noremap O O<esc>j
 
 " Redo last thing
-nmap U :redo<CR>
+noremap U :redo<CR>
 
 " Runs make
-nmap <leader>b :!make<CR>
+noremap <leader>b :!make<CR>
 " Runs make clean
-nmap <leader>B :!make clean<CR>
+noremap <leader>B :!make clean<CR>
 
 " Maps window split navigation to saner shortcuts
-nmap <Up>    :wincmd k<CR>
-nmap <Down>  :wincmd j<CR>
-nmap <Left>  :wincmd h<CR>
-nmap <Right> :wincmd l<CR>
+nnoremap <Up>    :wincmd k<CR>
+nnoremap <Down>  :wincmd j<CR>
+nnoremap <Left>  :wincmd h<CR>
+nnoremap <Right> :wincmd l<CR>
 
 " Resizes windows using control and arrow key
-nmap <S-Up>    :wincmd +<CR>
-nmap <S-Down>  :wincmd -<CR>
-nmap <S-Left>  :wincmd <<CR>
-nmap <S-Right> :wincmd ><CR>
+nnoremap <S-Up>    :wincmd +<CR>
+nnoremap <S-Down>  :wincmd -<CR>
+nnoremap <S-Left>  :wincmd <<CR>
+nnoremap <S-Right> :wincmd ><CR>
 
 " Shortcuts for buffer related stuff
-nmap <leader>m :bn<CR>
-nmap <leader>n :bp<CR>
-nmap <leader>w :bd!<CR>
-nmap <leader>l :ls<CR>
-nmap <leader>t :new<CR>
-nmap <leader>E :vs<CR>
-nmap <leader>O :sp<CR>
+nnoremap <leader>m :bn<CR>
+nnoremap <leader>n :bp<CR>
+nnoremap <leader>w :bd!<CR>
+nnoremap <leader>l :ls<CR>
+nnoremap <leader>t :new<CR>
+nnoremap <leader>E :vs<CR>
+nnoremap <leader>O :sp<CR>
 
 " Shortcuts to for tab related stuff
-nmap <leader>M :tabn<CR>
-nmap <leader>N :tabp<CR>
-nmap <leader>W :tabc<CR>
-nmap <leader>L :tabs<CR>
-nmap <leader>T :tabnew<CR>
+nnoremap <leader>M :tabn<CR>
+nnoremap <leader>N :tabp<CR>
+nnoremap <leader>W :tabc<CR>
+nnoremap <leader>L :tabs<CR>
+nnoremap <leader>T :tabnew<CR>
+
+nnoremap <C-p> :FZF<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
@@ -170,7 +179,7 @@ nmap <leader>T :tabnew<CR>
 let g:airline#extensions#tabline#enabled = 1
 
 " NERDTree settings
-map <C-n> :NERDTreeToggle<CR>
+nnoremap <F1> :NERDTreeToggle<CR>
 
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -187,7 +196,7 @@ augroup lexical
     autocmd!
     autocmd FileType markdown,mkd call lexical#init()
     autocmd FileType textile call lexical#init()
-    autocmd FileType text call lexical#init({ 'spell': 0 })jjjj
+    autocmd FileType text call lexical#init({ 'spell': 0 })
 augroup END
 
 let g:lexical#thesaurus = ['~/.config/nvim/thesaurus.txt']
@@ -203,4 +212,7 @@ augroup pencil
     autocmd FileType markdown,mkd call pencil#init()
     autocmd FileType text call pencil#init()
 augroup END
+
+" Deoplete settings
+let g:deoplete#enable_at_startup = 1
 

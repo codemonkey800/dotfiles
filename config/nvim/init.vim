@@ -1,6 +1,9 @@
 call plug#begin('~/.config/nvim/plugins')
 
-Plug 'felixhummel/setcolors.vim'
+function! DoRemote(arg)
+    UpdateRemotePlugins
+endfunction
+
 Plug 'airblade/vim-gitgutter'
 Plug 'amirh/html-autoclosetag'
 Plug 'ap/vim-css-color'
@@ -11,6 +14,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'elzr/vim-json'
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go'
+Plug 'felixhummel/setcolors.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'gitignore'
 Plug 'godlygeek/tabular'
@@ -28,6 +32,7 @@ Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
 Plug 'scrooloose/nerdtree'
 Plug 'shime/vim-livedown'
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'

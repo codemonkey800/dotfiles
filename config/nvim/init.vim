@@ -34,6 +34,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'shime/vim-livedown'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'

@@ -1,10 +1,35 @@
 # Aliases
-alias chrome 'google-chrome-unstable'
 alias e "$EDITOR"
-alias git 'hub'
-alias git-root 'git rev-parse --show-toplevel'
-alias lsports 'netstat -pelnut'
-alias subl 'subl3'
+alias git-root 'cd git rev-parse --show-toplevel'
+
+# Conditional Aliases
+if test -f (which 'apm-beta')
+    alias apm 'apm-beta'
+end
+
+if test -f (which 'atom-beta')
+    alias atom 'atom-beta'
+end
+
+if test -f (which 'google-chrome-unstable')
+    alias chrome 'google-chrome-unstable'
+end
+
+if test -f (which 'hub')
+    alias git 'hub'
+end
+
+if test -f (which 'netstat')
+    alias lsports 'netstat -pelnut'
+end
+
+if test -f (which 'npm')
+    alias npmls 'npm ls --depth=0'
+end
+
+if test -f (which 'subl3')
+    alias subl 'subl3'
+end
 
 # Functions
 function fish_greeting

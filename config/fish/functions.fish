@@ -3,31 +3,31 @@ alias e "$EDITOR"
 alias git-root 'cd git rev-parse --show-toplevel'
 
 # Conditional Aliases
-if test -f (which 'apm-beta')
+if test -f (which 'apm-beta' ^ /dev/null)
     alias apm 'apm-beta'
 end
 
-if test -f (which 'atom-beta')
+if test -f (which 'atom-beta') ^ /dev/null)
     alias atom 'atom-beta'
 end
 
-if test -f (which 'google-chrome-unstable')
+if test -f (which 'google-chrome-unstable') ^ /dev/null)
     alias chrome 'google-chrome-unstable'
 end
 
-if test -f (which 'hub')
+if test -f (which 'hub') ^ /dev/null)
     alias git 'hub'
 end
 
-if test -f (which 'netstat')
+if test -f (which 'netstat') ^ /dev/null)
     alias lsports 'netstat -pelnut'
 end
 
-if test -f (which 'npm')
+if test -f (which 'npm') ^ /dev/null)
     alias npmls 'npm ls --depth=0'
 end
 
-if test -f (which 'subl3')
+if test -f (which 'subl3') ^ /dev/null)
     alias subl 'subl3'
 end
 

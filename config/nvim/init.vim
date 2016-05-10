@@ -1,5 +1,12 @@
 call plug#begin('~/.config/nvim/plugins')
 
+function! UpdatePlugins()
+    PlugInstall
+    PlugUpdate
+    PlugUpgrade
+    PlugClean!
+endfunction
+
 function! DoRemote(arg)
     UpdateRemotePlugins
 endfunction

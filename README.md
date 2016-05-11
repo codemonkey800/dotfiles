@@ -1,4 +1,3 @@
-Dotfiles
 ===========
 Here's a bunch of useless configuration files for my Linux installation.
 
@@ -9,7 +8,7 @@ I also have random scripts that are not actually configuration files, but script
 Structure
 =========
 So I structured my files to resemble my Linux OS sort of. So files and directories that go in
-`~/.config` are located in the `config` directory. 
+`~/.config` are located in the `config` directory.
 
 The `scripts` directory should be placed in wherever user binaries are placed. For Linux,
 this would be `/usr/local/bin`. For OSX, I tend to create a directory in `$HOME` named

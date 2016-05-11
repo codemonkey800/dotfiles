@@ -46,7 +46,7 @@ end
 
 function l -d "Lists all files in a directory or reads a file"
     if test -f "$argv"
-        less -N "$argv"
+        vimpager "$argv"
     else
         ls -CAF --color=auto $argv
     end

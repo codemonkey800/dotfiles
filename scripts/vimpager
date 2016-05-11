@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+
+set -l pager "$EDITOR -u ~/.config/nvim/pager.vim"
+
+if test (count $argv) -gt 0
+    eval "$pager $argv"
+else
+    eval "$pager -"
+end
+

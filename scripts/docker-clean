@@ -1,25 +1,35 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
+
+if test ! -f (which docker)
+    echo 'Docker not installed!'
+    exit -1
+end
+
+if test ! -f (which pawk)
+    echo 'Pawk not installed'
+    exit -1
+end
 
 echo "Removing exited containers"
-if docker ps -a | grep Exited; then
-    docker ps -a | grep Exited | awk '{print $1}' | xargs docker rm -f
+if docker ps -a | grep Exited
+    docker rm -f (docker ps -a | grep Exited | pawk 'f[0]')
 else
     echo "No containers to remove"
-fi
+end
 
 echo "Removing <none> images"
-if docker images | grep "<none>"; then
-    docker images | grep "<none>" | awk '{print $3}' | xargs docker rmi -f
+if docker images | grep "<none>"
+    docker rmi -f (docker images | grep "<none>" | pawk 'f[2]')
 else
     echo "No images to remove"
-fi
+end
 
 echo "Removing volumes"
-if docker volume ls | grep local; then
-    docker volume ls | grep local | awk '{print $2}' | xargs docker volume rm
+if docker volume ls | grep local
+    docker volume rm (docker volume ls | grep local | pawk 'f[1]')
 else
     echo "No volumes to remove"
-fi
+end
 
 echo "All done!"
 

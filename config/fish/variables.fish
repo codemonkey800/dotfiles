@@ -1,5 +1,5 @@
 set -gx EDITOR (which nvim)
-set -gx PAGER (which vimpager)
+set -gx PAGER (which less)
 set -gx LESS '-R'
 set -gx LESSOPEN '|pygmentize -g %s'
 set -gx LANG en_US.UTF-8

@@ -1,10 +1,10 @@
 agnoster
-fzf
-getopts
-gitignore
-menu
 await
+fzf
 get_file_age
+getopts
 git_util
+gitignore
 last_job_id
+menu
 spin

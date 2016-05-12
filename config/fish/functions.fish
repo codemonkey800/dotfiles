@@ -3,31 +3,31 @@ alias e "$EDITOR"
 alias git-root 'cd (git rev-parse --show-toplevel)'
 
 # Conditional Aliases
-if test -f (which 'apm-beta' ^ /dev/null)
+if which 'apm-beta' ^ /dev/null > /dev/null
     alias apm 'apm-beta'
 end
 
-if test -f (which 'atom-beta' ^ /dev/null)
+if which 'atom-beta' ^ /dev/null > /dev/null
     alias atom 'atom-beta'
 end
 
-if test -f (which 'google-chrome-unstable' ^ /dev/null)
+if which 'google-chrome-unstable' ^ /dev/null > /dev/null
     alias chrome 'google-chrome-unstable'
 end
 
-if test -f (which 'hub' ^ /dev/null)
+if which 'hub' ^ /dev/null > /dev/null
     alias git 'hub'
 end
 
-if test -f (which 'netstat' ^ /dev/null)
+if which 'netstat' ^ /dev/null > /dev/null
     alias lsports 'netstat -pelnut'
 end
 
-if test -f (which 'npm' ^ /dev/null)
+if which 'npm' ^ /dev/null > /dev/null
     alias npmls 'npm ls --depth=0'
 end
 
-if test -f (which 'subl3' ^ /dev/null)
+if which 'subl3' ^ /dev/null > /dev/null
     alias subl 'subl3'
 end
 
@@ -46,7 +46,7 @@ end
 
 function l -d "Lists all files in a directory or reads a file"
     if test -f "$argv"
-        vimpager "$argv"
+        less -N "$argv"
     else
         ls -CAF --color=auto $argv
     end

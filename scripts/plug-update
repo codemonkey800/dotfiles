@@ -7,6 +7,5 @@ end
 
 eval $EDITOR +PlugInstall +PlugUpdate +PlugUpgrade +PlugClean! +qall
 
-set -l old_plug ~/.config/nvim/autoload/plug.vim.old
-rm -fv $old_plug
+rm -fv ~/.config/nvim/autoload/plug.vim.old
 

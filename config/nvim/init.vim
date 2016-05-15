@@ -71,7 +71,7 @@ set secure                     " Do the above securely
 " UI Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-colorscheme 0x7A69_dark
+colorscheme materialtheme
 
 set ruler                      " Always show current positions along the bottom
 set cmdheight=1                " Command bar is 1 unit high

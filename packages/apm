@@ -18,10 +18,10 @@ haskell-grammar@0.4.0
 highlight-line@0.11.1
 highlight-selected@0.11.2
 jade-beautify@0.1.4
-language-babel@2.20.8
+language-babel@2.20.10
 language-cmake@0.1.4
 language-docker@1.1.6
-language-fish-shell@1.0.3
+language-fish-shell@1.0.4
 language-groovy@0.6.0
 language-ini@1.16.0
 language-kotlin@0.4.0
@@ -54,10 +54,10 @@ minimap-cursorline@0.1.0
 minimap-find-and-replace@4.5.1
 minimap-highlight-selected@4.4.0
 minimap-linter@1.1.1
-nuclide@0.135.0
+nuclide@0.136.0
 pdf-view@0.50.0
-pigments@0.26.2
-preview@0.16.8
+pigments@0.26.3
+preview@0.16.9
 release-notes@0.53.0
 sort-lines@0.14.0
 sync-settings@0.7.2

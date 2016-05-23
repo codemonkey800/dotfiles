@@ -1,12 +1,5 @@
 call plug#begin('~/.config/nvim/plugins')
 
-function! UpdatePlugins()
-    PlugInstall
-    PlugUpdate
-    PlugUpgrade
-    PlugClean!
-endfunction
-
 function! DoRemote(arg)
     UpdateRemotePlugins
 endfunction
@@ -71,7 +64,7 @@ set secure                     " Do the above securely
 " UI Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-colorscheme materialtheme
+colorscheme koehler
 
 set ruler                      " Always show current positions along the bottom
 set cmdheight=1                " Command bar is 1 unit high

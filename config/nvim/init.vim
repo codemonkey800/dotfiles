@@ -64,7 +64,7 @@ set secure                     " Do the above securely
 " UI Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-colorscheme koehler
+colorscheme molokai
 
 set ruler                      " Always show current positions along the bottom
 set cmdheight=1                " Command bar is 1 unit high
@@ -187,6 +187,9 @@ nnoremap <A-F9> :call NextColor(0)<CR>
 " Plugin settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" vim-json settings
+let g:vim_json_syntax_conceal = 0
+
 " Airline settings
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -228,4 +231,10 @@ augroup END
 
 " Deoplete settings
 let g:deoplete#enable_at_startup = 1
+
+" vim-jsx settings
+let g:jsx_ext_required = 0
+
+" vim-editorconfig settings
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 

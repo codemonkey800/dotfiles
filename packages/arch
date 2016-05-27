@@ -1,5 +1,12 @@
 acpi
 adwaita-icon-theme
+android-platform
+android-sdk
+android-sdk-build-tools
+android-sdk-platform-tools
+android-studio-canary
+android-support
+android-udev
 atom-editor-bin
 autoconf
 automake

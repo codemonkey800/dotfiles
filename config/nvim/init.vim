@@ -21,28 +21,28 @@ Plug 'gitignore'
 Plug 'godlygeek/tabular'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf'
+Plug 'justinmk/vim-dirvish'
 Plug 'kassio/neoterm'
 Plug 'majutsushi/tagbar'
 Plug 'mips.vim'
-Plug 'mxw/vim-jsx'
 Plug 'nginx.vim'
-Plug 'pangloss/vim-javascript'
+Plug 'othree/es.next.syntax.vim'
+Plug 'othree/yajs.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'raimondi/delimitmate'
 Plug 'reedes/vim-lexical'
 Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
-Plug 'scrooloose/nerdtree'
 Plug 'shime/vim-livedown'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-utils/vim-man'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
 
@@ -72,9 +72,6 @@ set cmdheight=1                " Command bar is 1 unit high
 set number                     " Show line numbers
 set lazyredraw                 " Do not redraw while running macros
 set report=0                   " Always report how many lines changed
-
-" hi Normal ctermbg=None
-" hi NonText ctermbg=None
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text Formatting/Tab Settings
@@ -150,6 +147,11 @@ noremap <leader>b :!make<CR>
 noremap <leader>B :!make clean<CR>
 
 " Maps window split navigation to saner shortcuts
+" nnoremap <Up>    :wincmd k<CR>
+" nnoremap <Down>  :wincmd j<CR>
+" nnoremap <Left>  :wincmd h<CR>
+" nnoremap <Right> :wincmd l<CR>
+
 nnoremap <Up>    :wincmd k<CR>
 nnoremap <Down>  :wincmd j<CR>
 nnoremap <Left>  :wincmd h<CR>
@@ -167,8 +169,6 @@ nnoremap <leader>n :bp<CR>
 nnoremap <leader>w :bd!<CR>
 nnoremap <leader>l :ls<CR>
 nnoremap <leader>t :new<CR>
-nnoremap <leader>E :vs<CR>
-nnoremap <leader>O :sp<CR>
 
 " Shortcuts to for tab related stuff
 nnoremap <leader>M :tabn<CR>
@@ -194,11 +194,6 @@ let g:vim_json_syntax_conceal = 0
 " Airline settings
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-
-" NERDTree settings
-nnoremap <F1> :NERDTreeToggle<CR>
-
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Neomake settings
 autocmd! BufWritePost * Neomake

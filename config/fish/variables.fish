@@ -1,9 +1,41 @@
+# Editor and pager stuff
 set -gx EDITOR (which nvim)
 set -gx PAGER (which less)
-set -gx LESS '-R'
-set -gx LESSOPEN '|pygmentize -g %s'
+
+# Less stuff
+set -gx LESS "-R"
+set -gx LESSOPEN "|pygmentize -g %s"
+
+# Fzf stuff
+set -gx FZF_ALT_C_COMMAND "
+    command find -L \\( \
+        -path '*/.git' -o \
+        -path '*/.cache' -o \
+        -fstype dev -o \
+        -fstype proc \
+    \\) -prune -o \
+    -type d -print 2> /dev/null
+"
+
+set -gx FZF_CTRL_T_COMMAND "
+    command find -L \\( \
+        -path '*/.git' -o \
+        -path '*/.cache' -o \
+        -fstype dev -o \
+        -fstype proc \
+    \\) -prune -o \
+    \\( \
+        -type f -o \
+        -type d -o \
+        -type l \
+    \\) -print 2> /dev/null
+"
+
+# Misc stuff
 set -gx LANG en_US.UTF-8
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
+
+# PATH stuff
 set -gx USR_LOCAL /usr/local/bin /usr/local/sbin ^ /dev/null
 set -gx JAVA_HOME /usr/lib/jvm/default ^ /dev/null
 set -gx ANDROID_HOME /opt/android-sdk ^ /dev/null

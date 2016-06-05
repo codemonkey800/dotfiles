@@ -42,6 +42,9 @@ noremap <leader>b :!make<CR>
 " Runs make clean
 noremap <leader>B :!make clean<CR>
 
+" Pipe to selected to shell
+vnoremap <leader>r :!eval $SHELL<CR>
+
 noremap <leader>a ggvG
 
 " Maps window split navigation to saner shortcuts

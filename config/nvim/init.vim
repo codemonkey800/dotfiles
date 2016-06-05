@@ -1,10 +1,11 @@
 filetype indent plugin on
 
-source settings/plugins.vim
-source settings/general.vim
-source settings/user-interface.vim
-source settings/text-formatting.vim
-source settings/file.vim
-source settings/folding.vim
-source settings/plugin-settings.vim
+source ~/.config/nvim/settings/plugins.vim
+source ~/.config/nvim/settings/general.vim
+source ~/.config/nvim/settings/user-interface.vim
+source ~/.config/nvim/settings/text-formatting.vim
+source ~/.config/nvim/settings/file.vim
+source ~/.config/nvim/settings/folding.vim
+source ~/.config/nvim/settings/keymap.vim
+source ~/.config/nvim/settings/plugin-settings.vim
 

@@ -68,10 +68,10 @@
     background_image = None
     background_type = transparent
     copy_on_selection = True
-    cursor_color = "#c5c8c6"
+    cursor_color = "#ffffff"
     cursor_shape = ibeam
     font = Roboto Mono for Powerline 12
     foreground_color = "#ffffff"
-    palette = "#1d1f21:#cc342b:#198844:#fba922:#3971ed:#a36ac7:#3971ed:#c5c8c6:#969896:#cc342b:#198844:#fba922:#3971ed:#a36ac7:#3971ed:#ffffff"
+    palette = "#121212:#fa2573:#98e123:#dfd460:#1080d0:#8700ff:#43a8d0:#bbbbbb:#555555:#f6669d:#b1e05f:#fff26d:#00afff:#af87ff:#51ceff:#ffffff"
     scrollbar_position = hidden
     use_system_font = False

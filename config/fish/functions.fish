@@ -1,6 +1,6 @@
 # Aliases
 alias e "$EDITOR"
-alias git-root 'cd (git rev-parse --show-toplevel)'
+alias git_root 'cd (git rev-parse --show-toplevel)'
 
 # Conditional Aliases
 if which 'apm-beta' ^ /dev/null > /dev/null

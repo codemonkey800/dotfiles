@@ -1,3 +1,2 @@
 #!/usr/bin/env fish
 sudo systemctl restart NetworkManager
-

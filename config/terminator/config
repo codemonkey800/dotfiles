@@ -2,11 +2,11 @@
   enabled_plugins = ,
   suppress_multiple_term_dialog = True
   title_hide_sizetext = True
-  title_inactive_bg_color = "#969896"
-  title_inactive_fg_color = "#c5c8c6"
+  title_inactive_bg_color = "#000000"
+  title_inactive_fg_color = "#ff002e"
+  title_receive_bg_color = "#000000"
   title_receive_fg_color = "#0076c9"
-  title_transmit_bg_color = "#1d1f21"
-  title_transmit_fg_color = "#c5c8c6"
+  title_transmit_bg_color = "#000000"
   window_state = maximise
 [keybindings]
   broadcast_all = None
@@ -72,6 +72,6 @@
     cursor_shape = ibeam
     font = Roboto Mono for Powerline 12
     foreground_color = "#ffffff"
-    palette = "#121212:#fa2573:#98e123:#dfd460:#1080d0:#8700ff:#43a8d0:#bbbbbb:#555555:#f6669d:#b1e05f:#fff26d:#00afff:#af87ff:#51ceff:#ffffff"
+    palette = "#212121:#b7141f:#457b24:#f6981e:#134eb2:#560088:#0e717c:#efefef:#424242:#e83b3f:#7aba3a:#ffea2e:#54a4f3:#aa4dbc:#26bbd1:#d9d9d9"
     scrollbar_position = hidden
     use_system_font = False

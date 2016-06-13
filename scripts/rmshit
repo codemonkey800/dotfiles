@@ -1,38 +1,40 @@
-#!/usr/bin/env fish
+#! /usr/bin/env python
 
-if test ! -f ~/.shittyfiles
-    echo "Shitty files list missing!"
-    echo "Create shitty files in '~/.shittyfiles'"
-    exit 0
-end
+import glob
+import os
+import os.path as path
+import shutil
 
-set -l shitty_files (cat ~/.shittyfiles)
-set -l files_to_delete
+shitty_config_file = path.expanduser('~/.shittyfiles')
 
-for file in $shitty_files
-    set -l expanded_file (eval "echo $file")
-    if test -e $expanded_file
-        set files_to_delete $files_to_delete $expanded_file
-    end
-end
+if not path.exists(shitty_config_file):
+    print('Your shitty config file does not exist!')
+    print('Create the file "{0}"'.format(shitty_config_file))
+    exit(-1)
 
-set -l len (count $files_to_delete)
+with open(shitty_config_file) as file:
+    shitty_files = file.read().splitlines()
 
-if test $len -eq 0
-    echo "No shitty files found!"
-    exit 0
-end
+found = []
+for file in shitty_files:
+    found += glob.glob(path.expanduser(file))
 
-echo "Found $len shitty files:"
+if len(found) > 0:
+    print('Found {0} shitty files:'.format(len(found)))
+    for file in found:
+        print('  ', file)
 
-for file in $files_to_delete
-    printf "  $file\n"
-end
+    ans = input('Delete files? ([y]/n):')
 
-echo "Deleting in 1 second..."
-sleep 1
+    if ans == 'n':
+        print('Maybe next time!')
+        exit(0)
 
-for file in $files_to_delete
-    rm -rfv $file
-end
-
+    for file in found:
+        if path.isfile(file):
+            os.remove(file)
+        else:
+            shutil.rmtree(file)
+    print('All done! :)')
+else:
+    print('No shitty files found! :)')

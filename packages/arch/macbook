@@ -1,0 +1,10 @@
+acpi
+broadcom-wl-dkms
+btrfs-progs
+gpu-switch
+kbdlight
+mbpfan-git
+tlp
+xf86-video-intel
+xf86-video-nouveau
+xorg-xbacklight

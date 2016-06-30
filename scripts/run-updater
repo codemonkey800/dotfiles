@@ -3,12 +3,11 @@
 sudo update-pacman-db
 yaourt -Syua --force --needed --noconfirm
 sudo pkgfile -u
-sudo npm -g i (ncu -tg | pawk f[0])
 sudo pip install -U (pip list | pawk f[0])
 sudo pip2 install -U (pip2 list | pawk f[0])
 fisher update
 fish_update_completions
 plug-update
 
-echo "Don't forget to update your atom and npm packages!"
+echo "Remember to upgrade your npm and apm packages! :)"
 

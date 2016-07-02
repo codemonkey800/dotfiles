@@ -10,3 +10,7 @@ set tabstop=4                " 4 spaces
 set softtabstop=4            " 4 spaces
 set shiftwidth=4             " 4 spaces
 set expandtab                " Fuck tabs ;)
+
+set undodir=/tmp/nvim
+set undofile
+

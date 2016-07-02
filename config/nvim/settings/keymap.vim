@@ -4,6 +4,9 @@
 " Fuck the other mapleader key lol
 let mapleader = ","
 
+noremap <leader>f :Vexplore<CR>
+noremap <leader>F :Hexplore<CR>
+
 " Escape insert mode
 inoremap jk <esc>
 tnoremap jk <C-\><C-n>

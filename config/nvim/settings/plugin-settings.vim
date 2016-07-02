@@ -10,7 +10,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 " Neomake settings
-autocmd! BufWritePost * Neomake
+autocmd InsertChange, TextChanged * update | Neomake
 
 " vim-markdown settings
 let g:vim_markdown_math = 1

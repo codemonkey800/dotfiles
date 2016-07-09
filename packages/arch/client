@@ -6,6 +6,7 @@ android-sdk-platform-tools
 android-support
 android-udev
 atom-editor-bin
+baobab
 dconf-editor
 eog
 evince
@@ -20,6 +21,7 @@ gnome-screenshot
 gnome-session
 gnome-settings-daemon
 gnome-shell
+gnome-shell-extension-activities-config
 gnome-shell-extension-dash-to-dock
 gnome-shell-extension-mediaplayer-git
 gnome-shell-extension-middleclickclose-git
@@ -29,6 +31,8 @@ gnome-shell-extension-topicons
 gnome-system-monitor
 gnome-themes-standard
 gnome-tweak-tool
+gnome-user-docs
+gnome-user-share
 google-chrome-dev
 grilo-plugins
 gucharmap

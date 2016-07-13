@@ -13,6 +13,6 @@ if which apm > /dev/null ^ /dev/null
     apm upgrade -c false
 end
 
-print '\n\n'
+printf '\n\n'
 echo "Remember to upgrade your npm packages! :)"
 

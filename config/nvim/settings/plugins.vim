@@ -24,7 +24,7 @@ Plug 'godlygeek/tabular'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf'
 Plug 'justinmk/vim-dirvish'
-Plug 'kassio/neoterm'
+Plug 'kassio/neoterm', { 'commit': '9e33da0a'}
 Plug 'majutsushi/tagbar'
 Plug 'nginx.vim'
 Plug 'othree/es.next.syntax.vim'

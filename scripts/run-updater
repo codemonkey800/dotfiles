@@ -1,5 +1,9 @@
 #!/usr/bin/env fish
 
+if test (uname) != "Linux"
+    echo "You need to run this script on Linux, preferrably Arch"
+end
+
 sudo update-pacman-db
 yaourt -Syua --force --needed --noconfirm
 sudo pkgfile -u

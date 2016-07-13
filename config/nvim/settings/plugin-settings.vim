@@ -2,6 +2,9 @@
 " Plugin settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Neoterm settings
+let g:neoterm_shell = "fish"
+
 " vim-json settings
 let g:vim_json_syntax_conceal = 0
 

@@ -8,7 +8,7 @@ set -gx LESSOPEN "|pygmentize -g %s"
 
 # Fzf stuff
 set -gx FZF_ALT_C_COMMAND "
-    command find -L \\( \
+    command find -L . \\( \
         -path '*/.git' -o \
         -path '*/.cache' -o \
         -fstype dev -o \
@@ -18,7 +18,7 @@ set -gx FZF_ALT_C_COMMAND "
 "
 
 set -gx FZF_CTRL_T_COMMAND "
-    command find -L \\( \
+    command find -L . \\( \
         -path '*/.git' -o \
         -path '*/.cache' -o \
         -fstype dev -o \

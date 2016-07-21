@@ -82,6 +82,8 @@ nnoremap <leader>L :tabs<CR>
 nnoremap <leader>T :tabnew<CR>
 
 nnoremap <C-p> :FZF<CR>
+
+nnoremap <F8> <nop>
 nnoremap <F8> :TagbarToggle<CR>
 
 nnoremap <F9> :call NextColor(1)<CR>

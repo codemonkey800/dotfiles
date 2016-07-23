@@ -61,7 +61,6 @@ linter-eslint
 linter-flake8
 linter-flow
 linter-gcc
-linter-jade
 linter-javac
 linter-jsonlint
 linter-kotlin

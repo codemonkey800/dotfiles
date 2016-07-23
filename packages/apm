@@ -10,6 +10,7 @@ auto-detect-indentation
 autocomplete-cmake
 autocomplete-ctags
 autocomplete-emojis
+autocomplete-flow
 autocomplete-html-entities
 autocomplete-java-minus
 autocomplete-json
@@ -31,6 +32,7 @@ git-time-machine
 haskell-grammar
 highlight-line
 highlight-selected
+hyperclick
 jade-beautify
 java-import-wiz
 language-babel
@@ -52,10 +54,12 @@ latex-autocomplete
 latexer
 linter
 linter-chktex
+linter-cppcheck
 linter-csslint
 linter-docker
 linter-eslint
 linter-flake8
+linter-flow
 linter-gcc
 linter-jade
 linter-javac
@@ -71,6 +75,9 @@ minimap-cursorline
 minimap-find-and-replace
 minimap-highlight-selected
 minimap-linter
+minimap-pigments
+minimap-split-diff
+node-debugger
 nuclide
 open-this
 pdf-view
@@ -79,6 +86,7 @@ preview
 quick-highlight
 release-notes
 sort-lines
+split-diff
 sync-settings
 todo-show
 tool-bar

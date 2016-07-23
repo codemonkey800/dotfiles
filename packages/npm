@@ -1,4 +1,5 @@
 bower
+dockerlint
 editorconfig-cli
 glob
 gulp

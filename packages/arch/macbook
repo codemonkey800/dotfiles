@@ -3,7 +3,9 @@ broadcom-wl-dkms
 gpu-switch
 kbdlight
 mbpfan-git
+systemd-vgaswitcheroo-units
 tlp
+xf86-input-mtrack-git
 xf86-video-intel
 xf86-video-nouveau
 xorg-xbacklight

@@ -7,6 +7,7 @@ buck
 bzip2
 coreutils
 cowsay
+cppcheck
 cryptsetup
 ctags
 device-mapper
@@ -51,12 +52,11 @@ make
 man-db
 man-pages
 mdadm
+moreutils
 neovim
 netctl
-net-tools
 ntfs-3g
 openssh
-openvpn
 p7zip
 package-query
 pacman

@@ -6,8 +6,9 @@ android-sdk-build-tools
 android-sdk-platform-tools
 android-support
 android-udev
-atom-editor-bin
+atom-editor
 baobab
+broadcom-wl-dkms
 dconf-editor
 eog
 evince
@@ -83,9 +84,9 @@ texlive-science
 tracker
 ttf-chromeosextra-font
 ttf-droid-font
+ttf-ms-fonts
 ttf-roboto-font
 ttf-roboto-slab
-u2f-udev
 vlc
 watchman
 xdg-user-dirs-gtk

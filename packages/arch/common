@@ -42,6 +42,7 @@ intel-ucode
 iproute2
 iputils
 jfsutils
+keychain
 less
 libtool
 licenses

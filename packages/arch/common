@@ -72,7 +72,6 @@ pygmentize
 python2-pip
 python-neovim
 python-pip
-python-pygments
 python-virtualenv
 refind-efi
 reflector
@@ -88,7 +87,6 @@ tar
 texinfo
 tmux
 tree
-unzip
 usbutils
 util-linux
 wget

@@ -31,6 +31,8 @@ if which 'subl3' ^ /dev/null > /dev/null
     alias subl 'subl3'
 end
 
+alias pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
+
 # Functions
 function fish_greeting
     fortune 50% myfortunes 30% off 20% ascii-art | cowsay -n

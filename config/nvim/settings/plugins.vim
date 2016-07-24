@@ -4,6 +4,7 @@ function! DoRemote(arg)
     UpdateRemotePlugins
 endfunction
 
+Plug 'flowtype/vim-flow'
 Plug 'airblade/vim-gitgutter'
 Plug 'amirh/html-autoclosetag'
 Plug 'ap/vim-css-color'
@@ -24,7 +25,7 @@ Plug 'godlygeek/tabular'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf'
 Plug 'justinmk/vim-dirvish'
-Plug 'kassio/neoterm', { 'commit': '9e33da0a'}
+Plug 'kassio/neoterm'
 Plug 'majutsushi/tagbar'
 Plug 'nginx.vim'
 Plug 'othree/es.next.syntax.vim'

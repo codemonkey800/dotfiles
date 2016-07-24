@@ -1,9 +1,9 @@
+acpid
 autoconf
 automake
 bash
 binutils
 bison
-buck
 bzip2
 coreutils
 cowsay
@@ -28,7 +28,6 @@ gawk
 gettext
 git
 glibc
-gparted
 grep
 groff
 gzip
@@ -99,4 +98,3 @@ xfsprogs
 xsel
 yaourt
 zip
-acpid

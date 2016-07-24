@@ -9,6 +9,7 @@ android-udev
 atom-editor
 baobab
 broadcom-wl-dkms
+buck
 dconf-editor
 eog
 evince
@@ -37,6 +38,7 @@ gnome-tweak-tool
 gnome-user-docs
 gnome-user-share
 google-chrome-dev
+gparted
 grilo-plugins
 gucharmap
 gvfs

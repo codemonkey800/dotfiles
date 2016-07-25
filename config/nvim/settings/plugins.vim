@@ -4,7 +4,6 @@ function! DoRemote(arg)
     UpdateRemotePlugins
 endfunction
 
-Plug 'flowtype/vim-flow'
 Plug 'airblade/vim-gitgutter'
 Plug 'amirh/html-autoclosetag'
 Plug 'ap/vim-css-color'
@@ -20,6 +19,7 @@ Plug 'fatih/vim-go'
 Plug 'felixhummel/setcolors.vim'
 Plug 'Firef0x/PKGBUILD.vim'
 Plug 'flazz/vim-colorschemes'
+Plug 'flowtype/vim-flow'
 Plug 'gitignore'
 Plug 'godlygeek/tabular'
 Plug 'janko-m/vim-test'

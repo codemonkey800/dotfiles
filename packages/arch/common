@@ -25,6 +25,8 @@ flex
 fortune-mod
 fzf
 gawk
+gcc
+gcc-libs
 gettext
 git
 glibc
@@ -59,6 +61,7 @@ openssh
 p7zip
 package-query
 pacman
+parted
 patch
 pciutils
 pcmciautils
@@ -87,6 +90,7 @@ tar
 texinfo
 tmux
 tree
+unzip
 usbutils
 util-linux
 wget

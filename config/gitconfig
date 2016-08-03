@@ -1,7 +1,17 @@
+[alias]
+    a = add -A
+    d = diff
+    dt = difftool
+    s = status
+[color]
+    ui = true
+[core]
+    editor = nvim
+[diff]
+    prompt = false
+	tool = vimdiff
+[difftool]
+	path = nvim
 [user]
 	email = jeremyasuncion808@gmail.com
 	name = Jeremy Asuncion
-[diff]
-	tool = vimdiff
-[difftool]
-	prompt = false

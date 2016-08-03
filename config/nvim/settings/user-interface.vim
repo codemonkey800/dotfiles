@@ -2,7 +2,7 @@
 " UI Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-colorscheme molokai_dark
+colorscheme obsidian2
 
 set ruler       " Always show current positions along the bottom
 set cmdheight=1 " Command bar is 1 unit high

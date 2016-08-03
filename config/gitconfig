@@ -1,0 +1,7 @@
+[user]
+	email = jeremyasuncion808@gmail.com
+	name = Jeremy Asuncion
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false

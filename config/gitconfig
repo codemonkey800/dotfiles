@@ -1,7 +1,9 @@
 [alias]
     a = add -A
+    c = commit -am
     d = diff
     dt = difftool
+    p = push origin master
     s = status
 [color]
     ui = true

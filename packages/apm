@@ -1,6 +1,7 @@
 Sublime-Style-Column-Selection
 atom-beautify
 atom-django
+atom-jade
 atom-material-syntax
 atom-material-ui
 atom-react-native-autocomplete
@@ -32,6 +33,7 @@ haskell-grammar
 highlight-line
 highlight-selected
 hyperclick
+jade-beautify
 java-import-wiz
 language-babel
 language-bazel
@@ -47,6 +49,7 @@ language-lua
 language-mips
 language-ocaml
 language-pug
+language-rust
 language-swift
 language-thrift
 latex

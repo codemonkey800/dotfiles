@@ -1,0 +1,20 @@
+[alias]
+    a = add -A
+    c = commit -am
+    ca = commit -a --amend --no-edit
+    d = diff
+    dt = difftool
+    p = push origin master
+    s = status
+[color]
+    ui = true
+[core]
+    editor = nvim
+[diff]
+    prompt = false
+	tool = vimdiff
+[difftool]
+	path = nvim
+[user]
+	email = jeremyasuncion808@gmail.com
+	name = Jeremy Asuncion

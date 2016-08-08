@@ -39,13 +39,6 @@ function fish_greeting
     echo
 end
 
-if functions -q gitignore
-    function mkgitignore -d "Wrapper over gitignore function in gitignore fisher plugin"
-        mkdir -p ~/.cache/
-        gitignore $argv
-    end
-end
-
 function l -d "Lists all files in a directory or reads a file"
     if test -f "$argv"
         less -N "$argv"

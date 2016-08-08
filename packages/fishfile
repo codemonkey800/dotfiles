@@ -1,10 +1,7 @@
-agnoster
-await
-bd
-docker-completion
-fzf
-getopts
-gitignore
-last_job_id
-menu
-spin
+oh-my-fish/theme-agnoster
+fisherman/await
+0rax/fish-bd
+fisherman/docker-completion
+fisherman/fzf
+fisherman/last_job_id
+fisherman/menu

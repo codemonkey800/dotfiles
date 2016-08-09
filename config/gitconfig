@@ -12,11 +12,11 @@
     editor = nvim
 [diff]
     prompt = false
-	tool = vimdiff
+    tool = vimdiff
 [difftool]
-	path = nvim
+    path = nvim
 [hub]
     protocol = ssh
 [user]
-	email = jeremyasuncion808@gmail.com
-	name = Jeremy Asuncion
+    email = jeremyasuncion808@gmail.com
+    name = Jeremy Asuncion

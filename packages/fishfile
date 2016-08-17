@@ -3,5 +3,8 @@ fisherman/await
 0rax/fish-bd
 fisherman/docker-completion
 fisherman/fzf
+fisherman/getopts
+fisherman/gitignore
 fisherman/last_job_id
 fisherman/menu
+fisherman/spin

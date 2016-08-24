@@ -5,6 +5,7 @@
     d = diff
     dt = difftool
     p = push origin master
+    pu = pull origin master
     s = status
 [color]
     ui = true

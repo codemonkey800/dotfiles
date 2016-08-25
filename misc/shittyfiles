@@ -17,7 +17,10 @@
 ~/.gconf
 ~/.gconfd
 ~/.gstreamer-0.10
+~/.ipython
 ~/.java
+~/.jspm
+~/.jupyter
 ~/.lesshst
 ~/.local/share/gegl-0.2
 ~/.local/share/recently-used.xbel

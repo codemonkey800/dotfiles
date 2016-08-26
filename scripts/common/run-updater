@@ -15,11 +15,11 @@ plug-update
 
 if exists apm
     apm upgrade -c false
-end
-
-if exists apm-beta
+else
     apm-beta upgrade -c false
 end
+
+sudo npm -g i (npm -g outdated --depth=0 --parseable | cut -d: -f2)
 
 echo 'Cleaning up.'
 yaourt -Scc --noconfirm

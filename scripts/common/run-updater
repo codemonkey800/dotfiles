@@ -28,6 +28,3 @@ if exists rmshit
     echo y | rmshit
 end
 
-printf '\n\n'
-echo "Remember to upgrade your npm packages! :)"
-

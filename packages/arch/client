@@ -2,9 +2,11 @@ adwaita-icon-theme
 android-google-apis-23
 android-sdk
 android-sdk-build-tools
+android-sdk-platform-tools
 android-support
 android-support-repository
 android-udev
+atom-editor-beta-bin
 baobab
 broadcom-wl-dkms
 buck
@@ -24,11 +26,13 @@ gnome-session
 gnome-settings-daemon
 gnome-shell
 gnome-shell-extension-activities-config
+gnome-shell-extension-arch-update
 gnome-shell-extension-dash-to-dock
 gnome-shell-extension-mediaplayer-git
 gnome-shell-extension-middleclickclose-git
 gnome-shell-extension-pixel-saver-git
 gnome-shell-extensions
+gnome-shell-extension-topicons-plus-git
 gnome-system-monitor
 gnome-themes-standard
 gnome-tweak-tool
@@ -49,7 +53,9 @@ gvfs-smb
 handbrake-cli
 intellij-idea-ue-eap
 jdk8-openjdk
+jupyter-notebook
 logmein-hamachi
+mathjax
 mousetweaks
 mutter
 nautilus

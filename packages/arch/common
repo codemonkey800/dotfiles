@@ -5,6 +5,7 @@ bash
 binutils
 bison
 bzip2
+clang
 coreutils
 cowsay
 cppcheck
@@ -81,6 +82,7 @@ sed
 shadow
 smartmontools
 s-nail
+speedtest-cli
 sudo
 sysfsutils
 systemd-sysvcompat

@@ -1,3 +1,0 @@
-#!/usr/bin/env fish
-git rev-parse --show-toplevel
-

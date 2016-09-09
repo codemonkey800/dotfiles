@@ -17,11 +17,11 @@ function l -d "Lists all files in a directory or reads a file"
     if test -f "$argv"
         less -N "$argv"
     else
-    if test (uname) = "Darwin"
-        ls -CAF $argv
-    else
+        if test (uname) = "Darwin"
+            ls -CAF $argv
+        else
             ls -CAF --color=auto $argv
-    end
+        end
     end
 end
 
@@ -55,7 +55,7 @@ end
 # Aliases
 alias e "$EDITOR"
 alias g 'git'
-
+alias groot 'cd (git rev-parse --show-toplevel)'
 
 # Conditional Aliases
 if exists apm-beta

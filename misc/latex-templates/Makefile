@@ -1,14 +1,16 @@
 TEX = pdflatex
 TEX_FLAGS = -interaction=nonstopmode -shell-escape
-PAPER = resume
 
-all: $(PAPER).pdf
+all: *.pdf
 
-$(PAPER).pdf: $(PAPER).tex
+*.pdf: *.tex
 	$(TEX) $(TEX_FLAGS) $?
+	@mkdir -v build
+	@mv -v $@ build
 
 clean:
-	@rm -vrf *.log *.pdf *.aux
+	@rm -vrf *.log *.aux
+	@rm -vrf build
 
 .PHONY: all clean
 

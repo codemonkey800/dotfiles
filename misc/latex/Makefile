@@ -1,15 +1,17 @@
 TEX = pdflatex
 TEX_FLAGS = -interaction=nonstopmode -shell-escape
+SRC_FILES = $(wildcard *.tex)
+OUT_FILES = $(SRC_FILES:.tex=.pdf)
 
-all: *.pdf
+all: $(OUT_FILES)
 
-*.pdf: *.tex
+$(OUT_FILES): $(SRC_FILES)
 	$(TEX) $(TEX_FLAGS) $?
 	@mkdir -v build
 	@mv -v $@ build
 
 clean:
-	@rm -vrf *.log *.aux
+	@rm -vrf *.log *.aux *.pdf
 	@rm -vrf build
 
 .PHONY: all clean

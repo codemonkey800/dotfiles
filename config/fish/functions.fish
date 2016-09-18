@@ -20,7 +20,7 @@ function l -d "Lists all files in a directory or reads a file"
         if test \( -n $i \) -a \( $i -gt 0 \); or test \( -n $j \) -a \( $j -gt 0 \)
             less -N $argv[-1]
         else
-            pygmentize $argv[-1]
+            pygmentize -g $argv[-1]
         end
     else
         if test (uname) = "Darwin"

@@ -37,6 +37,7 @@ Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
 Plug 'shime/vim-livedown'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'ternjs/tern_for_vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'

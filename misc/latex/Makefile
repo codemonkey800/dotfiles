@@ -11,7 +11,7 @@ $(OUT_FILES): $(SRC_FILES)
 	@mv -v $@ build
 
 clean:
-	@rm -vrf *.log *.aux *.pdf
+	@rm -vrf *.log *.aux *.pdf _minted-solution
 	@rm -vrf build
 
 .PHONY: all clean

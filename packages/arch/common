@@ -5,6 +5,7 @@ bash
 binutils
 bison
 bzip2
+checkupdates-aur
 clang
 coreutils
 cowsay
@@ -24,6 +25,7 @@ findutils
 fish
 flex
 fortune-mod
+fpc
 fzf
 gawk
 gettext
@@ -32,6 +34,8 @@ glibc
 grep
 groff
 gzip
+htop
+httpie
 hub
 inetutils
 intel-ucode
@@ -52,6 +56,7 @@ make
 man-db
 man-pages
 mdadm
+mit-scheme
 moreutils
 neovim
 netctl
@@ -65,6 +70,7 @@ patch
 pciutils
 pcmciautils
 perl
+perl-checkupdates-aur
 pkg-config
 pkgfile
 powerline-fonts-git

@@ -1,12 +1,9 @@
 bower
 dockerlint
 editorconfig-cli
-glob
 gulp
 json
-npm
 npm-check-updates
-npm-user-validate
 pnpm
 react-native-cli
 semver

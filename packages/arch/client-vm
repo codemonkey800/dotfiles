@@ -62,6 +62,7 @@ nodejs
 npm
 openjdk8-doc
 openjdk8-src
+open-vm-tools
 paper-icon-theme-git
 simplescreenrecorder
 sublime-text-dev
@@ -94,3 +95,5 @@ vlc
 watchman
 xdg-user-dirs-gtk
 xf86-input-libinput
+xf86-input-vmmouse
+xf86-video-vmware

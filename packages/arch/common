@@ -60,6 +60,7 @@ mit-scheme
 moreutils
 neovim
 netctl
+net-tools
 ntfs-3g
 openssh
 p7zip

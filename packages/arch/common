@@ -4,6 +4,7 @@ automake
 bash
 binutils
 bison
+btrfs-progs
 bzip2
 checkupdates-aur
 clang

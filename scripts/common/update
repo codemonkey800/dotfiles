@@ -22,7 +22,7 @@ if exists apm-beta
 end
 
 if exists npm
-    sudo npm -g i (npm -g outdated --depth=0 --parseable | cut -d: -f2)
+    sudo npm -g i (npm -g outdated --depth=0 --parseable | cut -d: -f4)
 end
 
 echo 'Cleaning up.'

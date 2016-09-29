@@ -11,7 +11,7 @@ sudo pip install -U (pip list | pawk f[0])
 sudo pip2 install -U (pip2 list | pawk f[0])
 fisher update
 fish_update_completions
-plug-update
+update-plug
 
 if exists apm
     apm upgrade -c false
@@ -22,7 +22,10 @@ if exists apm-beta
 end
 
 if exists npm
-    sudo npm -g i (npm -g outdated --depth=0 --parseable | cut -d: -f4)
+    set -l pkgs (npm -g outdated --depth=0 --parseable | cut -d: -f4)
+    if test (count $pkgs) -gt 0
+        sudo npm -g i $pkgs
+    end
 end
 
 echo 'Cleaning up.'

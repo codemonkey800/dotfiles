@@ -36,7 +36,7 @@ function ll -d "Lists all files in a directory and prints their permissions and 
 end
 
 function lc -d "Lists all files in a directory in a column"
-    ll $argv | tail -n +2 | awk '{print $9}'
+    ll $argv | tail -n +2 | pawk f[8:]
 end
 
 function mkcd

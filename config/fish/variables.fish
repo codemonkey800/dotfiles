@@ -11,6 +11,7 @@ set -gx FZF_ALT_C_COMMAND "
     command find -L . \\( \
         -path '*/.git' -o \
         -path '*/.cache' -o \
+        -path '*/node_modules' -o \
         -fstype dev -o \
         -fstype proc \
     \\) -prune -o \
@@ -21,6 +22,7 @@ set -gx FZF_CTRL_T_COMMAND "
     command find -L . \\( \
         -path '*/.git' -o \
         -path '*/.cache' -o \
+        -path '*/node_modules' -o \
         -fstype dev -o \
         -fstype proc \
     \\) -prune -o \

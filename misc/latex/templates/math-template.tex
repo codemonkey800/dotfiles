@@ -2,6 +2,7 @@
 
 \usepackage{amsmath, mathtools, amsthm}
 \usepackage{amssymb}
+\usepackage{minted}
 \usepackage[paperwidth=8.5in, paperheight=11in, margin=1.0in]{geometry}
 \usepackage{pgfplots}
 \usepackage{tikz}
@@ -33,10 +34,14 @@
 \newcommand{\vecb}[1]{\mathbf{#1}} % Bold vectors
 \newcommand{\vecu}[1]{\hat{\mathbf{#1}}} % Bold unit vectors
 
-\newcommand{\env}[2]{
-    \begin{#1}
-        #2
-    \end{#1}
+\newcommand{\env}[2]{%
+    \begin{#1}%
+        #2%
+    \end{#1}%
+}
+
+\newcommand{\code}[2]{%
+    \inputminted[matheescape=true]{#1}{#2}
 }
 
 \begin{document}

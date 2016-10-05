@@ -1,0 +1,6 @@
+#!/usr/bin/env fish
+
+set tmp (mktemp -d)
+fish -c "cd $tmp; and fish"
+rm -rf $tmp
+

@@ -108,3 +108,5 @@ xfsprogs
 xsel
 yaourt
 zip
+cmake
+maven

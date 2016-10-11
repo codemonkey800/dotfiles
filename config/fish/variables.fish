@@ -13,6 +13,8 @@ set -gx FZF_ALT_C_COMMAND "
         -path '*/.git' -o \
         -path '*/.cache' -o \
         -path '*/node_modules' -o \
+        -path '*/build' -o \
+        -path '*/_minted*' -o \
         -fstype dev -o \
         -fstype proc \
     \\) -prune -o \
@@ -24,6 +26,8 @@ set -gx FZF_CTRL_T_COMMAND "
         -path '*/.git' -o \
         -path '*/.cache' -o \
         -path '*/node_modules' -o \
+        -path '*/build' -o \
+        -path '*/_minted*' -o \
         -fstype dev -o \
         -fstype proc \
     \\) -prune -o \

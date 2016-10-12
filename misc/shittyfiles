@@ -38,6 +38,7 @@
 ~/.python_history
 ~/.recently-used
 ~/.spicec
+.sqlite_history
 ~/.thumbnails
 ~/.v8flags*
 ~/.viminfo

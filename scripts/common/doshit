@@ -1,6 +1,7 @@
 #!/usr/bin/env fish
 
 set tmp (mktemp -d)
-fish -c "cd $tmp; and fish"
+set id (echo $tmp | pawk -F. f[-1])
+fish -c "cd $tmp; and tmux new -s $id"
 rm -rf $tmp
 

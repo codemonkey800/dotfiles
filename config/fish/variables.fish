@@ -39,6 +39,7 @@ set -gx FZF_CTRL_T_COMMAND "
 "
 
 # Misc stuff
+set -gx SRC $HOME/.local/src
 set -gx LANG en_US.UTF-8
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 

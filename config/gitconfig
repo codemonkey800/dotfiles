@@ -11,6 +11,7 @@
     ui = true
 [core]
     editor = nvim
+    sparsecheckout = true
 [diff]
     prompt = false
     tool = vimdiff

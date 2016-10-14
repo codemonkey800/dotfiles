@@ -3,7 +3,6 @@ dockerlint
 editorconfig-cli
 gulp
 json
-npm
 npm-check-updates
 pnpm
 react-native-cli

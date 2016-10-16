@@ -2,6 +2,7 @@ oh-my-fish/theme-agnoster
 fisherman/await
 0rax/fish-bd
 fisherman/docker-completion
+brgmnn/fish-docker-compose
 fisherman/fzf
 fisherman/getopts
 fisherman/gitignore

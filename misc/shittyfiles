@@ -19,6 +19,7 @@
 ~/.gstreamer-0.10
 ~/.ipython
 ~/.java
+~/javac-services.*.log
 ~/.jspm
 ~/.jupyter
 ~/.lesshst

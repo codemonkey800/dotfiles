@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Asuncion <jeremyasuncion808@gmail.com>
 
 pkgname=yarn-git
-pkgver=0.15.1_130_g8f4f01e
+pkgver=0.15.1_144_g5ce30e8
 pkgrel=1
 pkgdesc="Fast, reliable, and secure dependency management."
 arch=(any)

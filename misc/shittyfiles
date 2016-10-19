@@ -34,6 +34,7 @@
 ~/npm-debug.log
 ~/.nv
 ~/.objectdb
+~/.oracle_jre_usage/
 ~/.parallel
 ~/.pulse
 ~/.python_history

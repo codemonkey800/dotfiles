@@ -36,7 +36,6 @@ gnome-shell-extension-topicons-plus-git
 gnome-system-monitor
 gnome-themes-standard
 gnome-tweak-tool
-gnome-user-docs
 gnome-user-share
 google-chrome-dev
 gparted
@@ -53,14 +52,11 @@ gvfs-smb
 handbrake-cli
 intellij-idea-ue-eap
 jdk8-openjdk
-jupyter-notebook
 logmein-hamachi
-mathjax
 mousetweaks
 mutter
 nautilus
 nodejs
-npm
 openjdk8-doc
 openjdk8-src
 paper-icon-theme-git
@@ -68,7 +64,6 @@ simplescreenrecorder
 spotify
 sublime-text-dev
 sushi
-teamviewer
 terminator
 texlive-bibtexextra
 texlive-core

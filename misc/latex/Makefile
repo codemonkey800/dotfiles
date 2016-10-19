@@ -7,7 +7,7 @@ all: $(OUT_FILES)
 
 $(OUT_FILES): $(SRC_FILES)
 	$(TEX) $(TEX_FLAGS) $?
-	@mkdir -v build
+	@mkdir -pv build
 	@mv -v $@ build
 
 clean:

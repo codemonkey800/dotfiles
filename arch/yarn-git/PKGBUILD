@@ -1,0 +1,35 @@
+# Maintainer: Jeremy Asuncion <jeremyasuncion808@gmail.com>
+
+pkgname=yarn-git
+pkgver=0.15.1_130_g8f4f01e
+pkgrel=1
+pkgdesc="Fast, reliable, and secure dependency management."
+arch=(any)
+url='https://yarnpkg.com/'
+license=('BSD')
+depends=('nodejs')
+makedepends=('npm')
+conflicts=('yarn' 'nodejs-yarn')
+source=('yarn-git::git+https://github.com/yarnpkg/yarn')
+md5sums=(SKIP)
+
+pkgver() {
+    cd "$pkgname"
+    git describe --long | sed 's/v//g; s/-/_/g'
+}
+
+build() {
+    cd "$pkgname"
+    npm install
+    ./scripts/build-dist.sh
+    npm prune --production
+}
+
+package() {
+    install -dm755 "$pkgdir/usr/lib/node_modules/yarn"
+    install -dm755 "$pkgdir/usr/bin"
+    install -Dm644 $pkgname/LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+
+    cp -R "$pkgname"/{bin,lib*,node_modules,package.json,yarn.lock} "$pkgdir/usr/lib/node_modules/yarn"
+    ln -s "$pkgdir/usr/lib/node_modules/yarn/bin/yarn" "$pkgdir/usr/bin"
+}

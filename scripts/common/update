@@ -5,7 +5,7 @@ if test (uname) != "Linux"
 end
 
 sudo update-pacman-db
-yaourt -Syua --force --needed --noconfirm
+yaourt -Syua --needed --noconfirm
 sudo pkgfile -u
 pip install  --user -U (pip --user list | pawk f[0])
 pip2 install --user  -U (pip2 --user list | pawk f[0])

@@ -46,16 +46,18 @@ function mkcd
     cd "$argv"
 end
 
-function my-public-ip -d "Gets the public ip using an external service"
-    wget http://ipinfo.io/ip -qO-
+function public-ip -d "Gets the public ip using an external service"
+    curl -q http://ipinfo.io/ip
 end
 
 function r -d "An alias for rm -rf"
     rm -rf $argv
 end
 
-function tree -d "Runs the tree command with color enabled and pipes it to less for paging"
-   eval  (which tree) -C $argv | less
+if exists tree
+    function tree -d "Runs the tree command with color enabled and pipes it to less for paging"
+       eval  (which tree) -C $argv | less
+    end
 end
 
 # Aliases
@@ -84,10 +86,6 @@ end
 
 if exists netstat
     alias lsports 'netstat -pelnut'
-end
-
-if exists npm
-    alias npmls 'npm ls --depth=0'
 end
 
 if exists subl3

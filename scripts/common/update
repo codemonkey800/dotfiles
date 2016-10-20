@@ -7,8 +7,8 @@ end
 sudo update-pacman-db
 yaourt -Syua --force --needed --noconfirm
 sudo pkgfile -u
-sudo pip install -U (pip list | pawk f[0])
-sudo pip2 install -U (pip2 list | pawk f[0])
+pip install  --user -U (pip --user list | pawk f[0])
+pip2 install --user  -U (pip2 --user list | pawk f[0])
 fisher update
 fish_update_completions
 update-plug

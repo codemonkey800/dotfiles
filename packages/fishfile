@@ -3,7 +3,9 @@ fisherman/await
 0rax/fish-bd
 fisherman/docker-completion
 brgmnn/fish-docker-compose
+fisherman/fnm
 fisherman/fzf
+fisherman/get_file_age
 fisherman/getopts
 fisherman/gitignore
 fisherman/last_job_id

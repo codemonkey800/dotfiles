@@ -10,6 +10,8 @@ atom-editor-beta-bin
 baobab
 broadcom-wl-dkms
 buck
+clang
+cmake
 dconf-editor
 eog
 evince
@@ -50,9 +52,11 @@ gvfs-mtp
 gvfs-nfs
 gvfs-smb
 handbrake-cli
+httpie
 intellij-idea-ue-eap
 jdk8-openjdk
 logmein-hamachi
+mit-scheme
 mousetweaks
 mutter
 nautilus

@@ -7,8 +7,6 @@ bison
 btrfs-progs
 bzip2
 checkupdates-aur
-clang
-cmake
 coreutils
 cowsay
 cryptsetup
@@ -26,9 +24,9 @@ findutils
 fish
 flex
 fortune-mod
-fpc
 fzf
 gawk
+gcc
 gettext
 git
 glibc
@@ -36,7 +34,6 @@ grep
 groff
 gzip
 htop
-httpie
 hub
 inetutils
 intel-ucode
@@ -56,9 +53,7 @@ m4
 make
 man-db
 man-pages
-maven
 mdadm
-mit-scheme
 moreutils
 neovim
 netctl

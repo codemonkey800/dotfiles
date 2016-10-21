@@ -6,10 +6,6 @@ source ~/.config/nvim/settings/keymap.vim
 " Escape nvim terminal
 tnoremap jk <C-\><C-n>
 
-" Open file explorer
-noremap <leader>f :Vexplore<CR>
-noremap <leader>F :Hexplore<CR>
-
 " Runs make
 noremap <leader>b :!make<CR>
 " Runs make clean
@@ -29,10 +25,8 @@ nnoremap <leader>W :tabc<CR>
 nnoremap <leader>L :tabs<CR>
 nnoremap <leader>T :tabnew<CR>
 
+" Ctrl-p like functionality with FZF
 nnoremap <C-p> :FZF<CR>
-
-nnoremap <F8> <nop>
-nnoremap <F8> :TagbarToggle<CR>
 
 nnoremap <F9> :call NextColor(1)<CR>
 nnoremap <S-F9> :call NextColor(-1)<CR>

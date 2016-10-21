@@ -41,10 +41,13 @@ noremap U :redo<CR>
 " Pipe to selected to shell
 vnoremap <leader>r :!eval $SHELL<CR>
 
+" Sort things
+noremap <leader>s :sort<CR>
+
+" Select all text
 noremap <leader>a ggvG
 
 " Maps window split navigation to saner shortcuts
-
 nnoremap <Up>    :wincmd k<CR>
 nnoremap <Down>  :wincmd j<CR>
 nnoremap <Left>  :wincmd h<CR>

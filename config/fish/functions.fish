@@ -65,6 +65,7 @@ alias e "$EDITOR"
 alias re "sudo -E $EDITOR"
 alias g 'git'
 alias groot 'cd (git rev-parse --show-toplevel)'
+alias info 'info --vi-keys'
 
 # Conditional Aliases
 if exists apm-beta

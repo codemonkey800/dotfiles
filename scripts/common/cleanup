@@ -7,7 +7,5 @@ if test (count $pkgs) -gt 0
     yaourt -Rscun --noconfirm $pkgs
 end
 
-if exists rmshit
-    echo y | rmshit
-end
+echo y | rmshit
 

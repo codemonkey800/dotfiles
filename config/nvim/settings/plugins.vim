@@ -5,9 +5,10 @@ function! DoRemote(arg)
 endfunction
 
 " Autocomplete
-Plug 'amirh/html-autoclosetag'
-Plug 'raimondi/delimitmate'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'amirh/html-autoclosetag'
+Plug 'ervandew/supertab'
+Plug 'raimondi/delimitmate'
 Plug 'ternjs/tern_for_vim'
 
 " Linting

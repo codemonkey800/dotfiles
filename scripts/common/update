@@ -4,6 +4,13 @@ if test (uname) != "Linux"
     echo "You need to run this script on Linux, preferrably Arch"
 end
 
+if test (count $argv) -gt 0
+    if test $argv[1] = "-l"
+        checkupdates; and checkupdates-aur
+    end
+    exit 0
+end
+
 sudo update-pacman-db
 yaourt -Syua --needed --noconfirm
 sudo pkgfile -u

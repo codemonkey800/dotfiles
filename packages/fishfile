@@ -4,8 +4,5 @@ fisherman/await
 fisherman/docker-completion
 brgmnn/fish-docker-compose
 fisherman/fzf
-fisherman/getopts
-fisherman/gitignore
 fisherman/last_job_id
 fisherman/menu
-fisherman/spin

@@ -4,12 +4,25 @@ function fish_greeting
     echo
 end
 
-function exists -d 'Silent wrapper over "which". Returns the status of the command'
+function exists -d "Silent wrapper over "which". Returns the status of the command"
     if test (count $argv) -gt 0
         which $argv[1] > /dev/null ^ /dev/null
     else
-        echo 'You need to specify a command.'
+        echo "You need to specify a command."
         return -1
+    end
+end
+
+function gi -d "Simple commandline client for accessing the gitignore.io api"
+	function _request
+        curl -L -s "https://www.gitignore.io/api/$argv"
+    end
+
+    switch "$argv"
+        case "list"
+            _request list | sed 's/,/\n/g' | sort
+        case "*"
+            _request $argv
     end
 end
 
@@ -63,37 +76,37 @@ end
 # Aliases
 alias e "$EDITOR"
 alias re "sudo -E $EDITOR"
-alias g 'git'
-alias groot 'cd (git rev-parse --show-toplevel)'
-alias info 'info --vi-keys'
+alias g "git"
+alias groot "cd (git rev-parse --show-toplevel)"
+alias info "info --vi-keys"
 
 # Conditional Aliases
 if exists apm-beta
-    alias apm 'apm-beta'
+    alias apm "apm-beta"
 end
 
 if exists atom-beta
-    alias atom 'atom-beta'
+    alias atom "atom-beta"
 end
 
 if exists google-chrome-unstable
-    alias chrome 'google-chrome-unstable'
+    alias chrome "google-chrome-unstable"
 end
 
 if exists hub
-    alias git 'hub'
-    alias g 'hub'
+    alias git "hub"
+    alias g "hub"
 end
 
 if exists netstat
-    alias lsports 'netstat -pelnut'
+    alias lsports "netstat -pelnut"
 end
 
 if exists subl3
-    alias subl 'subl3'
+    alias subl "subl3"
 end
 
 if exists pdflatex
-    alias pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
+    alias pdflatex "pdflatex -interaction=nonstopmode -shell-escape"
 end
 

@@ -6,6 +6,7 @@ endfunction
 
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'zchee/deoplete-jedi'
 Plug 'amirh/html-autoclosetag'
 Plug 'ervandew/supertab'
 Plug 'raimondi/delimitmate'

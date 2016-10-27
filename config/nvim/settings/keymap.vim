@@ -27,7 +27,7 @@ nnoremap <leader><space> :nohlsearch<CR>
 " Space open/closes folds
 nnoremap <space> za
 
-" Copy/Paste to X11 clipboard using xsel
+" Copy/Paste to host keyboard
 vnoremap <leader>c "+y<CR>
 noremap <leader>v "+p<CR>
 
@@ -42,7 +42,8 @@ noremap U :redo<CR>
 vnoremap <leader>r :!eval $SHELL<CR>
 
 " Sort things
-noremap <leader>s :sort<CR>
+noremap <leader>s :!sort<CR>
+noremap <leader>S :!sort -r<CR>
 
 " Select all text
 noremap <leader>a ggvG

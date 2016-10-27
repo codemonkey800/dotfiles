@@ -8,31 +8,11 @@ alias sed "sed -r"
 alias top "htop"
 
 # Conditional Aliases
-if exists apm-beta
-    alias apm "apm-beta"
-end
+exists apm-beta; and alias apm "apm-beta"
+exists atom-beta; and alias atom "atom-beta"
+exists google-chrome-unstable; and alias chrome "google-chrome-unstable"
+exists hub; and alias git "hub"; and alias g "hub"
+exists netstat; and alias lsports "netstat -pelnut"
+exists subl3; and alias subl "subl3"
+exists pdflatex; and alias pdflatex "pdflatex -interaction=nonstopmode -shell-escape"
 
-if exists atom-beta
-    alias atom "atom-beta"
-end
-
-if exists google-chrome-unstable
-    alias chrome "google-chrome-unstable"
-end
-
-if exists hub
-    alias git "hub"
-    alias g "hub"
-end
-
-if exists netstat
-    alias lsports "netstat -pelnut"
-end
-
-if exists subl3
-    alias subl "subl3"
-end
-
-if exists pdflatex
-    alias pdflatex "pdflatex -interaction=nonstopmode -shell-escape"
-end

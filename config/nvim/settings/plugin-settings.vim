@@ -13,7 +13,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 " Neomake settings
-autocmd InsertChange, TextChanged * update | Neomake
+autocmd! BufWritePost * Neomake
 
 " vim-markdown settings
 let g:vim_markdown_math = 1
@@ -58,13 +58,13 @@ let g:clang_library_path = '/usr/lib/libclang.so'
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 " NERDTree settings
-function CloseIfNERDTreeOpen()
+function! CloseIfNERDTreeOpen()
     if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()
         q
     endif
 endfunction
 
-function OnVimEnter()
+function! OnVimEnter()
     if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") |
         exe 'NERDTree' argv()[0] |
         wincmd p |

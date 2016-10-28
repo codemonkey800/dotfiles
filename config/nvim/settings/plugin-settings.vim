@@ -51,3 +51,28 @@ let g:jsx_ext_required = 0
 " vim-editorconfig settings
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+" clang_complete settings
+let g:clang_library_path = '/usr/lib/libclang.so'
+
+" vim-javacomplete2 settings
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+" NERDTree settings
+function CloseIfNERDTreeOpen()
+    if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()
+        q
+    endif
+endfunction
+
+function OnVimEnter()
+    if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") |
+        exe 'NERDTree' argv()[0] |
+        wincmd p |
+        ene |
+    endif
+endfunction
+
+autocmd StdinReadPre * let s:std_in = 1
+autocmd bufenter * :call CloseIfNERDTreeOpen()
+autocmd VimEnter * :call OnVimEnter()
+

@@ -28,7 +28,11 @@ nnoremap <leader>T :tabnew<CR>
 " Ctrl-p like functionality with FZF
 nnoremap <C-p> :FZF<CR>
 
+" Color settings thing
 nnoremap <F9> :call NextColor(1)<CR>
 nnoremap <S-F9> :call NextColor(-1)<CR>
 nnoremap <A-F9> :call NextColor(0)<CR>
+
+" Show NERDTree on F1
+noremap <F1> :NERDTreeToggle<CR>
 

@@ -11,6 +11,9 @@ set t_Co=256             " COLORS
 set exrc                 " Scan working directory for .vimrc files
 set secure               " Do the above securely
 
+set completeopt+=noselect
+
 let g:python_host_prog = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/bin/python'
+let g:python3_host_skip_check = 1
 

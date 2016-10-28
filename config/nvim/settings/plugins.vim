@@ -5,12 +5,16 @@ function! DoRemote(arg)
 endfunction
 
 " Autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'zchee/deoplete-jedi'
 Plug 'amirh/html-autoclosetag'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'carlitux/deoplete-ternjs'
 Plug 'ervandew/supertab'
 Plug 'raimondi/delimitmate'
-Plug 'ternjs/tern_for_vim'
+Plug 'Rip-Rip/clang_complete'
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/neco-vim'
+Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'zchee/deoplete-jedi'
 
 " Linting
 Plug 'benekastah/neomake'
@@ -52,10 +56,13 @@ Plug 'ap/vim-css-color'
 Plug 'felixhummel/setcolors.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Utilitiy
+Plug 'airblade/vim-rooter'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'junegunn/fzf'
 Plug 'kassio/neoterm'

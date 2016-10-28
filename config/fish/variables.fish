@@ -44,9 +44,11 @@ set -gx LANG en_US.UTF-8
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
 # PATH stuff
-if test -d $HOME/.local/bin
-    set -gx PATH $PATH $HOME/.local/bin
-end
+not test -d $HOME/.local/bin; and mkdir $HOME/.local/bin
+not test -d $HOME/.local/src/go/bin; and mkdir -p $HOME/.local/src/go/bin
+
+set -gx GOPATH $HOME/.local/src/go
+set -gx PATH $PATH $HOME/.local/bin $GOPATH/bin
 
 if test (uname) = Linux
     set -gx USR_LOCAL /usr/local/bin /usr/local/sbin ^ /dev/null

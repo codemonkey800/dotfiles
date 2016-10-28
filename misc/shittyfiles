@@ -2,6 +2,7 @@
 ~/.babel*
 ~/.bash*
 ~/.bazaar
+~/.bundle
 ~/.byobu
 ~/.bzr.log
 ~/ca2

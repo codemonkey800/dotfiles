@@ -62,7 +62,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Utilitiy
-Plug 'airblade/vim-rooter'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'junegunn/fzf'
 Plug 'kassio/neoterm'

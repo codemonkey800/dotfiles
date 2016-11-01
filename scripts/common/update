@@ -6,7 +6,14 @@ end
 
 if test (count $argv) -gt 0
     if test $argv[1] = "-l"
+        echo "Pacman:"
         checkupdates; and checkupdates-aur
+
+        echo -e "\nPip:"
+        pip list --user -o
+
+        echo -e "\nPip 2:"
+        pip2 list --user -o
     end
     exit 0
 end

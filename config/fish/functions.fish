@@ -14,7 +14,7 @@ function exists -d "Silent wrapper over "which". Returns the status of the comma
 end
 
 function gi -d "Simple commandline client for accessing the gitignore.io api"
-	function _request
+    function _request
         curl -L -s "https://www.gitignore.io/api/$argv"
     end
 
@@ -60,7 +60,7 @@ function mkcd
 end
 
 function public-ip -d "Gets the public ip using an external service"
-    curl -q http://ipinfo.io/ip
+    curl -q "http://ipinfo.io/ip"
 end
 
 function r -d "An alias for rm -rf"

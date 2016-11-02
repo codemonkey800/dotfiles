@@ -5,7 +5,7 @@ if test (uname) != "Linux"
 end
 
 if test -n "$EDITOR"
-    eval $EDITOR $HOME/.config/i3/config
+    eval $EDITOR ~/.config/i3/config
 else
     echo "Editor environment variable is not set"
     exit -1

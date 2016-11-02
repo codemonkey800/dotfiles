@@ -39,16 +39,16 @@ set -gx FZF_CTRL_T_COMMAND "
 "
 
 # Misc stuff
-set -gx SRC $HOME/.local/src
+set -gx SRC ~/.local/src
 set -gx LANG en_US.UTF-8
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
 # PATH stuff
-not test -d $HOME/.local/bin; and mkdir $HOME/.local/bin
-not test -d $HOME/.local/src/go/bin; and mkdir -p $HOME/.local/src/go/bin
+not test -d ~/.local/bin; and mkdir ~/.local/bin
+not test -d ~/.local/src/go/bin; and mkdir -p ~/.local/src/go/bin
 
-set -gx GOPATH $HOME/.local/src/go
-set -gx PATH $PATH $HOME/.local/bin $GOPATH/bin
+set -gx GOPATH ~/.local/src/go
+set -gx PATH $PATH ~/.local/bin $GOPATH/bin
 
 if test (uname) = Linux
     set -gx USR_LOCAL /usr/local/bin /usr/local/sbin ^ /dev/null

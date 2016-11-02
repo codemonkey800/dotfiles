@@ -1,6 +1,6 @@
 # Functions
 function fish_greeting
-    fortune 50% myfortunes 30% off 20% ascii-art | cowsay -n
+    fortune 50% myfortunes 30% off 20% ascii-art | cowsay -n | lolcat
     echo
 end
 

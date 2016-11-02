@@ -76,6 +76,7 @@ procps-ng
 psmisc
 pygmentize
 python2-pip
+python-lolcat
 python-neovim
 python-pip
 python-virtualenv

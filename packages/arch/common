@@ -26,10 +26,11 @@ flex
 fortune-mod
 fzf
 gawk
-gcc
 gettext
 git
 glibc
+go
+go-tools
 grep
 groff
 gzip
@@ -76,6 +77,7 @@ procps-ng
 psmisc
 pygmentize
 python2-pip
+python-jedi
 python-lolcat
 python-neovim
 python-pip

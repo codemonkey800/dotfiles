@@ -2,7 +2,7 @@ TEX = $(shell which pdflatex)
 TEX_FLAGS = -interaction=nonstopmode -shell-escape
 
 BUILD_DIR = build/
-SRC_FILES = $(wildcard chapter*/*.tex)
+SRC_FILES = $(wildcard *.tex) $(wildcard **/*.tex)
 OUT_FILES = $(SRC_FILES:%.tex=$(BUILD_DIR)/%.pdf)
 
 all: $(OUT_FILES)

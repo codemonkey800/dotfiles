@@ -1,11 +1,12 @@
 [alias]
     a = add -A
-    c = commit -am
     ca = commit -a --amend --no-edit
+    c = commit -am
     d = diff
     dt = difftool
     p = push origin master
     pu = pull origin master
+    r = remote
     s = status
 [color]
     ui = true

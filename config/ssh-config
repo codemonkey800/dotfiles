@@ -1,0 +1,15 @@
+Host github.com gitlab.com bitbucket.com
+    HostName %h
+    User git
+    IdentityFile ~/.ssh/vcs
+
+Host dev
+    HostName jeremyasuncion.io
+    User jeremy
+    IdentityFile ~/.ssh/vps
+
+Host aur
+    HostName aur.archlinux.org
+    IdentityFile ~/.ssh/aur
+    User aur
+

@@ -18,6 +18,7 @@
 ~/.gconf
 ~/.gconfd
 ~/.gstreamer-0.10
+/home/jeremy/.gradle/
 ~/.ipython
 ~/.java
 ~/javac-services.*.log

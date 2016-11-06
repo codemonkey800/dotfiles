@@ -56,6 +56,7 @@ man-db
 man-pages
 mdadm
 moreutils
+namcap
 neovim
 netctl
 net-tools
@@ -80,6 +81,7 @@ python2-pip
 python-jedi
 python-lolcat
 python-neovim
+python-pawk
 python-pip
 python-virtualenv
 refind-efi
@@ -101,6 +103,7 @@ tree
 unzip
 usbutils
 util-linux
+watchdog
 wget
 which
 words

@@ -1,0 +1,3 @@
+[submodule "arch/python-pawk"]
+	path = arch/python-pawk
+	url = ssh://aur@aur.archlinux.org/python-pawk

@@ -1,4 +1,5 @@
 acpid
+aria2
 autoconf
 automake
 bash
@@ -86,6 +87,7 @@ python-pip
 python-virtualenv
 refind-efi
 reflector
+repose
 rsync
 sed
 shadow

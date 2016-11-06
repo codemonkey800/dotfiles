@@ -11,6 +11,9 @@ if test (id -u) -ne 0
     exit -1
 end
 
+# Removes mirrorlist.pacnew if it exists
+rm -fv /etc/pacman.d/mirrorlist.pacnew
+
 # Gets a list of mirrors sorted by rate using n threads
 reflector -c US --verbose --threads (nproc) --sort rate --save /etc/pacman.d/mirrorlist
 

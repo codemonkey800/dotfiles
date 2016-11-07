@@ -11,11 +11,9 @@ source ~/.config/fish/functions.fish
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/completions.fish
 
-# Init stuff
+# Keychain stuff
 if test (hostname) = "jeremy-dev-server"
-    if test $status -eq 0
-        # Start keychain quietly
-        eval (keychain --eval --agents ssh -Q --quiet --nogui ~/.ssh/id_rsa)
-    end
+    # Start keychain quietly
+    eval (keychain --eval --agents ssh -Q --quiet --nogui ~/.ssh/{aur,vcs})
 end
 

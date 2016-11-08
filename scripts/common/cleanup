@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-yaourt -Scc --noconfirm
+echo -e "y\ny\n" | yaourt -Scc
 
 set pkgs (yaourt -Qqdt)
 if test (count $pkgs) -gt 0

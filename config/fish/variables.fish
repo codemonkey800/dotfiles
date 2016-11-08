@@ -39,7 +39,9 @@ set -gx FZF_CTRL_T_COMMAND "
 "
 
 # Misc stuff
+set -gx DOTFILES ~/.local/src/misc/dotfiles
 set -gx SRC ~/.local/src
+
 set -gx LANG en_US.UTF-8
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 

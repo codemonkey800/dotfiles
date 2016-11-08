@@ -3,9 +3,6 @@
 
 source ~/.config/nvim/settings/keymap.vim
 
-" Escape nvim terminal
-tnoremap jk <C-\><C-n>
-
 " Runs make
 noremap <leader>b :!make<CR>
 " Runs make clean
@@ -28,11 +25,11 @@ nnoremap <leader>T :tabnew<CR>
 " Ctrl-p like functionality with FZF
 nnoremap <C-p> :FZF<CR>
 
-" Color settings thing
-nnoremap <F9> :call NextColor(1)<CR>
-nnoremap <S-F9> :call NextColor(-1)<CR>
-nnoremap <A-F9> :call NextColor(0)<CR>
-
 " Show NERDTree on F1
 noremap <F1> :NERDTreeToggle<CR>
+
+" Start interactive EasyAlign in visual mode
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign in normal mode
+nmap ga <Plug>(EasyAlign)
 

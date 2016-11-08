@@ -31,8 +31,8 @@ augroup END
 let g:lexical#thesaurus = ['~/.config/nvim/thesaurus.txt']
 let g:lexical#dictionary = ['/usr/share/dict/american-english']
 
-let g:lexical#spell_key = '<leader>s'
-let g:lexical#thesaurus_key = '<leader>t'
+let g:lexical#spell_key = '<leader>t'
+let g:lexical#thesaurus_key = '<leader>T'
 let g:lexical#dictionary_key = '<leader>k'
 
 " vim-pencil settings
@@ -42,37 +42,16 @@ augroup pencil
     autocmd FileType text call pencil#init()
 augroup END
 
-" Deoplete settings
-let g:deoplete#enable_at_startup = 1
-
 " vim-jsx settings
 let g:jsx_ext_required = 0
 
 " vim-editorconfig settings
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-" clang_complete settings
-let g:clang_library_path = '/usr/lib/libclang.so'
+" deoplete settings
+let g:deoplete#enable_at_startup = 1
 
-" vim-javacomplete2 settings
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-" NERDTree settings
-function! CloseIfNERDTreeOpen()
-    if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()
-        q
-    endif
-endfunction
-
-function! OnVimEnter()
-    if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") |
-        exe 'NERDTree' argv()[0] |
-        wincmd p |
-        ene |
-    endif
-endfunction
-
-autocmd StdinReadPre * let s:std_in = 1
-autocmd bufenter * :call CloseIfNERDTreeOpen()
-autocmd VimEnter * :call OnVimEnter()
+" deoplete-clang settings
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/usr/lib/clang/'
 

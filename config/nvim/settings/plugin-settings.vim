@@ -50,8 +50,24 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources = {}
+let g:deoplete#keyword_patterns = {}
 
-" deoplete-clang settings
-let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/usr/lib/clang/'
+" clang_complete settings
+let g:clang_library_path = '/usr/lib/libclang.so'
+
+" tmux-complete settings
+let g:tmuxcomplete#trigger = ''
+
+" deoplete-flow settings
+let g:deoplete#sources#flow#flow_bin = 'flow'
+
+" deoplete-github settings
+let g:deoplete#sources.gitcommit = ['github']
+let g:deoplete#keyword_patterns.gitcommit = '.+'
+let g:deoplete#omni#input_patterns = {}
+call deoplete#util#set_pattern(
+    \ g:deoplete#omni#input_patterns,
+    \ 'gitcommit',
+    \ [g:deoplete#keyword_patterns.gitcommit])
 

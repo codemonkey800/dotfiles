@@ -3,10 +3,22 @@ call plug#begin('~/.config/nvim/plugins')
 " Autocomplete
 Plug 'amirh/html-autoclosetag'
 Plug 'ervandew/supertab'
+Plug 'honza/vim-snippets'
 Plug 'raimondi/delimitmate'
+Plug 'Shougo/echodoc.vim'
+Plug 'SirVer/ultisnips'
+
+" Deoplete
+Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
+Plug 'SevereOverfl0w/deoplete-github'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neco-vim'
-Plug 'zchee/deoplete-clang'
+Plug 'Shougo/neco-vim', { 'for': 'vim' }
+Plug 'Shougo/neoinclude.vim'
+Plug 'steelsojka/deoplete-flow', { 'for': 'javascript' }
+Plug 'wellle/tmux-complete.vim'
+Plug 'zchee/deoplete-go', { 'for': 'go' }
+Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 
 " Linting
 Plug 'benekastah/neomake'
@@ -41,6 +53,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'janko-m/vim-test'
 Plug 'kassio/neoterm'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'vim-utils/vim-man'
 
 " User Interface

@@ -50,6 +50,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
 let g:deoplete#sources = {}
 let g:deoplete#keyword_patterns = {}
 

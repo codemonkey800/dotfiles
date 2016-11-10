@@ -11,11 +11,20 @@ source ~/.config/fish/functions.fish
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/completions.fish
 
-# Init stuff
-if test (hostname) = "jeremy-dev-server"
-    if test $status -eq 0
-        # Start keychain quietly
-        eval (keychain --eval --agents ssh -Q --quiet --nogui ~/.ssh/id_rsa)
+if status -i
+    # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
+    if test -z $DISPLAY
+        set -l keys
+        for f in ~/.ssh/*.pub
+            set keys $keys ~/.ssh/(basename $f .pub)
+        end
+
+        if test (count $keys) -gt 0
+            keychain --eval --agents ssh --quick --quiet --nogui $keys | source
+        end
+    else if test (count (keychain -l)) -gt 0
+        # Have keychain kill all ssh-agent's if any are running and $DISPLAY is defined
+        keychain --quiet -k all
     end
 end
 

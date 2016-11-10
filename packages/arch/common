@@ -113,3 +113,5 @@ xfsprogs
 xsel
 yaourt
 zip
+python-sh
+python2-neovim

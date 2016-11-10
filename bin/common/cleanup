@@ -7,5 +7,11 @@ if test (count $pkgs) -gt 0
     yaourt -Rscun --noconfirm $pkgs
 end
 
+begin
+    set -l files /tmp/{yaourt*,npm*}
+    echo "Removing "{(count $files)}" files from /tmp!"
+    sudo rm -rf $files
+end
+
 echo y | rmshit
 

@@ -4,8 +4,8 @@
     c = commit -am
     d = diff
     dt = difftool
-    p = push origin master
-    pu = pull origin master
+    p = push
+    pu = pull
     r = remote
     s = status
 [color]

@@ -23,3 +23,7 @@
 [user]
     email = jeremyasuncion808@gmail.com
     name = Jeremy Asuncion
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true

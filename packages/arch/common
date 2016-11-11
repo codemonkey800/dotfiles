@@ -29,6 +29,7 @@ fzf
 gawk
 gettext
 git
+git-extras
 glibc
 go
 go-tools
@@ -51,6 +52,7 @@ linux-headers
 lm_sensors
 logrotate
 lsb-release
+lsof
 lvm2
 m4
 make

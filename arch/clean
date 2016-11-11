@@ -1,0 +1,11 @@
+#!/usr/bin/env fish
+
+set -l files 
+
+if test (count $files) -gt 0
+    echo "Removing "{(count $files)}" files!"
+    rm -rfv $files
+end
+
+echo Done!
+

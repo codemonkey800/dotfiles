@@ -58,7 +58,7 @@ USECOLOR=1
 #TERMINALTITLE=1
 
 # Command
-#PACMAN="pacman"
+PACMAN="/usr/bin/powerpill"
 #MAKEPKG="makepkg"
 #DIFFEDITCMD="vimdiff"
 

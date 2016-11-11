@@ -19,6 +19,8 @@
   },
   "reflector": {
     "args.unused": [
+        "--protocol",
+        "https",
         "--country",
         "US",
         "--sort",

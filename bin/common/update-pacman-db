@@ -15,5 +15,5 @@ end
 rm -fv /etc/pacman.d/mirrorlist.pacnew
 
 # Gets a list of mirrors sorted by rate using n threads
-reflector -c US --verbose --threads (nproc) --sort rate --save /etc/pacman.d/mirrorlist
+reflector -p https -c US --verbose --threads (nproc) --sort rate --save /etc/pacman.d/mirrorlist
 

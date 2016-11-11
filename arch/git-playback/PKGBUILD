@@ -8,13 +8,18 @@ pkgdesc="A git command to play back or step through the history of a git-control
 arch=(any)
 url="https://github.com/jianli/git-playback"
 license=('MIT')
-depends=('python')
+depends=('python' 'python-gitpython')
 makedepends=('python-setuptools')
 checkdepends=()
 source=("https://pypi.python.org/packages/f9/30/0b33c4291dc93e174d7f985f613fa15d3f6cd40638f02fc0c63962c3f039/${pkgname}-${pkgver}.tar.gz")
 md5sums=('5fe91116cdf7e9588000dc142b35f53d')
 
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    python setup.py build
+}
+
 package() {
-    cd "$srcdir/$pkgname-$pkgver"
-    python setup.py install --prefix=/usr --root="$pkgdir"
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    python setup.py install -O1 --skip-build --prefix=/usr --root="${pkgdir}"
 }

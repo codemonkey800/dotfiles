@@ -17,7 +17,7 @@
 #VISUAL="$VISUAL"
 
 # SUDO
-#SUDONOVERIF=0      # Avoid multiple sudo checks when timestamp_timeout=0
+SUDONOVERIF=1      # Avoid multiple sudo checks when timestamp_timeout=0
 #SUDOREDIRECT=1     # Define to 0 in case you use a fingerprint device
 
 # ABS

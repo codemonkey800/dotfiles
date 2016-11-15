@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://dotfiles.github.io/" target="_blank">
-    <img src="misc/dotfiles.png" width="30%">
+    <img src="images/dotfiles.png" width="30%">
   </a>
 </p>
 

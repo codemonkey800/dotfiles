@@ -148,6 +148,8 @@ $ sudo cp misc/myfortunes /usr/share/fortunes # /usr/share/games/fortune-mod on 
 $ sudo strfile /usr/share/fortunes/myfortunes
 ```
 
+![](images/greeting.png)
+
 ### Fisherman
 Once you've symlinked all the fishfiles and installed fisherman, you can run:
 ```fish

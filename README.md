@@ -39,7 +39,7 @@ a base for your own set of dotfiles, or even take a subset of my dotfiles and in
   - Template files: `basic.tex` and `math-template.tex`
 - A bunch of useful scripts
   - `copy` - Convenience scrpt for the command `rsync -aP`
-  - `doshit` - Creates a temporary directory in *tmpfs* and starts a new tmux session in it. Exiting automatically deletes the directory
+  - `doshit` - Creates a temporary directory in **tmpfs** and starts a new tmux session in it. Exiting automatically deletes the directory
   - `rmshit` - Sources a list of files to delete file named `~/.shittyfiles`
   - `update-*` - A set of scripts that runs updates on their respective program. For example, `update-pacman-db` updates the pacman database using [Reflector](https://wiki.archlinux.org/index.php/Reflector)
   - `update` - A monolithic script that 
@@ -65,7 +65,7 @@ a base for your own set of dotfiles, or even take a subset of my dotfiles and in
 - And a bunch more that I can't remember!
 
 ## Structure :penguin:
-I've structured the repo to map **somewhat** directly to how it would be laid out in your home directory
+I've structured the repo to map *somewhat* directly to how it would be laid out in your home directory
 (with the exception of some of the directories like `packages/`). The directory structure below only
 shows files that are symlinked to their respective locations. More detailed instructions on
 setting up everything are below.
@@ -106,7 +106,7 @@ config/
     pacman.conf       -> /etc/pacman.conf
     powerpill.json    -> /etc/powerpill/powerpill.json
     yaourtrc          -> /etc/yaourtrc
-  ssh-config          -> ~/.ssh/config # Note: You most likely won't be using this as is since it's configured for my stuff
+  ssh-config          -> ~/.ssh/config # Note: You most likely won't be using this *as is*
   terminator-config   -> ~/.config/terminator/config
 misc/
   shittyfiles         -> ~/.shittyfiles
@@ -135,9 +135,9 @@ $ for f in $PWD/bin/**/*
 You can install from the package listings `cat`ing the listings you want to use in a command substitution (or subshell),
 and use it as an argument for `yaourt -S`.
 ```fish
-$ yaourt -S (cat common client desktop)
+$ yaourt -S (cat packages/arch/{common,client,desktop})
 # If you're lazy, you can also do this:
-$ yaourt -S --noconfirm (cat common client desktop)
+$ yaourt -S --noconfirm (cat packages/arch/{common,client,desktop})
 ```
 
 ### Fortunes - Fancy Greeting Message on Login

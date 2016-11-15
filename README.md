@@ -1,38 +1,205 @@
-===========
-Here's a bunch of useless configuration files for my Linux installation.
+<p align="center">
+  <a href="https://dotfiles.github.io/" target="_blank">
+    <img src="misc/dotfiles.png" width="30%">
+  </a>
+</p>
 
-I have config files for stuff like fish shell, i3, and xinitrc.
+<p align="center">
+    <a href="http://forthebadge.com/" target="_blank">
+      <img src="http://forthebadge.com/images/badges/compatibility-club-penguin.svg">
+    </a>
+    <a href="http://forthebadge.com/" target="_blank">
+      <img src="http://forthebadge.com/images/badges/certified-snoop-lion.svg">
+    </a>
+</p>
 
-I also have random scripts that are not actually configuration files, but scripts. So yeah.
+---
 
-Structure
-=========
-So I structured my files to resemble my Linux OS sort of. So files and directories that go in
-`~/.config` are located in the `config` directory.
+# Dotfiles :fish:
+Aside from being free and having a [penguin](https://en.wikipedia.org/wiki/Tux) for a mascot, a Linux based OS is probably *the* best for customization.
+[Dotfiles](https://en.wikipedia.org/wiki/Dotfiles) are essentially hidden files and directories, such as `~/.bashrc`, `~/.config/`, and `~/.local/` to name a few.
 
-The `scripts` directory should be placed in wherever user binaries are placed. For Linux,
-this would be `/usr/local/bin`. For OSX, I tend to create a directory in `$HOME` named
-bin and add it to my `PATH` environment variable.
+Dotfiles are not strictly limited to configuration files. You can have executable scripts, package listings for backups, build files, etc.
+(At least, that's what I have in my dotfiles :stuck_out_tongue_winking_eye:)
 
-The packages directories contains text files that list my installed packages at the time.
-So far it has my Arch packages and Atom packages.
+## Features :package:
+Although my dotfiles are tailored to my development environment, you can easily use them as a bootstrap for a new system,
+a base for your own set of dotfiles, or even take a subset of my dotfiles and incorporate it into your own. 
 
-Setup
-=====
-For the `config` directory, simply copy the files over to your `~/.config` directory:
-```bash
-cp -r config ~/.config
+- Fish
+  - [Fisherman](http://fisherman.sh/) for plugins and themes
+  - [Keychain](https://wiki.archlinux.org/index.php?title=SSH_keys#Keychain) support for environments where $DISPLAY isn't defined
+  - Configuration split into aliases, functions, variables, and completions
+- NeoVim
+  - Asynchronous autocompletion for a variety of languages using [Deoplete](https://github.com/Shougo/deoplete.nvim)
+  - Plugin management using [vim-plug](https://github.com/junegunn/vim-plug)
+  - Configuration files split into settings modules
+- LaTeX
+  - Makefile for compiling LaTeX documents that make use of `pythontex`
+  - Template files: `basic.tex` and `math-template.tex`
+- A bunch of useful scripts
+  - `copy` - Convenience scrpt for the command `rsync -aP`
+  - `doshit` - Creates a temporary directory in *tmpfs* and starts a new tmux session in it. Exiting automatically deletes the directory
+  - `rmshit` - Sources a list of files to delete file named `~/.shittyfiles`
+  - `update-*` - A set of scripts that runs updates on their respective program. For example, `update-pacman-db` updates the pacman database using [Reflector](https://wiki.archlinux.org/index.php/Reflector)
+  - `update` - A monolithic script that 
+- Arch Linux PKGBUILDs
+  - python-pawk
+- Pacman
+  - Yaourt for package management and Powerpill for parallel and segmented downloads
+- Git
+  - Some useful (or useless) git aliases
+  - Various custom git commands
+  - [hub](https://hub.github.com/) wrapper for CLI interaction with GitHub
+- Backup Package Listings
+  - Atom Packages
+  - npm global modules
+  - Fisherman plugins
+  - Arch packages separated in to several files
+    - `common` - Packages used on all machines
+    - `client` - Packages used on a machine that will define `$DISPLAY`
+    - `desktop` - Packages used on my desktop machine
+    - `macbook` - Packages used on my MacBook Pro
+    - `vm` - Packages used on Arch in a virtual machine
+- My i3 config file if you want to use that for some reason
+- And a bunch more that I can't remember!
+
+## Structure :penguin:
+I've structured the repo to map **somewhat** directly to how it would be laid out in your home directory
+(with the exception of some of the directories like `packages/`). The directory structure below only
+shows files that are symlinked to their respective locations. More detailed instructions on
+setting up everything are below.
+
+Note: A `x -> y` will indicate that a symbolic link `y` points to `x`.
+
+```
+bin/ # The directory organization is for development purposes. It's best you flatten out your symbolic links
+  common/
+    cleanup           -> ~/.local/bin/cleanup
+    copy              -> ~/.local/bin/copy
+    doshit            -> ~/.local/bin/doshit
+    ... 
+  docker/ 
+    docker-clean      -> ~/.local/bin/docker-clean
+  ...
+config/
+  fish/
+    aliases.fish      -> ~/.config/fish/aliases.fish
+    completions.fish  -> ~/.config/fish/completions.fish
+    ... 
+  gitconfig           -> ~/.gitconfig
+  i3/ 
+    compton           -> ~/.config/i3/compton
+    config            -> ~/.config/i3/config
+  npmrc               -> ~/.npmrc
+  nvim/
+    init.vim          -> ~/.config/nvim/init.vim
+    settings/         -> ~/.config/nvim/settings/ # That's right, symlink the entire directory :^)
+      file.vim
+      folding.vim
+      general.vim
+      ...
+    thesauraus.txt    -> ~/.config/nvim/thesauraus.txt
+  pacman/ # The following symlinks require root permission
+    makepkg.conf      -> /etc/pacman.d/makepkg.conf
+    pacman-aria2.conf ->/etc/pacman.d/pacman-aria2.conf
+    pacman.conf       -> /etc/pacman.conf
+    powerpill.json    -> /etc/powerpill/powerpill.json
+    yaourtrc          -> /etc/yaourtrc
+  ssh-config          -> ~/.ssh/config # Note: You most likely won't be using this as is since it's configured for my stuff
+  terminator-config   -> ~/.config/terminator/config
+misc/
+  shittyfiles         -> ~/.shittyfiles
 ```
 
-For the scripts, you can copy them or run `install` to your user binaries:
-```bash
-sudo install scripts/* /usr/local/bin
-# or
-sudo cp scripts/* /usr/local/bin
+## Installation :wrench:
+Until I create a setup script to automate installation, you'll have to do it manually :^( All examples below
+will be using fish shell syntax. You should be able to convert the shell code below into bash or zsh.
+
+Of course, you'll need to clone the dotfiles somewhere. For the sake of simplicity, we'll clone it to `$HOME`:
+```fish
+$ git clone git://github.com/codemonkey800/dotfiles.git ~/dotfiles
+$ cd ~/dotfiles
 ```
 
-License
-=======
+### `bin/` Scripts
+First, create directory at `~/.local/bin/` and then copy every file in `~/dotfiles/bin/` to that directory:
+```fish
+$ mkdir -p ~/.local/bin
+$ for f in $PWD/bin/**/*
+    ln -svf $f ~/.local/bin
+  end
+```
+
+### Backup Package Listings
+You can install from the package listings `cat`ing the listings you want to use in a command substitution (or subshell),
+and use it as an argument for `yaourt -S`.
+```fish
+$ yaourt -S (cat common client desktop)
+# If you're lazy, you can also do this:
+$ yaourt -S --noconfirm (cat common client desktop)
+```
+
+### Fortunes - Fancy Greeting Message on Login
+For my shell, I have fancy login greetings made using [lolcat](https://github.com/tehmaze/lolcat/), [cowsay](https://github.com/piuccio/cowsay),
+and [Fortune](https://wiki.archlinux.org/index.php/Fortune). Make sure you install all three, then you can run:
+```fish
+$ sudo cp misc/myfortunes /usr/share/fortunes # /usr/share/games/fortune-mod on ubuntu
+$ sudo strfile /usr/share/fortunes/myfortunes
+```
+
+### Fisherman
+Once you've symlinked all the fishfiles and installed fisherman, you can run:
+```fish
+cat packages/fishfile | fisherman
+```
+
+### nvim
+First, you have to install vim-plug:
+```fish
+$ curl -fLO ~/.config/nvim/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+Once you've symlinked everything correctly, you can run `update-plug` do a quick and easy installation.
+
+### Pacman
+Warning: You need to have installed Powerpill before symlinking `config/pacman/yaourtrc -> /etc/yaourtrc`. 
+Failing to do so will cause an error since, from `yaourt`'s perspective, the `powerpill` command
+doesn't exist.
+
+Also, some packages in `arch/` are submitted on the [Arch User Repository](https://aur.archlinux.org/).
+But not all of them are. If you want to build those that aren't, or if you just want to build anything,
+you can go into each directory and run:
+```fish
+$ makepkg -si
+```
+
+to build and install the package.
+
+### Atom
+Once you've installed Atom and APM, you can run:
+```fish
+$ apm install (cat packages/apm)
+```
+
+### npm
+I local Node.js/npm distrubtions using `fnm`. However, I still do use global modules with those distributions. You can run:
+```fish
+$ npm -g i (cat packages/npm)
+```
+
+## macOS/Windows Support :computer:
+Some of my dotfiles will be incompatible with macOS and Windows. For example, anything pacman related cannot be used.
+Any other settings that are highly dependent on either a Linux based OS or Arch Linux won't work on macOS or Windows.
+
+For Windows, you'll most likely either need to install [Cygwin](https://www.cygwin.com/),
+use the [Bash Subsystem](https://msdn.microsoft.com/en-us/commandline/wsl/about),
+or run a Linux distro in a VM. 
+
+Personally, I use Windows on my desktop and run Arch in VMWare Workstation.
+
+## License :octocat:
 The MIT License (MIT)
 
 Copyright (c) 2016 Jeremy Asuncion
@@ -54,4 +221,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-

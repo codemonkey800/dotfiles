@@ -25,9 +25,6 @@ nnoremap <leader>T :tabnew<CR>
 " Ctrl-p like functionality with FZF
 nnoremap <C-p> :FZF<CR>
 
-" Show NERDTree on F1
-noremap <F1> :NERDTreeToggle<CR>
-
 " Start interactive EasyAlign in visual mode
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign in normal mode

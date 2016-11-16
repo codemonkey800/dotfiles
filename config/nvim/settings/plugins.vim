@@ -41,7 +41,6 @@ Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'Firef0x/PKGBUILD.vim'
 Plug 'flowtype/vim-flow'
-Plug 'gitignore'
 Plug 'lervag/vimtex'
 Plug 'nginx.vim'
 Plug 'othree/es.next.syntax.vim'
@@ -67,8 +66,10 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Utilitiy
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'gitignore'
 Plug 'junegunn/fzf'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
+Plug 'fszymanski/fzf-gitignore.nvim', { 'do': ':UpdateRemotePlugins' }
 
 call plug#end()

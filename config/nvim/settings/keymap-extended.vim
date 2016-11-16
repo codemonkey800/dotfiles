@@ -1,5 +1,9 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Keymap Extended Settings
+"
 " This file extends the base keymap settings and adds vim or nvim specific
 " keybindings.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 source ~/.config/nvim/settings/keymap.vim
 

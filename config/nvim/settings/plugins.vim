@@ -1,12 +1,14 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 call plug#begin('~/.config/nvim/plugins')
 
 " Autocomplete
 Plug 'amirh/html-autoclosetag'
 Plug 'ervandew/supertab'
-Plug 'honza/vim-snippets'
 Plug 'raimondi/delimitmate'
 Plug 'Shougo/echodoc.vim'
-Plug 'SirVer/ultisnips'
 
 " Deoplete
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
@@ -34,6 +36,9 @@ Plug 'reedes/vim-lexical'
 Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
 
+" Snippets
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
 " Syntaxes
 Plug 'dag/vim-fish'
 Plug 'ekalinin/Dockerfile.vim'
@@ -47,14 +52,6 @@ Plug 'othree/es.next.syntax.vim'
 Plug 'othree/yajs.vim'
 Plug 'plasticboy/vim-markdown'
 
-" Tooling
-Plug 'editorconfig/editorconfig-vim'
-Plug 'janko-m/vim-test'
-Plug 'kassio/neoterm'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'vim-utils/vim-man'
-
 " User Interface
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
@@ -66,10 +63,17 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Utilitiy
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'cazador481/fakeclip.neovim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'fszymanski/fzf-gitignore.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'gitignore'
+Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf'
+Plug 'kassio/neoterm'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
-Plug 'fszymanski/fzf-gitignore.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'vim-utils/vim-man'
 
 call plug#end()

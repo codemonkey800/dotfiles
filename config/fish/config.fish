@@ -11,7 +11,7 @@ source ~/.config/fish/functions.fish
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/completions.fish
 
-if status -i
+if exists keychain; and status -i
     # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
     if test -z $DISPLAY
         set -l keys

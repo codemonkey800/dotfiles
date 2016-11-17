@@ -30,6 +30,7 @@ gawk
 gettext
 git
 git-extras
+git-lfs
 glibc
 go
 go-tools
@@ -51,6 +52,7 @@ linux
 linux-headers
 lm_sensors
 logrotate
+lostfiles
 lsb-release
 lsof
 lvm2
@@ -94,6 +96,7 @@ python-virtualenv
 refind-efi
 reflector
 repose
+rmlint
 rsync
 sed
 shadow

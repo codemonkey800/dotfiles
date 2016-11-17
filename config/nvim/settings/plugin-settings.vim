@@ -99,6 +99,9 @@ let g:airline_powerline_fonts = 1
 " Utilitiy
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" fakeclip
+let g:vim_fakeclip_tmux_plus=1
+
 " vim-editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 

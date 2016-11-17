@@ -28,10 +28,6 @@ nnoremap <leader><space> :nohlsearch<CR>
 " Space open/closes folds
 nnoremap <space> za
 
-" Copy/Paste to host keyboard
-vnoremap <leader>c "+y<CR>
-nnoremap <leader>v "+p<CR>
-
 " Adds a new line below or above without entering insert mode
 noremap o o<esc>k
 noremap O O<esc>j

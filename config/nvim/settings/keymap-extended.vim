@@ -1,8 +1,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Keymap Extended Settings
 "
-" This file extends the base keymap settings and adds vim or nvim specific
-" keybindings.
+" This file extends the base keymap settings and adds vim/nvim specific
+" keybindings or keybindings for plugins.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 source ~/.config/nvim/settings/keymap.vim
@@ -25,6 +25,10 @@ nnoremap <leader>N :tabp<CR>
 nnoremap <leader>W :tabc<CR>
 nnoremap <leader>L :tabs<CR>
 nnoremap <leader>T :tabnew<CR>
+
+" fakeclip keymaps
+vnoremap <leader>c "+y<CR>
+nnoremap <leader>v "*p<CR>
 
 " Ctrl-p like functionality with FZF
 nnoremap <C-p> :FZF<CR>

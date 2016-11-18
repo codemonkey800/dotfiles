@@ -1,0 +1,17 @@
+#!/usr/bin/env fish
+
+echo -e "y\ny\n" | yaourt -Scc
+
+set pkgs (yaourt -Qqdt)
+if test (count $pkgs) -gt 0
+    yaourt -Rscun --noconfirm $pkgs
+end
+
+begin
+    set -l files /tmp/{yaourt*,npm*}
+    echo "Removing "{(count $files)}" files from /tmp!"
+    sudo rm -rf $files
+end
+
+echo y | rmshit
+

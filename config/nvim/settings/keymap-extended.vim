@@ -1,10 +1,11 @@
-" This file extends the base keymap settings and adds vim or nvim specific
-" keybindings.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Keymap Extended Settings
+"
+" This file extends the base keymap settings and adds vim/nvim specific
+" keybindings or keybindings for plugins.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 source ~/.config/nvim/settings/keymap.vim
-
-" Escape nvim terminal
-tnoremap jk <C-\><C-n>
 
 " Runs make
 noremap <leader>b :!make<CR>
@@ -25,14 +26,15 @@ nnoremap <leader>W :tabc<CR>
 nnoremap <leader>L :tabs<CR>
 nnoremap <leader>T :tabnew<CR>
 
+" fakeclip keymaps
+vnoremap <leader>c "+y<CR>
+nnoremap <leader>v "*p<CR>
+
 " Ctrl-p like functionality with FZF
 nnoremap <C-p> :FZF<CR>
 
-" Color settings thing
-nnoremap <F9> :call NextColor(1)<CR>
-nnoremap <S-F9> :call NextColor(-1)<CR>
-nnoremap <A-F9> :call NextColor(0)<CR>
-
-" Show NERDTree on F1
-noremap <F1> :NERDTreeToggle<CR>
+" Start interactive EasyAlign in visual mode
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign in normal mode
+nmap ga <Plug>(EasyAlign)
 

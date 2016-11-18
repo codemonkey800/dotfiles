@@ -13,19 +13,6 @@ function exists -d "Silent wrapper over "which". Returns the status of the comma
     end
 end
 
-function gi -d "Simple commandline client for accessing the gitignore.io api"
-    function _request
-        curl -L -s "https://www.gitignore.io/api/$argv"
-    end
-
-    switch "$argv"
-        case "list"
-            _request list | sed 's/,/\n/g' | sort
-        case "*"
-            _request $argv
-    end
-end
-
 function l -d "Lists all files in a directory or reads a file"
     if test (count $argv) -gt 0; and test -f $argv[-1]
         set -l i (contains -i -- -p $argv)

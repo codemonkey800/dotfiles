@@ -1,8 +1,9 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Base Keymap settings
+"
 " These are vim keymaps that are safe to source
 " inside non-vim programs that provide vim bindings, like Intellij
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fuck the other mapleader key lol
 let mapleader = ","
 
@@ -27,10 +28,6 @@ nnoremap <leader><space> :nohlsearch<CR>
 " Space open/closes folds
 nnoremap <space> za
 
-" Copy/Paste to host keyboard
-vnoremap <leader>c "+y<CR>
-noremap <leader>v "+p<CR>
-
 " Adds a new line below or above without entering insert mode
 noremap o o<esc>k
 noremap O O<esc>j
@@ -39,7 +36,7 @@ noremap O O<esc>j
 noremap U :redo<CR>
 
 " Pipe to selected to shell
-vnoremap <leader>r :!eval $SHELL<CR>
+noremap <leader>r :!%:p<CR>
 
 " Sort things
 noremap <leader>s :!sort<CR>

@@ -4,8 +4,8 @@
     c = commit -am
     d = diff
     dt = difftool
-    p = push origin master
-    pu = pull origin master
+    p = push
+    pu = pull
     r = remote
     s = status
 [color]
@@ -23,3 +23,7 @@
 [user]
     email = jeremyasuncion808@gmail.com
     name = Jeremy Asuncion
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true

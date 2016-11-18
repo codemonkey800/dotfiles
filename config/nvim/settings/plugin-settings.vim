@@ -1,26 +1,52 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Neoterm settings
-let g:neoterm_shell = "fish"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autocomplete
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" vim-json settings
-let g:vim_json_syntax_conceal = 0
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Deoplete
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Airline settings
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#sources = {}
+let g:deoplete#keyword_patterns = {}
 
-" Neomake settings
-autocmd! BufWritePost * Neomake
+" clang_complete
+let g:clang_library_path = '/usr/lib/libclang.so'
 
-" vim-markdown settings
-let g:vim_markdown_math = 1
-let g:vim_markdown_json_frontmatter = 1
-let g:vim_markdown_new_list_item_indent = 2
+" tmux-complete
+let g:tmuxcomplete#trigger = ''
 
-" vim-lexical settings
+" deoplete-flow
+let g:deoplete#sources#flow#flow_bin = 'flow'
+
+" deoplete-github
+let g:deoplete#sources.gitcommit = ['github']
+let g:deoplete#keyword_patterns.gitcommit = '.+'
+let g:deoplete#omni#input_patterns = {}
+call deoplete#util#set_pattern(
+    \ g:deoplete#omni#input_patterns,
+    \ 'gitcommit',
+    \ [g:deoplete#keyword_patterns.gitcommit])
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Linting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Movement/Text Manipulation
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Prose
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" vim-lexical
 augroup lexical
     autocmd!
     autocmd FileType markdown,mkd call lexical#init()
@@ -31,48 +57,57 @@ augroup END
 let g:lexical#thesaurus = ['~/.config/nvim/thesaurus.txt']
 let g:lexical#dictionary = ['/usr/share/dict/american-english']
 
-let g:lexical#spell_key = '<leader>s'
-let g:lexical#thesaurus_key = '<leader>t'
+let g:lexical#spell_key = '<leader>t'
+let g:lexical#thesaurus_key = '<leader>T'
 let g:lexical#dictionary_key = '<leader>k'
 
-" vim-pencil settings
+" vim-pencil
 augroup pencil
     autocmd!
     autocmd FileType markdown,mkd call pencil#init()
     autocmd FileType text call pencil#init()
 augroup END
 
-" Deoplete settings
-let g:deoplete#enable_at_startup = 1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Snippets
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" vim-jsx settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntaxes
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" vim-json
+let g:vim_json_syntax_conceal = 0
+
+" vim-markdown
+let g:vim_markdown_math = 1
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_new_list_item_indent = 2
+
+" vim-jsx
 let g:jsx_ext_required = 0
 
-" vim-editorconfig settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" User Interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Utilitiy
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" fakeclip
+let g:vim_fakeclip_tmux_plus=1
+
+" vim-editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-" clang_complete settings
-let g:clang_library_path = '/usr/lib/libclang.so'
+" Neoterm
+let g:neoterm_shell = "fish"
 
-" vim-javacomplete2 settings
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-" NERDTree settings
-function! CloseIfNERDTreeOpen()
-    if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()
-        q
-    endif
-endfunction
-
-function! OnVimEnter()
-    if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") |
-        exe 'NERDTree' argv()[0] |
-        wincmd p |
-        ene |
-    endif
-endfunction
-
-autocmd StdinReadPre * let s:std_in = 1
-autocmd bufenter * :call CloseIfNERDTreeOpen()
-autocmd VimEnter * :call OnVimEnter()
+" Neomake
+autocmd! BufWritePost * Neomake
 

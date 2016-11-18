@@ -39,7 +39,9 @@ set -gx FZF_CTRL_T_COMMAND "
 "
 
 # Misc stuff
+set -gx DOTFILES ~/.local/src/misc/dotfiles
 set -gx SRC ~/.local/src
+
 set -gx LANG en_US.UTF-8
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
@@ -52,9 +54,6 @@ set -gx PATH $PATH ~/.local/bin $GOPATH/bin
 
 if test (uname) = Linux
     set -gx USR_LOCAL /usr/local/bin /usr/local/sbin ^ /dev/null
-    for i in 1 2
-        set -gx USR_LOCAL $USR_LOCAL (find $USR_LOCAL[$i] -type l -not -xtype l -o -type d)
-    end
 
     set -gx JAVA_HOME /usr/lib/jvm/default ^ /dev/null
     set -gx ANDROID_HOME /opt/android-sdk ^ /dev/null

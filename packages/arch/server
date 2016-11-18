@@ -1,1 +1,6 @@
 certbot
+ddclient
+rtl8812au-dkms-git
+ssmtp
+wpa_actiond
+wpa_supplicant

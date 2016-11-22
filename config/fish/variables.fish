@@ -46,8 +46,8 @@ set -gx LANG en_US.UTF-8
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
 # PATH stuff
-not test -d ~/.local/bin; and mkdir ~/.local/bin
-not test -d ~/.local/src/go/bin; and mkdir -p ~/.local/src/go/bin
+mkdir -p ~/.local/bin
+mkdir -p ~/.local/src/go/bin
 
 set -gx GOPATH ~/.local/src/go
 set -gx PATH $PATH ~/.local/bin $GOPATH/bin

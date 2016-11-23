@@ -1,5 +1,4 @@
 # Editor and pager stuff
-set -gx TERM xterm-256color
 set -gx EDITOR (which nvim)
 set -gx PAGER (which less)
 

@@ -31,6 +31,7 @@ gettext
 git
 git-extras
 git-lfs
+git-secret
 glibc
 go
 go-tools
@@ -122,5 +123,5 @@ words
 xfsprogs
 xsel
 yaourt
+youtube-dl
 zip
-git-secret

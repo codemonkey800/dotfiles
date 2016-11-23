@@ -10,20 +10,30 @@ source ~/.config/fish/variables.fish
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/completions.fish
 
-if exists keychain; and status -i
-    # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
-    if test -z $DISPLAY
-        set -l keys
-        for f in ~/.ssh/*.pub
-            set keys $keys ~/.ssh/(basename $f .pub)
-        end
+if status -i
+    if exists keychain
+        # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
+        if test -z $DISPLAY
+            set -l keys
+            for f in ~/.ssh/*.pub
+                set keys $keys ~/.ssh/(basename $f .pub)
+            end
 
-        if test (count $keys) -gt 0
-            keychain --eval --agents ssh --quick --quiet --nogui $keys | source
+            if test (count $keys) -gt 0
+                keychain --eval --agents ssh --quick --quiet --nogui $keys | source
+            end
+        else if test (count (keychain -l)) -gt 0
+            # Have keychain kill all ssh-agent's if any are running and $DISPLAY is defined
+            keychain --quiet -k all
         end
-    else if test (count (keychain -l)) -gt 0
-        # Have keychain kill all ssh-agent's if any are running and $DISPLAY is defined
-        keychain --quiet -k all
+    end
+
+    if exists tmux; and test -z $TMUX
+        if tmux ls | grep main > /dev/null ^ /dev/null
+            exec tmux a -t (whoami)/main
+        else
+            exec tmux new -s (whoami)/main
+        end
     end
 end
 

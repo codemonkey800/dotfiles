@@ -10,7 +10,6 @@ complete -c g -w git
 
 # Function completions
 complete -c l -w ls
-complete -c l -s p -d 'Pipes output into $PAGER'
 complete -c l -l pager -d 'Pipes output into $PAGER'
 
 # Script completions

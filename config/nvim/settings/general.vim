@@ -8,7 +8,6 @@ set hidden               " Allow change to buffer without saving
 set mouse=a              " Sometimes a mouse is useful ;)
 set noerrorbells         " Fuck bells
 set novisualbell         " Fuck bells man
-set t_Co=256             " COLORS
 set exrc                 " Scan working directory for .vimrc files
 set secure               " Do the above securely
 

@@ -6,6 +6,29 @@ set -gx PAGER (which less)
 set -gx LESS "-R"
 set -gx LESSOPEN "|pygmentize -g %s"
 
+# Misc stuff
+set -gx DOTFILES ~/.local/src/misc/dotfiles
+set -gx SRC ~/.local/src
+
+set -gx LANG en_US.UTF-8
+set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
+
+# PATH stuff
+mkdir -p ~/.local/bin
+mkdir -p ~/.local/src/go/bin
+
+set -gx GOPATH ~/.local/src/go
+set -gx PATH $PATH ~/.local/bin $GOPATH/bin
+
+if test (uname) = Linux
+    set -gx USR_LOCAL /usr/local/bin /usr/local/sbin ^ /dev/null
+
+    set -gx JAVA_HOME /usr/lib/jvm/default ^ /dev/null
+    set -gx ANDROID_HOME /opt/android-sdk ^ /dev/null
+    set -gx ANDROID $ANDROID_HOME/tools $ANDROID_HOME/platform-tools ^ /dev/null
+    set -gx PATH $PATH $USR_LOCAL $ANDROID $JAVA_HOME/bin ^ /dev/null
+end
+
 # Fzf stuff
 set -gx FZF_ALT_C_COMMAND "
     command find -L . \\( \
@@ -36,29 +59,6 @@ set -gx FZF_CTRL_T_COMMAND "
         -type l \
     \\) -print 2> /dev/null
 "
-
-# Misc stuff
-set -gx DOTFILES ~/.local/src/misc/dotfiles
-set -gx SRC ~/.local/src
-
-set -gx LANG en_US.UTF-8
-set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
-
-# PATH stuff
-mkdir -p ~/.local/bin
-mkdir -p ~/.local/src/go/bin
-
-set -gx GOPATH ~/.local/src/go
-set -gx PATH $PATH ~/.local/bin $GOPATH/bin
-
-if test (uname) = Linux
-    set -gx USR_LOCAL /usr/local/bin /usr/local/sbin ^ /dev/null
-
-    set -gx JAVA_HOME /usr/lib/jvm/default ^ /dev/null
-    set -gx ANDROID_HOME /opt/android-sdk ^ /dev/null
-    set -gx ANDROID $ANDROID_HOME/tools $ANDROID_HOME/platform-tools ^ /dev/null
-    set -gx PATH $PATH $USR_LOCAL $ANDROID $JAVA_HOME/bin ^ /dev/null
-end
 
 # Color settings
 set -gx fish_color_autosuggestion 8a8a8a

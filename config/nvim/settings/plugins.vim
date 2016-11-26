@@ -16,7 +16,7 @@ Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
 Plug 'SevereOverfl0w/deoplete-github'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
-Plug 'Shougo/neoinclude.vim'
+Plug 'Shougo/neoinclude.vim', { 'commit': 'bde1512' }
 Plug 'steelsojka/deoplete-flow', { 'for': 'javascript' }
 Plug 'wellle/tmux-complete.vim'
 Plug 'zchee/deoplete-go', { 'for': 'go' }
@@ -51,12 +51,13 @@ Plug 'nginx.vim'
 Plug 'othree/es.next.syntax.vim'
 Plug 'othree/yajs.vim'
 Plug 'plasticboy/vim-markdown'
+Plug 'sheerun/vim-polyglot'
 
 " User Interface
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
 Plug 'felixhummel/setcolors.vim'
-Plug 'flazz/vim-colorschemes'
+Plug 'joshdick/onedark.vim'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -74,6 +75,6 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'vim-utils/vim-man'
+Plug 'ansiesc.vim'
 
 call plug#end()

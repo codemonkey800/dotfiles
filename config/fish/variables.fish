@@ -1,12 +1,12 @@
-# Editor and pager stuff
-set -gx EDITOR (which nvim)
-set -gx PAGER (which less)
-
 # Less stuff
 set -gx LESS "-R"
 set -gx LESSOPEN "|pygmentize -g %s"
 
 # Misc stuff
+set -gx EDITOR (which nvim)
+set -gx PAGER "$EDITOR -c 'runtime! macros/less.vim' -c AnsiEsc -"
+set -gx MANPAGER "$EDITOR -c 'setf man' -c 'runtime! macros/less.vim' -"
+
 set -gx DOTFILES ~/.local/src/misc/dotfiles
 set -gx SRC ~/.local/src
 

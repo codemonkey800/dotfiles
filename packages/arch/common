@@ -95,6 +95,7 @@ python-pawk
 python-pip
 python-sh
 python-virtualenv
+ranger
 refind-efi
 reflector
 repose
@@ -117,6 +118,7 @@ unzip
 urlview
 usbutils
 util-linux
+vifm
 watchdog
 wget
 which

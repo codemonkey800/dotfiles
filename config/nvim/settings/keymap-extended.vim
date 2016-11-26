@@ -7,6 +7,9 @@
 
 source ~/.config/nvim/settings/keymap.vim
 
+" Open current directory with file manager
+noremap <leader>f :e .<CR>
+
 " Runs make
 noremap <leader>b :!make<CR>
 " Runs make clean

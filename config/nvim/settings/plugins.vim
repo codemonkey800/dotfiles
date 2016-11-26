@@ -63,6 +63,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Utilitiy
+Plug 'airodactyl/neovim-ranger'
+Plug 'ansiesc.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'cazador481/fakeclip.neovim'
 Plug 'editorconfig/editorconfig-vim'
@@ -75,6 +77,5 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'ansiesc.vim'
 
 call plug#end()

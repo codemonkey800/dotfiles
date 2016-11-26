@@ -6,7 +6,6 @@ android-sdk-platform-tools
 android-support
 android-support-repository
 android-udev
-atom-editor-beta-bin
 baobab
 broadcom-wl-dkms
 buck
@@ -67,7 +66,7 @@ simplescreenrecorder
 spotify
 sublime-text-dev
 sushi
-terminator
+termite
 texlive-bibtexextra
 texlive-core
 texlive-fontsextra
@@ -90,7 +89,6 @@ ttf-droid-font
 ttf-ms-fonts
 ttf-roboto-font
 ttf-roboto-slab
-visual-studio-code
 vlc
 watchman
 xdg-user-dirs-gtk

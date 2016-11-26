@@ -1,29 +1,32 @@
+# vim: set ts=2 sw=2 sts=2 et sta :
+
 [alias]
-    a = add -A
-    ca = commit -a --amend --no-edit
-    c = commit -am
-    d = diff
-    dt = difftool
-    p = push
-    pu = pull
-    r = remote
-    s = status
+  a = add -A
+  amend = commit -a --amend --no-edit
+  ca = commit -am
+  c = commit -m
+  d = diff
+  dt = difftool
+  p = push
+  pu = pull
+  r = remote
+  s = status
 [color]
-    ui = true
+  ui = true
 [core]
-    editor = nvim
-    sparsecheckout = true
+  editor = nvim
+  sparsecheckout = true
 [diff]
-    prompt = false
-    tool = vimdiff
+  prompt = false
+  tool = vimdiff
 [difftool]
-    path = nvim
+  path = nvim
 [hub]
-    protocol = ssh
+  protocol = ssh
 [user]
-    email = jeremyasuncion808@gmail.com
-    name = Jeremy Asuncion
+  email = jeremyasuncion808@gmail.com
+  name = Jeremy Asuncion
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true

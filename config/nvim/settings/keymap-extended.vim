@@ -37,7 +37,7 @@ nnoremap <leader>v "*p<CR>
 nnoremap <C-p> :FZF<CR>
 
 " Start interactive EasyAlign in visual mode
-xmap ga <Plug>(EasyAlign)
+xnoremap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign in normal mode
-nmap ga <Plug>(EasyAlign)
+nnoremap ga <Plug>(EasyAlign)
 

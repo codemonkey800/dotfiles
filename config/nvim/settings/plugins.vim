@@ -14,7 +14,7 @@ Plug 'Shougo/echodoc.vim'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
 Plug 'SevereOverfl0w/deoplete-github'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'Shougo/neoinclude.vim', { 'commit': 'bde1512' }
 Plug 'steelsojka/deoplete-flow', { 'for': 'javascript' }
@@ -56,9 +56,9 @@ Plug 'sheerun/vim-polyglot'
 " User Interface
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
+Plug 'c0r73x/neotags.nvim'
 Plug 'felixhummel/setcolors.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -68,11 +68,12 @@ Plug 'ansiesc.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'cazador481/fakeclip.neovim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'fszymanski/fzf-gitignore.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'fszymanski/fzf-gitignore.nvim'
 Plug 'gitignore'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf'
 Plug 'kassio/neoterm'
+Plug 'Tagbar'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'

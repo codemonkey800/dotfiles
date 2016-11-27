@@ -5,7 +5,7 @@ if test ! -f /usr/bin/nvim -a ! -f /usr/local/bin/nvim
     exit -1
 end
 
-eval $EDITOR +PlugInstall +PlugUpdate +PlugUpgrade +PlugClean! +qall
+eval $EDITOR +PlugInstall +PlugUpdate +UpdateRemotePlugins +PlugUpgrade +PlugClean! +qall
 
 rm -fv ~/.config/nvim/autoload/plug.vim.old
 

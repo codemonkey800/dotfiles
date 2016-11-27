@@ -54,7 +54,7 @@ augroup lexical
     autocmd FileType text call lexical#init({ 'spell': 0 })
 augroup END
 
-let g:lexical#thesaurus = ['~/.config/nvim/thesaurus.txt']
+let g:lexical#thesaurus = ['~/.config/nvim/mthesaur.txt']
 let g:lexical#dictionary = ['/usr/share/dict/american-english']
 
 let g:lexical#spell_key = '<leader>t'
@@ -95,6 +95,9 @@ let g:jsx_ext_required = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'onedark'
+
+" neotags
+let g:neotags_enabled = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utilitiy

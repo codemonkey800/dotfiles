@@ -1,0 +1,1 @@
+./config/nvim/mthesaur.txt filter=lfs diff=lfs merge=lfs -text

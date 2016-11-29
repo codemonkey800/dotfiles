@@ -7,8 +7,14 @@
 
 source ~/.config/nvim/settings/keymap.vim
 
+" Open nvim config for editing
+noremap <leader>ev :edit $MYVIMRC<CR>
+
+" Source nvim config
+noremap <leader>sv :source $MYVIMRC<CR>
+
 " Open current directory with file manager
-noremap <leader>f :e .<CR>
+noremap <leader>f :edit .<CR>
 
 " Runs make
 noremap <leader>b :!make<CR>

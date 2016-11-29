@@ -7,8 +7,16 @@
 
 source ~/.config/nvim/settings/keymap.vim
 
+" Open nvim config for editing
+noremap <leader>ev :edit $MYVIMRC<CR>
+
+" Source nvim config
+noremap <leader>sv :source $MYVIMRC<CR>
+
+" Ctrl-p like functionality with FZF
+nnoremap <C-p> :FZF<CR>
 " Open current directory with file manager
-noremap <leader>f :e .<CR>
+noremap <leader>f :edit .<CR>
 
 " Runs make
 noremap <leader>b :!make<CR>
@@ -32,9 +40,6 @@ nnoremap <leader>T :tabnew<CR>
 " fakeclip keymaps
 vnoremap <leader>c "+y<CR>
 nnoremap <leader>v "*p<CR>
-
-" Ctrl-p like functionality with FZF
-nnoremap <C-p> :FZF<CR>
 
 " Start interactive EasyAlign in visual mode
 xnoremap ga <Plug>(EasyAlign)

@@ -22,6 +22,9 @@ noremap L $
 noremap $ <nop>
 noremap ^ <nop>
 
+nnoremap Q :q!<CR>
+nnoremap q :q<CR>
+
 " Turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
@@ -39,11 +42,14 @@ noremap U :redo<CR>
 noremap <leader>r :!%:p<CR>
 
 " Sort things
-noremap <leader>s :!sort<CR>
-noremap <leader>S :!sort -r<CR>
+noremap <leader>s :sort<CR>
+noremap <leader>S :sort!<CR>
 
 " Select all text
 noremap <leader>a ggvG
+
+" Lists files in current director
+" nnoremap <leader>ls :echo globpath('.', '*')<CR>
 
 " Maps window split navigation to saner shortcuts
 nnoremap <Up>    :wincmd k<CR>

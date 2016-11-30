@@ -1,4 +1,5 @@
 # Aliases
+alias dotfiles "pushd $DOTFILES"
 alias e "$EDITOR"
 alias g 'git'
 alias gr 'cd (git rev-parse --show-toplevel)'

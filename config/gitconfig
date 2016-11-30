@@ -11,22 +11,36 @@
   pu = pull
   r = remote
   s = status
+
 [color]
   ui = true
+
 [core]
   editor = nvim
   sparsecheckout = true
+
 [diff]
   prompt = false
   tool = vimdiff
+
 [difftool]
   path = nvim
-[hub]
-  protocol = ssh
-[user]
-  email = jeremyasuncion808@gmail.com
-  name = Jeremy Asuncion
+
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   required = true
+
+[hub]
+  protocol = ssh
+
+[url "git@gitlab.com:"]
+  insteadOf = "gl:"
+
+[url "ssh://aur@aur.archlinux.org/"]
+  insteadOf = "aur://"
+
+[user]
+  email = jeremyasuncion808@gmail.com
+  name = Jeremy Asuncion
+

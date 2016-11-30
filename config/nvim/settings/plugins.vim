@@ -37,7 +37,8 @@ Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
 
 " Snippets
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Syntaxes
 Plug 'dag/vim-fish'

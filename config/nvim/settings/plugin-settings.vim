@@ -98,6 +98,7 @@ let g:airline_theme = 'onedark'
 
 " neotags
 let g:neotags_enabled = 1
+let g:neotags_file = '/tmp/tags'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utilitiy

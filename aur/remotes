@@ -1,0 +1,55 @@
+#!/usr/bin/env fish
+
+set remotes (find -type d -not -path . | xargs -L1 basename)
+
+function __has_remote
+    git remote -v | grep $argv[1] > /dev/null ^ /dev/null
+end
+
+function __help
+    echo "
+    Usage: ./remotes <command> [arg]
+
+    Commands:
+        setup  - Sets up the remotes if they don't already exist
+        print  - Prints out the remotes and their urls
+        remove - Removes remotes from the git repo. Specify 'all' to remove all remotes
+    "
+end
+
+if test (count $argv) -eq 0
+    __help
+    exit
+end
+
+switch $argv[1]
+    case s setup
+        for remote in $remotes
+            if not __has_remote $remote
+                git remote add -f $remote ssh://aur@aur.archlinux.org/$remote.git
+            end
+        end
+
+    case p print
+        for remote in $remotes
+            if __has_remote $remote
+                echo "$remote ->" (git remote get-url $remote)
+            end
+        end
+
+    case r remove
+        set remotes_to_remove $argv[2..-1]
+        if test (count $argv) -gt 1; and test $argv[2] = 'all'
+            set remotes_to_remove $remotes
+        end
+
+        for arg in $remotes_to_remove
+            if contains -- $arg $remotes; and __has_remote $arg
+                git remote remove $arg
+            end
+        end
+
+    case '*'
+        __help
+end
+

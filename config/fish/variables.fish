@@ -13,6 +13,8 @@ set -gx SRC ~/.local/src
 set -gx LANG en_US.UTF-8
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
+set -gx DIRENV_LOG_FORMAT ''
+
 # PATH stuff
 mkdir -p ~/.local/bin
 mkdir -p ~/.local/src/go/bin

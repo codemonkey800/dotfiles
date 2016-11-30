@@ -8,20 +8,23 @@
 source ~/.config/nvim/settings/keymap.vim
 
 " Open nvim config for editing
-noremap <leader>ev :edit $MYVIMRC<CR>
+nnoremap <leader>ev :edit $MYVIMRC<CR>
 
 " Source nvim config
-noremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Ctrl-p like functionality with FZF
 nnoremap <C-p> :FZF<CR>
 " Open current directory with file manager
-noremap <leader>f :edit .<CR>
+nnoremap <leader>f :edit .<CR>
 
 " Runs make
-noremap <leader>b :!make<CR>
+nnoremap <leader>b :!make<CR>
 " Runs make clean
-noremap <leader>B :!make clean<CR>
+nnoremap <leader>B :!make clean<CR>
+
+nnoremap ~ :terminal<CR>
+tnoremap <C-q> <C-\><C-n>
 
 " Shortcuts for buffer related stuff
 nnoremap <leader>m :bn<CR>

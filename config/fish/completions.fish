@@ -1,21 +1,21 @@
 # Alias completions
-complete -c exists -w which
-complete -c ll -w ls
-complete -c lc -w ls
-complete -c mkcd -w mkdir
-complete -c r -w rm
-complete -c e -w $EDITOR
-complete -c hub -w git
-complete -c g -w git
+complete --command exists --wraps which
+complete --command ll --wraps ls
+complete --command lc --wraps ls
+complete --command mkcd --wraps mkdir
+complete --command r --wraps rm
+complete --command e --wraps $EDITOR
+complete --command hub --wraps git
+complete --command g --wraps git
 
 # Function completions
-complete -c l -w ls
-complete -c l -l pager -d 'Pipes output into $PAGER'
+complete --command l --wraps ls
+complete --command l --long-option pager --description 'Pipes output into $PAGER'
 
 # Script completions
-complete -c copy -w rsync
+complete --command copy --wraps rsync
 
-complete -c gpu -l on -d 'Turns on discrete gpu'
-complete -c gpu -l off -d 'Turns off discrete gpu'
-complete -c gpu -l help -d 'Prints help message'
+complete --command gpu --long-option on --description 'Turns on discrete gpu'
+complete --command gpu --long-option off --description 'Turns off discrete gpu'
+complete --command gpu --long-option help --description 'Prints help message'
 

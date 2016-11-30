@@ -106,6 +106,8 @@ shadow
 smartmontools
 s-nail
 speedtest-cli
+squashfs-tools
+sshfs
 sudo
 sysfsutils
 systemd-sysvcompat

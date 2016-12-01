@@ -101,6 +101,7 @@ refind-efi
 reflector
 repose
 rmlint
+rng-tools
 rsync
 sed
 shadow

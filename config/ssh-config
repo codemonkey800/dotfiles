@@ -6,7 +6,6 @@ Host github.com gitlab.com bitbucket.com
 Host dev
     HostName jeremyasuncion.io
     IdentityFile ~/.ssh/vps
-    RequestTTY force
     User jeremy
 
 Host aur

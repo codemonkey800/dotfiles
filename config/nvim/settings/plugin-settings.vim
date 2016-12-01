@@ -114,5 +114,5 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 let g:neoterm_shell = "fish"
 
 " Neomake
-autocmd! BufWritePost * Neomake
+autocmd! BufWritePost,BufEnter * Neomake
 

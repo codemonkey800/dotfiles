@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+
+set -l socket /tmp/nvim-(whoami).socket
+
+if test -e $socket
+    env NVIM_LISTEN_ADDRESS=$socket nvr $argv
+else
+    env NVIM_LISTEN_ADDRESS=$socket nvim $argv
+end
+

@@ -17,9 +17,9 @@
 ~/.FRD/log/app.log
 ~/.gconf
 ~/.gconfd
+~/.gi_list
+~/.gradle/
 ~/.gstreamer-0.10
-/home/jeremy/.gi_list
-/home/jeremy/.gradle/
 ~/.ipython
 ~/.java
 ~/javac-services.*.log

@@ -1,9 +1,9 @@
 # Less stuff
-set -gx LESS "-R"
-set -gx LESSOPEN "|pygmentize -g %s"
+set -gx LESS '-R'
+set -gx LESSOPEN '|pygmentize -g %s'
 
 # Development environment
-set -gx DIRENV_LOG_FORMAT ''
+set -gx DIRENV_LOG_FORMAT
 set -gx DOTFILES ~/.local/src/misc/dotfiles
 set -gx EDITOR (which nvim)
 set -gx SRC ~/.local/src
@@ -19,7 +19,6 @@ set -gx PAGER "$EDITOR -c 'runtime! macros/less.vim' -c AnsiEsc -"
 # PATH stuff
 mkdir -p ~/.local/bin
 mkdir -p ~/.local/src/go/bin
-
 
 set -gx GOPATH ~/.local/src/go
 
@@ -37,36 +36,6 @@ if exists fzf
     if exists tmux
         set -gx FZF_TMUX 1
     end
-
-    set -gx FZF_ALT_C_COMMAND "
-        command find -L . \\( \
-            -path '*/.git' -o \
-            -path '*/.cache' -o \
-            -path '*/node_modules' -o \
-            -path '*/build' -o \
-            -path '*/_minted*' -o \
-            -fstype dev -o \
-            -fstype proc \
-        \\) -prune -o \
-        -type d -print 2> /dev/null
-    "
-
-    set -gx FZF_CTRL_T_COMMAND "
-        command find -L . \\( \
-            -path '*/.git' -o \
-            -path '*/.cache' -o \
-            -path '*/node_modules' -o \
-            -path '*/build' -o \
-            -path '*/_minted*' -o \
-            -fstype dev -o \
-            -fstype proc \
-        \\) -prune -o \
-        \\( \
-            -type f -o \
-            -type d -o \
-            -type l \
-        \\) -print 2> /dev/null
-    "
 end
 
 # Color settings

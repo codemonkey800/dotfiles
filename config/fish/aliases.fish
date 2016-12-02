@@ -5,7 +5,12 @@ alias g 'git'
 alias gr 'cd (git rev-parse --show-toplevel)'
 alias info 'info --vi-keys'
 alias re "sudo -E $EDITOR"
-alias lsof-del 'lsof +c 0 | grep -w DEL | pawk \'"{}: {}".format(f[0], f[-1:])\' | sort -u'
+alias lsof-del '
+    lsof +c 0
+    | grep -w DEL 
+    | pawk \'"{}: {}".format(f[0], f[-1:])\'
+    | sort -u
+'
 
 # Conditional Aliases
 exists apm-beta; and alias apm 'apm-beta'

@@ -1,12 +1,13 @@
 # Alias completions
+complete --command e --wraps nvim
 complete --command exists --wraps which
-complete --command ll --wraps ls
+complete --command g --wraps git
+complete --command hub --wraps git
 complete --command lc --wraps ls
+complete --command ll --wraps ls
 complete --command mkcd --wraps mkdir
 complete --command r --wraps rm
-complete --command e --wraps $EDITOR
-complete --command hub --wraps git
-complete --command g --wraps git
+complete --command re --wraps nvim
 
 # Function completions
 complete --command l --wraps ls

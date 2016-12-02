@@ -1,5 +1,5 @@
 # Aliases
-alias dotfiles "pushd $DOTFILES"
+alias dotfiles "pushd $DOTFILES; and echo 'Run popd to return to the previous directory'"
 alias e "$EDITOR"
 alias g 'git'
 alias gr 'cd (git rev-parse --show-toplevel)'

@@ -6,6 +6,10 @@ if not test -f ~/.config/fish/functions/fisher.fish
     fisher
 end
 
+if functions -q bass; and test -f /etc/profile
+    bass source /etc/profile
+end
+
 source ~/.config/fish/variables.fish
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/completions.fish
@@ -38,4 +42,5 @@ if status -i
         end
     end
 end
+
 

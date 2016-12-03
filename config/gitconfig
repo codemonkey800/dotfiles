@@ -3,10 +3,12 @@
 [alias]
   a = add --all
   amend = commit --all --amend --no-edit
-  ca = commit --all --message
   c = commit --message
+  ca = commit --all --message
   d = diff
   dt = difftool
+  l = log --show-signature --name-status --color=always
+  ls = ls-files
   p = push
   pu = pull
   r = remote
@@ -16,7 +18,7 @@
   ui = true
 
 [commit]
-	gpgsign = true
+  gpgsign = true
 
 [core]
   editor = nvim
@@ -35,7 +37,7 @@
   required = true
 
 [gpg]
-  program = "gpg2"
+  program = "/usr/bin/gpg2"
 
 [hub]
   protocol = "ssh"

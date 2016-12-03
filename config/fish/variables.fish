@@ -9,6 +9,10 @@ setenv EDITOR (which nvim)
 setenv SRC ~/.local/src
 setenv VIRTUAL_ENV_DISABLE_PROMPT 1
 
+# GPG stuff
+setenv ENCRYPTION_KEY A1CE3226F4FDEFF5
+setenv SIGNING_KEY 3FCC32880193C153
+
 # Locale stuff
 setenv LANG en_US.UTF-8
 
@@ -64,3 +68,4 @@ setenv fish_pager_color_completion normal
 setenv fish_pager_color_description 555\x1eyellow
 setenv fish_pager_color_prefix cyan
 setenv fish_pager_color_progress cyan
+

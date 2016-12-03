@@ -24,7 +24,7 @@ Dotfiles are not strictly limited to configuration files. You can have executabl
 
 ## Features :package:
 Although my dotfiles are tailored to my development environment, you can easily use them as a bootstrap for a new system,
-a base for your own set of dotfiles, or even take a subset of my dotfiles and incorporate it into your own. 
+a base for your own set of dotfiles, or even take a subset of my dotfiles and incorporate it into your own.
 
 - Fish
   - [Fisherman](http://fisherman.sh/) for plugins and themes
@@ -42,7 +42,7 @@ a base for your own set of dotfiles, or even take a subset of my dotfiles and in
   - `doshit` - Creates a temporary directory in **tmpfs** and starts a new tmux session in it. Exiting automatically deletes the directory
   - `rmshit` - Sources a list of files to delete file named `~/.shittyfiles`
   - `update-*` - A set of scripts that runs updates on their respective program. For example, `update-pacman-db` updates the pacman database using [Reflector](https://wiki.archlinux.org/index.php/Reflector)
-  - `update` - A monolithic script that 
+  - `update` - A monolithic script that
 - Arch Linux PKGBUILDs
   - python-pawk
 - Pacman
@@ -78,17 +78,17 @@ bin/ # The directory organization is for development purposes. It's best you fla
     cleanup           -> ~/.local/bin/cleanup
     copy              -> ~/.local/bin/copy
     doshit            -> ~/.local/bin/doshit
-    ... 
-  docker/ 
+    ...
+  docker/
     docker-clean      -> ~/.local/bin/docker-clean
   ...
 config/
   fish/
     aliases.fish      -> ~/.config/fish/aliases.fish
     completions.fish  -> ~/.config/fish/completions.fish
-    ... 
+    ...
   gitconfig           -> ~/.gitconfig
-  i3/ 
+  i3/
     compton           -> ~/.config/i3/compton
     config            -> ~/.config/i3/config
   npmrc               -> ~/.npmrc
@@ -166,7 +166,7 @@ $ curl -fLO ~/.config/nvim/autoload/plug.vim --create-dirs \
 Once you've symlinked everything correctly, you can run `update-plug` do a quick and easy installation.
 
 ### Pacman
-Warning: You need to have installed Powerpill before symlinking `config/pacman/yaourtrc -> /etc/yaourtrc`. 
+Warning: You need to have installed Powerpill before symlinking `config/pacman/yaourtrc -> /etc/yaourtrc`.
 Failing to do so will cause an error since, from `yaourt`'s perspective, the `powerpill` command
 doesn't exist.
 
@@ -197,7 +197,7 @@ Any other settings that are highly dependent on either a Linux based OS or Arch 
 
 For Windows, you'll most likely either need to install [Cygwin](https://www.cygwin.com/),
 use the [Bash Subsystem](https://msdn.microsoft.com/en-us/commandline/wsl/about),
-or run a Linux distro in a VM. 
+or run a Linux distro in a VM.
 
 Personally, I use Windows on my desktop and run Arch in VMWare Workstation.
 

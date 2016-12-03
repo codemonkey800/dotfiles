@@ -45,7 +45,7 @@ vnoremap <leader>c "+y<CR>
 nnoremap <leader>v "*p<CR>
 
 " Start interactive EasyAlign in visual mode
-xnoremap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign in normal mode
-nnoremap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 

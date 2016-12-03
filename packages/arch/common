@@ -6,6 +6,7 @@ bash
 binutils
 bison
 btrfs-progs
+buck
 bzip2
 checkupdates-aur
 coreutils

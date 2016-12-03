@@ -1,5 +1,5 @@
-; Shamelessly copied from arch wiki:
-; https://wiki.archlinux.org/index.php/GnuPG#Start_gpg-agent_with_systemd_user
+# Shamelessly copied from arch wiki:
+# https://wiki.archlinux.org/index.php/GnuPG#Start_gpg-agent_with_systemd_user
 [Unit]
 Description=GnuPG private key agent
 IgnoreOnIsolate=true

@@ -1,10 +1,10 @@
 # vim: set ts=2 sw=2 sts=2 et sta :
 
 [alias]
-  a = add -A
-  amend = commit -a --amend --no-edit
-  ca = commit -am
-  c = commit -m
+  a = add --all
+  amend = commit --gpg-sign --all --amend --no-edit
+  ca = commit --gpg-sign --all --message
+  c = commit --gpg-sign --message
   d = diff
   dt = difftool
   p = push
@@ -43,4 +43,5 @@
 [user]
   email = jeremyasuncion808@gmail.com
   name = Jeremy Asuncion
+  signingkey = 3FCC32880193C153
 

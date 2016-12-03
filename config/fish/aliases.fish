@@ -7,7 +7,7 @@ alias info 'info --vi-keys'
 alias re "sudo -E $EDITOR"
 alias lsof-del '
     lsof +c 0
-    | grep -w DEL 
+    | grep -w DEL
     | pawk \'"{}: {}".format(f[0], f[-1:])\'
     | sort -u
 '

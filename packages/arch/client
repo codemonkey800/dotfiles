@@ -8,7 +8,6 @@ android-support-repository
 android-udev
 baobab
 broadcom-wl-dkms
-buck
 clang
 cmake
 dconf-editor

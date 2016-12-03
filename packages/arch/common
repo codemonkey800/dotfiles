@@ -67,6 +67,7 @@ mdadm
 moreutils
 namcap
 neovim
+neovim-remote
 netctl
 net-tools
 ntfs-3g

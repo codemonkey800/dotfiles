@@ -43,7 +43,7 @@
   protocol = "ssh"
 
 [url "git@gitlab.com:"]
-  insteadOf = "gl:"
+  insteadOf = "gl://"
 
 [url "ssh://aur@aur.archlinux.org/"]
   insteadOf = "aur://"

@@ -2,9 +2,9 @@
 
 [alias]
   a = add --all
-  amend = commit --gpg-sign --all --amend --no-edit
-  ca = commit --gpg-sign --all --message
-  c = commit --gpg-sign --message
+  amend = commit --all --amend --no-edit
+  ca = commit --all --message
+  c = commit --message
   d = diff
   dt = difftool
   p = push
@@ -14,6 +14,9 @@
 
 [color]
   ui = true
+
+[commit]
+	gpgsign = true
 
 [core]
   editor = nvim
@@ -31,8 +34,11 @@
   smudge = git-lfs smudge -- %f
   required = true
 
+[gpg]
+  program = "gpg2"
+
 [hub]
-  protocol = ssh
+  protocol = "ssh"
 
 [url "git@gitlab.com:"]
   insteadOf = "gl:"
@@ -41,7 +47,7 @@
   insteadOf = "aur://"
 
 [user]
-  email = jeremyasuncion808@gmail.com
-  name = Jeremy Asuncion
-  signingkey = 3FCC32880193C153
+  email = "jeremyasuncion808@gmail.com"
+  name = "Jeremy Asuncion"
+  signingkey = "3FCC32880193C153"
 

@@ -7,7 +7,7 @@
 ~/.bzr.log
 ~/ca2
 ~/ca2~
-~/.cache/
+~/.cache/*
 ~/.config/enchant
 ~/.dbus
 ~/.distlib

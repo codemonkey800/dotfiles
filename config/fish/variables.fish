@@ -4,9 +4,8 @@ setenv LESSOPEN '|pygmentize -g %s'
 
 # Development environment
 setenv DIRENV_LOG_FORMAT
-setenv DOTFILES ~/.local/src/misc/dotfiles
+setenv DOTFILES ~/src/misc/dotfiles
 setenv EDITOR (which nvim)
-setenv SRC ~/.local/src
 setenv VIRTUAL_ENV_DISABLE_PROMPT 1
 
 # GPG stuff
@@ -21,10 +20,10 @@ setenv MANPAGER "$EDITOR -c 'setf man' -c 'runtime! macros/less.vim' -"
 setenv PAGER "$EDITOR -c 'runtime! macros/less.vim' -c AnsiEsc -"
 
 # PATH stuff
-mkdir -p ~/.local/bin
-mkdir -p ~/.local/src/go/bin
+mkdir -p ~/bin
+mkdir -p ~/src/go/bin
 
-setenv GOPATH ~/.local/src/go
+setenv GOPATH ~/src/go
 
 function __add_to_path
     if not contains $argv[1] -- $PATH
@@ -32,7 +31,7 @@ function __add_to_path
     end
 end
 
-__add_to_path ~/.local/bin
+__add_to_path ~/bin
 __add_to_path $GOPATH/bin
 
 # Fzf stuff

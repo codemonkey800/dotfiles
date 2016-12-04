@@ -14,8 +14,6 @@ source ~/.config/fish/variables.fish
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/completions.fish
 
-eval (direnv hook fish)
-
 if status -i
     if exists keychain
         # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive

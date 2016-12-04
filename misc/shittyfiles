@@ -9,6 +9,7 @@
 ~/ca2~
 ~/.cache/*
 ~/.config/enchant
+~/.config/yarn
 ~/.dbus
 ~/.distlib
 ~/.dropbox-dist
@@ -37,7 +38,7 @@
 ~/npm-debug.log
 ~/.nv
 ~/.objectdb
-~/.oracle_jre_usage/
+~/.oracle_jre_usage
 ~/.parallel
 ~/.pulse
 ~/.python_history

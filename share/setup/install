@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+
+ROOT="$(git rev-parse --show-toplevel)"
+DOTBOT_ROOT="$ROOT/share/setup/dotbot"
+CONFIG="$ROOT/share/setup/install.yml"
+
+cd "$DOTBOT_ROOT"
+git submodule update --init --recursive "$DOTBOT_ROOT"
+
+"$DOTBOT_ROOT/bin/dotbot" -d "$ROOT" -c "$CONFIG" "$@"
+

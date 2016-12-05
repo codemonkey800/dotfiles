@@ -9,7 +9,6 @@
 ~/ca2~
 ~/.cache/*
 ~/.config/enchant
-~/.config/yarn
 ~/.dbus
 ~/.distlib
 ~/.dropbox-dist

@@ -11,9 +11,9 @@ function __help
     Usage: ./remotes <command> [arg]
 
     Commands:
-        setup  - Sets up the remotes if they don't already exist
-        print  - Prints out the remotes and their urls
-        remove - Removes remotes from the git repo. Specify 'all' to remove all remotes
+        s[etup]  - Sets up the remotes if they don't already exist
+        p[rint]  - Prints out the remotes and their urls
+        r[emove] - Removes remotes from the git repo. Specify 'all' to remove all remotes
     "
 end
 

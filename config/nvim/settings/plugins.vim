@@ -7,17 +7,18 @@ call plug#begin('~/.config/nvim/plugins')
 " Autocomplete
 Plug 'amirh/html-autoclosetag'
 Plug 'ervandew/supertab'
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'raimondi/delimitmate'
-Plug 'Shougo/echodoc.vim'
 
 " Deoplete
-Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
-Plug 'SevereOverfl0w/deoplete-github'
+Plug 'SevereOverfl0w/deoplete-github', { 'for': 'gitcommit' }
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
-Plug 'Shougo/neoinclude.vim', { 'commit': 'bde1512' }
-Plug 'steelsojka/deoplete-flow', { 'for': 'javascript' }
+Plug 'Shougo/neoinclude.vim'
+Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'steelsojka/deoplete-flow', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'wellle/tmux-complete.vim'
 Plug 'zchee/deoplete-go', { 'for': 'go' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
@@ -64,6 +65,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Utilitiy
+Plug 'Shougo/echodoc.vim'
 Plug 'Tagbar'
 Plug 'airodactyl/neovim-ranger'
 Plug 'ansiesc.vim'
@@ -75,6 +77,7 @@ Plug 'gitignore'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf'
 Plug 'kassio/neoterm'
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'

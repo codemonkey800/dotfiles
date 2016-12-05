@@ -23,7 +23,11 @@ let g:clang_library_path = '/usr/lib/libclang.so'
 let g:tmuxcomplete#trigger = ''
 
 " deoplete-flow
-let g:deoplete#sources#flow#flow_bin = 'flow'
+let g:flow_path = system('setenv PATH $PATH (npm bin);and which flow')
+
+if g:flow_path != 'flow not found'
+  let g:deoplete#sources#flow#flow_bin = g:flow_path
+endif
 
 " deoplete-github
 let g:deoplete#sources.gitcommit = ['github']
@@ -33,6 +37,12 @@ call deoplete#util#set_pattern(
     \ g:deoplete#omni#input_patterns,
     \ 'gitcommit',
     \ [g:deoplete#keyword_patterns.gitcommit])
+
+" deoplete-ternjs
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Linting
@@ -104,8 +114,12 @@ let g:neotags_file = '/tmp/tags'
 " Utilitiy
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" echodoc
+set noshowmode
+let g:echodoc_enable_at_startup = 1
+
 " fakeclip
-let g:vim_fakeclip_tmux_plus=1
+let g:vim_fakeclip_tmux_plus = 1
 
 " vim-editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']

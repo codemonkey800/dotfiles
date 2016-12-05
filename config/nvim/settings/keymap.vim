@@ -39,7 +39,10 @@ noremap O O<esc>j
 noremap U :redo<CR>
 
 " Pipe to selected to shell
-noremap <leader>r :!%:p<CR>
+vnoremap <leader>r :!%:p<CR>
+
+" Save current file
+nnoremap <C-s> :w<CR>
 
 " Sort things
 noremap <leader>s :sort<CR>

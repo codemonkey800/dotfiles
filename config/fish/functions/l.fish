@@ -11,19 +11,29 @@ function l -d 'Lists all files in a directory or reads a file'
             case '--*' '-*'
                 set args $args $arg
             case '*'
-                if test -e $arg
-                    set files $files $arg
-                end
+                set files $files $arg
         end
     end
 
     if test (count $files) -eq 1; and test -f $files[1]
-        if eval $pager
-            nvim -c 'runtime! macros/less.vim' $files[1]
+        if test -f $files[1]
+            if eval $pager
+                nvim -c 'runtime! macros/less.vim' $files[1]
+            else
+                pygmentize -g $files[1]
+            end
         else
-            pygmentize -g $files[1]
+            echo "'$files[1]' doest not exist!"
+            return -1
         end
     else
+        for file in $files
+            if not test -e $file
+                echo "'$file' does not exist!"
+                return -1
+            end
+        end
+
         set -l cmd 'ls -CAF'
 
         if test (uname) = 'Linux'

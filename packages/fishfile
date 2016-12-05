@@ -1,7 +1,10 @@
 oh-my-fish/theme-agnoster
-fisherman/await
 edc/bass
 0rax/fish-bd
 barnybug/docker-fish-completion
 fisherman/fzf
-fisherman/last_job_id
+fisherman/getopts
+laughedelic/pisces
+fisherman/transfer
+fisherman/upto
+fisherman/verman

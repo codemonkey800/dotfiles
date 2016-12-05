@@ -1,3 +1,0 @@
-[submodule "share/setup/dotbot"]
-	path = share/setup/dotbot
-	url = git@github.com:anishathalye/dotbot.git

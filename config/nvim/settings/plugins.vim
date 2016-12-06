@@ -7,7 +7,7 @@ call plug#begin('~/.config/nvim/plugins')
 " Autocomplete
 Plug 'amirh/html-autoclosetag'
 Plug 'ervandew/supertab'
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jspc.vim', { 'for': 'javascript' }
 Plug 'raimondi/delimitmate'
 
 " Deoplete
@@ -17,8 +17,8 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'Shougo/neoinclude.vim'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'steelsojka/deoplete-flow', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript' }
+" Plug 'steelsojka/deoplete-flow', { 'for': 'javascript' }
 Plug 'wellle/tmux-complete.vim'
 Plug 'zchee/deoplete-go', { 'for': 'go' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
@@ -47,7 +47,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'Firef0x/PKGBUILD.vim'
-Plug 'flowtype/vim-flow'
+" Plug 'flowtype/vim-flow'
 Plug 'lervag/vimtex'
 Plug 'nginx.vim'
 Plug 'othree/es.next.syntax.vim'
@@ -78,7 +78,7 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'kassio/neoterm'
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'

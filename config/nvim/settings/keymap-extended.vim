@@ -33,13 +33,6 @@ nnoremap <leader>w :bd!<CR>
 nnoremap <leader>l :ls<CR>
 nnoremap <leader>t :new<CR>
 
-" Shortcuts to for tab related stuff
-nnoremap <leader>M :tabn<CR>
-nnoremap <leader>N :tabp<CR>
-nnoremap <leader>W :tabc<CR>
-nnoremap <leader>L :tabs<CR>
-nnoremap <leader>T :tabnew<CR>
-
 " fakeclip keymaps
 vnoremap <leader>c "+y<CR>
 nnoremap <leader>v "*p<CR>

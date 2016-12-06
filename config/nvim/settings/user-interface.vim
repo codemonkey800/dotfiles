@@ -17,3 +17,5 @@ set noshowmode  "Don't show INSERT, NORMAL, or VISUAL"
 syntax on
 colorscheme onedark
 
+autocmd FileType help wincmd L
+

@@ -60,9 +60,3 @@ nnoremap <Down>  :wincmd j<CR>
 nnoremap <Left>  :wincmd h<CR>
 nnoremap <Right> :wincmd l<CR>
 
-" Resizes windows using control and arrow key
-nnoremap <S-Up>    :wincmd +<CR>
-nnoremap <S-Down>  :wincmd -<CR>
-nnoremap <S-Left>  :wincmd <<CR>
-nnoremap <S-Right> :wincmd ><CR>
-

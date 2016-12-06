@@ -10,16 +10,6 @@
 " Deoplete
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function! GetNodePackageManager()
-    if executable('npm')
-        return 'npm'
-    elseif executable('yarn')
-        return 'yarn'
-    else
-        return ''
-    endif
-endfunction
-
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
@@ -41,25 +31,14 @@ call deoplete#util#set_pattern(
     \ 'gitcommit',
     \ [g:deoplete#keyword_patterns.gitcommit])
 
-" The following deoplete configurations are only set if there is a node
-" package manager available
-let s:node_package_manager = GetNodePackageManager()
-if s:node_package_manager != ''
-    " deoplete-flow
-    let g:flow_path = system('setenv PATH $PATH (' . s:node_package_manager . ' bin);and which flow ^ /dev/null; or echo "flow not found"')
-    if g:flow_path != 'flow not found'
-      let g:deoplete#sources#flow#flow_bin = g:flow_path
-    endif
+" deoplete-flow
+" let g:deoplete#sources#flow#flow_bin = $PWD . '/node_modules/.bin/flow'
 
-
-    " deoplete-ternjs
-    let s:tern_path = system('setenv PATH $PATH (' . s:node_package_manager . ' bin); and which tern ^ /dev/null; or echo "tern not found"')
-    if s:tern_path != 'tern not found'
-        let g:tern_request_timeout = 1
-        let g:tern#command = [s:tern_path]
-        let g:tern#arguments = ['--persistent']
-    endif
-end
+" ternjs
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'
+let g:tern#command = [$PWD . '/node_modules/.bin/tern']
+let g:tern#arguments = ['--persistent']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Linting
@@ -141,13 +120,15 @@ let g:vim_fakeclip_tmux_plus = 1
 
 " fzf.vim
 let g:fzf_action = {
-    \ 'ctrl-t': 'tab split',
     \ 'ctrl-s': 'split',
     \ 'ctrl-v': 'vsplit'}
 let g:fzf_layout = { 'down': '~30%' }
 
 " vim-editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" vim-flow
+" let g:flow#autoclose = 1
 
 " Neoterm
 let g:neoterm_shell = "fish"

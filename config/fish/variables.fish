@@ -1,10 +1,26 @@
+# Dotfiles path
+setenv DOTFILES (
+    set dir (status -f)
+    if test -L $dir
+        set dir (readlink $dir)
+    end
+    readlink -f (dirname $dir)/../..
+)
+
+# fish stuff
+begin
+    set -l dir $DOTFILES/config/fish/functions
+    if not contains $dir -- $fish_function_path
+        setenv fish_function_path $fish_function_path $dir
+    end
+end
+
 # Less stuff
 setenv LESS '-R'
 setenv LESSOPEN '|pygmentize -g %s'
 
 # Development environment
 setenv DIRENV_LOG_FORMAT
-setenv DOTFILES ~/src/misc/dotfiles
 setenv EDITOR (which nvim)
 setenv VIRTUAL_ENV_DISABLE_PROMPT 1
 
@@ -21,19 +37,19 @@ setenv MANPAGER "$EDITOR -c 'setf man' -c 'runtime! macros/less.vim' -"
 setenv PAGER "$EDITOR -c 'runtime! macros/less.vim' -c AnsiEsc -"
 
 # PATH stuff
-mkdir -p ~/bin
-mkdir -p ~/src/go/bin
-
-setenv GOPATH ~/src/go
+mkdir -p ~/src/go;and setenv GOPATH ~/src/go
 
 function __add_to_path
-    if not contains $argv[1] -- $PATH
-        setenv PATH $PATH $argv[1]
+    for arg in $argv
+        if not contains $arg -- $PATH
+            mkdir -p (dirname $arg)
+            setenv PATH $PATH $arg
+        end
     end
 end
 
-__add_to_path ~/bin
 __add_to_path $GOPATH/bin
+__add_to_path (find $DOTFILES/bin -type d)
 
 # Fzf stuff
 if exists fzf

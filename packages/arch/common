@@ -16,6 +16,7 @@ ctags
 device-mapper
 dhcpcd
 diffutils
+direnv
 docker
 e2fsprogs
 exfat-utils

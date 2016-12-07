@@ -16,6 +16,7 @@ ctags
 device-mapper
 dhcpcd
 diffutils
+direnv
 docker
 e2fsprogs
 exfat-utils
@@ -87,6 +88,7 @@ powerline-fonts-git
 powerpill
 procps-ng
 psmisc
+pv
 pygmentize
 python2-neovim
 python2-pip
@@ -116,6 +118,7 @@ sysfsutils
 systemd-sysvcompat
 tar
 texinfo
+the_platinum_searcher
 time
 tmux
 tree

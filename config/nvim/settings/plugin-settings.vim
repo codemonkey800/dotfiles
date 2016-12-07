@@ -36,7 +36,6 @@ call deoplete#util#set_pattern(
 
 " ternjs
 let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0'
 let g:tern#command = [$PWD . '/node_modules/.bin/tern']
 let g:tern#arguments = ['--persistent']
 
@@ -135,5 +134,6 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 let g:neoterm_shell = "fish"
 
 " Neomake
-autocmd! BufWritePost,BufEnter * Neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+autocmd! BufWritePost * Neomake
 

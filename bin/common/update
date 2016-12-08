@@ -1,43 +1,174 @@
 #!/usr/bin/env fish
 
-if test (uname) != "Linux"
-    echo "You need to run this script on Linux, preferrably Arch"
+if test (uname) != 'Linux' -o (lsb_release -d | pawk f[1:]) != 'Arch Linux'
+    echo 'This script can only be run on Arch Linux!'
+    exit -1
 end
 
-if test (count $argv) -gt 0
-    if test $argv[1] = "-l"
-        echo "Pacman:"
-        checkupdates; and checkupdates-aur
+function print_help
+    echo 'Usage: update <options>'
+    echo
+    echo 'Options:'
+    echo '  -l, --list                           ' \
+         'List available updates.'
+    echo '  -p, --package-manager=package-manager' \
+         'Updates packages for a specific manager.'
+    echo '  --list-package-managers              ' \
+         'Lists all available package managers.'
+    echo
+    echo 'Notes:'
+    echo '  - Using --list with --package-manager will' \
+         'list updates available for that package manager.'
+    echo '  - You can specify multiple --package-manager' \
+         'flags to update or list the specified package managers.'
+end
+
+function list
+    for package_manager in (list-package-managers | string split ' ')
+        if test -z $package_manager
+            continue
+        end
+
+        if test $argv[1] = 'all'; or contains $package_manager -- $argv
+            switch $package_manager
+                case apm
+                    echo 'apm:'
+                    apm upgrade --list | sed 's/^/  /g'
+                case npm
+                    echo 'npm:'
+                    npm -g outdated ^ /dev/null | sed 's/^/  /g'
+                case pacman
+                    echo 'pacman:'
+                    checkupdates | sed 's/^/  /g'
+                case aur
+                    echo 'aur:'
+                    checkupdates-aur | sed 's/^/  /g'
+                case '*'
+                    echo "$package_manager:"
+                    echo "  Listing unsupported for $package_manager"
+                    echo '  skipping...'
+            end
+        end
     end
-    exit 0
 end
 
-sudo update-pacman-db
-yaourt -Syua --needed --noconfirm
-sudo pkgfile -u
-fisher update
-fish_update_completions
-update-plug
+function update
+    for package_manager in (list-package-managers | string split ' ')
+        if test -z $package_manager
+            continue
+        end
 
-if exists apm
-    apm upgrade -c false
-end
+        if test $argv[1] = 'all'; or contains $package_manager -- $argv
+            switch $package_manager
+                case apm
+                    echo 'TODO apm'
+                case npm
+                    echo 'TODO apm'
+                case yarn
+                    echo 'TODO yarn'
+                case nvim
+                    eval $EDITOR +PlugInstall +PlugUpdate \
+                                 +UpdateRemotePlugins +PlugUpgrade +PlugClean! +qall
 
-if exists apm-beta
-    apm-beta upgrade -c false
-end
+                    rm -fv ~/.config/nvim/autoload/plug.vim.old
 
-if exists npm
-    set -l pkgs (npm -g outdated --depth=0 --parseable | cut -d: -f4)
-    if test (count $pkgs) -gt 0
-        sudo npm -g i $pkgs
+                case pacman
+                    sudo pacman -Syu
+                case pkgfile
+                    sudo pkgfile -u
+                case yaourt
+                    yaourt -Syua
+            end
+        end
     end
 end
 
-echo 'Cleaning up.'
-yaourt -Scc --noconfirm
-yaourt -Rscun (yaourt -Qdtt --noconfirm)
-if exists rmshit
-    echo y | rmshit
+function list-package-managers
+    set package_managers ''
+
+    function _add --no-scope-shadowing
+        set package_managers $package_managers $argv[1]
+    end
+
+    type -q apm; or type -q apm; and _add apm
+    type -q npm; and _add npm
+    type -q yarn; and _add yarn
+    type -q nvim; and _add nvim
+    type -q pacman; and _add pacman
+    type -q pkgfile; and _add pkgfile
+    type -q yaourt; and _add aur
+
+    echo $package_managers
 end
 
+function main
+    if test (count $argv) -eq 0
+        update all
+        return 0
+    end
+
+    set list false
+    set package_managers
+
+    getopts $argv | while read -l flag val
+        switch $flag
+            case l list
+                set list true
+
+            case p package-manager
+                if test -z $val
+                    echo 'Package manager not specified.'
+                    return -1
+                end
+
+                set package_managers $package_managers $val
+
+            case list-package-managers
+                echo (list-package-managers)
+                return 0
+
+            case h help
+                print_help
+                return 0
+
+            case '*'
+                echo "Invalid flag $flag"
+                print_help
+                return -1
+
+        end
+    end
+
+    eval (
+        eval $list;
+        and echo list
+        or echo update
+    ) (
+        test (count $package_managers) -gt 0
+        and echo $package_managers
+        or echo all
+    )
+
+    return 0
+end
+
+main $argv
+
+# if test (count $argv) -gt 0
+#     if test $argv[1] = '-l'
+#         echo 'Pacman:'
+#         echo '  Official:'
+#         checkupdates | sed 's/^/    /g'
+#         echo '  AUR:'
+#         checkupdates-aur | sed 's/^/    /g'
+#     end
+#     exit 0
+# end
+#
+# sudo update-pacman-db
+# echo 'Cleaning up.'
+# yaourt -Rscun (yaourt -Qdtt --noconfirm)
+# if exists rmshit
+#     echo y | rmshit
+# end
+#

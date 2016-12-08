@@ -23,15 +23,20 @@ nnoremap <leader>b :!make<CR>
 " Runs make clean
 nnoremap <leader>B :!make clean<CR>
 
-nnoremap ~ :terminal<CR>
+" Since shell is defined to /bin/bash for POSIX
+" compatibility, we use the $SHELL environment variable
+" to launch a terminal with the user's shell
+nnoremap ~ :terminal bash -c 'exec $SHELL'<CR>
 tnoremap <C-q> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 
 " Shortcuts for buffer related stuff
-nnoremap <leader>m :bn<CR>
-nnoremap <leader>n :bp<CR>
-nnoremap <leader>w :bd!<CR>
-nnoremap <leader>l :ls<CR>
-nnoremap <leader>t :new<CR>
+nnoremap <leader>bp :bp<CR>
+nnoremap <leader>bn :bn<CR>
+nnoremap <leader>bd :bd<CR>
+nnoremap <leader>bD :bd!<CR>
+nnoremap <leader>bl :ls<CR>
+nnoremap <leader>bN :new<CR>
 
 " fakeclip keymaps
 vnoremap <leader>c "+y<CR>

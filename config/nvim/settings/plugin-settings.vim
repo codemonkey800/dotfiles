@@ -18,6 +18,8 @@ let g:deoplete#keyword_patterns = {}
 
 " clang_complete
 let g:clang_library_path = '/usr/lib/libclang.so'
+let g:clang_snippets = 1
+let g:clang_snippets_engine = 'ultisnips'
 
 " tmux-complete
 let g:tmuxcomplete#trigger = ''
@@ -36,7 +38,7 @@ call deoplete#util#set_pattern(
 
 " ternjs
 let g:tern_request_timeout = 1
-let g:tern#command = [$PWD . '/node_modules/.bin/tern']
+let g:tern#command = [resolve(system('npm bin') . '/tern')]
 let g:tern#arguments = ['--persistent']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -103,10 +105,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'onedark'
 
-" neotags
-let g:neotags_enabled = 1
-let g:neotags_file = '/tmp/tags'
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utilitiy
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -126,9 +124,6 @@ let g:fzf_layout = { 'down': '~30%' }
 
 " vim-editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-
-" vim-flow
-" let g:flow#autoclose = 1
 
 " Neoterm
 let g:neoterm_shell = "fish"

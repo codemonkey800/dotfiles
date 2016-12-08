@@ -11,9 +11,13 @@ set novisualbell         " Fuck bells man
 set exrc                 " Scan working directory for .vimrc files
 set secure               " Do the above securely
 
-set completeopt+=noselect
+set completeopt=menu,longest
 
 let g:python_host_prog = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/bin/python'
 let g:python3_host_skip_check = 1
+
+if &shell =~# 'fish$'
+    set shell=/bin/bash
+endif
 

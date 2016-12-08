@@ -74,9 +74,18 @@ function update
 
                 case pacman
                     sudo pacman -Syu
+                case pacmandb
+                    # Removes mirrorlist.pacnew if it exists
+                    sudo rm -fv /etc/pacman.d/mirrorlist.pacnew
+
+                    # Gets a list of mirrors sorted by rate using n threads
+                    sudo reflector -p http -p https -c US --verbose \
+                                   --threads (nproc) --sort rate \
+                                   --save /etc/pacman.d/mirrorlist
+
                 case pkgfile
                     sudo pkgfile -u
-                case yaourt
+                case aur
                     yaourt -Syua
             end
         end
@@ -96,6 +105,7 @@ function list-package-managers
     type -q nvim; and _add nvim
     type -q pacman; and _add pacman
     type -q pkgfile; and _add pkgfile
+    type -q reflector; and _add pacmandb
     type -q yaourt; and _add aur
 
     echo $package_managers

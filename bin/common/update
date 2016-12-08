@@ -68,7 +68,8 @@ function update
                     echo 'TODO yarn'
                 case nvim
                     eval $EDITOR +PlugInstall +PlugUpdate \
-                                 +UpdateRemotePlugins +PlugUpgrade +PlugClean! +qall
+                                 +UpdateRemotePlugins +PlugUpgrade \
+                                 +PlugClean! +qall
 
                     rm -fv ~/.config/nvim/autoload/plug.vim.old
 

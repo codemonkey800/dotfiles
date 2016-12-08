@@ -1,11 +1,12 @@
 # Aliases
 alias dotfiles "pushd $DOTFILES; and echo 'Run popd to return to the previous directory'"
 alias e "$EDITOR"
+alias exists 'type -q'
 alias g 'git'
 alias gr 'cd (git rev-parse --show-toplevel)'
 alias info 'info --vi-keys'
-alias re "sudo -E $EDITOR"
 alias lsof-del 'lsof +c 0 | grep -w DEL | pawk \'"{}: {}".format(f[0], f[-1:])\' | sort -u'
+alias re "sudo -E $EDITOR"
 
 # Conditional Aliases
 exists apm-beta; and alias apm 'apm-beta'

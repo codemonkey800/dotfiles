@@ -18,7 +18,6 @@ Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'Shougo/neoinclude.vim'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript' }
-" Plug 'steelsojka/deoplete-flow', { 'for': 'javascript' }
 Plug 'wellle/tmux-complete.vim'
 Plug 'zchee/deoplete-go', { 'for': 'go' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
@@ -47,7 +46,6 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'Firef0x/PKGBUILD.vim'
-" Plug 'flowtype/vim-flow'
 Plug 'lervag/vimtex'
 Plug 'nginx.vim'
 Plug 'othree/es.next.syntax.vim'
@@ -58,7 +56,6 @@ Plug 'sheerun/vim-polyglot'
 " User Interface
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
-Plug 'c0r73x/neotags.nvim'
 Plug 'felixhummel/setcolors.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
@@ -72,6 +69,7 @@ Plug 'airodactyl/neovim-ranger'
 Plug 'ansiesc.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'cazador481/fakeclip.neovim'
+Plug 'direnv/direnv.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'gitignore'
 Plug 'janko-m/vim-test'
@@ -85,3 +83,4 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
 call plug#end()
+

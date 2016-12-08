@@ -84,10 +84,8 @@ texlive-pstricks
 texlive-publishers
 texlive-science
 tracker
-ttf-chromeosextra-font
-ttf-droid-font
 ttf-ms-fonts
-ttf-roboto-font
+ttf-roboto
 ttf-roboto-slab
 vlc
 watchman

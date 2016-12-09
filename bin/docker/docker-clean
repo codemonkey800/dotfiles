@@ -10,9 +10,9 @@ if test ! -f (which pawk)
     exit -1
 end
 
-echo "Removing exited containers"
-if docker ps -a | grep Exited
-    docker rm -f (docker ps -a | grep Exited | pawk 'f[0]')
+echo "Removing non-running containers"
+if docker ps -a | egrep 'Created|Exited'
+    docker rm -f (docker ps -a | egrep 'Created|Exited' | pawk 'f[0]')
 else
     echo "No containers to remove"
 end

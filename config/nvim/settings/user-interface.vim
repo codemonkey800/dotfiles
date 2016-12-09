@@ -20,6 +20,3 @@ colorscheme molokai_dark
 hi Normal ctermbg=none guibg=none
 hi NonText ctermbg=none guibg=none
 
-autocmd FileType help :wincmd l
-autocmd BufLeave term://* stopinsert
-

@@ -8,35 +8,35 @@
 source ~/.config/nvim/settings/keymap.vim
 
 " Open nvim config for editing
-nnoremap <leader>ev :edit $MYVIMRC<CR>
+nnoremap <silent> <leader>ev :edit $MYVIMRC<CR>
 
 " Source nvim config
-nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
 
 " Ctrl-p like functionality with FZF
-nnoremap <C-p> :FZF<CR>
+nnoremap <silent> <C-p> :FZF<CR>
 " Open current directory with file manager
-nnoremap <leader>f :edit .<CR>
+nnoremap <silent> <leader>f :edit .<CR>
 
 " Runs make
-nnoremap <leader>b :!make<CR>
+nnoremap <silent> <leader>b :!make<CR>
 " Runs make clean
-nnoremap <leader>B :!make clean<CR>
+nnoremap <silent> <leader>B :!make clean<CR>
 
 " Since shell is defined to /bin/bash for POSIX
 " compatibility, we use the $SHELL environment variable
 " to launch a terminal with the user's shell
-nnoremap ~ :terminal bash -c 'exec $SHELL'<CR>
+nnoremap ~ :edit term://fish<CR>i
 tnoremap <C-q> <C-\><C-n>
 tnoremap <Esc> <C-\><C-n>
 
 " Shortcuts for buffer related stuff
-nnoremap <leader>bp :bp<CR>
-nnoremap <leader>bn :bn<CR>
-nnoremap <leader>bd :bd<CR>
-nnoremap <leader>bD :bd!<CR>
-nnoremap <leader>bl :ls<CR>
-nnoremap <leader>bN :new<CR>
+nnoremap <silent> <C-j> :bp<CR>
+nnoremap <silent> <C-k> :bn<CR>
+nnoremap <silent> <leader>w :bp \| bd #<CR>
+nnoremap <silent> <leader>W :bp \| bd! #<CR>
+nnoremap <silent> <leader>l :ls<CR>
+nnoremap <silent> <leader>t :new<CR>
 
 " fakeclip keymaps
 vnoremap <leader>c "+y<CR>
@@ -46,4 +46,20 @@ nnoremap <leader>v "*p<CR>
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign in normal mode
 nmap ga <Plug>(EasyAlign)
+
+" Next/Prev diff chunk
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+
+nnoremap <silent> <leader>u :UndotreeToggle<CR>
+
+nnoremap <silent> <A-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <A-j> :TmuxNavigateDown<CR>
+nnoremap <silent> <A-k> :TmuxNavigateUp<CR>
+nnoremap <silent> <A-l> :TmuxNavigateRight<CR>
+
+tnoremap <silent> <A-h> <C-\><C-n> :TmuxNavigateLeft<CR>
+tnoremap <silent> <A-j> <C-\><C-n> :TmuxNavigateDown<CR>
+tnoremap <silent> <A-k> <C-\><C-n> :TmuxNavigateUp<CR>
+tnoremap <silent> <A-l> <C-\><C-n> :TmuxNavigateRight<CR>
 

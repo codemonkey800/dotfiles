@@ -22,11 +22,11 @@ noremap L $
 noremap $ <nop>
 noremap ^ <nop>
 
-nnoremap Q :q!<CR>
-nnoremap q :q<CR>
+nnoremap <silent> Q :q!<CR>
+nnoremap <silent> q :q<CR>
 
 " Turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <silent> <leader><space> :nohlsearch<CR>
 
 " Space open/closes folds
 nnoremap <space> za
@@ -36,27 +36,27 @@ noremap o o<esc>k
 noremap O O<esc>j
 
 " Redo last thing
-noremap U :redo<CR>
+noremap <silent> U :redo<CR>
 
 " Pipe to selected to shell
-vnoremap <leader>r :!%:p<CR>
+vnoremap <silent> <leader>r :!%:p<CR>
 
 " Save current file
-nnoremap <C-s> :w<CR>
+nnoremap <silent> <C-s> :w<CR>
 
-" Sort things
-noremap <leader>s :sort<CR>
+" Sort t <silent>hings
+noremap <leader>s :sort<CR> <silent>
 noremap <leader>S :sort!<CR>
 
 " Select all text
-noremap <leader>a ggvG
+noremap <silent> <leader>a ggvG
 
 " Lists files in current director
 " nnoremap <leader>ls :echo globpath('.', '*')<CR>
 
 " Maps window split navigation to saner shortcuts
-nnoremap <Up>    :wincmd k<CR>
-nnoremap <Down>  :wincmd j<CR>
-nnoremap <Left>  :wincmd h<CR>
-nnoremap <Right> :wincmd l<CR>
+nnoremap <silent> <Left>  :wincmd h<CR>
+nnoremap <silent> <Down>  :wincmd j<CR>
+nnoremap <silent> <Up>    :wincmd k<CR>
+nnoremap <silent> <Right> :wincmd l<CR>
 

@@ -19,7 +19,7 @@ let g:deoplete#keyword_patterns = {}
 " clang_complete
 let g:clang_library_path = '/usr/lib/libclang.so'
 let g:clang_snippets = 1
-let g:clang_snippets_engine = 'ultisnips'
+let g:clang_snippets_engine = 'clang_complete'
 
 " tmux-complete
 let g:tmuxcomplete#trigger = ''
@@ -100,10 +100,13 @@ let g:jsx_ext_required = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Airline
-let g:airline#extensions#tmuxline#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'onedark'
+" let g:airline_theme = 'onedark'
+let g:airline_theme = 'molokai'
+let g:airline#extensions#tabline#enabled = 1
+
+" onedark.vim
+let g:onedark_terminal_italics = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utilitiy
@@ -122,13 +125,23 @@ let g:fzf_action = {
     \ 'ctrl-v': 'vsplit'}
 let g:fzf_layout = { 'down': '~30%' }
 
-" vim-editorconfig
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-
 " Neoterm
 let g:neoterm_shell = "fish"
 
 " Neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_highlight_lines = 1
+
 autocmd! BufWritePost * Neomake
+
+" tmux-navigator
+let g:tmux_navigator_no_mappings = 1
+
+" vim-editorconfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" undotree
+let g:undotree_WindowLayout = 1
+let g:undotree_SplitWidth = 50
+let g:undotree_DiffpanelHeight = 20
 

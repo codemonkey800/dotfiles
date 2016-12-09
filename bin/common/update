@@ -80,7 +80,7 @@ function update
                     rm -fv ~/.config/nvim/autoload/plug.vim.old
 
                 case pacman
-                    sudo pacman -Syu
+                    sudo pacman -Syu --noconfirm
                 case pacmandb
                     # Removes mirrorlist.pacnew if it exists
                     sudo rm -fv /etc/pacman.d/mirrorlist.pacnew
@@ -93,7 +93,7 @@ function update
                 case pkgfile
                     sudo pkgfile -u
                 case aur
-                    yaourt -Syua
+                    yaourt -Syua --noconfirm
             end
         end
     end

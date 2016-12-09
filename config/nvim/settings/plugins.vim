@@ -19,6 +19,7 @@ Plug 'Shougo/neoinclude.vim'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript' }
 Plug 'mhartington/deoplete-typescript', { 'for': 'typescript' }
+Plug 'ujihisa/neco-look'
 Plug 'wellle/tmux-complete.vim'
 Plug 'zchee/deoplete-go', { 'for': 'go' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }

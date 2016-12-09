@@ -15,7 +15,11 @@ set report=0    " Always report how many lines changed
 set noshowmode  "Don't show INSERT, NORMAL, or VISUAL"
 
 syntax on
-colorscheme onedark
+" colorscheme onedark
+colorscheme molokai_dark
+hi Normal ctermbg=none guibg=none
+hi NonText ctermbg=none guibg=none
 
-autocmd FileType help only
+autocmd FileType help :wincmd l
+autocmd BufLeave term://* stopinsert
 

@@ -18,6 +18,7 @@ Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'Shougo/neoinclude.vim'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript' }
+Plug 'mhartington/deoplete-typescript', { 'for': 'typescript' }
 Plug 'wellle/tmux-complete.vim'
 Plug 'zchee/deoplete-go', { 'for': 'go' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
@@ -28,7 +29,6 @@ Plug 'benekastah/neomake'
 " Movement/Text Manipulation
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/vim-easy-align'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 
 " Prose
@@ -37,15 +37,15 @@ Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
 
 " Snippets
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " Syntaxes
+Plug 'Firef0x/PKGBUILD.vim'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'dag/vim-fish'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
-Plug 'Firef0x/PKGBUILD.vim'
 Plug 'lervag/vimtex'
 Plug 'nginx.vim'
 Plug 'othree/es.next.syntax.vim'

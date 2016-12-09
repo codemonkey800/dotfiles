@@ -11,9 +11,9 @@ function! GetFiles()
     call system('git status')
 
     if v:shell_error
-        execute 'Files'
+        call fzf#vim#files($PWD)
     else
-        execute 'GFiles --exclude-standard --cached --others'
+        call fzf#vim#gitfiles('--exclude-standard --cached --others ' . $PWD)
     end
 endfunction
 

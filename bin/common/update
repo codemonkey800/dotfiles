@@ -24,6 +24,9 @@ function print_help
 end
 
 function list
+    alias __indent 'sed "s/^/  /g"'
+    set unsupported
+
     for package_manager in (list-package-managers | string split ' ')
         if test -z $package_manager
             continue
@@ -33,22 +36,24 @@ function list
             switch $package_manager
                 case apm
                     echo 'apm:'
-                    apm upgrade --list | sed 's/^/  /g'
+                    apm upgrade --list | __indent
                 case npm
                     echo 'npm:'
-                    npm -g outdated ^ /dev/null | sed 's/^/  /g'
+                    npm -g outdated ^ /dev/null | __indent
                 case pacman
                     echo 'pacman:'
-                    checkupdates | sed 's/^/  /g'
+                    checkupdates | __indent
                 case aur
                     echo 'aur:'
-                    checkupdates-aur | sed 's/^/  /g'
+                    checkupdates-aur | __indent
                 case '*'
-                    echo "$package_manager:"
-                    echo "  Listing unsupported for $package_manager"
-                    echo '  skipping...'
+                    set unsupported $unsupported $package_manager
             end
         end
+    end
+
+    if test (count $unsupported) -gt 0
+        echo -e "\nUnsupported Package Managers: " (string join ', ' $unsupported)
     end
 end
 
@@ -66,6 +71,8 @@ function update
                     echo 'TODO apm'
                 case yarn
                     echo 'TODO yarn'
+                case fish
+                    fisher up
                 case nvim
                     nvim +PlugInstall +PlugUpdate \
                          +UpdateRemotePlugins +PlugUpgrade +PlugClean! +qall
@@ -90,6 +97,8 @@ function update
             end
         end
     end
+
+    fish_update_completions
 end
 
 function list-package-managers
@@ -99,14 +108,16 @@ function list-package-managers
         set package_managers $package_managers $argv[1]
     end
 
-    type -q apm; or type -q apm; and _add apm
+    type -q apm-beta; and _add apm-beta
+    type -q apm; and _add apm
+    type -q fisher; and _add fisher
     type -q npm; and _add npm
-    type -q yarn; and _add yarn
     type -q nvim; and _add nvim
     type -q pacman; and _add pacman
     type -q pkgfile; and _add pkgfile
     type -q reflector; and _add pacmandb
     type -q yaourt; and _add aur
+    type -q yarn; and _add yarn
 
     echo $package_managers
 end

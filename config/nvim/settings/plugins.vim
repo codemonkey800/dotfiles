@@ -11,16 +11,18 @@ Plug 'othree/jspc.vim', { 'for': 'javascript' }
 Plug 'raimondi/delimitmate'
 
 " Deoplete
-Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
 Plug 'SevereOverfl0w/deoplete-github', { 'for': 'gitcommit' }
 Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'Shougo/neoinclude.vim'
-Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
-Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript' }
-Plug 'mhartington/deoplete-typescript', { 'for': 'typescript' }
 Plug 'ujihisa/neco-look'
 Plug 'wellle/tmux-complete.vim'
+
+" Deoplete Syntax
+Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
+Plug 'Shougo/neco-vim', { 'for': 'vim' }
+Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+Plug 'mhartington/deoplete-typescript', { 'for': 'typescript' }
+Plug 'steelsojka/deoplete-flow', { 'for': 'javascript' }
 Plug 'zchee/deoplete-go', { 'for': 'go' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 

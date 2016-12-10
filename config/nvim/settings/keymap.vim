@@ -4,7 +4,6 @@
 " These are vim keymaps that are safe to source
 " inside non-vim programs that provide vim bindings, like Intellij
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Fuck the other mapleader key lol
 let mapleader = ","
 
 " Escape insert mode
@@ -44,17 +43,19 @@ vnoremap <silent> <leader>r :!%:p<CR>
 " Save current file
 nnoremap <silent> <C-s> :w<CR>
 
-" Sort t <silent>hings
-noremap <leader>s :sort<CR> <silent>
-noremap <leader>S :sort!<CR>
+" Sort things
+noremap <silent> <leader>s :sort<CR>
+noremap <silent> <leader>S :sort!<CR>
 
 " Select all text
 noremap <silent> <leader>a ggvG
 
-" Lists files in current director
-" nnoremap <leader>ls :echo globpath('.', '*')<CR>
+" Go back from tag using Ctrl-[, which makes more sense than Ctrl-t
+nnoremap gt <C-]>
+nnoremap gT <C-t>
+nnoremap <C-]> <nop>
 
-" Maps window split navigation to saner shortcuts
+" Maps window split navigation to arrow keys
 nnoremap <silent> <Left>  :wincmd h<CR>
 nnoremap <silent> <Down>  :wincmd j<CR>
 nnoremap <silent> <Up>    :wincmd k<CR>

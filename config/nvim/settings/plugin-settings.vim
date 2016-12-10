@@ -16,11 +16,6 @@ let g:deoplete#enable_smart_case = 1
 let g:deoplete#sources = {}
 let g:deoplete#keyword_patterns = {}
 
-" clang_complete
-let g:clang_library_path = '/usr/lib/libclang.so'
-let g:clang_snippets = 1
-let g:clang_snippets_engine = 'clang_complete'
-
 " tmux-complete
 let g:tmuxcomplete#trigger = ''
 
@@ -33,17 +28,52 @@ call deoplete#util#set_pattern(
     \ 'gitcommit',
     \ [g:deoplete#keyword_patterns.gitcommit])
 
-" deoplete-flow
-" let g:deoplete#sources#flow#flow_bin = $PWD . '/node_modules/.bin/flow'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Deoplete Syntax
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" ternjs
-let g:tern_request_timeout = 1
-let g:tern#command = [resolve(system('npm bin') . '/tern')]
-let g:tern#arguments = ['--persistent']
+" clang_complete
+let g:clang_library_path = '/usr/lib/libclang.so'
+let g:clang_snippets = 1
+let g:clang_snippets_engine = 'clang_complete'
+
+" deoplete-flow
+function! TrimNewline(str)
+    return substitute(a:str, '[\S]+', '\1', '')
+endfunction
+
+let s:flow_path = ''
+if executable('flow')
+    let s:flow_path = TrimNewline(system('which flow'))
+else
+    let s:cmd = ''
+    if executable('yarn')
+        let s:cmd = 'yarn'
+    elseif executable('npm')
+        let s:cmd = 'npm'
+    endif
+
+    if s:cmd != ''
+        let s:flow_path = resolve(
+                    \ TrimNewline(system(s:cmd . ' bin'))
+                    \ . '/flow')
+        if !executable(s:flow_path)
+            let s:flow_path = ''
+        endif
+    endif
+end
+
+let g:deoplete#sources#flow#flow_bin = s:flow_path
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Linting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_highlight_lines = 1
+
+autocmd! BufWritePost * Neomake
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Movement/Text Manipulation
@@ -127,12 +157,6 @@ let g:fzf_layout = { 'down': '~30%' }
 
 " Neoterm
 let g:neoterm_shell = "fish"
-
-" Neomake
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_highlight_lines = 1
-
-autocmd! BufWritePost * Neomake
 
 " tmux-navigator
 let g:tmux_navigator_no_mappings = 1

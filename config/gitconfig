@@ -42,6 +42,9 @@
 [hub]
   protocol = "ssh"
 
+[tar "xz"]
+	command = xz -c
+
 [url "git@gitlab.com:"]
   insteadOf = "gl://"
 

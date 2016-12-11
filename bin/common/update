@@ -42,10 +42,7 @@ function list
                     npm -g outdated ^ /dev/null | __indent
                 case pacman
                     echo 'pacman:'
-                    checkupdates | __indent
-                case aur
-                    echo 'aur:'
-                    checkupdates-aur | __indent
+                    checkupdates; checkupdates-aur | __indent
                 case '*'
                     set unsupported $unsupported $package_manager
             end
@@ -80,7 +77,11 @@ function update
                     rm -fv ~/.config/nvim/autoload/plug.vim.old
 
                 case pacman
-                    sudo pacman -Syu --noconfirm
+                    if exists yaourt
+                        yaourt -Syua --noconfirm
+                    else
+                        sudo pacman -Syu --noconfirm
+                    end
                 case pacmandb
                     # Removes mirrorlist.pacnew if it exists
                     sudo rm -fv /etc/pacman.d/mirrorlist.pacnew
@@ -92,8 +93,6 @@ function update
 
                 case pkgfile
                     sudo pkgfile -u
-                case aur
-                    yaourt -Syua --noconfirm
             end
         end
     end
@@ -116,7 +115,6 @@ function list-package-managers
     type -q pacman; and _add pacman
     type -q pkgfile; and _add pkgfile
     type -q reflector; and _add pacmandb
-    type -q yaourt; and _add aur
     type -q yarn; and _add yarn
 
     echo $package_managers
@@ -175,21 +173,3 @@ end
 
 main $argv
 
-# if test (count $argv) -gt 0
-#     if test $argv[1] = '-l'
-#         echo 'Pacman:'
-#         echo '  Official:'
-#         checkupdates | sed 's/^/    /g'
-#         echo '  AUR:'
-#         checkupdates-aur | sed 's/^/    /g'
-#     end
-#     exit 0
-# end
-#
-# sudo update-pacman-db
-# echo 'Cleaning up.'
-# yaourt -Rscun (yaourt -Qdtt --noconfirm)
-# if exists rmshit
-#     echo y | rmshit
-# end
-#

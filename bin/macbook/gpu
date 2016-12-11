@@ -31,7 +31,7 @@ function print_state
 end
 
 function set_state
-   echo "$argv" | tee "$gpu_path" > /dev/null ^ /dev/null
+   echo "$argv" | tee "$gpu_path" ^&1 /dev/null
 end
 
 switch "$argv"

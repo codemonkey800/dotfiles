@@ -10,9 +10,18 @@ if functions -q bass; and test -f /etc/profile
     bass source /etc/profile
 end
 
-source ~/.config/fish/variables.fish
-source ~/.config/fish/aliases.fish
-source ~/.config/fish/completions.fish
+# Dotfiles path
+set -gx DOTFILES (
+    set dir (status -f)
+    if test -L $dir
+        set dir (readlink $dir)
+    end
+    readlink -f (dirname $dir)/../..
+)
+
+source $DOTFILES/config/fish/variables.fish
+source $DOTFILES/config/fish/aliases.fish
+source $DOTFILES/config/fish/completions.fish
 
 eval (direnv hook fish)
 
@@ -35,7 +44,7 @@ if status -i
     end
 
     if exists tmux; and test -z $TMUX
-        if tmux ls | grep main > /dev/null ^ /dev/null
+        if tmux ls | grep main ^&1 /dev/null
             exec tmux a -t (whoami)/main
         else
             exec tmux new -s (whoami)/main

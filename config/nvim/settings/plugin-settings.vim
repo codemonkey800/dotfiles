@@ -131,9 +131,10 @@ let g:jsx_ext_required = 0
 
 " Airline
 let g:airline_powerline_fonts = 1
-" let g:airline_theme = 'onedark'
-let g:airline_theme = 'molokai'
+let g:airline_theme = 'onedark'
+" let g:airline_theme = 'molokai'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#airline#enabled = 0
 
 " onedark.vim
 let g:onedark_terminal_italics = 1

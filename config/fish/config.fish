@@ -25,31 +25,34 @@ source $DOTFILES/config/fish/completions.fish
 
 eval (direnv hook fish)
 
-if status -i
-    if exists keychain
-        # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
-        if test -z $DISPLAY
-            set -l keys
-            for f in ~/.ssh/*.pub
-                set keys $keys ~/.ssh/(basename $f .pub)
-            end
+if not status -i
+    exit
+end
 
-            if test (count $keys) -gt 0
-                keychain --eval --agents ssh --quick --quiet --nogui $keys | source
-            end
-        else if test (count (keychain -l)) -gt 0
-            # Have keychain kill all ssh-agent's if any are running and $DISPLAY is defined
-            keychain --quiet -k all
+if exists keychain
+    # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
+    if test -z $DISPLAY
+        set -l keys
+        for f in ~/.ssh/*.pub
+            set keys $keys ~/.ssh/(basename $f .pub)
         end
-    end
 
-    if exists tmux; and test -z $TMUX
-        if tmux ls | grep main ^&1 /dev/null
-            exec tmux a -t (whoami)/main
-        else
-            exec tmux new -s (whoami)/main
+        if test (count $keys) -gt 0
+            keychain --eval --agents ssh --quick --quiet --nogui $keys | source
         end
+    else if test (count (keychain -l)) -gt 0
+        # Have keychain kill all ssh-agent's if any are running and $DISPLAY is defined
+        keychain --quiet -k all
     end
 end
 
+if exists tmux; and test -z $TMUX
+    if tmux ls | grep main ^&1 /dev/null
+        exec tmux a -t (whoami)/main
+    else
+        exec tmux new -s (whoami)/main
+    end
+end
+
+powerline-setup
 

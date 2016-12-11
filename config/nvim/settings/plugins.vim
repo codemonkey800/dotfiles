@@ -59,6 +59,7 @@ Plug 'sheerun/vim-polyglot'
 " User Interface
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
+Plug 'edkolev/tmuxline.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'

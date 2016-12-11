@@ -7,16 +7,6 @@
 
 source ~/.config/nvim/settings/keymap.vim
 
-function! GetFiles()
-    call system('git status')
-
-    if v:shell_error
-        call fzf#vim#files($PWD)
-    else
-        call fzf#vim#gitfiles('--exclude-standard --cached --others ' . $PWD)
-    end
-endfunction
-
 " Open nvim config for editing
 nnoremap <silent> <leader>ev :edit $MYVIMRC<CR>
 
@@ -24,7 +14,24 @@ nnoremap <silent> <leader>ev :edit $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
 
 " Ctrl-p like functionality with FZF
+function! GetFiles()
+    let l:opts = {}
+    let l:opts.source = 'pt -g ""'
+    let l:opts.down = '30%'
+
+    call system('git status')
+
+    if v:shell_error == 0
+        let l:opts.options = '--prompt "Git Files>"'
+    else
+        let l:opts.options = '--prompt "Files>"'
+    endif
+
+    return fzf#run(fzf#wrap('files', l:opts, 0))
+endfunction
+
 nnoremap <silent> <C-p> :call GetFiles()<CR>
+
 " Open current directory with file manager
 nnoremap <silent> <leader>f :edit .<CR>
 

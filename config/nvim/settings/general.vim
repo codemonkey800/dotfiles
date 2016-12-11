@@ -10,7 +10,6 @@ set noerrorbells             " Fuck bells
 set novisualbell             " Fuck bells man
 set exrc                     " Scan working directory for .vimrc files
 set secure                   " Do the above securely
-set spell                    " Enable spell checking
 set completeopt=menu,longest " Autocomplete method
 
 let g:python_host_prog = '/usr/bin/python2'

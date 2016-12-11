@@ -75,10 +75,10 @@ nnoremap <silent> <A-j> :TmuxNavigateDown<CR>
 nnoremap <silent> <A-k> :TmuxNavigateUp<CR>
 nnoremap <silent> <A-l> :TmuxNavigateRight<CR>
 
-inoremap <silent> <A-h> <Esc><CR> :TmuxNavigateLeft<CR>
-inoremap <silent> <A-j> <Esc><CR> :TmuxNavigateDown<CR>
-inoremap <silent> <A-k> <Esc><CR> :TmuxNavigateUp<CR>
-inoremap <silent> <A-l> <Esc><CR> :TmuxNavigateRight<CR>
+inoremap <silent> <A-h> <Esc> :TmuxNavigateLeft<CR>
+inoremap <silent> <A-j> <Esc> :TmuxNavigateDown<CR>
+inoremap <silent> <A-k> <Esc> :TmuxNavigateUp<CR>
+inoremap <silent> <A-l> <Esc> :TmuxNavigateRight<CR>
 
 tnoremap <silent> <A-h> <C-\><C-n> :TmuxNavigateLeft<CR>
 tnoremap <silent> <A-j> <C-\><C-n> :TmuxNavigateDown<CR>

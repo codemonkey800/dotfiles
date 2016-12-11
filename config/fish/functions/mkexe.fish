@@ -37,7 +37,7 @@ function mkexe --description "Creates a script that is executable."
     if test $n -ge 2
         set command $argv[2]
         if test -f $command
-            if not string match './*' $command > /dev/null ^ /dev/null
+            if not string match './*' $command ^&1 /dev/null
                 set command "./$command"
             end
             set shebang $command
@@ -46,7 +46,7 @@ function mkexe --description "Creates a script that is executable."
                 echo 'Command not have spaces in them!'
                 return -1
             end
-            if not which $command  > /dev/null ^ /dev/null
+            if not which $command  ^&1 /dev/null
                 echo "$command isn't in your PATH"
                 return -1
             end

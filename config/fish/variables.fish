@@ -1,18 +1,12 @@
-# Dotfiles path
-set -gx DOTFILES (
-    set dir (status -f)
-    if test -L $dir
-        set dir (readlink $dir)
-    end
-    readlink -f (dirname $dir)/../..
-)
-
 # fish stuff
 begin
-    set -l dir $DOTFILES/config/fish/functions
-    if not contains $dir -- $fish_function_path
-        set -gx fish_function_path $fish_function_path $dir
+    function __add_func_path
+        if test -n $argv[1]; and not contains $argv[1]-- $fish_function_path
+            set -gx fish_function_path $fish_function_path $argv[1]
+        end
     end
+
+    __add_func_path $DOTFILES/config/fish/functions
 end
 
 # Less stuff

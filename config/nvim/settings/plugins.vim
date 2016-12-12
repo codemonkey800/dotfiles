@@ -36,7 +36,6 @@ Plug 'tpope/vim-surround'
 
 " Prose
 Plug 'reedes/vim-lexical'
-Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
 
 " Snippets

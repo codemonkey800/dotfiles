@@ -42,6 +42,7 @@ vnoremap <silent> <leader>r :!%:p<CR>
 
 " Save current file
 nnoremap <silent> <C-s> :w<CR>
+inoremap <silent> <C-s> <Esc>:w<CR>li
 
 " Sort things
 noremap <silent> <leader>s :sort<CR>

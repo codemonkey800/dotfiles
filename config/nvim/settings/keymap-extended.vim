@@ -13,21 +13,26 @@ nnoremap <silent> <leader>ev :edit $MYVIMRC<CR>
 " Source nvim config
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
 
+" Opens up command edit
+nnoremap <silent> <M-c> q:
+
 " Ctrl-p like functionality with FZF
 function! GetFiles()
     let l:opts = {}
-    let l:opts.source = 'pt -g ""'
     let l:opts.down = '30%'
+    let l:opts.source = 'pt -g "" --hidden --ignore .git'
 
     call system('git status')
 
     if v:shell_error == 0
+        let l:name = 'gitfiles'
         let l:opts.options = '--prompt "Git Files>"'
     else
+        let l:name = 'files'
         let l:opts.options = '--prompt "Files>"'
     endif
 
-    return fzf#run(fzf#wrap('files', l:opts, 0))
+    return fzf#run(fzf#wrap(l:name, l:opts, 0))
 endfunction
 
 nnoremap <silent> <C-p> :call GetFiles()<CR>
@@ -43,9 +48,9 @@ nnoremap <silent> <leader>B :!make clean<CR>
 " Since shell is defined to /bin/bash for POSIX
 " compatibility, we use the $SHELL environment variable
 " to launch a terminal with the user's shell
-nnoremap ~ :edit term://fish<CR>i
-tnoremap <C-q> <C-\><C-n>
-tnoremap <Esc> <C-\><C-n>
+nnoremap <silent> ~ :edit term://fish<CR>i
+tnoremap <silent> jk <C-\><C-n>
+tnoremap <silent> <Esc> <C-\><C-n>
 
 " Shortcuts for buffer related stuff
 nnoremap <silent> <C-j> :bp<CR>
@@ -56,17 +61,17 @@ nnoremap <silent> <leader>l :ls<CR>
 nnoremap <silent> <leader>t :new<CR>
 
 " fakeclip keymaps
-vnoremap <leader>c "+y<CR>
-nnoremap <leader>v "*p<CR>
+vnoremap <silent> <leader>c "+y<CR>
+nnoremap <silent> <leader>v "*p<CR>
 
 " Start interactive EasyAlign in visual mode
-xmap ga <Plug>(EasyAlign)
+xmap <silent> ga <Plug>(EasyAlign)
 " Start interactive EasyAlign in normal mode
-nmap ga <Plug>(EasyAlign)
+nmap <silent> ga <Plug>(EasyAlign)
 
 " Next/Prev diff chunk
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
+nmap <silent> ]h <Plug>GitGutterNextHunk
+nmap <silent> [h <Plug>GitGutterPrevHunk
 
 nnoremap <silent> <leader>u :UndotreeToggle<CR>
 

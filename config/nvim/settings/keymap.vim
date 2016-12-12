@@ -7,15 +7,15 @@
 let mapleader = ","
 
 " Escape insert mode
-inoremap jk <esc>
+inoremap <silent> jk <esc>
 
 " Move vertically by visual line
-noremap j gj
-noremap k gk
+noremap <silent>  j gj
+noremap <silent>  k gk
 
 " Swap capital H and L for begin and end of lines
-noremap H ^
-noremap L $
+norema <silent>  H ^
+norema <silent>  L $
 
 " Don't do anything yo
 noremap $ <nop>
@@ -51,9 +51,9 @@ noremap <silent> <leader>S :sort!<CR>
 noremap <silent> <leader>a ggvG
 
 " Go back from tag using Ctrl-[, which makes more sense than Ctrl-t
-nnoremap gt <C-]>
-nnoremap gT <C-t>
-nnoremap <C-]> <nop>
+nnoremap <silent> gt <C-]>
+nnoremap <silent> gT <C-t>
+nnoremap <silent> <C-]> <nop>
 
 " Maps window split navigation to arrow keys
 nnoremap <silent> <Left>  :wincmd h<CR>

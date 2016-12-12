@@ -82,7 +82,6 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'

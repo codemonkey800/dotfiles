@@ -98,13 +98,6 @@ let g:lexical#spell_key = '<leader>t'
 let g:lexical#thesaurus_key = '<leader>T'
 let g:lexical#dictionary_key = '<leader>k'
 
-" vim-pencil
-augroup pencil
-    autocmd!
-    autocmd FileType markdown,mkd call pencil#init()
-    autocmd FileType text call pencil#init()
-augroup END
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Snippets
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

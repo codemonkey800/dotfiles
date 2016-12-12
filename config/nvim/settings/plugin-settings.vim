@@ -39,7 +39,7 @@ let g:clang_snippets_engine = 'clang_complete'
 
 " deoplete-flow
 function! TrimNewline(str)
-    return substitute(a:str, '[\S]+', '\1', '')
+    return substitute(a:str, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 endfunction
 
 let s:flow_path = ''
@@ -70,7 +70,7 @@ let g:deoplete#sources#flow#flow_bin = s:flow_path
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Neomake
-let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
 let g:neomake_highlight_lines = 1
 
 autocmd! BufWritePost * Neomake
@@ -131,10 +131,8 @@ let g:jsx_ext_required = 0
 
 " Airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'onedark'
-" let g:airline_theme = 'molokai'
+let g:airline_theme = 'jellybeans'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#airline#enabled = 0
 
 " onedark.vim
 let g:onedark_terminal_italics = 1

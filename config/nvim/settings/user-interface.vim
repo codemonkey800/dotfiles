@@ -15,5 +15,9 @@ set report=0    " Always report how many lines changed
 set noshowmode  "Don't show INSERT, NORMAL, or VISUAL"
 
 syntax on
-colorscheme onedark
+colorscheme jellybeans
+
+hi Normal ctermbg=none guibg=none
+hi NonText ctermbg=none guibg=none
+hi LineNr ctermbg=none guibg=none
 

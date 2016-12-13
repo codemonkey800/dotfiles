@@ -7,7 +7,6 @@ set termencoding=utf-8       " Terminal encoding
 set fileformats=unix,dos,mac " Supports all three in this order
 set fileformat=unix          " Default file format
 
-
 " Use spaces over tabs and use 4 spaces per indent
 set tabstop=4
 set softtabstop=4

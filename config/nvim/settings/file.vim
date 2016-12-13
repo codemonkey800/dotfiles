@@ -15,7 +15,7 @@ set expandtab                " Fuck tabs ;)
 set undodir=/tmp/nvim
 set undofile
 
-autocmd BufEnter .*rc :setf json
+autocmd BufEnter .{babel,eslint}rc :setf json
 autocmd BufLeave term://* stopinsert
 autocmd FileType help :wincmd l
 

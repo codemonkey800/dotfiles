@@ -4,7 +4,7 @@ function __mkexe_help
 
     Arguments:
         filename - The filename of the new executable script
-        command  - A command to run through "which"
+        command  - A command to run through "type"
         exe_path - An absolute or relative path to an executable
     '
 end
@@ -37,7 +37,7 @@ function mkexe --description "Creates a script that is executable."
     if test $n -ge 2
         set command $argv[2]
         if test -f $command
-            if not string match './*' $command ^&1 /dev/null
+            if not string match './*' $command > /dev/null ^&1
                 set command "./$command"
             end
             set shebang $command
@@ -46,7 +46,7 @@ function mkexe --description "Creates a script that is executable."
                 echo 'Command not have spaces in them!'
                 return -1
             end
-            if not which $command  ^&1 /dev/null
+            if not type -fp $command > /dev/null ^&1
                 echo "$command isn't in your PATH"
                 return -1
             end

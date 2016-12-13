@@ -36,7 +36,6 @@ Plug 'tpope/vim-surround'
 
 " Prose
 Plug 'reedes/vim-lexical'
-Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-wordy'
 
 " Snippets
@@ -82,7 +81,6 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'

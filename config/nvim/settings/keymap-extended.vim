@@ -15,6 +15,7 @@ nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
 
 " Opens up command edit
 nnoremap <silent> <M-c> q:
+vnoremap <silent> <M-c> q:
 
 " Ctrl-p like functionality with FZF
 function! GetFiles()

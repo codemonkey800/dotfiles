@@ -3,7 +3,7 @@
 set remotes (find -type d -not -path . | xargs -L1 basename)
 
 function __has_remote
-    git remote -v | grep $argv[1] > /dev/null ^ /dev/null
+    git remote -v | grep -q $argv[1]
 end
 
 function __help

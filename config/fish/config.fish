@@ -47,7 +47,7 @@ if exists keychain
 end
 
 if exists tmux; and test -z $TMUX
-    if tmux ls | grep main ^&1 /dev/null
+    if tmux ls | grep -q main
         exec tmux a -t (whoami)/main
     else
         exec tmux new -s (whoami)/main

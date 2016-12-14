@@ -11,7 +11,7 @@ set noerrorbells
 set novisualbell
 
  " Autocomplete method
-set completeopt=menu,menuone,preview,noinsert
+set completeopt=menu,menuone,noinsert
 
 let g:python_host_prog = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/bin/python'

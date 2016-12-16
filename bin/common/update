@@ -5,6 +5,16 @@ if test (uname) != 'Linux' -o (lsb_release -d | pawk f[1:]) != 'Arch Linux'
     exit -1
 end
 
+function __update_pacman_db
+    # Removes mirrorlist.pacnew if it exists
+    sudo rm -fv /etc/pacman.d/mirrorlist.pacnew
+
+    # Gets a list of mirrors sorted by rate using n threads
+    sudo reflector -p http -p https -c US --verbose \
+                   --threads (nproc) --sort rate \
+                   --save /etc/pacman.d/mirrorlist
+end
+
 function print_help
     echo 'Usage: update <options>'
     echo
@@ -77,27 +87,28 @@ function update
                     rm -fv ~/.config/nvim/autoload/plug.vim.old
 
                 case pacman
+                    if contains pacmandb -- $argv
+                        __update_pacman_db
+                    end
+
                     if exists yaourt
                         yaourt -Syua --noconfirm
                     else
                         sudo pacman -Syu --noconfirm
                     end
                 case pacmandb
-                    # Removes mirrorlist.pacnew if it exists
-                    sudo rm -fv /etc/pacman.d/mirrorlist.pacnew
-
-                    # Gets a list of mirrors sorted by rate using n threads
-                    sudo reflector -p http -p https -c US --verbose \
-                                   --threads (nproc) --sort rate \
-                                   --save /etc/pacman.d/mirrorlist
-
+                    if not contains pacman -- $argv
+                        __update_pacman_db
+                    end
                 case pkgfile
                     sudo pkgfile -u
             end
         end
     end
 
-    fish_update_completions
+    if contains fish -- $argv; or contains pacman -- $argv
+        fish_update_completions
+    end
 end
 
 function list-package-managers

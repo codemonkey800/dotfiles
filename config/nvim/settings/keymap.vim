@@ -24,9 +24,6 @@ noremap ^ <nop>
 nnoremap <silent> Q :q!<CR>
 nnoremap <silent> q :q<CR>
 
-" Turn off search highlight
-nnoremap <silent> <leader><space> :nohlsearch<CR>
-
 " Space open/closes folds
 nnoremap <space> za
 

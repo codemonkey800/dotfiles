@@ -24,7 +24,19 @@ function print_help
 end
 
 function list
-    alias __indent 'sed "s/^/  /g"'
+    function __indent
+        set size 2
+        if test (count $argv) -gt 0; and test $argv[1] -eq $argv[1]
+            set size $argv[1]
+        end
+
+        set indent
+        for i in (seq $size)
+            set indent "$indent "
+        end
+
+        eval "sed 's/^/$indent/g'"
+    end
     set unsupported
 
     for package_manager in (list-package-managers | string split ' ')
@@ -42,7 +54,10 @@ function list
                     npm -g outdated ^ /dev/null | __indent
                 case pacman
                     echo 'pacman:'
-                    checkupdates; checkupdates-aur | __indent
+                    echo '  Official:'
+                    checkupdates | __indent 4
+                    echo '  AUR:'
+                    checkupdates-aur | __indent 4
                 case '*'
                     set unsupported $unsupported $package_manager
             end

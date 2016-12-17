@@ -84,8 +84,6 @@ perl
 perl-checkupdates-aur
 pkg-config
 pkgfile
-powerline
-powerline-fonts-git
 powerpill
 procps-ng
 psmisc

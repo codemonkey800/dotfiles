@@ -54,5 +54,3 @@ if exists tmux; and test -z $TMUX
     end
 end
 
-powerline-setup
-

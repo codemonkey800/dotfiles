@@ -6,6 +6,17 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
 
+" Modified insert mode
+function! SmartInsert()
+    if len(getline('.')) == 0
+        return 'cc'
+    else
+        return 'i'
+    endif
+endfunction
+
+nnoremap <silent> <expr> i SmartInsert()
+
 " Escape insert mode
 inoremap <silent> jk <esc>
 

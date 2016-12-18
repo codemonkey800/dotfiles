@@ -1,0 +1,75 @@
+#!/bin/bash
+
+set -e
+
+ARCH="$([[ $(uname -m) == 'x86_64' ]] && echo x64 || echo x86)"
+OS="$(echo $(uname) | tr '[:upper:]' '[:lower:]')"
+USE_XZ="$(type xz &> /dev/null && echo true || echo false)"
+
+_print() {
+    local total_cols="$(tput cols)"
+    local left=0
+    local right=0
+
+    let "total_cols -= ${#1}"
+    let 'total_cols -= 2'
+    let 'left = total_cols / 2'
+    let 'right = total_cols - left'
+
+    _print_side() {
+        printf "%${2}s" | tr ' ' "$1"
+    }
+
+    _print_side '=' $left
+    printf " $1 "
+    _print_side '=' $right
+    printf '\n'
+}
+
+_latest() {
+    curl -sL "http://semver.io/$1/unstable"
+}
+
+get-node() {
+    _print 'Getting Node'
+
+    local ver="$(_latest node)"
+    local url='https://nodejs.org/dist'
+    local url="${url}/v${ver}"
+    local url="${url}/node-v${ver}-${OS}-${ARCH}"
+
+    local cmd="wget -O- '%s' | tar -%sxf - -C .node --strip-components=1"
+
+    if eval ${USE_XZ:-false}; then
+        url="$url.tar.xz"
+        cmd="$(printf "$cmd" "$url" J)"
+    else
+        url="$url.tar.gz"
+        cmd="$(printf "$cmd" "$url" z)"
+    fi
+
+    eval $cmd
+
+    rm -rf .node/bin/npm .node/lib
+}
+
+get-yarn() {
+    _print 'Getting Yarn'
+
+    local url='https://yarnpkg.com/latest.tar.gz'
+    wget -O- "$url" | tar -zxf - -C .node --strip-components=1
+}
+
+
+main() {
+    mkdir -p .node
+
+    [[ ! -f .node/bin/node ]] && get-node
+    [[ ! -f .node/bin/yarn ]] && get-yarn
+
+    layout node
+    export PATH=$PATH:.node/bin
+}
+
+main "$@"
+

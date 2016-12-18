@@ -64,7 +64,6 @@ refind-theme-regular-git
 seahorse
 simplescreenrecorder
 spotify
-sublime-text-dev
 sushi
 termite
 texlive-bibtexextra
@@ -87,6 +86,7 @@ tracker
 ttf-ms-fonts
 ttf-roboto
 ttf-roboto-slab
+visual-studio-code
 vlc
 watchman
 xdg-user-dirs-gtk

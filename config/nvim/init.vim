@@ -87,8 +87,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 " }}
 
-" utilitiy {{
-
+" utility {{
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/echodoc.vim'
 Plug 'Tagbar'

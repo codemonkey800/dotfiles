@@ -53,7 +53,6 @@ function __add_to_path
     end
 end
 
-__add_to_path $GOPATH/bin
 __add_to_path (find $DOTFILES/bin -type d)
 
 # Fzf stuff

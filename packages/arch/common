@@ -35,8 +35,6 @@ git-extras
 git-lfs
 git-secret
 glibc
-go
-go-tools
 grep
 groff
 gzip

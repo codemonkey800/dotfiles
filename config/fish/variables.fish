@@ -1,13 +1,12 @@
 # fish stuff
 begin
     function __add_func_path
-        if test -n $argv[1] -a -d $argv[1]; and not contains $argv[1]-- $fish_function_path
+        if test -n $argv[1] -a -d $argv[1]; and not contains $argv[1] -- $fish_function_path
             set -gx fish_function_path $fish_function_path $argv[1]
         end
     end
 
     __add_func_path $DOTFILES/config/fish/functions
-    __add_func_path /usr/lib/python3.5/site-packages/powerline/bindings/fish
 end
 
 # Less stuff
@@ -42,8 +41,6 @@ set -gx MANPAGER "$EDITOR -c 'setf man' -c 'runtime! macros/less.vim' -"
 set -gx PAGER "$EDITOR -c 'runtime! macros/less.vim' -c AnsiEsc -"
 
 # PATH stuff
-mkdir -p ~/src/go;and set -gx GOPATH ~/src/go
-
 function __add_to_path
     for arg in $argv
         if not contains $arg -- $PATH

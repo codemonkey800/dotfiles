@@ -149,7 +149,6 @@ set fileformats=unix,dos,mac
 
 " }}
 
-
 " persistent undo {{
 
 set undodir=/tmp/nvim
@@ -180,6 +179,7 @@ set smartindent
 set cmdheight=1
 set completeopt=menu,menuone,noinsert
 set foldmethod=syntax
+set foldlevelstart=10
 set lazyredraw
 set noshowmode
 set nowrap

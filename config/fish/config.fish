@@ -6,10 +6,6 @@ if not test -f ~/.config/fish/functions/fisher.fish
     fisher
 end
 
-if functions -q bass; and test -f /etc/profile
-    bass source /etc/profile
-end
-
 # Dotfiles path
 set -gx DOTFILES (
     set dir (status -f)
@@ -25,9 +21,7 @@ source $DOTFILES/config/fish/completions.fish
 
 eval (direnv hook fish)
 
-if not status -i
-    exit
-end
+not status -i; and exit
 
 if exists keychain
     # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive

@@ -2,11 +2,14 @@
 
 set -e
 
+export NODE_HOME='.node'
+
 ARCH="$([[ $(uname -m) == 'x86_64' ]] && echo x64 || echo x86)"
 OS="$(echo $(uname) | tr '[:upper:]' '[:lower:]')"
-USE_XZ="$(type xz &> /dev/null && echo true || echo false)"
 
-_print() {
+# prints a message surrounded by a bunch of equal sign
+# as wide as the terminal.
+_msg() {
     local total_cols="$(tput cols)"
     local left=0
     local right=0
@@ -16,6 +19,8 @@ _print() {
     let 'left = total_cols / 2'
     let 'right = total_cols - left'
 
+    # helper function that prints $2 spaces
+    # using the character or string $1
     _print_side() {
         printf "%${2}s" | tr ' ' "$1"
     }
@@ -26,50 +31,55 @@ _print() {
     printf '\n'
 }
 
+# helper function that fetches the latest and greatest
 _latest() {
     curl -sL "http://semver.io/$1/unstable"
 }
 
+# fetches node from the official mirror
+# and removes npm because who needs that anymore
 get-node() {
-    _print 'Getting Node'
-
+    # build up url and use latest version of node
     local ver="$(_latest node)"
     local url='https://nodejs.org/dist'
-    local url="${url}/v${ver}"
-    local url="${url}/node-v${ver}-${OS}-${ARCH}"
+    local url="$url/v$ver"
+    local url="$url/node-v$ver-$OS-$ARCH"
 
-    local cmd="wget -O- '%s' | tar -%sxf - -C .node --strip-components=1"
+    wget --show-progress -qO- "$url.tar.gz" | tar -zxf - -C $NODE_HOME --strip-components=1
 
-    if eval ${USE_XZ:-false}; then
-        url="$url.tar.xz"
-        cmd="$(printf "$cmd" "$url" J)"
-    else
-        url="$url.tar.gz"
-        cmd="$(printf "$cmd" "$url" z)"
-    fi
-
-    eval $cmd
-
-    rm -rf .node/bin/npm .node/lib
+    # remove any trace of npm
+    rm -rf $NODE_HOME/bin/npm $NODE_HOME/lib
 }
 
+# fetches binary distribution of yarn
+# and modifies script to treat $NODE_HOME as $HOME.
+#
+# this is mostly so that your actual home directory
+# doesn't get populated with a bunch of .yarn* files.
 get-yarn() {
-    _print 'Getting Yarn'
-
     local url='https://yarnpkg.com/latest.tar.gz'
-    wget -O- "$url" | tar -zxf - -C .node --strip-components=1
+    wget --show-progress -qO- "$url" | tar -zxf - -C $NODE_HOME --strip-components=1
+
+    sed -i "s/  node/  HOME=$NODE_HOME node/g" $NODE_HOME/bin/yarn
+
+    # add some useful packages to global
+    yarn global add npm@next npm-check-updates
 }
 
 
 main() {
-    mkdir -p .node
+    mkdir -p $NODE_HOME
 
-    [[ ! -f .node/bin/node ]] && get-node
-    [[ ! -f .node/bin/yarn ]] && get-yarn
-
+    # set up environment variables for node project
     layout node
-    export PATH=$PATH:.node/bin
+    export PATH=$PATH:$NODE_HOME/bin
+
+    # fetch node or yarn if they're not in $NODE_HOME/bin
+    [[ ! -f $NODE_HOME/bin/node ]] && _msg 'Fetching Node' && get-node
+    [[ ! -f $NODE_HOME/bin/yarn ]] && _msg 'Fetching Yarn' && get-yarn
 }
 
+# if a developer doesn't have direnv installed, they
+# can still run the script to set up their environment.
 main "$@"
 

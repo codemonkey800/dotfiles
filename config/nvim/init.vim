@@ -40,7 +40,10 @@ Plug 'benekastah/neomake'
 
 " movement/text manipulation {{
 
+Plug 'bronson/vim-trailing-whitespace'
 Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'haya14busa/incsearch.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 
@@ -61,7 +64,6 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " syntaxes {{
 
-Plug 'Firef0x/PKGBUILD.vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'dag/vim-fish'
 Plug 'ekalinin/Dockerfile.vim'
@@ -69,7 +71,6 @@ Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'lervag/vimtex'
 Plug 'nginx.vim'
-Plug 'othree/es.next.syntax.vim'
 Plug 'othree/yajs.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'sheerun/vim-polyglot'
@@ -88,28 +89,25 @@ Plug 'vim-airline/vim-airline-themes'
 " }}
 
 " utility {{
+
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/echodoc.vim'
 Plug 'Tagbar'
 Plug 'airodactyl/neovim-ranger'
 Plug 'ansiesc.vim'
-Plug 'bronson/vim-trailing-whitespace'
 Plug 'cazador481/fakeclip.neovim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'direnv/direnv.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'gitignore'
-Plug 'haya14busa/incsearch-fuzzy.vim'
-Plug 'haya14busa/incsearch.vim'
-Plug 'janko-m/vim-test'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-eunuch'
+Plug 'qpkorr/vim-bufkill'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 
 " }}
@@ -178,8 +176,9 @@ set smartindent
 
 set cmdheight=1
 set completeopt=menu,menuone,noinsert
-set foldmethod=syntax
 set foldlevelstart=10
+set foldmethod=syntax
+set hidden
 set lazyredraw
 set noshowmode
 set nowrap
@@ -218,10 +217,13 @@ endif
 
 " autocmd {
 
-autocmd BufEnter .{babel,eslint}rc :setf json
-autocmd BufLeave term://* stopinsert
-autocmd FileType help :wincmd l
-autocmd FileType vim :set foldmarker={{,}} foldlevel=0 foldmethod=marker
+augroup mycmds
+    autocmd!
+    autocmd BufEnter .{babel,eslint}rc :setf json
+    autocmd BufLeave term://* stopinsert
+    autocmd FileType help :wincmd l
+    autocmd FileType vim :set foldmarker={{,}} foldlevel=0 foldmethod=marker
+augroup END
 
 " }
 
@@ -313,11 +315,38 @@ nnoremap <silent> <leader>b :!make<CR>
 " runs make clean
 nnoremap <silent> <leader>B :!make clean<CR>
 
-" buffer maps
-nnoremap <silent> <leader>w :bp \| bd #<CR>
-nnoremap <silent> <leader>W :bp \| bd! #<CR>
+nnoremap <silent> <leader>pc :PlugClean!<CR>
+nnoremap <silent> <leader>pi :PlugInstall<CR>
+nnoremap <silent> <leader>ps :PlugStatus<CR>
+nnoremap <silent> <leader>pu :PlugUpdate \| PlugUpgrade \| UpdateRemotePlugins<CR>
+
+" buffer maps {{
+
+function! BufferCount()
+    let l:len = 0
+    for i in range(1, bufnr('$'))
+        if buflisted(i)
+            let l:len += 1
+        endif
+    endfor
+    return l:len
+endfunction
+
+function! BufferDelete()
+    if winnr('$') == 1 || BufferCount() == 1
+        bdelete
+    else
+        if !&modified
+            BD!
+        endif
+    endif
+endfunction
+
+nnoremap <silent> <leader>w :call BufferDelete()<CR>
 nnoremap <silent> <leader>l :ls<CR>
 nnoremap <silent> <leader>t :new<CR>
+
+"}}
 
 " }}
 
@@ -439,8 +468,8 @@ nmap s <Plug>(easymotion-overwin-f2)
 map <leader><leader>L <Plug>(easymotion-bd-jk)
 nmap <leader><leader>L <Plug>(easymotion-overwin-line)
 
-map <leader><leader> <Plug>(easymotion-bd-w)
-nmap <leader><leader> <Plug>(easymotion-overwin-w)
+map <leader><leader>w <Plug>(easymotion-bd-w)
+nmap <leader><leader>w <Plug>(easymotion-overwin-w)
 
 " }}
 
@@ -559,9 +588,13 @@ function! s:config_fuzzyall(...) abort
   \ }), get(a:, 1, {}))
 endfunction
 
-noremap <silent> <expr> / incsearch#go(<SID>config_fuzzyall())
-noremap <silent> <expr> ? incsearch#go(<SID>config_fuzzyall({ 'command': '?' ))
-noremap <silent> <expr> g/ incsearch#go(<SID>config_fuzzyall({ 'is_stay': 1 }))
+map <silent> / <Plug>(incsearch-fuzzy-/)
+map <silent> ? <Plug>(incsearch-fuzzy-?)
+map <silent> g/ <Plug>(incsearch-fuzzy-stay)
+
+noremap <silent> <expr> z/ incsearch#go(<SID>config_fuzzyall())
+noremap <silent> <expr> z? incsearch#go(<SID>config_fuzzyall({ 'command': '?' ))
+noremap <silent> <expr> zg/ incsearch#go(<SID>config_fuzzyall({ 'is_stay': 1 }))
 
 " }}
 

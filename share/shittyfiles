@@ -47,9 +47,7 @@
 ~/.wget-hsts
 ~/.xsel.log
 ~/.xsession-error*
-~/.yarn
 ~/.yarn*
-~/.yarn-cache
 ~/.yjp
 ~/ca2
 ~/ca2~

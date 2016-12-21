@@ -1,13 +1,11 @@
 # fish stuff
-begin
-    function __add_func_path
-        if test -n $argv[1] -a -d $argv[1]; and not contains $argv[1] -- $fish_function_path
-            set -gx fish_function_path $fish_function_path $argv[1]
-        end
+function __add_func_path
+    if test -n $argv[1] -a -d $argv[1]; and not contains $argv[1] -- $fish_function_path
+        set -gx fish_function_path $fish_function_path $argv[1]
     end
-
-    __add_func_path $DOTFILES/config/fish/functions
 end
+
+__add_func_path $DOTFILES/config/fish/functions
 
 # Less stuff
 set -gx LESS '-R'
@@ -15,16 +13,7 @@ set -gx LESSOPEN '|pygmentize -g %s'
 
 # Development environment
 set -gx DIRENV_LOG_FORMAT
-set -gx EDITOR (which nvim)
-# set -gx EDITOR (
-#     if type -q nvr
-#         which nvr
-#     else if type -q nvim
-#         which nvim
-#     else
-#         which vi
-#     end
-# )
+set -gx EDITOR (type -p nvim)
 set -gx NVIM_LISTEN_ADDRESS /tmp/nvim-(whoami).socket
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 

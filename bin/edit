@@ -1,9 +1,0 @@
-#!/usr/bin/env fish
-
-if test $argv[1] = '--local'
-    set -e argv[1]
-    nvim $argv
-else
-    nvr --remote-silent $argv
-end
-

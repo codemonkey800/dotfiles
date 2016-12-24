@@ -1,17 +1,15 @@
 #!/usr/bin/env fish
 
-echo -e "y\ny\n" | yaourt -Scc
+echo -e "y\ny\n" | sudo pacman -Scc
 
-set pkgs (yaourt -Qqdt)
+set pkgs (pacman -Qqdt)
 if test (count $pkgs) -gt 0
-    yaourt -Rscun --noconfirm $pkgs
+    sudo pacman -Rscun --noconfirm $pkgs
 end
 
-begin
-    set -l files /tmp/{yaourt*,npm*}
-    echo "Removing "{(count $files)}" files from /tmp!"
-    sudo rm -rf $files
-end
+set files /tmp/{yaourt*,npm*}
+echo "Removing "(count $files)" files from /tmp!"
+sudo rm -rf $files
 
 echo y | rmshit
 

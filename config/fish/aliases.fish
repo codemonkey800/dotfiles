@@ -1,22 +1,42 @@
 # Aliases
-alias dotfiles "fish -c 'cd $DOTFILES; and echo \\'Control-D to go back.\\'; and exec fish'"
+alias dotfiles "fish -c '
+    cd $DOTFILES;
+    echo Control-D to go back.;
+    exec fish
+'"
 alias e "$EDITOR"
 alias exists 'type -q'
 alias g 'git'
 alias gr 'cd (git rev-parse --show-toplevel)'
 alias info 'info --vi-keys'
-alias lsof-del 'lsof +c 0 | grep -w DEL | pawk \'"{}: {}".format(f[0], f[-1:])\' | sort -u'
+alias lsof-del 'lsof +c 0
+    | grep -w DEL
+    | pawk \'"{}: {}".format(f[0], f[-1:])\'
+    | sort -u
+'
+alias nm-restart 'sudo systemctl restart NetworkManager'
 alias re "sudo -E $EDITOR"
 alias wh 'type -p'
 
 # Conditional Aliases
-exists apm-beta; and alias apm 'apm-beta'
-exists atom-beta; and alias atom 'atom-beta'
-exists google-chrome-unstable; and alias chrome 'google-chrome-unstable'
-exists htop; and alias top 'htop'
-exists hub; and alias git "hub"; and alias g 'hub'
-exists netstat; and alias lsports 'netstat -pelnut'
-exists npm; and alias npmls 'npm ls --depth=0'
-exists pdflatex; and alias pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
-exists subl3; and alias subl 'subl3'
 
+# Convenience function for conditionally
+# setting aliases.
+# Usage: __aliasif <alias> <command>
+function __aliasif
+    if exists (echo $argv[2] | pawk f[0])
+        alias $argv[1] $argv[2]
+    end
+end
+
+__aliasif apm 'apm-beta'
+__aliasif atom 'atom-beta'
+__aliasif chrome 'google-chrome-unstable'
+__aliasif copy 'rsync -aP'
+__aliasif g 'hub'
+__aliasif git "hub"
+__aliasif lsports 'netstat -pelnut'
+__aliasif npmls 'npm ls --depth=0'
+__aliasif pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
+__aliasif subl 'subl3'
+__aliasif top 'htop'

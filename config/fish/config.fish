@@ -19,8 +19,6 @@ source $DOTFILES/config/fish/variables.fish
 source $DOTFILES/config/fish/aliases.fish
 source $DOTFILES/config/fish/completions.fish
 
-eval (direnv hook fish)
-
 not status -i; and exit
 
 if exists keychain

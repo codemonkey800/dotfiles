@@ -1,10 +1,20 @@
-# fish stuff
+# helper functions
 function __add_func_path
     if test -n $argv[1] -a -d $argv[1]; and not contains $argv[1] -- $fish_function_path
         set -gx fish_function_path $fish_function_path $argv[1]
     end
 end
 
+function __add_to_path
+    for arg in $argv
+        if not contains $arg -- $PATH
+            mkdir -p (dirname $arg)
+            set -gx PATH $PATH $arg
+        end
+    end
+end
+
+# fish stuff
 __add_func_path $DOTFILES/config/fish/functions
 
 # Less stuff
@@ -30,22 +40,11 @@ set -gx MANPAGER "$EDITOR -c 'setf man' -c 'runtime! macros/less.vim' -"
 set -gx PAGER "$EDITOR -c 'runtime! macros/less.vim' -c AnsiEsc -"
 
 # PATH stuff
-function __add_to_path
-    for arg in $argv
-        if not contains $arg -- $PATH
-            mkdir -p (dirname $arg)
-            set -gx PATH $PATH $arg
-        end
-    end
-end
-
 __add_to_path (find $DOTFILES/bin -type d)
 
 # Fzf stuff
 if type -q fzf
-    if type -q tmux
-        set -gx FZF_TMUX 1
-    end
+    set -gx FZF_TMUX 1
 end
 
 # Color settings

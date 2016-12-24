@@ -4,7 +4,6 @@ call plug#begin('~/.config/nvim/plugins')
 
 " autocomplete {{
 
-Plug 'amirh/html-autoclosetag'
 Plug 'ervandew/supertab'
 Plug 'othree/jspc.vim', { 'for': 'javascript' }
 Plug 'raimondi/delimitmate'

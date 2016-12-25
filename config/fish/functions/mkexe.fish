@@ -1,12 +1,10 @@
 function __mkexe_help
-    echo '
-    Usage: mkexe filename [command|exe_path]
-
-    Arguments:
-        filename - The filename of the new executable script
-        command  - A command to run through "type"
-        exe_path - An absolute or relative path to an executable
-    '
+    echo 'Usage: mkexe filename [command|exe_path]'
+    echo
+    echo 'Arguments:'
+    echo '    filename - The filename of the new executable script'
+    echo '    command  - A command to run through "type"'
+    echo '    exe_path - An absolute or relative path to an executable'
 end
 
 function __mkexe_create_file
@@ -30,17 +28,11 @@ function mkexe --description "Creates a script that is executable."
         end
     end
 
-    touch $file
-    chmod +x $file
-
     set shebang '/usr/bin/env fish'
     if test $n -ge 2
         set command $argv[2]
         if test -f $command
-            if not string match './*' $command > /dev/null ^&1
-                set command "./$command"
-            end
-            set shebang $command
+            test -x $command; and set shebang $command
         else
             if string match -r '\s' "$command"
                 echo 'Command not have spaces in them!'
@@ -54,6 +46,8 @@ function mkexe --description "Creates a script that is executable."
         end
     end
 
+    touch $file
+    chmod +x $file
     echo -e "#!$shebang\n" | cat - $file | sponge $file
 end
 

@@ -5,7 +5,7 @@ barnybug/docker-fish-completion
 fisherman/fzf
 fisherman/get
 fisherman/getopts
+fisherman/last_job_id
 laughedelic/pisces
 fisherman/transfer
-fisherman/upto
 fisherman/z

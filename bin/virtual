@@ -1,14 +1,20 @@
 #!/usr/bin/env fish
 
-if not type -q pacman
-    echo 'This script will only work on a system with pacman'
-end
-
 function help
     echo 'Usage: virtual <environment> [dir]'
     echo
     echo 'Arguments:'
     echo '  environment The environment to setup'
+end
+
+function fetch
+    wget -q --show-progress -O- $argv[1] \
+    | tar -zxf - --strip-components 1 -C $argv[2]
+end
+
+if not set -q argv[1]
+    help
+    exit
 end
 
 # args
@@ -26,41 +32,40 @@ mkdir -p $dir
 # setup environment
 switch $environment
     case node
-        for pkg in (pacman -Sp nodejs yarn)
-            wget -O- $pkg | tar -Jxf - --strip-components 1 -C $dir
+        set -l ver (curl -sL 'https://semver.io/node/unstable')
+
+        echo "Fetching Node.js and Yarn:"
+        for url in 'https://yarnpkg.com/latest.tar.gz' \
+                   "https://nodejs.org/dist/v$ver/node-v$ver-linux-x64.tar.gz"
+            fetch $url $dir
         end
 
         echo -e \
 "
 function deactivate
     set -e VIRTUAL_ENV
-    if set -q OLD_LD_LIBRARY_PATH
-        set -gx LD_LIBRARY_PATH \$OLD_LD_LIBRARY_PATH
-    end
-    if set -q OLDPATH
-        set -gx PATH \$OLDPATH
+    if set -q OLD_PATH
+        set -gx PATH \$OLD_PATH
+        set -e OLD_PATH
     end
 end
 
-set -gx OLD_LD_LIBRARY_PATH \$LD_LIBRARY_PATH
-set -gx LD_LIBRARY_PATH \$LD_LIBRARY_PATH \$PWD/$dir/lib
+set -gx VIRTUAL_ENV \$PWD/$dir
 
 set -gx OLD_PATH \$PATH
 set -gx PATH \$PATH \$PWD/$dir/bin
 
-set -gx VIRTUAL_ENV \$PWD/$dir
-
 if type -q yarn
     alias yarn 'env HOME=\$PWD/$dir yarn'
 end
+
+set -gx PATH \$PATH yarn bin > /dev/null ^ /dev/null
 " > $dir/activate.fish
 
     case go
-        for pkg in (pacman -Sp go)
-            wget -O- $pkg | tar -Jxf - --strip-components 1 -C $dir
-        end
-
-        ln -sf $PWD/$dir/share/go/doc $PWD/$dir/lib/go/doc
+        set -l url (curl -sL 'https://golang.org/dl/' | grep -m1 linux | string match -r 'href="(http.*)"')[2]
+        echo "Fetching Go:"
+        fetch $url $dir
 
     echo -e \
 "
@@ -68,8 +73,9 @@ function deactivate
     set -e VIRTUAL_ENV
     set -e GOPATH
     set -e GOROOT
-    if set -q OLDPATH
-        set -gx PATH \$OLDPATH
+    if set -q OLD_PATH
+        set -gx PATH \$OLD_PATH
+        set -e OLD_PATH
     end
 end
 
@@ -79,23 +85,19 @@ function gopath
             cd \$GOPATH
         end
     else
-        if set -q GOPATH
-            for i in (seq (count \$PATH))
-                if test \$PATH[\$i] = '\$GOPATH/bin'
-                    set -e PATH[\$i]
-                end
-            end
+        if set -q GOPATH; and set -l i (contains -i \$GOPATH/bin \$PATH)
+            set -e PATH[\$i]
         end
         set -gx GOPATH \$argv[1]
-        set -gx PATH \$PATH \$GOPATH/bin
+        set -gx PATH \$PATH \$GOPATH/bin > /dev/null ^ /dev/null
     end
 end
 
-set -gx OLDPATH \$PATH
-set -gx PATH \$PATH \$PWD/$dir/bin
-
 set -gx VIRTUAL_ENV \$PWD/$dir
-set -gx GOROOT \$PWD/$dir/lib/go
+set -gx GOROOT \$PWD/$dir
+
+set -gx OLD_PATH \$PATH
+set -gx PATH \$PATH \$GOROOT/bin
 
 echo 'Use the gopath function to cd to or set GOPATH'
 " > $dir/activate.fish

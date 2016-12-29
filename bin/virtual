@@ -1,0 +1,109 @@
+#!/usr/bin/env fish
+
+if not type -q pacman
+    echo 'This script will only work on a system with pacman'
+end
+
+function help
+    echo 'Usage: virtual <environment> [dir]'
+    echo
+    echo 'Arguments:'
+    echo '  environment The environment to setup'
+end
+
+# args
+set environment $argv[1]
+set dir (
+    if set -q argv[2]
+        echo $argv[2]
+    else
+        echo '.venv'
+    end
+)
+
+mkdir -p $dir
+
+# setup environment
+switch $environment
+    case node
+        for pkg in (pacman -Sp nodejs yarn)
+            wget -O- $pkg | tar -Jxf - --strip-components 1 -C $dir
+        end
+
+        echo -e \
+"
+function deactivate
+    set -e VIRTUAL_ENV
+    if set -q OLD_LD_LIBRARY_PATH
+        set -gx LD_LIBRARY_PATH \$OLD_LD_LIBRARY_PATH
+    end
+    if set -q OLDPATH
+        set -gx PATH \$OLDPATH
+    end
+end
+
+set -gx OLD_LD_LIBRARY_PATH \$LD_LIBRARY_PATH
+set -gx LD_LIBRARY_PATH \$LD_LIBRARY_PATH \$PWD/$dir/lib
+
+set -gx OLD_PATH \$PATH
+set -gx PATH \$PATH \$PWD/$dir/bin
+
+set -gx VIRTUAL_ENV \$PWD/$dir
+
+if type -q yarn
+    alias yarn 'env HOME=\$PWD/$dir yarn'
+end
+" > $dir/activate.fish
+
+    case go
+        for pkg in (pacman -Sp go)
+            wget -O- $pkg | tar -Jxf - --strip-components 1 -C $dir
+        end
+
+        ln -sf $PWD/$dir/share/go/doc $PWD/$dir/lib/go/doc
+
+    echo -e \
+"
+function deactivate
+    set -e VIRTUAL_ENV
+    set -e GOPATH
+    set -e GOROOT
+    if set -q OLDPATH
+        set -gx PATH \$OLDPATH
+    end
+end
+
+function gopath
+    if not set -q argv[1]
+        if set -q GOPATH
+            cd \$GOPATH
+        end
+    else
+        if set -q GOPATH
+            for i in (seq (count \$PATH))
+                if test \$PATH[\$i] = '\$GOPATH/bin'
+                    set -e PATH[\$i]
+                end
+            end
+        end
+        set -gx GOPATH \$argv[1]
+        set -gx PATH \$PATH \$GOPATH/bin
+    end
+end
+
+set -gx OLDPATH \$PATH
+set -gx PATH \$PATH \$PWD/$dir/bin
+
+set -gx VIRTUAL_ENV \$PWD/$dir
+set -gx GOROOT \$PWD/$dir/lib/go
+
+echo 'Use the gopath function to cd to or set GOPATH'
+" > $dir/activate.fish
+
+    case python
+        virtualenv $dir
+    case '*'
+        echo "Unsupported environment: $argv[1]"
+        exit -1
+end
+

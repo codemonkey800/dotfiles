@@ -380,9 +380,13 @@ nnoremap <silent> <C-k> :bn<CR>
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
+
 let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#enable_smart_case = 1
+
+let g:deoplete#auto_complete_start_length = 1
 
 let g:deoplete#keyword_patterns = {}
 let g:deoplete#sources = {}
@@ -400,38 +404,6 @@ call deoplete#util#set_pattern(
     \ 'gitcommit',
     \ [g:deoplete#keyword_patterns.gitcommit])
 " }}
-
-" }}
-
-" deoplete  {{
-
-" deoplete-flow
-function! TrimNewline(str)
-    return substitute(a:str, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-endfunction
-
-let s:flow_path = ''
-if executable('flow')
-    let s:flow_path = TrimNewline(system('which flow'))
-else
-    let s:cmd = ''
-    if executable('yarn')
-        let s:cmd = 'yarn'
-    elseif executable('npm')
-        let s:cmd = 'npm'
-    endif
-
-    if s:cmd != ''
-        let s:flow_path = resolve(
-                    \ TrimNewline(system(s:cmd . ' bin'))
-                    \ . '/flow')
-        if !executable(s:flow_path)
-            let s:flow_path = ''
-        endif
-    endif
-end
-
-let g:deoplete#sources#flow#flow_bin = s:flow_path
 
 " }}
 

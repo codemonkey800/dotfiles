@@ -235,7 +235,9 @@ augroup END
 " modified insert mode {{
 
 function! SmartInsert()
-    if len(getline('.')) == 0
+    if &buftype ==# 'terminal'
+        startinsert
+    elseif len(getline('.')) == 0
         return 'cc'
     else
         return 'i'
@@ -411,6 +413,7 @@ call deoplete#util#set_pattern(
 
 " Neomake
 let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
+let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
 let g:neomake_highlight_lines = 1
 
 autocmd! BufWritePost * Neomake

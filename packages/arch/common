@@ -44,6 +44,7 @@ inetutils
 intel-ucode
 iproute2
 iputils
+ipython
 jfsutils
 keychain
 less

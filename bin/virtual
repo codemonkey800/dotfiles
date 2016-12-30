@@ -59,7 +59,7 @@ if type -q yarn
     alias yarn 'env HOME=\$PWD/$dir yarn'
 end
 
-set -gx PATH \$PATH yarn bin > /dev/null ^ /dev/null
+set -gx PATH \$PATH (yarn bin) > /dev/null ^ /dev/null
 " > $dir/activate.fish
 
     case go

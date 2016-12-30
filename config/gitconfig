@@ -45,6 +45,9 @@
 [tar "xz"]
   command = xz -c
 
+[url "git@github.com:"]
+  insteadOf = "gh://"
+
 [url "git@gitlab.com:"]
   insteadOf = "gl://"
 

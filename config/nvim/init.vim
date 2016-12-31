@@ -75,6 +75,9 @@ Plug 'justinj/vim-react-snippets'
 " syntaxes {{
 
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'othree/es.next.syntax.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/yajs.vim'
 Plug 'sheerun/vim-polyglot'
 
 " }}
@@ -499,6 +502,8 @@ let g:lexical#dictionary_key = '<leader>k'
 " javascript
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
+
+let g:used_javascript_libs = 'jquery,underscore,react'
 
 " json
 let g:vim_json_syntax_conceal = 0

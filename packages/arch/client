@@ -1,8 +1,8 @@
 adwaita-icon-theme
 android-google-apis-23
+android-google-repository
 android-sdk
-android-sdk-build-tools
-android-sdk-platform-tools
+android-sdk-build-tools-23.0.1
 android-support
 android-support-repository
 android-udev

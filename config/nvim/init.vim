@@ -4,8 +4,9 @@ call plug#begin('~/.config/nvim/plugins')
 
 " autocomplete {{
 
+Plug 'alvan/vim-closetag'
 Plug 'ervandew/supertab'
-Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 
 " }}
 
@@ -73,15 +74,7 @@ Plug 'justinj/vim-react-snippets'
 
 " syntaxes {{
 
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'dag/vim-fish'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'elzr/vim-json'
-Plug 'fatih/vim-go'
-Plug 'lervag/vimtex'
-Plug 'nginx.vim'
-Plug 'othree/yajs.vim'
-Plug 'plasticboy/vim-markdown'
 Plug 'sheerun/vim-polyglot'
 
 " }}
@@ -503,20 +496,20 @@ let g:lexical#dictionary_key = '<leader>k'
 
 " syntaxes {{
 
-" vim-json
+" javascript
+let g:javascript_plugin_flow = 1
+let g:javascript_plugin_jsdoc = 1
+
+" json
 let g:vim_json_syntax_conceal = 0
 
-" vim-markdown
+" markdown
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_math = 1
 let g:vim_markdown_new_list_item_indent = 2
 
-" vim-jsx
-let g:jsx_ext_required = 0
-
 " }}
-"
 
 " user interface {{
 

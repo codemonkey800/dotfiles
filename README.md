@@ -16,15 +16,24 @@
 ---
 
 # Dotfiles :fish:
-Aside from being free and having a [penguin](https://en.wikipedia.org/wiki/Tux) for a mascot, a Linux based OS is probably *the* best for customization.
-[Dotfiles](https://en.wikipedia.org/wiki/Dotfiles) are essentially hidden files and directories, such as `~/.bashrc`, `~/.config/`, and `~/.local/` to name a few.
+Aside from being free and having a [penguin](https://en.wikipedia.org/wiki/Tux)
+for a mascot, a Linux based OS is probably *the* best for customization.
+[Dotfiles](https://en.wikipedia.org/wiki/Dotfiles) are essentially hidden files
+and directories, such as `~/.bashrc`, `~/.config/`, and `~/.local/` to name a
+few.
 
-Dotfiles are not strictly limited to configuration files. You can have executable scripts, package listings for backups, build files, etc.
-(At least, that's what I have in my dotfiles :stuck_out_tongue_winking_eye:)
+Dotfiles are not strictly limited to configuration files. You can have
+executable scripts, package listings for backups, build files, etc.  (At least,
+that's what I have in my dotfiles :stuck_out_tongue_winking_eye:)
+
+As a side note, since this is my personal configuration repo, it is subject to
+change rapidly since I tend to change my mind frequently on how I want my setup
+to be.
 
 ## Features :package:
-Although my dotfiles are tailored to my development environment, you can easily use them as a bootstrap for a new system,
-a base for your own set of dotfiles, or even take a subset of my dotfiles and incorporate it into your own.
+Although my dotfiles are tailored to my development environment, you can easily
+use them as a bootstrap for a new system, a base for your own set of dotfiles,
+or even take a subset of my dotfiles and incorporate it into your own.
 
 - Fish
   - [Fisherman](http://fisherman.sh/) for plugins and themes
@@ -39,12 +48,13 @@ a base for your own set of dotfiles, or even take a subset of my dotfiles and in
   - Template files: `basic.tex` and `math-template.tex`
 - A bunch of useful scripts
   - `copy` - Convenience scrpt for the command `rsync -aP`
-  - `doshit` - Creates a temporary directory in **tmpfs** and starts a new tmux session in it. Exiting automatically deletes the directory
   - `rmshit` - Sources a list of files to delete file named `~/.shittyfiles`
-  - `update-*` - A set of scripts that runs updates on their respective program. For example, `update-pacman-db` updates the pacman database using [Reflector](https://wiki.archlinux.org/index.php/Reflector)
-  - `update` - A monolithic script that
+  - `update` - A big ass script that runs updates
 - Arch Linux PKGBUILDs
+  - python-click-completion
+  - python-click-didyoumean
   - python-pawk
+  - refind-theme-regular-git
 - Pacman
   - Yaourt for package management and Powerpill for parallel and segmented downloads
 - Git
@@ -74,13 +84,9 @@ Note: A `x -> y` will indicate that a symbolic link `y` points to `x`.
 
 ```
 bin/ # The directory organization is for development purposes. It's best you flatten out your symbolic links
-  common/
-    cleanup           -> ~/.local/bin/cleanup
-    copy              -> ~/.local/bin/copy
-    doshit            -> ~/.local/bin/doshit
-    ...
-  docker/
-    docker-clean      -> ~/.local/bin/docker-clean
+  cleanup           -> ~/.local/bin/cleanup
+  copy              -> ~/.local/bin/copy
+  docker-clean      -> ~/.local/bin/docker-clean
   ...
 config/
   fish/
@@ -94,12 +100,10 @@ config/
   npmrc               -> ~/.npmrc
   nvim/
     init.vim          -> ~/.config/nvim/init.vim
-    settings/         -> ~/.config/nvim/settings/ # That's right, symlink the entire directory :^)
-      file.vim
-      folding.vim
-      general.vim
-      ...
-    thesauraus.txt    -> ~/.config/nvim/thesauraus.txt
+    mthesaur.txt      -> ~/.config/nvim/thesauraus.txt
+    spell             -> ~/.config/nvim/spell
+    UltiSnips         -> ~/.config/nvim/UltiSnips/
+    vintrc.yaml       -> ~/.vintrc.yaml
   pacman/ # The following symlinks require root permission
     makepkg.conf      -> /etc/pacman.d/makepkg.conf
     pacman-aria2.conf ->/etc/pacman.d/pacman-aria2.conf
@@ -113,27 +117,29 @@ misc/
 ```
 
 ## Installation :wrench:
-Until I create a setup script to automate installation, you'll have to do it manually :^( All examples below
-will be using fish shell syntax. You should be able to convert the shell code below into bash or zsh.
+Until I create a setup script to automate installation, you'll have to do it
+manually :^( All examples below will be using fish shell syntax. You should be
+able to convert the shell code below into bash or zsh.
 
-Of course, you'll need to clone the dotfiles somewhere. For the sake of simplicity, we'll clone it to `$HOME`:
+Of course, you'll need to clone the dotfiles somewhere. For the sake of
+simplicity, we'll clone it to `$HOME`:
 ```fish
 $ git clone git://github.com/codemonkey800/dotfiles.git ~/dotfiles
 $ cd ~/dotfiles
 ```
 
 ### `bin/` Scripts
-First, create directory at `~/.local/bin/` and then copy every file in `~/dotfiles/bin/` to that directory:
+First, create directory at `~/bin/` and then copy every file in
+`~/dotfiles/bin/` to that directory:
 ```fish
-$ mkdir -p ~/.local/bin
-$ for f in $PWD/bin/**/*
-    ln -svf $f ~/.local/bin
-  end
+$ mkdir -p ~/bin
+$ ln -svf $PWD/* ~/bin
 ```
 
 ### Backup Package Listings
-You can install from the package listings `cat`ing the listings you want to use in a command substitution (or subshell),
-and use it as an argument for `yaourt -S`.
+You can install from the package listings `cat`ing the listings you want to use
+in a command substitution (or subshell), and use it as an argument for
+`yaourt -S`.
 ```fish
 $ yaourt -S (cat packages/arch/{common,client,desktop})
 # If you're lazy, you can also do this:
@@ -141,8 +147,11 @@ $ yaourt -S --noconfirm (cat packages/arch/{common,client,desktop})
 ```
 
 ### Fortunes - Fancy Greeting Message on Login
-For my shell, I have fancy login greetings made using [lolcat](https://github.com/tehmaze/lolcat/), [cowsay](https://github.com/piuccio/cowsay),
-and [Fortune](https://wiki.archlinux.org/index.php/Fortune). Make sure you install all three, then you can run:
+For my shell, I have fancy login greetings made using
+[lolcat](https://github.com/tehmaze/lolcat/),
+[cowsay](https://github.com/piuccio/cowsay), and
+[Fortune](https://wiki.archlinux.org/index.php/Fortune). Make sure you install
+all three, then you can run:
 ```fish
 $ sudo cp misc/myfortunes /usr/share/fortunes # /usr/share/games/fortune-mod on ubuntu
 $ sudo strfile /usr/share/fortunes/myfortunes
@@ -163,16 +172,19 @@ $ curl -fLO ~/.config/nvim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
-Once you've symlinked everything correctly, you can run `update-plug` do a quick and easy installation.
+Once you've symlinked everything correctly, you can run `update-plug` do a
+quick and easy installation.
 
 ### Pacman
-Warning: You need to have installed Powerpill before symlinking `config/pacman/yaourtrc -> /etc/yaourtrc`.
-Failing to do so will cause an error since, from `yaourt`'s perspective, the `powerpill` command
-doesn't exist.
+Warning: You need to have installed Powerpill before symlinking
+`config/pacman/yaourtrc -> /etc/yaourtrc`.  Failing to do so will cause an
+error since, from `yaourt`'s perspective, the `powerpill` command doesn't
+exist.
 
-Also, some packages in `arch/` are submitted on the [Arch User Repository](https://aur.archlinux.org/).
-But not all of them are. If you want to build those that aren't, or if you just want to build anything,
-you can go into each directory and run:
+Also, some packages in `arch/` are submitted on the [Arch User
+Repository](https://aur.archlinux.org/).  But not all of them are. If you want
+to build those that aren't, or if you just want to build anything, you can go
+into each directory and run:
 ```fish
 $ makepkg -si
 ```
@@ -186,18 +198,22 @@ $ apm install (cat packages/apm)
 ```
 
 ### npm
-I local Node.js/npm distrubtions using `fnm`. However, I still do use global modules with those distributions. You can run:
+I local Node.js/npm distrubtions using `fnm`. However, I still do use global
+modules with those distributions. You can run:
 ```fish
 $ npm -g i (cat packages/npm)
 ```
 
 ## macOS/Windows Support :computer:
-Some of my dotfiles will be incompatible with macOS and Windows. For example, anything pacman related cannot be used.
-Any other settings that are highly dependent on either a Linux based OS or Arch Linux won't work on macOS or Windows.
+Some of my dotfiles will be incompatible with macOS and Windows. For example,
+anything pacman related cannot be used.  Any other settings that are highly
+dependent on either a Linux based OS or Arch Linux won't work on macOS or
+Windows.
 
-For Windows, you'll most likely either need to install [Cygwin](https://www.cygwin.com/),
-use the [Bash Subsystem](https://msdn.microsoft.com/en-us/commandline/wsl/about),
-or run a Linux distro in a VM.
+For Windows, you'll most likely either need to install
+[Cygwin](https://www.cygwin.com/), use the [Bash
+Subsystem](https://msdn.microsoft.com/en-us/commandline/wsl/about), or run a
+Linux distro in a VM.
 
 Personally, I use Windows on my desktop and run Arch in VMWare Workstation.
 

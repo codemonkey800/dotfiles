@@ -1,5 +1,5 @@
-~/.FRD/links.txt
-~/.FRD/log/app.log
+~/.FRD
+~/.FRD
 ~/.adobe
 ~/.babel*
 ~/.bash*
@@ -7,9 +7,7 @@
 ~/.bundle
 ~/.byobu
 ~/.bzr.log
-~/.cache/*
 ~/.config/enchant
-~/.config/yarn
 ~/.dbus
 ~/.distlib
 ~/.dropbox-dist
@@ -47,7 +45,6 @@
 ~/.wget-hsts
 ~/.xsel.log
 ~/.xsession-error*
-~/.yarn*
 ~/.yjp
 ~/ca2
 ~/ca2~

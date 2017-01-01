@@ -69,6 +69,8 @@ neovim
 neovim-remote
 netctl
 net-tools
+nodejs
+npm
 ntfs-3g
 openssh
 p7zip
@@ -96,6 +98,7 @@ python-neovim
 python-pawk
 python-pip
 python-sh
+python-vint
 python-virtualenv
 ranger
 refind-efi
@@ -130,6 +133,6 @@ words
 xfsprogs
 xsel
 yaourt
+yarn
 youtube-dl
 zip
-python-vint

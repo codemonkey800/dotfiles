@@ -7,11 +7,11 @@ function __add_to_path
     end
 end
 
-# Less stuff
+# less stuff
 set -gx LESS '-R'
 set -gx LESSOPEN '|pygmentize -g %s'
 
-# Development environment
+# development environment
 set -gx DIRENV_LOG_FORMAT
 set -gx EDITOR (type -p nvim)
 set -gx NVIM_LISTEN_ADDRESS /tmp/nvim-(whoami).socket
@@ -22,15 +22,18 @@ set -gx ENCRYPTION_KEY A1CE3226F4FDEFF5
 set -gx GPG_TTY (tty)
 set -gx SIGNING_KEY 3FCC32880193C153
 
-# Locale stuff
+# locale stuff
 set -gx LANG en_US.UTF-8
 
-# Pager stuff
+# pager stuff
 set -gx MANPAGER "$EDITOR -c 'setf man' -c 'runtime! macros/less.vim' -"
 set -gx PAGER "$EDITOR -c 'runtime! macros/less.vim' -c AnsiEsc -"
 
-# Android stuff
-set -gx ANDROID_HOME ~/share/software/android/sdk
+# user installed software
+set -gx SOFTWARE_HOME ~/share/software
+
+# android stuff
+set -gx ANDROID_HOME $SOFTWARE_HOME/android/sdk
 
 # PATH stuff
 __add_to_path (find $DOTFILES/bin -type d)
@@ -42,7 +45,7 @@ if type -q fzf
     set -gx FZF_TMUX 1
 end
 
-# Color settings
+# color settings
 set -gx fish_color_autosuggestion 8a8a8a
 set -gx fish_color_command 005fd7
 set -gx fish_color_comment ff8700

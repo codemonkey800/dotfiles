@@ -45,8 +45,11 @@ switch $environment
             fetch $url $dir
         end
 
-        echo 'Removing npm:'
+        # remove npm
         rm -rf $dir/{bin/npm,lib/node_modules}
+
+        # patch yarn to use $dir as $HOME
+         sed -i "s|  node|  HOME=$PWD/$dir node|g" $dir/bin/yarn
 
         echo -e \
 "

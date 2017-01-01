@@ -1,8 +1,11 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Version=1.0
-Terminal=false
 Type=Application
-Name=WebStorm EAP
-Exec=/home/jeremy/share/software/webstorm/bin/webstorm.sh
+Name=WebStorm
 Icon=/home/jeremy/share/software/webstorm/bin/webstorm.svg
+Exec="/home/jeremy/share/software/webstorm/bin/webstorm.sh" %f
+Comment=The Drive to Develop
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-webstorm

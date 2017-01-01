@@ -1,49 +1,38 @@
 " This is a stripped down version of my neovim init.vim file
-" that is used for intellij. It includes basic and mapleader
+" that is used for IDEA based IDEs. It includes basic and mapleader
 " based mappings as well as mappings for IDE actions.
-
-" extensions {{
-
-" vim-surround plugin
-set surround
-
-" }}
 
 " basic mappings {{
 
 " escape insert mode
-inoremap <silent> jk <esc>
+inoremap jk <esc>
+
+" Ctrl-C to escape
+nnoremap <C-c> <esc>
 
 " move vertically by visual line
-noremap <silent>  j gj
-noremap <silent>  k gk
+noremap j gj
+noremap k gk
 
 " swap capital H and L for begin and end of lines
-noremap <silent>  H ^
-noremap <silent>  L $
+noremap H ^
+noremap L $
 
 " quit and force quit maps
-nnoremap <silent> Q :q!<CR>
-nnoremap <silent> q :q<CR>
-
-" space open/closes folds
-nnoremap <space> za
+nnoremap Q :q!<CR>
+nnoremap q :q<CR>
 
 " adds a new line below or above without entering insert mode
 noremap o o<esc>k
 noremap O O<esc>j
 
 " redo last thing
-noremap <silent> U :redo<CR>
-
-" save current file
-nnoremap <silent> <C-s> :w<CR>
-inoremap <silent> <C-s> <Esc>:w<CR>li
+noremap U :redo<CR>
 
 " Go back from tag using Ctrl-[, which makes more sense than Ctrl-t
-nnoremap <silent> gt <C-]>
-nnoremap <silent> gT <C-t>
-nnoremap <silent> <C-]> <nop>
+nnoremap gt <C-]>
+nnoremap gT <C-t>
+nnoremap <C-]> <nop>
 
 " }}
 
@@ -51,19 +40,22 @@ nnoremap <silent> <C-]> <nop>
 
 let g:mapleader = ','
 
-" Pipe to selected to shell
-vnoremap <silent> <leader>r :!%:p<CR>
-
 " sort things
-noremap <silent> <leader>s :sort<CR>
-noremap <silent> <leader>S :sort!<CR>
+noremap <leader>s :sort<CR>
+noremap <leader>S :sort!<CR>
 
 " select all text
-noremap <silent> <leader>a ggvG$
+noremap <leader>a ggvG$
 
 " system clipboard
-vnoremap <silent> <leader>c "+y
-nnoremap <silent> <leader>v "+p
+vnoremap <leader>c "+y
+nnoremap <leader>v "+p
 
 " }}
 
+" extensions {{
+
+" vim-surround plugin
+set surround
+
+" }}

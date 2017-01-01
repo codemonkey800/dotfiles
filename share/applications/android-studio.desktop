@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Android Studio Canary
+Exec=/home/jeremy/share/software/android/studio/bin/studio.sh
+Icon=/home/jeremy/share/software/android/studio/bin/studio.png

@@ -75,6 +75,7 @@ Plug 'justinj/vim-react-snippets'
 " syntaxes {{
 
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'mxw/vim-jsx'
 Plug 'othree/es.next.syntax.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/yajs.vim'
@@ -504,6 +505,8 @@ let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
 
 let g:used_javascript_libs = 'jquery,underscore,react'
+
+let g:jsx_ext_required = 0
 
 " json
 let g:vim_json_syntax_conceal = 0

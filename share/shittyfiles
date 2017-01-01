@@ -7,7 +7,9 @@
 ~/.bundle
 ~/.byobu
 ~/.bzr.log
+~/.cache/*
 ~/.config/enchant
+~/.config/yarn
 ~/.dbus
 ~/.distlib
 ~/.dropbox-dist
@@ -45,6 +47,7 @@
 ~/.wget-hsts
 ~/.xsel.log
 ~/.xsession-error*
+~/.yarn*
 ~/.yjp
 ~/ca2
 ~/ca2~

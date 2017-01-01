@@ -1,0 +1,69 @@
+" This is a stripped down version of my neovim init.vim file
+" that is used for intellij. It includes basic and mapleader
+" based mappings as well as mappings for IDE actions.
+
+" extensions {{
+
+" vim-surround plugin
+set surround
+
+" }}
+
+" basic mappings {{
+
+" escape insert mode
+inoremap <silent> jk <esc>
+
+" move vertically by visual line
+noremap <silent>  j gj
+noremap <silent>  k gk
+
+" swap capital H and L for begin and end of lines
+noremap <silent>  H ^
+noremap <silent>  L $
+
+" quit and force quit maps
+nnoremap <silent> Q :q!<CR>
+nnoremap <silent> q :q<CR>
+
+" space open/closes folds
+nnoremap <space> za
+
+" adds a new line below or above without entering insert mode
+noremap o o<esc>k
+noremap O O<esc>j
+
+" redo last thing
+noremap <silent> U :redo<CR>
+
+" save current file
+nnoremap <silent> <C-s> :w<CR>
+inoremap <silent> <C-s> <Esc>:w<CR>li
+
+" Go back from tag using Ctrl-[, which makes more sense than Ctrl-t
+nnoremap <silent> gt <C-]>
+nnoremap <silent> gT <C-t>
+nnoremap <silent> <C-]> <nop>
+
+" }}
+
+" leader mappings {{
+
+let g:mapleader = ','
+
+" Pipe to selected to shell
+vnoremap <silent> <leader>r :!%:p<CR>
+
+" sort things
+noremap <silent> <leader>s :sort<CR>
+noremap <silent> <leader>S :sort!<CR>
+
+" select all text
+noremap <silent> <leader>a ggvG$
+
+" system clipboard
+vnoremap <silent> <leader>c "+y
+nnoremap <silent> <leader>v "+p
+
+" }}
+

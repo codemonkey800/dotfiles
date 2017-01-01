@@ -1,10 +1,15 @@
 #!/usr/bin/env fish
 
 function help
+    echo 'Boostrap development environment using latest dev runtime.'
+    echo
     echo 'Usage: virtual <environment> [dir]'
     echo
     echo 'Arguments:'
     echo '  environment The environment to setup'
+    echo
+    echo 'Options:'
+    echo '  -h, --help  Print this help message'
 end
 
 function fetch
@@ -12,7 +17,7 @@ function fetch
     | tar -zxf - --strip-components 1 -C $argv[2]
 end
 
-if not set -q argv[1]
+if not set -q argv[1]; or string match -qr '(-h|--help)' -- "$argv[1]"
     help
     exit
 end
@@ -34,11 +39,14 @@ switch $environment
     case node
         set -l ver (curl -sL 'https://semver.io/node/unstable')
 
-        echo "Fetching Node.js and Yarn:"
+        echo 'Fetching Node.js and Yarn:'
         for url in 'https://yarnpkg.com/latest.tar.gz' \
                    "https://nodejs.org/dist/v$ver/node-v$ver-linux-x64.tar.gz"
             fetch $url $dir
         end
+
+        echo 'Removing npm:'
+        rm -rf $dir/{bin/npm,lib/node_modules}
 
         echo -e \
 "

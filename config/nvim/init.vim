@@ -307,6 +307,7 @@ nnoremap <silent> <leader>ev :edit $MYVIMRC<CR>
 
 " source nvim config
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
+
 " select all text
 noremap <silent> <leader>a ggvG$
 

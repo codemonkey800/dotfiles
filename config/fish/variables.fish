@@ -1,8 +1,7 @@
 # helper functions
 function __add_to_path
     for arg in $argv
-        if not contains $arg -- $PATH
-            mkdir -p (dirname $arg)
+        if not contains $arg -- $PATH; and test -d $arg
             set -gx PATH $PATH $arg
         end
     end
@@ -26,14 +25,19 @@ set -gx SIGNING_KEY 3FCC32880193C153
 # Locale stuff
 set -gx LANG en_US.UTF-8
 
-# Pagerstuff
+# Pager stuff
 set -gx MANPAGER "$EDITOR -c 'setf man' -c 'runtime! macros/less.vim' -"
 set -gx PAGER "$EDITOR -c 'runtime! macros/less.vim' -c AnsiEsc -"
 
+# Android stuff
+set -gx ANDROID_HOME ~/share/software/android/sdk
+
 # PATH stuff
 __add_to_path (find $DOTFILES/bin -type d)
+__add_to_path $ANDROID_HOME/tools
+__add_to_path $ANDROID_HOME/platform-tools
 
-# Fzf stuff
+# FZF stuff
 if type -q fzf
     set -gx FZF_TMUX 1
 end

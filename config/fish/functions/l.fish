@@ -34,19 +34,19 @@ function l -d 'Lists all files in a directory or reads a file'
             end
         end
 
-        set -l cmd 'ls -CAF'
+        set -l args "$args -CAF"
 
         if test (uname) = 'Linux'
-            set cmd "$cmd --color=auto"
+            set args "$args --color=always"
         end
 
-        set cmd "$cmd $args $files"
+        set args "$args $files"
 
         if eval $pager
-            set cmd "$cmd | $PAGER"
+            eval "ls $args | $PAGER"
+        else
+            eval "ls $args"
         end
-
-        eval $cmd
     end
 end
 

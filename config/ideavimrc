@@ -15,24 +15,31 @@ noremap j gj
 noremap k gk
 
 " swap capital H and L for begin and end of lines
-noremap H ^
+noremap H 0
 noremap L $
+noremap 0 <nop>
+noremap $ <nop>
 
-" quit and force quit maps
-nnoremap Q :q!<CR>
+" quit window
 nnoremap q :q<CR>
 
 " adds a new line below or above without entering insert mode
-noremap o o<esc>k
-noremap O O<esc>j
+" nnoremap o o<esc>k
+" nnoremap O O<esc>j
 
 " redo last thing
-noremap U :redo<CR>
+nnoremap U :redo<CR>
 
-" Go back from tag using Ctrl-[, which makes more sense than Ctrl-t
+" go back from tag using Ctrl-[, which makes more sense than Ctrl-t
 nnoremap gt <C-]>
 nnoremap gT <C-t>
 nnoremap <C-]> <nop>
+
+" next and previous tabs
+nnoremap <C-j> :action PreviousTab<CR>
+nnoremap <C-k> :action NextTab<CR>
+
+" window navigation
 
 " }}
 
@@ -45,11 +52,7 @@ noremap <leader>s :sort<CR>
 noremap <leader>S :sort!<CR>
 
 " select all text
-noremap <leader>a ggvG$
-
-" system clipboard
-vnoremap <leader>c "+y
-nnoremap <leader>v "+p
+nnoremap <leader>a ggvG$
 
 " }}
 

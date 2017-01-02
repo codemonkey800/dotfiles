@@ -69,6 +69,9 @@ neovim
 neovim-remote
 netctl
 net-tools
+nodejs
+npm
+npm-check-updates
 ntfs-3g
 openssh
 p7zip
@@ -131,5 +134,6 @@ words
 xfsprogs
 xsel
 yaourt
+yarn
 youtube-dl
 zip

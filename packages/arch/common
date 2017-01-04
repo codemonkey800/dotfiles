@@ -46,6 +46,7 @@ iproute2
 iputils
 ipython
 jfsutils
+jq
 keychain
 less
 libtool

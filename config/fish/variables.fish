@@ -40,6 +40,8 @@ __add_to_path (find $DOTFILES/bin -type d)
 __add_to_path $ANDROID_HOME/tools
 __add_to_path $ANDROID_HOME/platform-tools
 
+set -gx PATH $PATH ./node_modules/.bin ^ /dev/null
+
 # FZF stuff
 if type -q fzf
     set -gx FZF_TMUX 1

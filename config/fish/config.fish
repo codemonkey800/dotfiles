@@ -21,6 +21,14 @@ source $DOTFILES/config/fish/completions.fish
 
 not status -i; and exit
 
+# source profile.d stuff if a display manager
+# isn't used
+if test -z $DISPLAY; and exists bass
+    for f in /etc/profile.d/*.sh
+        bass source $f > /dev/null ^ /dev/null
+    end
+end
+
 if exists keychain
     # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
     if test -z $DISPLAY

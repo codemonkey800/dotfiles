@@ -1,5 +1,6 @@
 certbot
 ddclient
+lib32-gcc-libs
 rtl8812au-dkms-git
 ssmtp
 wpa_actiond

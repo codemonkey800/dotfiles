@@ -16,6 +16,7 @@ alias lsof-del 'lsof +c 0
     | sort -u
 '
 alias nm-restart 'sudo systemctl restart NetworkManager'
+alias paths 'echo $PATH | tr " " \n'
 alias re "sudo -E $EDITOR"
 alias wh 'type -P'
 

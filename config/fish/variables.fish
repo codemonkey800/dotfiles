@@ -1,8 +1,11 @@
 # helper functions
 function __add_to_path
     for arg in $argv
-        if not contains $arg -- $PATH; and test -d $arg
-            set -gx PATH $PATH $arg
+        if not contains $arg $PATH
+            if string match -q '/*' $arg; and not test -d $arg
+                return -1
+            end
+            set -gx PATH $PATH $arg ^ /dev/null
         end
     end
 end
@@ -39,8 +42,7 @@ set -gx ANDROID_HOME $SOFTWARE_HOME/android/sdk
 __add_to_path (find $DOTFILES/bin -type d)
 __add_to_path $ANDROID_HOME/tools
 __add_to_path $ANDROID_HOME/platform-tools
-
-set -gx PATH $PATH ./node_modules/.bin ^ /dev/null
+__add_to_path ./node_modules/.bin
 
 # FZF stuff
 if type -q fzf

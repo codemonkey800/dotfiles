@@ -59,7 +59,7 @@ function deactivate
         set -gx PATH \$OLD_PATH
         set -e OLD_PATH
     end
-    functions -e yarn
+    functions -e deactivate yarn
 end
 
 set -gx VIRTUAL_ENV \$PWD/$dir
@@ -89,6 +89,7 @@ function deactivate
         set -gx PATH \$OLD_PATH
         set -e OLD_PATH
     end
+    functions -e deactivate gopath
 end
 
 function gopath

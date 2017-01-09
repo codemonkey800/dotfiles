@@ -17,6 +17,7 @@ device-mapper
 dhcpcd
 diffutils
 docker
+docker-compose
 e2fsprogs
 exfat-utils
 fakeroot
@@ -70,9 +71,6 @@ neovim
 neovim-remote
 netctl
 net-tools
-nodejs
-npm
-npm-check-updates
 ntfs-3g
 openssh
 p7zip
@@ -135,6 +133,5 @@ words
 xfsprogs
 xsel
 yaourt
-yarn
 youtube-dl
 zip

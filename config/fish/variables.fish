@@ -42,7 +42,6 @@ set -gx ANDROID_HOME $SOFTWARE_HOME/android/sdk
 __add_to_path (find $DOTFILES/bin -type d)
 __add_to_path $ANDROID_HOME/tools
 __add_to_path $ANDROID_HOME/platform-tools
-__add_to_path ./node_modules/.bin
 
 # FZF stuff
 if type -q fzf

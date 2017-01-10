@@ -7,14 +7,12 @@ function __has_remote
 end
 
 function __help
-    echo "
-    Usage: ./remotes <command> [arg]
-
-    Commands:
-        s[etup]  - Sets up the remotes if they don't already exist
-        p[rint]  - Prints out the remotes and their urls
-        r[emove] - Removes remotes from the git repo. Specify 'all' to remove all remotes
-    "
+    echo 'Usage: ./remotes <command> [arg]'
+    echo
+    echo 'Commands:'
+    echo '    s[etup]  - Sets up the remotes if they don\'t already exist'
+    echo '    p[rint]  - Prints out the remotes and their urls'
+    echo '    r[emove] - Removes remotes from the git repo. Specify "all" to remove all remotes'
 end
 
 if test (count $argv) -eq 0

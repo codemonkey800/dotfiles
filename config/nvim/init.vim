@@ -98,7 +98,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'Shougo/denite.nvim'
 Plug 'Tagbar'
-Plug 'airodactyl/neovim-ranger'
 Plug 'ansiesc.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
@@ -202,23 +201,23 @@ hi LineNr ctermbg=none guibg=none
 
 " }}
 
-" force nvim to use system python interpreters {
+" force nvim to use system python interpreters {{
 
 let g:python_host_prog = '/usr/bin/python2'
 let g:python3_host_prog = '/usr/bin/python'
 let g:python3_host_skip_check = 1
 
-" }
+" }}
 
-" force nvim to use bash for posix compatibility {
+" force nvim to use bash for posix compatibility {{
 
 if &shell =~# 'fish$'
   set shell=bash
 endif
 
-" }
+" }}
 
-" autocmd {
+" autocmd {{
 
 augroup mycmds
   autocmd!
@@ -228,7 +227,7 @@ augroup mycmds
   autocmd FileType vim :set foldmarker={{,}} foldlevel=0 foldmethod=marker
 augroup END
 
-" }
+" }}
 
 " }}
 

@@ -29,8 +29,7 @@ set -gx SIGNING_KEY 3FCC32880193C153
 set -gx LANG en_US.UTF-8
 
 # pager stuff
-set -gx MANPAGER "$EDITOR -c 'setf man' -c 'runtime! macros/less.vim' -"
-set -gx PAGER "$EDITOR -c 'runtime! macros/less.vim' -c AnsiEsc -"
+set -gx PAGER less
 
 # user installed software
 set -gx SOFTWARE_HOME ~/share/software

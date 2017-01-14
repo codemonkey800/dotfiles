@@ -18,7 +18,7 @@ function l -d 'Lists all files in a directory or reads a file'
     if test (count $files) -eq 1; and test -f $files[1]
         if test -f $files[1]
             if eval $pager
-                nvim -c 'runtime! macros/less.vim' $files[1]
+                eval "less -N $files[1]"
             else
                 pygmentize -g $files[1]
             end

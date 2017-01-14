@@ -21,6 +21,7 @@
   gpgsign = true
 
 [core]
+  excludesfile = /home/jeremy/.gitignore_global
   editor = nvim
   sparsecheckout = true
 

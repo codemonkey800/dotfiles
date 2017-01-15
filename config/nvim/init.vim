@@ -542,7 +542,7 @@ let g:fzf_layout = { 'down': '~30%' }
 function! GetFiles()
   let l:opts = {}
   let l:opts.down = '30%'
-  let l:opts.source = 'pt -g "" --hidden --ignore .git'
+  let l:opts.source = 'pt -g "" --hidden --global-gitignore --ignore .git'
 
   call system('git status')
 

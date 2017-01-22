@@ -1,0 +1,82 @@
+// Place your settings in this file to overwrite the default settings
+{
+  // editor
+  "editor.fontSize": 14,
+  "editor.fontFamily": "'Source Code Pro', monospace",
+  "editor.tabSize": 2,
+  "editor.rulers": [
+    80
+  ],
+
+  // extensions
+  "extensions.autoUpdate": true,
+
+  // files
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/.venv": true
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // terminal
+  "terminal.external.linuxExec": "termite",
+
+  // window
+  "window.menuBarVisibility": "toggle",
+
+  // vim
+  "vim.leader": ",",
+  "vim.showcmd": false,
+  "vim.easymotion": true,
+  "vim.otherModesKeyBindingsNonRecursive": [
+    {
+      "before": ["j"],
+      "after": ["g", "j"]
+    },
+    {
+      "before": ["k"],
+      "after": ["g", "k"]
+    },
+
+    {
+      "before": ["q"],
+      "after": [],
+      "commands": [
+        {
+          "command": "workbench.action.closeActiveEditor",
+          "args": []
+        }
+      ]
+    },
+
+    {
+      "before": ["o"],
+      "after": ["o", "<Esc>", "k"]
+    },
+    {
+      "before": ["O"],
+      "after": ["O", "<Esc>"]
+    },
+
+    {
+      "before": ["H"],
+      "after": ["0"]
+    },
+    {
+      "before": ["L"],
+      "after": ["$"]
+    }
+  ],
+  "vim.insertModeKeyBindingsNonRecursive": [
+    {
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "editor.cursorBlinking": "blink",
+  "git.confirmSync": false
+}

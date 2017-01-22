@@ -34,6 +34,7 @@ end
 __aliasif apm 'apm-beta'
 __aliasif atom 'atom-beta'
 __aliasif chrome 'google-chrome-unstable'
+__aliasif code 'code-insiders'
 __aliasif copy 'rsync -aP'
 __aliasif g 'hub'
 __aliasif git "hub"

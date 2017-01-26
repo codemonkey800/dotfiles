@@ -19,6 +19,7 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+Plug 'carlitux/deoplete-ternjs'
 Plug 'mhartington/deoplete-typescript', { 'for': 'typescript' }
 Plug 'steelsojka/deoplete-flow', { 'for': 'javascript' }
 Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
@@ -40,6 +41,12 @@ Plug 'Shougo/neopairs.vim'
 
 " }}
 
+" language utilities {{
+
+Plug 'ternjs/tern_for_vim'
+
+" }}
+
 " linting {{
 
 Plug 'benekastah/neomake'
@@ -54,6 +61,7 @@ Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
+Plug 'wellle/targets.vim'
 
 " }}
 
@@ -75,37 +83,35 @@ Plug 'justinj/vim-react-snippets'
 " syntaxes {{
 
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'mxw/vim-jsx'
-" Plug 'othree/es.next.syntax.vim'
-" Plug 'othree/javascript-libraries-syntax.vim'
-" Plug 'othree/yajs.vim'
 Plug 'sheerun/vim-polyglot'
 
 " }}
 
 " user interface {{
 
+Plug 'Shougo/denite.nvim'
+Plug 'Tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
 Plug 'flazz/vim-colorschemes'
-Plug 'joshdick/onedark.vim'
+Plug 'justinmk/vim-dirvish'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'wellle/visual-split.vim'
 
 " }}
 
 " utility {{
 
-Plug 'Shougo/denite.nvim'
-Plug 'Tagbar'
 Plug 'ansiesc.vim'
+Plug 'brooth/far.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'fszymanski/fzf-gitignore.nvim'
 Plug 'gitignore'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'kassio/neoterm'
 Plug 'mbbill/undotree'
 Plug 'moll/vim-node'
 Plug 'tpope/vim-commentary'
@@ -143,7 +149,7 @@ set termencoding=utf-8
 
 " }}
 
-" file formats {{{
+" file formats {{
 
 set fileformat=unix
 set fileformats=unix,dos,mac
@@ -234,6 +240,8 @@ augroup END
 
 " keymaps {{
 
+let g:mapleader = ','
+
 " base maps {{
 
 " modified insert mode {{
@@ -291,42 +299,6 @@ nnoremap <silent> <C-]> <nop>
 
 " }}
 
-" <leader> maps {{
-
-let g:mapleader = ','
-
-" Pipe to selected to shell
-vnoremap <silent> <leader>r :!%:p<CR>
-
-" sort things
-noremap <silent> <leader>s :sort<CR>
-noremap <silent> <leader>S :sort!<CR>
-
-" open nvim config for editing
-nnoremap <silent> <leader>ev :edit $MYVIMRC<CR>
-
-" source nvim config
-nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
-
-" select all text
-noremap <silent> <leader>a ggvG$
-
-" open current directory with file manager
-nnoremap <silent> <leader>f :edit .<CR>
-
-" runs neomake on the current dir
-nnoremap <silent> <leader>b :Neomake!<CR>
-
-" Plug mappings
-nnoremap <silent> <leader>pc :PlugClean!<CR>
-nnoremap <silent> <leader>pi :PlugInstall<CR>
-nnoremap <silent> <leader>ps :PlugStatus<CR>
-nnoremap <silent> <leader>pu :PlugUpdate \| PlugUpgrade \| UpdateRemotePlugins<CR>
-
-" system clipboard
-vnoremap <silent> <leader>c "+y
-nnoremap <silent> <leader>v "+p
-
 " buffer maps {{
 
 function! BufferCount()
@@ -352,16 +324,66 @@ nnoremap <silent> <leader>w :call BufferDelete()<CR>
 nnoremap <silent> <leader>l :ls<CR>
 nnoremap <silent> <leader>n :enew<CR>
 
+" next/previous buffers
+nnoremap <silent> <C-k> :bn<CR>
+nnoremap <silent> <C-j> :bp<CR>
+
 "}}
+
+" fancy maps {{
+
+" run file if it's executable {{
+
+function! ExecuteCurrentFile()
+  if executable(expand('%:p'))
+    !./%
+  endif
+endfunction
+
+nnoremap <silent> <leader>r :call ExecuteCurrentFile()<CR>
 
 " }}
 
-" fancy maps {{
+" sort things
+noremap <silent> <leader>s :sort<CR>
+noremap <silent> <leader>S :sort!<CR>
+
+" open nvim config for editing
+nnoremap <silent> <leader>ve :edit $MYVIMRC<CR>
+
+" source nvim config
+nnoremap <silent> <leader>vs :source $MYVIMRC<CR>
+
+" select all text
+noremap <silent> <leader>a ggvG$
+
+" open current directory with file manager
+nnoremap <silent> <leader>f :Dirvish<CR>
+
+" runs neomake on the current dir
+nnoremap <silent> <leader>b :Neomake!<CR>
+
+" Plug mappings {{
+
+function! CleanVimPlugins()
+  PlugClean!
+  call delete(fnamemodify($MYVIMRC, ':p:h') . '/autoload/plug.vim.old')
+endfunction
+
+nnoremap <silent> <leader>pc :call CleanVimPlugins()<CR>
+nnoremap <silent> <leader>pi :PlugInstall<CR>
+nnoremap <silent> <leader>ps :PlugStatus<CR>
+nnoremap <silent> <leader>pu :PlugUpdate \| PlugUpgrade \| UpdateRemotePlugins<CR>
+
+" }}
+
+" system clipboard
+noremap <silent> <leader>c "+y
+nnoremap <silent> <leader>v "+p
 
 " opens up command edit
 nnoremap <silent> <M-c> q:
 vnoremap <silent> <M-c> q:
-
 
 " since shell is defined to /bin/bash for posix
 " compatibility, we use the $shell environment variable
@@ -369,10 +391,6 @@ vnoremap <silent> <M-c> q:
 nnoremap <silent> ~ :edit term://fish<CR>i
 tnoremap <silent> jk <C-\><C-n>
 tnoremap <silent> <Esc> <C-\><C-n>
-
-" shortcuts for buffer related stuff
-nnoremap <silent> <C-j> :bp<CR>
-nnoremap <silent> <C-k> :bn<CR>
 
 " }}
 
@@ -385,7 +403,9 @@ nnoremap <silent> <C-k> :bn<CR>
 
 " deoplete {{
 
-" deoplete
+" core {{
+
+" settings {{
 
 let g:deoplete#enable_at_startup = 1
 
@@ -394,6 +414,10 @@ let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 
 let g:deoplete#keyword_patterns = {}
+
+" }}
+
+" custom sets {{
 
 call deoplete#custom#set('_', 'min_pattern_length', 0)
 call deoplete#custom#set('_', 'sorters', ['sorter_word'])
@@ -409,6 +433,10 @@ call deoplete#custom#set('_', 'converters', [
   \ 'converter_truncate_menu',
 \ ])
 
+" }}
+
+" keymaps {{
+
 inoremap <silent> <expr> <C-g> deoplete#undo_completion()
 inoremap <silent> <expr> <C-l> deoplete#refresh()
 
@@ -418,28 +446,56 @@ inoremap <silent> <expr> <BS> deoplete#smart_close_popup()."\<C-h>"
 function! s:DeopleteCR() abort
   return deoplete#close_popup() . "\<CR>"
 endfunction
+
 inoremap <silent> <CR> <C-r>=<SID>DeopleteCR()<CR>
 
-" tmux-complete
-let g:tmuxcomplete#trigger = ''
+" }}
 
-" neopairs
+" }}
+
+" plugins {{
+
+" ternjs {{
+
+let g:tern_request_timeout = 1
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
+
+" }}
+
+" echodoc {{
+
+let g:echodoc_enable_at_startup = 1
+
+" }}
+
+" neopairs {{
+
 let g:neopairs#enable = 1
 
-" echodoc
-set noshowmode
-let g:echodoc_enable_at_startup = 1
+" }}
+
+" tmux-complete {{
+
+let g:tmuxcomplete#trigger = ''
+
+" }}
+
+" }}
 
 " }}
 
 " linting {{
 
-" Neomake
+" Neomake {{
+
 let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
 let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
 let g:neomake_highlight_lines = 1
 
 autocmd! BufWritePost * Neomake
+
+" }}
 
 " }}
 
@@ -467,6 +523,27 @@ nmap <leader><leader>L <Plug>(easymotion-overwin-line)
 
 map <leader><leader>w <Plug>(easymotion-bd-w)
 nmap <leader><leader>w <Plug>(easymotion-overwin-w)
+
+" }}
+
+" incsearch {{
+
+function! s:FuzzyAll(...) abort
+  return extend(copy({
+  \   'converters': [
+  \   incsearch#config#fuzzy#converter(),
+  \   incsearch#config#fuzzyspell#converter(),
+  \   ],
+  \ }), get(a:, 1, {}))
+endfunction
+
+map <silent> / <Plug>(incsearch-fuzzy-/)
+map <silent> ? <Plug>(incsearch-fuzzy-?)
+map <silent> g/ <Plug>(incsearch-fuzzy-stay)
+
+noremap <silent> <expr> z/ incsearch#go(<SID>FuzzyAll())
+noremap <silent> <expr> z? incsearch#go(<SID>FuzzyAll({ 'command': '?' ))
+noremap <silent> <expr> zg/ incsearch#go(<SID>FuzzyAll({ 'is_stay': 1 }))
 
 " }}
 
@@ -498,16 +575,35 @@ let g:lexical#dictionary_key = '<leader>k'
 
 " syntaxes {{
 
-" javascript
+" vim-polyglot {{
+
+let g:polyglot_disabled = ['dockerfile']
+
+" }}
+
+" syntax configurations {{
+
+" vim-javascript {{
+
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
 
-let g:jsx_ext_required = 0
+" }}
 
-" json
+" vim-json {{
+
 let g:vim_json_syntax_conceal = 0
 
-" markdown
+" }}
+
+" vim-jsx {{
+
+let g:jsx_ext_required = 0
+
+" }}
+
+" vim-markdown {{
+
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_math = 1
@@ -515,15 +611,39 @@ let g:vim_markdown_new_list_item_indent = 2
 
 " }}
 
+" }}
+
+" }}
+
 " user interface {{
 
-" Airline
+" Airline {{
+
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'jellybeans'
 let g:airline#extensions#tabline#enabled = 1
 
-" onedark.vim
-let g:onedark_terminal_italics = 1
+" }}
+
+" dirvish {{
+
+autocmd FileType dirvish call fugitive#detect(@%)
+
+" }}
+
+" gitgutter {{
+
+" next/prev diff chunk
+nmap <silent> ]h <Plug>GitGutterNextHunk
+nmap <silent> [h <Plug>GitGutterPrevHunk
+
+" }}
+
+" Tagbar {{
+
+nnoremap <silent> <leader>t :Tagbar<CR>
+
+" }}
 
 " }}
 
@@ -557,40 +677,6 @@ nnoremap <silent> <C-p> :call GetFiles()<CR>
 
 " }}
 
-" gitgutter {{
-
-" next/prev diff chunk
-nmap <silent> ]h <Plug>GitGutterNextHunk
-nmap <silent> [h <Plug>GitGutterPrevHunk
-
-" }}
-
-" incsearch {{
-function! s:FuzzyAll(...) abort
-  return extend(copy({
-  \   'converters': [
-  \   incsearch#config#fuzzy#converter(),
-  \   incsearch#config#fuzzyspell#converter(),
-  \   ],
-  \ }), get(a:, 1, {}))
-endfunction
-
-map <silent> / <Plug>(incsearch-fuzzy-/)
-map <silent> ? <Plug>(incsearch-fuzzy-?)
-map <silent> g/ <Plug>(incsearch-fuzzy-stay)
-
-noremap <silent> <expr> z/ incsearch#go(<SID>FuzzyAll())
-noremap <silent> <expr> z? incsearch#go(<SID>FuzzyAll({ 'command': '?' ))
-noremap <silent> <expr> zg/ incsearch#go(<SID>FuzzyAll({ 'is_stay': 1 }))
-
-" }}
-
-" Neoterm
-let g:neoterm_shell = 'fish'
-
-" Tagbar
-nnoremap <silent> <leader>t :Tagbar<CR>
-
 " tmux-navigator {{
 let g:tmux_navigator_no_mappings = 1
 
@@ -614,10 +700,14 @@ tnoremap <silent> <A-l> <C-\><C-n> :TmuxNavigateRight<CR>
 
 " }}
 
-" vim-editorconfig
+" vim-editorconfig {{
+
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+" }}
+
 " undotree {{
+
 let g:undotree_WindowLayout = 1
 let g:undotree_SplitWidth = 50
 let g:undotree_DiffpanelHeight = 20

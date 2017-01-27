@@ -19,7 +19,6 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
-Plug 'carlitux/deoplete-ternjs'
 Plug 'mhartington/deoplete-typescript', { 'for': 'typescript' }
 Plug 'steelsojka/deoplete-flow', { 'for': 'javascript' }
 Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
@@ -43,7 +42,7 @@ Plug 'Shougo/neopairs.vim'
 
 " language utilities {{
 
-Plug 'ternjs/tern_for_vim'
+Plug 'heavenshell/vim-jsdoc'
 
 " }}
 
@@ -455,14 +454,6 @@ inoremap <silent> <CR> <C-r>=<SID>DeopleteCR()<CR>
 
 " plugins {{
 
-" ternjs {{
-
-let g:tern_request_timeout = 1
-let g:tern#command = ['tern']
-let g:tern#arguments = ['--persistent']
-
-" }}
-
 " echodoc {{
 
 let g:echodoc_enable_at_startup = 1
@@ -482,6 +473,13 @@ let g:tmuxcomplete#trigger = ''
 " }}
 
 " }}
+
+" }}
+
+" language utilities {{
+
+let g:jsdoc_underscore_private = 1
+let g:jsdoc_enable_es6 = 1
 
 " }}
 

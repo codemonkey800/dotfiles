@@ -13,12 +13,12 @@ function help
 end
 
 function fetch
-    wget -q --show-progress -O- $argv[1] \
-    | tar -zxf - --strip-components 1 -C $argv[2]
+    curl -L# $argv[1] | tar -zxf - --strip-components 1 -C $argv[2]
 end
 
 if not set -q argv[1]; or string match -qr '(-h|--help)' -- "$argv[1]"
     help
+    functions -e help
     exit
 end
 

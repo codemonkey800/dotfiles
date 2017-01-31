@@ -148,8 +148,9 @@ set termencoding=utf-8
 
 " }}
 
-" file formats {{
+" file formats/file handling {{
 
+set backupcopy=yes
 set fileformat=unix
 set fileformats=unix,dos,mac
 

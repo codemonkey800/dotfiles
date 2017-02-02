@@ -38,18 +38,24 @@ mkdir -p $dir
 switch $environment
     case node
         set -l ver (curl -sL 'https://semver.io/node/unstable')
+        set -l yarn_ver (curl -sL 'https://semver.io/yarn/unstable')
 
-        echo 'Fetching Node.js and Yarn:'
-        for url in 'https://yarnpkg.com/latest.tar.gz' \
-                   "https://nodejs.org/dist/v$ver/node-v$ver-linux-x64.tar.gz"
-            fetch $url $dir
-        end
+        echo "Fetching Node $ver"
+        fetch "https://nodejs.org/dist/v$ver/node-v$ver-linux-x64.tar.gz" $dir
 
-        # remove npm
+        echo "Fetching Yarn $yarn_ver"
+        fetch "https://github.com/yarnpkg/yarn/releases/download/v$yarn_ver/yarn-v$yarn_ver.tar.gz" $dir
+
+        # remove provided npm
         rm -rf $dir/{bin/npm,lib/node_modules}
 
         # patch yarn to use $dir as $HOME
          sed -i "s|  node|  HOME=$PWD/$dir node|g" $dir/bin/yarn
+
+         # install ncu and latest npm
+         env PATH=(string join : $PATH):$PWD/$dir/bin yarn global add \
+            npm-check-updates \
+            npm@next
 
         echo -e \
 "

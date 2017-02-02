@@ -97,6 +97,7 @@ python-lolcat
 python-neovim
 python-pawk
 python-pip
+python-plumbum
 python-sh
 python-vint
 python-virtualenv
@@ -129,6 +130,7 @@ watchdog
 wget
 which
 whois
+wireshark-cli
 words
 xfsprogs
 xsel

@@ -19,7 +19,7 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
-Plug 'mhartington/deoplete-typescript', { 'for': 'typescript' }
+Plug 'mhartington/nvim-typescript', { 'for': 'typescript' }
 Plug 'steelsojka/deoplete-flow', { 'for': 'javascript' }
 Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
 Plug 'ujihisa/neco-look'
@@ -464,6 +464,17 @@ let g:echodoc_enable_at_startup = 1
 " neopairs {{
 
 let g:neopairs#enable = 1
+
+" }}
+
+" }}
+
+" sources {{
+
+" nvim-typescript {{
+
+let g:nvim_typescript#signature_complete = 0
+let g:nvim_typescript#type_info_on_hold = 1
 
 " }}
 

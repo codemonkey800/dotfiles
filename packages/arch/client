@@ -1,5 +1,6 @@
 adwaita-icon-theme
 android-udev
+atom-editor-beta-bin
 baobab
 clang
 cmake
@@ -42,6 +43,7 @@ gvfs-mtp
 gvfs-nfs
 gvfs-smb
 handbrake-cli
+hunspell-en
 jdk8-openjdk
 logmein-hamachi
 mit-scheme

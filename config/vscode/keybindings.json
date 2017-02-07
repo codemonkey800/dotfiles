@@ -12,7 +12,6 @@
     "command": "editor.action.insertLineAfter",
     "when": "editorTextFocus && !inDebugRepl && vim.mode == 'Insert'"
   },
-
   {
     "key": "alt+h",
     "command": "workbench.action.previousEditor",
@@ -22,5 +21,14 @@
     "key": "alt+l",
     "command": "workbench.action.nextEditor",
     "when": "editorTextFocus && !inDebugRepl && vim.mode != 'Insert'"
+  },
+  {
+    "key": "ctrl+b",
+    "command": "editor.action.goToDeclaration",
+    "when": "editorTextFocus && !inDebugRepl && vim.mode === 'Normal'"
+  },
+  {
+    "key": "meta+r",
+    "command": "workbench.action.reloadWindow"
   }
 ]

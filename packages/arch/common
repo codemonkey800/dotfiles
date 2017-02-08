@@ -93,6 +93,7 @@ pygmentize
 python2-neovim
 python2-pip
 python-jedi
+python-jinja
 python-lolcat
 python-neovim
 python-pawk

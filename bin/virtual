@@ -68,16 +68,13 @@ function deactivate
     functions -e deactivate yarn
 end
 
-set -gx VIRTUAL_ENV \$PWD/$dir
-
-set -gx OLD_PATH \$PATH
-set -gx PATH \$PATH \$PWD/$dir/bin
-
 if type -q yarn
     alias yarn 'env HOME=\$PWD/$dir yarn'
 end
 
-set -gx PATH \$PATH (yarn bin) > /dev/null ^ /dev/null
+set -gx VIRTUAL_ENV \$PWD/$dir
+set -gx OLD_PATH \$PATH
+set -gx PATH \$PATH \$PWD/$dir/bin (yarn bin) > /dev/null ^ /dev/null
 " > $dir/activate.fish
 
     case go
@@ -114,7 +111,6 @@ end
 
 set -gx VIRTUAL_ENV \$PWD/$dir
 set -gx GOROOT \$PWD/$dir
-
 set -gx OLD_PATH \$PATH
 set -gx PATH \$PATH \$GOROOT/bin
 

@@ -42,6 +42,7 @@ Plug 'Shougo/neopairs.vim'
 
 " language utilities {{
 
+Plug 'flowtype/vim-flow'
 Plug 'heavenshell/vim-jsdoc'
 
 " }}
@@ -183,7 +184,7 @@ set smartindent
 " user interface {{
 
 set cmdheight=1
-set completeopt=menu,menuone,noinsert
+set completeopt=menu,menuone,noinsert,noselect
 set foldlevelstart=10
 set foldmethod=syntax
 set hidden
@@ -410,6 +411,7 @@ let g:deoplete#enable_at_startup = 1
 
 let g:deoplete#enable_camel_case = 1
 let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_refresh_always = 1
 let g:deoplete#enable_smart_case = 1
 
 let g:deoplete#keyword_patterns = {}
@@ -489,8 +491,18 @@ let g:tmuxcomplete#trigger = ''
 
 " language utilities {{
 
+" vim-flow {{
+
+let g:flow#enable = 0
+
+" }}
+
+" vim-jsdoc {{
+
 let g:jsdoc_underscore_private = 1
 let g:jsdoc_enable_es6 = 1
+
+" }}
 
 " }}
 

@@ -68,13 +68,16 @@ function deactivate
     functions -e deactivate yarn
 end
 
+
+set -gx VIRTUAL_ENV \$PWD/$dir
+set -gx OLD_PATH \$PATH
+set -gx PATH \$PATH \$PWD/$dir/bin
+
 if type -q yarn
     alias yarn 'env HOME=\$PWD/$dir yarn'
 end
 
-set -gx VIRTUAL_ENV \$PWD/$dir
-set -gx OLD_PATH \$PATH
-set -gx PATH \$PATH \$PWD/$dir/bin (yarn bin) > /dev/null ^ /dev/null
+set -gx PATH \$PATH (yarn bin) > /dev/null ^ /dev/null
 " > $dir/activate.fish
 
     case go
@@ -118,7 +121,8 @@ echo 'Use the gopath function to cd to or set GOPATH'
 " > $dir/activate.fish
 
     case python
-        virtualenv $dir
+        python -m venv $dir
+
     case '*'
         echo "Unsupported environment: $argv[1]"
         exit -1

@@ -78,5 +78,7 @@
     }
   ],
   "editor.cursorBlinking": "blink",
-  "git.confirmSync": false
+  "git.confirmSync": false,
+  "workbench.welcome.enabled": false,
+  "vsicons.projectDetection.autoReload": true
 }

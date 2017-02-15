@@ -553,8 +553,8 @@ nmap <leader><leader>w <Plug>(easymotion-overwin-w)
 function! s:FuzzyAll(...) abort
   return extend(copy({
   \   'converters': [
-  \   incsearch#config#fuzzy#converter(),
-  \   incsearch#config#fuzzyspell#converter(),
+  \     incsearch#config#fuzzy#converter(),
+  \     incsearch#config#fuzzyspell#converter(),
   \   ],
   \ }), get(a:, 1, {}))
 endfunction
@@ -577,8 +577,9 @@ noremap <silent> <expr> zg/ incsearch#go(<SID>FuzzyAll({ 'is_stay': 1 }))
 augroup lexical
   autocmd!
   autocmd FileType markdown,mkd call lexical#init()
-  autocmd FileType textile call lexical#init()
+  autocmd FileType tex call lexical#init()
   autocmd FileType text call lexical#init({ 'spell': 0 })
+  autocmd FileType textile call lexical#init()
 augroup END
 
 let g:lexical#thesaurus = ['~/.config/nvim/mthesaur.txt']

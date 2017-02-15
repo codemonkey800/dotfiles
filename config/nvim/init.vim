@@ -494,6 +494,7 @@ let g:tmuxcomplete#trigger = ''
 " vim-flow {{
 
 let g:flow#enable = 0
+let g:flow#omnifunc = 0
 
 " }}
 

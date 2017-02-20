@@ -20,10 +20,12 @@ Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'mhartington/nvim-typescript', { 'for': 'typescript' }
+Plug 'ponko2/deoplete-fish', { 'for': 'fish' }
 Plug 'steelsojka/deoplete-flow', { 'for': 'javascript' }
 Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
 Plug 'ujihisa/neco-look'
 Plug 'wellle/tmux-complete.vim'
+Plug 'zchee/deoplete-docker', { 'for': 'dockerfile' }
 Plug 'zchee/deoplete-go', { 'for': 'go' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 
@@ -246,17 +248,18 @@ let g:mapleader = ','
 
 " modified insert mode {{
 
-function! SmartInsert()
+function! SmartInsert(key)
   if &buftype ==# 'terminal'
     startinsert
   elseif len(getline('.')) == 0
     return 'cc'
   else
-    return 'i'
+    return a:key
   endif
 endfunction
 
-nnoremap <silent> <expr> i SmartInsert()
+nnoremap <silent> <expr> i SmartInsert('i')
+nnoremap <silent> <expr> a SmartInsert('a')
 
 " }}
 

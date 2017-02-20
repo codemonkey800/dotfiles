@@ -1,53 +1,53 @@
 #!/usr/bin/env fish
 
-if test (uname) != "Linux"
-    echo "You need to run this script on Linux"
+if test (uname) != 'Linux'
+    echo 'You need to run this script on Linux'
 end
 
 # Must be root
 if test (id -u) -ne 0
-    echo "Must be root to run"
+    echo 'Must be root to run'
     exit -1
 end
 
 set gpu_path /sys/kernel/debug/vgaswitcheroo/switch
 
-if test ! -f "$gpu_path"
-    echo "File does not exist. Maybe you don't have switchable GPUs"
+if test ! -f $gpu_path
+    echo 'File does not exist. Maybe you don\'t have switchable GPUs'
     exit -1
 end
 
 function print_help
-    echo "Usage: gpu <option>"
+    echo 'Usage: gpu <option>'
     echo
-    echo "Options:"
-    echo "    --on   - Turns on discrete gpu"
-    echo "    --off  - Turns off discrete gpu"
-    echo "    --help - Prints this message"
+    echo 'Options:'
+    echo '    --on   - Turns on discrete gpu'
+    echo '    --off  - Turns off discrete gpu'
+    echo '    --help - Prints this message'
 end
 
 function print_state
-    cat "$gpu_path"
+    cat $gpu_path
 end
 
 function set_state
-   echo "$argv" | tee "$gpu_path" > /dev/null ^&1
+   echo $argv | tee $gpu_path > /dev/null ^&1
 end
 
-switch "$argv"
-    case "--on"
+switch $argv
+    case '--on'
         set_state ON
         print_state
-    case "--off"
+    case '--off'
         set_state OFF
         print_state
-    case "--help"
+    case '--help'
         print_help
     case '*'
         if test (count $argv) -eq 0
             print_state
         else
-            echo "Invalid switch"
+            echo 'Invalid switch'
             print_help
         end
 end

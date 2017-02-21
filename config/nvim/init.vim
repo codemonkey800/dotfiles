@@ -95,6 +95,7 @@ Plug 'Shougo/denite.nvim'
 Plug 'Tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
+Plug 'arakashic/chromatica.nvim'
 Plug 'flazz/vim-colorschemes'
 Plug 'justinmk/vim-dirvish'
 Plug 'vim-airline/vim-airline'
@@ -419,6 +420,12 @@ let g:deoplete#enable_smart_case = 1
 
 let g:deoplete#keyword_patterns = {}
 
+let g:deoplete#ignore_sources = {
+  \ '_': [
+    \ 'around',
+  \]
+\}
+
 " }}
 
 " custom sets {{
@@ -477,7 +484,7 @@ let g:neopairs#enable = 1
 
 " nvim-typescript {{
 
-let g:nvim_typescript#signature_complete = 0
+let g:nvim_typescript#signature_complete = 1
 let g:nvim_typescript#type_info_on_hold = 1
 
 " }}
@@ -648,6 +655,12 @@ let g:vim_markdown_new_list_item_indent = 2
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'jellybeans'
 let g:airline#extensions#tabline#enabled = 1
+
+" }}
+
+" chromatica.nvim {{
+
+let g:chromatica#enable_at_startup = 1
 
 " }}
 

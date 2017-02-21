@@ -25,7 +25,7 @@
   {
     "key": "ctrl+b",
     "command": "editor.action.goToDeclaration",
-    "when": "editorTextFocus && !inDebugRepl && vim.mode === 'Normal'"
+    "when": "editorTextFocus && !inDebugRepl && vim.mode !== 'Insert'"
   },
   {
     "key": "meta+r",

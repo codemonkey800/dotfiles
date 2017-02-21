@@ -20,7 +20,14 @@ function l -d 'Lists all files in a directory or reads a file'
             if eval $pager
                 eval "less -N $files[1]"
             else
-                pygmentize -g $files[1]
+                # pipe file through syntax highlighter
+                # depending on syntax
+                switch (echo $files[1] | pawk -F. f[-1])
+                    case 'json'
+                        jq . $files[1]
+                    case '*'
+                        pygmentize -g $files[1]
+                end
             end
         else
             echo "'$files[1]' doest not exist!"

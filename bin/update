@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-if test (uname) != 'Linux' -o (lsb_release -d | pawk f[1:]) != 'Arch Linux'
+if test (uname) != 'Linux'; or test (lsb_release -d | pawk f[1:]) != 'Arch Linux'
     echo 'This script can only be run on Arch Linux!'
     exit -1
 end

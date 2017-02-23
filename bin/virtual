@@ -1,5 +1,26 @@
 #!/usr/bin/env fish
 
+function cache
+    set cmd $argv[1]
+    set env $argv[2]
+    set dir $argv[3]
+    set cache ~/.cache/{$env}_venv.tar.xz
+
+    switch $cmd
+        case 'set'
+            tar -caf $cache $dir/*
+        case 'get'
+            echo "Using cache: $cache"
+            tar -xf $cache -C $dir
+        case 'get-name'
+            echo $cache
+        case '*'
+            echo "Invalid cache command: '$cmd'"
+            return -1
+    end
+end
+
+# print help message
 function help
     echo 'Boostrap development environment using latest dev runtime.'
     echo
@@ -13,7 +34,10 @@ function help
 end
 
 function fetch
-    curl -L# $argv[1] | tar -zxf - --strip-components 1 -C $argv[2]
+    set url $argv[1]
+    set dest $argv[2]
+
+    curl -L# $url | tar -zxf - --strip-components 1 -C $dest
 end
 
 if not set -q argv[1]; or string match -qr '(-h|--help)' -- "$argv[1]"
@@ -37,91 +61,58 @@ mkdir -p $dir
 # setup environment
 switch $environment
     case node
+        cache get node $dir
+
         set -l ver (curl -sL 'https://semver.io/node/unstable')
         set -l yarn_ver (curl -sL 'https://semver.io/yarn/unstable')
+        set -l cache (cache get-name node $dir)
 
-        echo "Fetching Node $ver"
-        fetch "https://nodejs.org/dist/v$ver/node-v$ver-linux-x64.tar.gz" $dir
+        if test -f $cache
+            cache get node $dir
+        else
+            echo "Fetching Node $ver"
+            fetch "https://nodejs.org/dist/v$ver/node-v$ver-linux-x64.tar.gz" $dir
 
-        echo "Fetching Yarn $yarn_ver"
-        fetch "https://github.com/yarnpkg/yarn/releases/download/v$yarn_ver/yarn-v$yarn_ver.tar.gz" $dir
+            echo "Fetching Yarn $yarn_ver"
+            fetch "https://github.com/yarnpkg/yarn/releases/download/v$yarn_ver/yarn-v$yarn_ver.tar.gz" $dir
 
-        # remove provided npm
-        rm -rf $dir/{bin/npm,lib/node_modules}
+            # remove provided npm
+            rm -rf $dir/{bin/npm,lib/node_modules}
 
-        # patch yarn to use $dir as $HOME
-         sed -i "s|  node|  HOME=$PWD/$dir node|g" $dir/bin/yarn
+            # patch yarn to use $dir as $HOME
+            sed -i "s|  node|  HOME=$PWD/$dir node|g" $dir/bin/yarn
 
-         # install ncu and latest npm
-         env PATH=(string join : $PATH):$PWD/$dir/bin yarn global add \
-            npm-check-updates \
-            npm@next
+            # install ncu and latest npm
+            env PATH=(string join : $PATH):$PWD/$dir/bin yarn global add \
+                npm-check-updates \
+                npm@next
 
-        echo -e \
-"
-function deactivate
-    set -e VIRTUAL_ENV
-    if set -q OLD_PATH
-        set -gx PATH \$OLD_PATH
-        set -e OLD_PATH
-    end
-    functions -e deactivate yarn
-end
-
-
-set -gx VIRTUAL_ENV \$PWD/$dir
-set -gx OLD_PATH \$PATH
-set -gx PATH \$PATH \$PWD/$dir/bin
-
-if type -q yarn
-    alias yarn 'env HOME=\$PWD/$dir yarn'
-end
-
-set -gx PATH \$PATH (yarn bin) > /dev/null ^ /dev/null
-" > $dir/activate.fish
+            # create cache
+            cache set node $dir
+        end
 
     case go
-        set -l url (curl -sL 'https://golang.org/dl/' | grep -m1 linux | string match -r 'href="(http.*)"')[2]
-        echo "Fetching Go:"
-        fetch $url $dir
+        set -l cache (cache get-name go $dir)
 
-    echo -e \
-"
-function deactivate
-    set -e VIRTUAL_ENV
-    set -e GOPATH
-    set -e GOROOT
-    if set -q OLD_PATH
-        set -gx PATH \$OLD_PATH
-        set -e OLD_PATH
-    end
-    functions -e deactivate gopath
-end
+        if test -f $cache
+            cache get go $dir
+        else
+            set -l url (
+                curl -sL 'https://golang.org/dl/' \
+                    | grep -m1 linux \
+                    | string match -r 'href="(http.*)"'
+            )[2]
 
-function gopath
-    if not set -q argv[1]
-        if set -q GOPATH
-            cd \$GOPATH
+            echo "Fetching Go:"
+            fetch $url $dir
+
+            # create cache
+            cache set node $dir
         end
-    else
-        if set -q GOPATH; and set -l i (contains -i \$GOPATH/bin \$PATH)
-            set -e PATH[\$i]
-        end
-        set -gx GOPATH \$argv[1]
-        set -gx PATH \$PATH \$GOPATH/bin > /dev/null ^ /dev/null
-    end
-end
-
-set -gx VIRTUAL_ENV \$PWD/$dir
-set -gx GOROOT \$PWD/$dir
-set -gx OLD_PATH \$PATH
-set -gx PATH \$PATH \$GOROOT/bin
-
-echo 'Use the gopath function to cd to or set GOPATH'
-" > $dir/activate.fish
 
     case python
         python -m venv $dir
+        cache_venv python
 
     case '*'
         echo "Unsupported environment: $argv[1]"

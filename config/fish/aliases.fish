@@ -43,3 +43,6 @@ __aliasif npmls 'npm ls --depth=0'
 __aliasif pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
 __aliasif subl 'subl3'
 __aliasif top 'htop'
+
+functions -e __aliasif
+

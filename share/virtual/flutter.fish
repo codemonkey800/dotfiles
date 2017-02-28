@@ -14,4 +14,3 @@ set -gx VIRTUAL_ENV $PWD/{venv_dir}
 set -gx OLD_PATH $PATH
 set -gx PATH $PATH $PWD/{venv_dir}/bin
 
-set -gx PATH $PATH (yarn bin) > /dev/null ^ /dev/null

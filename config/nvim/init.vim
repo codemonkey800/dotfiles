@@ -265,7 +265,7 @@ nnoremap <silent> <expr> a SmartInsert('a')
 " }}
 
 " improves <C-l>
-nnoremap <C-l> :nohlsearch<CR> :diffupdate<CR> :syntax sync fromstart<CR><C-l>
+nnoremap <silent> <C-l> :nohlsearch<CR> :diffupdate<CR> :syntax sync fromstart<CR><C-l>
 
 " escape insert mode
 inoremap <silent> jk <esc>
@@ -398,6 +398,27 @@ tnoremap <silent> <Esc> <C-\><C-n>
 
 " }}
 
+" spell maps {
+
+" toggle {{
+
+function! ToggleSpell()
+    if &spell
+        set nospell
+    else
+        set spell
+    end
+endfunction
+
+nnoremap <silent> <M-s> :call ToggleSpell()<CR>
+
+" }}
+
+nnoremap <silent> gs ]s
+nnoremap <silent> gS [s
+
+" }
+
 " }}
 
 " plugin settings/keymaps {{
@@ -423,6 +444,7 @@ let g:deoplete#keyword_patterns = {}
 let g:deoplete#ignore_sources = {
   \ '_': [
     \ 'around',
+    \ 'buffer',
   \]
 \}
 
@@ -469,6 +491,12 @@ inoremap <silent> <CR> <C-r>=<SID>DeopleteCR()<CR>
 " echodoc {{
 
 let g:echodoc_enable_at_startup = 1
+
+" }}
+
+" jedi {{
+
+let g:deoplete#sources#jedi#show_docstring = 1
 
 " }}
 

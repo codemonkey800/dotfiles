@@ -1,15 +1,3 @@
-# helper functions
-function __add_to_path
-    for arg in $argv
-        if not contains $arg $PATH
-            if string match -q '/*' $arg; and not test -d $arg
-                return -1
-            end
-            set -gx PATH $PATH $arg ^ /dev/null
-        end
-    end
-end
-
 # less stuff
 set -gx LESS '-R'
 set -gx LESSOPEN '|pygmentize -g %s'
@@ -38,9 +26,9 @@ set -gx SOFTWARE_HOME ~/share/software
 set -gx ANDROID_HOME $SOFTWARE_HOME/android/sdk
 
 # PATH stuff
-__add_to_path (find $DOTFILES/bin -type d)
-__add_to_path $ANDROID_HOME/tools
-__add_to_path $ANDROID_HOME/platform-tools
+set -gx PATH $PATH $DOTFILES/bin
+set -gx PATH $ANDROID_HOME/platform-tools ^ /dev/null
+set -gx PATH $ANDROID_HOME/tools ^ /dev/null
 
 # FZF stuff
 if type -q fzf

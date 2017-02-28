@@ -26,8 +26,8 @@ function gopath
     end
 end
 
-set -gx VIRTUAL_ENV $PWD/%s
-set -gx GOROOT $PWD/%s
+set -gx VIRTUAL_ENV $PWD/{venv_dir}
+set -gx GOROOT $PWD/{venv_dir}
 set -gx OLD_PATH $PATH
 set -gx PATH $PATH $GOROOT/bin
 

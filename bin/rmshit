@@ -5,36 +5,44 @@ import os
 import os.path as path
 import shutil
 
-shitty_config_file = path.expanduser('~/.shittyfiles')
+def main():
+    shitty_config_file = path.expandvars('$DOTFILES/share/shittyfiles')
 
-if not path.exists(shitty_config_file):
-    print('Your shitty config file does not exist!')
-    print('Create the file "{0}"'.format(shitty_config_file))
-    exit(-1)
+    if not path.exists(shitty_config_file):
+        print('Your shitty config file does not exist!')
+        print('Create the file "{0}"'.format(shitty_config_file))
+        exit(-1)
 
-with open(shitty_config_file) as file:
-    shitty_files = file.read().splitlines()
+    with open(shitty_config_file) as file:
+        shitty_files = file.read().splitlines()
 
-found = []
-for file in shitty_files:
-    found += glob.glob(path.expanduser(file))
+    found = []
+    for file in shitty_files:
+        found += glob.glob(path.expanduser(file))
 
-if len(found) > 0:
-    print('Found {0} shitty files:'.format(len(found)))
-    for file in found:
-        print('  ', file)
+    if len(found) > 0:
+        print('Found {0} shitty files:'.format(len(found)))
+        for file in found:
+            print('  ', file)
 
-    ans = input('Delete files? ([y]/n):')
+        ans = input('Delete files? ([y]/n):')
 
-    if ans == 'n':
-        print('Maybe next time!')
-        exit(0)
+        if ans == 'n':
+            print('Maybe next time!')
+            exit(0)
 
-    for file in found:
-        if path.isfile(file):
-            os.remove(file)
-        else:
-            shutil.rmtree(file)
-    print('All done! :)')
-else:
-    print('No shitty files found! :)')
+        for file in found:
+            if path.isfile(file):
+                os.remove(file)
+            else:
+                shutil.rmtree(file)
+        print('All done! :)')
+    else:
+        print('No shitty files found! :)')
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt as e:
+        pass
+

@@ -1,121 +1,275 @@
-#!/usr/bin/env fish
+#!/usr/bin/env python3
 
-function cache
-    set cmd $argv[1]
-    set env $argv[2]
-    set dir $argv[3]
-    set cache ~/.cache/{$env}_venv.tar.xz
+import os
+import plumbum.cli as cli
+import re
+import sys
+import tempfile as tmp
+import xml.dom.minidom as dom
 
-    switch $cmd
-        case 'set'
-            tar -caf $cache $dir/*
-        case 'get'
-            echo "Using cache: $cache"
-            tar -xf $cache -C $dir
-        case 'get-name'
-            echo $cache
-        case '*'
-            echo "Invalid cache command: '$cmd'"
-            return -1
-    end
-end
+from abc import (
+    ABC,
+    abstractmethod,
+    abstractproperty,
+)
+from collections import namedtuple
+from plumbum import BG, FG, local as sh
 
-# print help message
-function help
-    echo 'Boostrap development environment using latest dev runtime.'
-    echo
-    echo 'Usage: virtual <environment> [dir]'
-    echo
-    echo 'Arguments:'
-    echo '  environment The environment to setup'
-    echo
-    echo 'Options:'
-    echo '  -h, --help  Print this help message'
-end
-
-function fetch
-    set url $argv[1]
-    set dest $argv[2]
-
-    curl -L# $url | tar -zxf - --strip-components 1 -C $dest
-end
-
-if not set -q argv[1]; or string match -qr '(-h|--help)' -- "$argv[1]"
-    help
-    functions -e help
-    exit
-end
-
-# args
-set environment $argv[1]
-set dir (
-    if set -q argv[2]
-        echo $argv[2]
-    else
-        echo '.venv'
-    end
+LINK_TEMPLATES = dict(
+    node='https://nodejs.org/dist/v{version}/node-v{version}-linux-x64.tar.gz',
+    go='https://storage.googleapis.com/golang/{version}.linux-amd64.tar.gz',
 )
 
-mkdir -p $dir
+ENV_SCRIPTS = {
+    file.stem: file
+    for file in sh.path(sh.env['DOTFILES'], 'share/virtual')
+}
 
-# setup environment
-switch $environment
-    case node
-        cache get node $dir
+class Environment(ABC):
+    '''Abstract class that represents a development environment.'''
 
-        set -l ver (curl -sL 'https://semver.io/node/unstable')
-        set -l yarn_ver (curl -sL 'https://semver.io/yarn/unstable')
-        set -l cache (cache get-name node $dir)
+    def __init__(self, dest='.venv'):
+        self.dest = sh.cwd / dest
 
-        if test -f $cache
-            cache get node $dir
-        else
-            echo "Fetching Node $ver"
-            fetch "https://nodejs.org/dist/v$ver/node-v$ver-linux-x64.tar.gz" $dir
+    @property
+    @abstractmethod
+    def name(self):
+        '''Name of the environment.'''
 
-            echo "Fetching Yarn $yarn_ver"
-            fetch "https://github.com/yarnpkg/yarn/releases/download/v$yarn_ver/yarn-v$yarn_ver.tar.gz" $dir
+    @property
+    @abstractmethod
+    def version(self):
+        '''Latest version of environment'''
 
-            # remove provided npm
-            rm -rf $dir/{bin/npm,lib/node_modules}
+    @property
+    def links(self):
+        '''Returns a list of download links for the dev environment.'''
+        link = LINK_TEMPLATES.get(self.name, None)
+        if link:
+            link = link.format(version=self.version)
+        return [link]
 
-            # patch yarn to use $dir as $HOME
-            sed -i "s|  node|  HOME=$PWD/$dir node|g" $dir/bin/yarn
+    @property
+    def cache(self):
+        '''Returns the file path for this environment's cache file.'''
+        return sh.path(f'~/.cache/{self.name}_venv.tar.xz')
 
-            # install ncu and latest npm
-            env PATH=(string join : $PATH):$PWD/$dir/bin yarn global add \
-                npm-check-updates \
-                npm@next
+    def pre_cache(self):
+        '''Hook that child classes should override for pre-cache operations.'''
 
-            # create cache
-            cache set node $dir
-        end
+    def load_cache(self):
+        '''Load a cached virtual environment.'''
+        pv = sh['pv']
+        tar = sh['tar']
 
-    case go
-        set -l cache (cache get-name go $dir)
+        print('Extracting cached virtual environment:')
 
-        if test -f $cache
-            cache get go $dir
-        else
-            set -l url (
-                curl -sL 'https://golang.org/dl/' \
-                    | grep -m1 linux \
-                    | string match -r 'href="(http.*)"'
-            )[2]
+        chain = pv[self.cache]
+        chain |= tar[
+            '-J', '-x',
+            '-f', '-',
+            '-C', self.dest,
+        ]
+        chain & FG
 
-            echo "Fetching Go:"
-            fetch $url $dir
+    def save_cache(self):
+        '''Caches the current virtual environment for later use.'''
+        du = sh['du']
+        pawk = sh['pawk']
+        pv = sh['pv']
+        tar = sh['tar']
+        xz = sh['xz']
 
-            # create cache
-            cache set node $dir
-        end
+        print('Cacheing virtual environment:')
 
-    case python
-        python -m venv $dir
-        cache_venv python
+        with sh.cwd(self.dest):
+            chain = tar['-c', '-f', '-', '.']
+            chain |= pv['-s', re.split('\s+', du('-s', '-b'))[0]]
+            chain |= xz['-z', '-c'] > self.cache
+            chain & FG
 
-    case '*'
-        echo "Unsupported environment: $argv[1]"
-        exit -1
-end
+    def mkdest(self):
+        '''
+            Creates the destination directory. If it already exists, then
+            prompt the user to continue by deleting the contents of the
+            existing virtual environment or exit.
+        '''
+        if self.dest.exists() and len([*self.dest]) > 0:
+            print(f'{self.dest} exists and is non-empty.')
+            ans = cli.terminal.ask('Erase contents and continue?', 'y')
+
+            if ans in ['', 'y', 'yes']:
+                self.dest.delete()
+            else:
+                print('Exiting.')
+                sys.exit(0)
+
+        self.dest.mkdir()
+
+    def init(self, force=False):
+        '''Creates and caches the virtual environment.'''
+        self.mkdest()
+
+        if not force and self.cache.exists():
+            self.load_cache()
+        else:
+            self.fetch()
+            self.pre_cache()
+            self.save_cache()
+
+        self.write_activate_script()
+
+        # ayy lmao we did it bois
+        print('Done!')
+        print('Run to activate:')
+        print(f'  $ source {self.dest.name}/activate.fish')
+
+    def write_activate_script(self):
+        '''Creates a template file '''
+        if self.name in ENV_SCRIPTS:
+            data = ENV_SCRIPTS[self.name].read()
+            (sh.cwd / self.dest / 'activate.fish').write(
+                data.format(venv_dir=self.dest.name),
+            )
+
+    def fetch(self, force=False):
+        '''Fetches the latest distribution of this development environment.'''
+        curl = sh['curl']
+        tar = sh['tar']
+
+        for link in self.links:
+            chain = curl['-#', '-L', link]
+            chain |= tar[
+                '-z', '-x',
+                '-f', '-',
+                '-C', self.dest,
+                '--strip-components', 1,
+            ]
+
+            print(f'Fetching {link}')
+            chain & FG
+
+    def __repr__(self):
+        return f'<Environment {self.name}>'
+
+    def __str__(self):
+        return self.name
+
+class NodeEnvironment(Environment):
+    NODE_MIRROR = 'https://nodejs.org/dist/latest'
+
+    @property
+    def name(self):
+        return 'node'
+
+    @property
+    def version(self):
+        curl = sh['curl']
+        return curl('https://semver.io/node/unstable')
+
+    @property
+    def links(self):
+        return super().links + ['https://yarnpkg.com/latest.tar.gz']
+
+    def pre_cache(self):
+        '''Install latest npm and npm-check-updates before being cached.'''
+        with sh.env(PATH=sh.env['PATH'] + ':' + sh.cwd / self.dest / 'bin'):
+            data = sh.which('yarn').read()
+            data = re.sub(
+                r'^(\s*)node(.*)',
+                f'\\1HOME={sh.cwd / self.dest} node\\2',
+                data,
+                flags=re.MULTILINE,
+            )
+            sh.which('yarn').write(data)
+
+            print('Adding npm@next and npm-check-updates.')
+            sh['yarn'][
+                'global', 'add',
+                'npm@next', 'npm-check-updates',
+            ] & FG
+
+
+class GoEnvironment(Environment):
+    GO_DL_URL = 'https://storage.googleapis.com/golang'
+
+    @property
+    def name(self):
+        return 'go'
+
+    @property
+    def version(self):
+        xml = dom.parseString(sh['curl'](self.GO_DL_URL))
+        ver = xml.getElementsByTagName('NextMarker')[0].firstChild.nodeValue
+        ver = '.'.join(ver.split('.')[:2])
+        return ver
+
+class PythonEnvironment(Environment):
+    @property
+    def name(self):
+        return 'python'
+
+    @property
+    def version(self):
+        return sys.version
+
+    def write_activate_script(self):
+        dest = self.dest.name
+        sh['ln'](
+            '-s',
+            sh.cwd / f'{dest}/bin/activate.fish',
+            sh.cwd / f'{dest}/activate.fish'
+        )
+
+    def fetch(self, force=False):
+        sh.python['-m', 'venv', self.dest] & FG
+
+class FlutterEnvironment(Environment):
+    @property
+    def name(self):
+        return 'flutter'
+
+    @property
+    def version(self):
+        return 'master'
+
+    def fetch(self, force=False):
+        print('Fetching Flutter SDK:')
+        sh['git'][
+            'clone',
+            'git://github.com/flutter/flutter.git',
+            self.dest,
+        ] & FG
+
+ENVIRONMENTS = {
+    'go': GoEnvironment,
+    'node': NodeEnvironment,
+    'python': PythonEnvironment,
+    'flutter': FlutterEnvironment,
+}
+
+class Virtual(cli.Application):
+    '''
+        A simple cli script that creates a virtual environment
+        and activation file.
+    '''
+
+    PROGNAME = 'virtual'
+    VERSION = '0.1.0'
+
+    force = cli.Flag(
+        ['f', '--force'],
+        help='Download new environment even if there\'s a cached one available',
+    )
+
+    @cli.positional(cli.Set(*ENVIRONMENTS.keys(), case_sensitive=False))
+    def main(self, environment, dest='.venv'):
+        env = ENVIRONMENTS[environment](dest=dest)
+        env.init(force=self.force)
+
+if __name__ == '__main__':
+    try:
+        Virtual.run()
+    except KeyboardInterrupt as e:
+        pass
 

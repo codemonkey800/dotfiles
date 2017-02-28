@@ -44,8 +44,9 @@ Plug 'Shougo/neopairs.vim'
 
 " language utilities {{
 
-Plug 'flowtype/vim-flow'
-Plug 'heavenshell/vim-jsdoc'
+Plug 'critiqjo/lldb.nvim', { 'for': ['c', 'cpp'] }
+Plug 'flowtype/vim-flow', { 'for': ['javascript', 'jsx'] }
+Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'typescript'] }
 
 " }}
 
@@ -528,6 +529,15 @@ let g:tmuxcomplete#trigger = ''
 " }}
 
 " language utilities {{
+
+" lldb.vim {{
+
+nmap <silent> <M-b> <Plug>LLBreakSwitch
+nnoremap <silent> <leader>dd :LLmode debug<CR>
+nnoremap <silent> <leader>dc :LLmode code<CR>
+nnoremap <silent> <leader>dn :LL continue<CR>
+
+" }}
 
 " vim-flow {{
 

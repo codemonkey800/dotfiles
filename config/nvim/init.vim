@@ -95,7 +95,7 @@ Plug 'Shougo/denite.nvim'
 Plug 'Tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
-Plug 'arakashic/chromatica.nvim'
+Plug 'arakashic/chromatica.nvim', { 'for': ['c', 'cpp'] }
 Plug 'flazz/vim-colorschemes'
 Plug 'justinmk/vim-dirvish'
 Plug 'vim-airline/vim-airline'

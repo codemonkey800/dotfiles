@@ -1,54 +1,43 @@
-#!/usr/bin/env fish
+#!/usr/bin/env python3
 
-if test (uname) != 'Linux'
-    echo 'You need to run this script on Linux'
-end
+import common
+import os
+import plumbum.cli as cli
+import sys
 
-# Must be root
-if test (id -u) -ne 0
-    echo 'Must be root to run'
-    exit -1
-end
+from plumbum import local as sh
 
-set gpu_path /sys/kernel/debug/vgaswitcheroo/switch
+VGA_SWITCH_PATH = sh.path('/sys/kernel/debug/vgaswitcheroo/switch')
 
-if test ! -f $gpu_path
-    echo 'File does not exist. Maybe you don\'t have switchable GPUs'
-    exit -1
-end
+class Gpu(cli.Application):
+    '''
+        Manages the power state of the MacBook discrete GPU using vgaswitcharoo
+    '''
 
-function print_help
-    echo 'Usage: gpu <option>'
-    echo
-    echo 'Options:'
-    echo '    --on   - Turns on discrete gpu'
-    echo '    --off  - Turns off discrete gpu'
-    echo '    --help - Prints this message'
-end
+    PROGNAME = 'gpu'
+    VERSION = '0.2.0'
 
-function print_state
-    cat $gpu_path
-end
+    @cli.positional(cli.Set(
+        'status',
+        'on',
+        'off',
+        case_sensitive=False
+    ))
+    def main(self, command='status'):
+        common.check_linux()
+        common.check_root()
 
-function set_state
-   echo $argv | tee $gpu_path > /dev/null ^&1
-end
+        if command == 'status':
+            print(VGA_SWITCH_PATH.read())
+        elif command == 'on':
+            VGA_SWITCH_PATH.write('ON')
+        else:
+            VGA_SWITCH_PATH.write('OFF')
 
-switch $argv
-    case '--on'
-        set_state ON
-        print_state
-    case '--off'
-        set_state OFF
-        print_state
-    case '--help'
-        print_help
-    case '*'
-        if test (count $argv) -eq 0
-            print_state
-        else
-            echo 'Invalid switch'
-            print_help
-        end
-end
+
+if __name__ == '__main__':
+    try:
+        Gpu.run()
+    except KeyboardInterrupt as e:
+        pass
 

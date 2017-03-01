@@ -1,15 +1,31 @@
-#!/usr/bin/env fish
+#!/usr/bin/env python3
 
-echo -e 'y\ny\n' | sudo pacman -Scc
+from glob import glob
+from plumbum import FG, local as sh
 
-set pkgs (pacman -Qqdt)
-if test (count $pkgs) -gt 0
-    sudo pacman -Rscun --noconfirm $pkgs
-end
+def main():
+    echo = sh['echo']
+    pacman = sh['pacman']
+    rm = sh['rm']
+    rmshit = sh['rmshit']
+    sudo = sh['sudo']
 
-set files /tmp/{yaourt*,npm*}
-echo 'Removing' (count $files) 'files from /tmp!'
-sudo rm -rf $files
+    chain = echo['-e', 'y\ny\n'] | sudo[pacman['-Scc']]
+    print(chain())
 
-echo y | rmshit
+    pkgs = pacman('-Qqdt', retcode=None).split('\n')[:-1]
+    if len(pkgs) > 0:
+        sudo[pacman['-Rscun', '--noconfirm', pkgs]] & FG
+
+    rm('-rf', glob('/tmp/npm*'))
+    rm('-rf', glob('/tmp/yaourt*'))
+
+    chain = echo['y'] | rmshit
+    print(chain())
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt as e:
+        pass
 

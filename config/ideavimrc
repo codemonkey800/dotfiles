@@ -2,57 +2,99 @@
 " that is used for IDEA based IDEs. It includes basic and mapleader
 " based mappings as well as mappings for IDE actions.
 
-" basic mappings {{
+" keymaps {{
+
+let g:mapleader = ','
+
+" base maps {{
+
+" modified insert mode {{
+
+function! SmartInsert(key)
+  if &buftype ==# 'terminal'
+    startinsert
+  elseif len(getline('.')) == 0
+    return 'cc'
+  else
+    return a:key
+  endif
+endfunction
+
+nnoremap <expr> i SmartInsert('i')
+nnoremap <expr> a SmartInsert('a')
+
+" }}
+
+" improves <C-l>
+nnoremap <C-l> :nohlsearch<CR> :diffupdate<CR> :syntax sync fromstart<CR><C-l>
 
 " escape insert mode
 inoremap jk <esc>
-
-" Ctrl-C to escape
-nnoremap <C-c> <esc>
 
 " move vertically by visual line
 noremap j gj
 noremap k gk
 
 " swap capital H and L for begin and end of lines
-noremap H 0
+noremap H ^
 noremap L $
-noremap 0 <nop>
-noremap $ <nop>
 
-" quit window
+" quit and force quit maps
+nnoremap Q :q!<CR>
 nnoremap q :q<CR>
 
+" space open/closes folds
+nnoremap <space> za
+
 " adds a new line below or above without entering insert mode
-" nnoremap o o<esc>k
-" nnoremap O O<esc>j
+noremap o o<esc>k
+noremap O O<esc>j
 
 " redo last thing
-nnoremap U :redo<CR>
+noremap U :redo<CR>
 
-" go back from tag using Ctrl-[, which makes more sense than Ctrl-t
+" save current file
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>li
+
+" Go back from tag using Ctrl-[, which makes more sense than Ctrl-t
 nnoremap gt <C-]>
 nnoremap gT <C-t>
 nnoremap <C-]> <nop>
 
-" next and previous tabs
-nnoremap <C-j> :action PreviousTab<CR>
-nnoremap <C-k> :action NextTab<CR>
-
-" window navigation
-
 " }}
 
-" leader mappings {{
-
-let g:mapleader = ','
+" fancy maps {{
 
 " sort things
 noremap <leader>s :sort<CR>
 noremap <leader>S :sort!<CR>
 
 " select all text
-nnoremap <leader>a ggvG$
+noremap <leader>a ggvG$
+
+" }}
+
+" spell maps {
+
+" toggle {{
+
+function! ToggleSpell()
+    if &spell
+        set nospell
+    else
+        set spell
+    end
+endfunction
+
+nnoremap <M-s> :call ToggleSpell()<CR>
+
+" }}
+
+nnoremap  gs ]s
+nnoremap  gS [s
+
+" }
 
 " }}
 

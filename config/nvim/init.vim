@@ -44,7 +44,6 @@ Plug 'Shougo/neopairs.vim'
 
 " language utilities {{
 
-Plug 'critiqjo/lldb.nvim', { 'for': ['c', 'cpp'] }
 Plug 'flowtype/vim-flow', { 'for': ['javascript', 'jsx'] }
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'typescript'] }
 
@@ -100,7 +99,6 @@ Plug 'arakashic/chromatica.nvim', { 'for': ['c', 'cpp'] }
 Plug 'flazz/vim-colorschemes'
 Plug 'justinmk/vim-dirvish'
 Plug 'mhinz/vim-startify'
-Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'wellle/visual-split.vim'
@@ -125,6 +123,14 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 
 " }}
+
+" special plugins {{
+
+" vim-devicons must be load after the other plugins
+Plug 'ryanoasis/vim-devicons'
+
+" }}
+
 
 call plug#end()
 
@@ -211,6 +217,8 @@ colorscheme jellybeans
 hi Normal ctermbg=none guibg=none
 hi NonText ctermbg=none guibg=none
 hi LineNr ctermbg=none guibg=none
+
+set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete\ Mono\ 14
 
 " }}
 
@@ -531,15 +539,6 @@ let g:tmuxcomplete#trigger = ''
 " }}
 
 " language utilities {{
-
-" lldb.vim {{
-
-nmap <silent> <M-b> <Plug>LLBreakSwitch
-nnoremap <silent> <leader>dd :LLmode debug<CR>
-nnoremap <silent> <leader>dc :LLmode code<CR>
-nnoremap <silent> <leader>dn :LL continue<CR>
-
-" }}
 
 " vim-flow {{
 

@@ -99,6 +99,8 @@ Plug 'ap/vim-css-color'
 Plug 'arakashic/chromatica.nvim', { 'for': ['c', 'cpp'] }
 Plug 'flazz/vim-colorschemes'
 Plug 'justinmk/vim-dirvish'
+Plug 'mhinz/vim-startify'
+Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'wellle/visual-split.vim'

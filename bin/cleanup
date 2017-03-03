@@ -11,5 +11,5 @@ set files /tmp/{yaourt*,npm*}
 echo 'Removing' (count $files) 'files from /tmp!'
 sudo rm -rf $files
 
-echo y | rmshit
+rmshit -vy
 

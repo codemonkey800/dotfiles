@@ -79,7 +79,7 @@ class RmShit(cli.Application):
             )
 
         if should_delete:
-            rm['-rf', files] & FG
+            rm['-rfv' if self.verbose else '-rf', files] & FG
             print(f'{len(files)} files deleted!')
         else:
             if len(files) > 0:

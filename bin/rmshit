@@ -1,48 +1,95 @@
 #!/usr/bin/env python3
 
-import glob
 import os
 import os.path as path
-import shutil
+import plumbum.cli as cli
 
-def main():
-    shitty_config_file = path.expandvars('$DOTFILES/share/shittyfiles')
+from glob import glob
+from plumbum import FG, local as sh
 
-    if not path.exists(shitty_config_file):
-        print('Your shitty config file does not exist!')
-        print('Create the file "{0}"'.format(shitty_config_file))
-        exit(-1)
+CONFIG_FILE = sh.path(path.expandvars('$DOTFILES/share/shittyfiles'))
 
-    with open(shitty_config_file) as file:
-        shitty_files = file.read().splitlines()
+def expandPath(p):
+    '''Expands a path's glob and tilde syntax if they're present.'''
+    return glob(path.expanduser(p))
 
-    found = []
-    for file in shitty_files:
-        found += glob.glob(path.expanduser(file))
+class RmShit(cli.Application):
+    '''
+        A script for removing user defined shitty files.  Also has support for
+        directory specific shitty config files.
+    '''
 
-    if len(found) > 0:
-        print('Found {0} shitty files:'.format(len(found)))
-        for file in found:
-            print('  ', file)
+    PROGNAME = 'rmshit'
+    VERSION = '0.2.0'
 
-        ans = input('Delete files? ([y]/n):')
+    config = cli.SwitchAttr(
+        ['-c', '--config'],
+        cli.ExistingFile,
+        help='Specify a specific config file to load',
+        default=CONFIG_FILE,
+    )
 
-        if ans == 'n':
-            print('Maybe next time!')
-            exit(0)
+    noconfirm = cli.Flag(
+        ['-y', '--no-confirm'],
+        help='Delete shitty files without confirmation',
+        default=False,
+    )
 
-        for file in found:
-            if path.isfile(file):
-                os.remove(file)
+    verbose = cli.Flag(
+        ['-v', '--verbose'],
+        help='Print out files as they\'re being deleted',
+        default=False,
+    )
+
+    def main(self):
+        config = sh.path(self.config)
+        local_config = sh.cwd / '.shittyfiles'
+        files = []
+        should_delete = True
+        rm = sh['rm']
+
+        if not config.exists():
+            should_delete = False
+            print('Your shitty config file does not exist!')
+            print(f'Create the file at "{config}"')
+        else:
+            files.extend(config.read().splitlines())
+
+        if local_config.exists():
+            print(f'local shittyfiles config found at {sh.cwd}')
+            should_delete = True
+            files.extend(local_config.read().splitlines())
+
+        files = [
+            sh.path(f)
+            for pattern in files
+            for f in expandPath(pattern)
+        ]
+
+        if len(files) == 0:
+            should_delete = False
+
+        if not self.noconfirm and len(files) > 0:
+            if self.verbose:
+                for f in files:
+                    print(f'  {f}')
+            should_delete = cli.terminal.ask(
+                f'Delete {len(files)} files',
+                default=True,
+            )
+
+        if should_delete:
+            rm['-rf', files] & FG
+            print(f'{len(files)} files deleted!')
+        else:
+            if len(files) > 0:
+                print('Nothing was deleted!')
             else:
-                shutil.rmtree(file)
-        print('All done! :)')
-    else:
-        print('No shitty files found! :)')
+                print('No shitty files to be found!')
 
 if __name__ == '__main__':
     try:
-        main()
+        RmShit.run()
     except KeyboardInterrupt as e:
         pass
 

@@ -50,6 +50,7 @@ mit-scheme
 mousetweaks
 mutter
 nautilus
+nerd-fonts-complete
 noto-fonts-emoji
 openjdk8-doc
 openjdk8-src
@@ -80,7 +81,6 @@ tracker
 ttf-ms-fonts
 ttf-roboto
 ttf-roboto-slab
-visual-studio-code
 vlc
 watchman
 xdg-user-dirs-gtk

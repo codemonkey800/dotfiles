@@ -21,7 +21,5 @@ end
 
 set -gx VIRTUAL_ENV $PWD/{venv_dir}
 set -gx OLD_PATH $PATH
-set -gx PATH $PATH $PWD/{venv_dir}/bin
-
-add-node-module
+set -gx PATH $PATH $PWD/{venv_dir}/bin (yarn bin)
 

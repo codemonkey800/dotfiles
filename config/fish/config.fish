@@ -19,6 +19,9 @@ source $DOTFILES/config/fish/variables.fish
 source $DOTFILES/config/fish/aliases.fish
 source $DOTFILES/config/fish/completions.fish
 
+# sort and keep only unique paths
+set -gx PATH (paths | sort -u)
+
 not status -i; and exit
 
 # # source profile.d stuff if a display manager

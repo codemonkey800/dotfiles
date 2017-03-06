@@ -5,40 +5,9 @@ call plug#begin('~/.config/nvim/plugins')
 " autocomplete {{
 
 Plug 'alvan/vim-closetag'
-Plug 'ervandew/supertab'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'jiangmiao/auto-pairs'
-
-" }}
-
-" deoplete {{
-
-Plug 'Shougo/deoplete.nvim'
-
-" sources {{
-
-Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim', { 'for': 'vim' }
-Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
-Plug 'mhartington/nvim-typescript', { 'for': 'typescript' }
-Plug 'ponko2/deoplete-fish', { 'for': 'fish' }
-Plug 'steelsojka/deoplete-flow', { 'for': 'javascript' }
-Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
-Plug 'ujihisa/neco-look'
-Plug 'wellle/tmux-complete.vim'
-Plug 'zchee/deoplete-docker', { 'for': 'dockerfile' }
-Plug 'zchee/deoplete-go', { 'for': 'go' }
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-
-" }}
-
-" plugins {{
-
-Plug 'Shougo/context_filetype.vim'
-Plug 'Shougo/echodoc.vim'
-Plug 'Shougo/neoinclude.vim'
-Plug 'Shougo/neopairs.vim'
-
-" }}
+Plug 'roxma/nvim-completion-manager'
 
 " }}
 
@@ -435,104 +404,21 @@ nnoremap <silent> gS [s
 " plugin settings/keymaps {{
 
 " autocomplete {{
-" }}
 
-" deoplete {{
+" nvim-completion-manager {{
 
-" core {{
-
-" settings {{
-
-let g:deoplete#enable_at_startup = 1
-
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#enable_smart_case = 1
-
-let g:deoplete#keyword_patterns = {}
-
-let g:deoplete#ignore_sources = {
-  \ '_': [
-    \ 'around',
-    \ 'buffer',
-  \]
-\}
+inoremap <expr> <Tab> pumvisible() ? '\<C-n>' : '\<Tab>'
+inoremap <expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
+inoremap <expr> <buffer> <CR> (pumvisible() ? '\<C-y>\<CR>' : '\<CR>')
 
 " }}
 
-" custom sets {{
+" LanguageClient {{
 
-call deoplete#custom#set('_', 'min_pattern_length', 0)
-call deoplete#custom#set('_', 'sorters', ['sorter_word'])
-call deoplete#custom#set('_', 'matchers', [
-  \ 'matcher_length',
-  \ 'matcher_full_fuzzy',
-\ ])
-call deoplete#custom#set('_', 'converters', [
-  \ 'converter_auto_delimiter',
-  \ 'converter_auto_paren',
-  \ 'converter_remove_overlap',
-  \ 'converter_truncate_abbr',
-  \ 'converter_truncate_menu',
-\ ])
-
-" }}
-
-" keymaps {{
-
-inoremap <silent> <expr> <C-g> deoplete#undo_completion()
-inoremap <silent> <expr> <C-l> deoplete#refresh()
-
-inoremap <silent> <expr> <C-h> deoplete#smart_close_popup()."\<C-h>"
-inoremap <silent> <expr> <BS> deoplete#smart_close_popup()."\<C-h>"
-
-function! s:DeopleteCR() abort
-  return deoplete#close_popup() . "\<CR>"
-endfunction
-
-inoremap <silent> <CR> <C-r>=<SID>DeopleteCR()<CR>
-
-" }}
-
-" }}
-
-" plugins {{
-
-" echodoc {{
-
-let g:echodoc_enable_at_startup = 1
-
-" }}
-
-" jedi {{
-
-let g:deoplete#sources#jedi#show_docstring = 1
-
-" }}
-
-" neopairs {{
-
-let g:neopairs#enable = 1
-
-" }}
-
-" }}
-
-" sources {{
-
-" nvim-typescript {{
-
-let g:nvim_typescript#signature_complete = 1
-let g:nvim_typescript#type_info_on_hold = 1
-
-" }}
-
-" tmux-complete {{
-
-let g:tmuxcomplete#trigger = ''
-
-" }}
+let g:LanguageClient_serverCommands = {
+  \ 'javascript': ['javascript-typescript-stdio'],
+  \ 'typescript': ['javascript-typescript-stdio'],
+\ }
 
 " }}
 

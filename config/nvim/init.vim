@@ -416,7 +416,7 @@ inoremap <expr> <buffer> <CR> (pumvisible() ? '\<C-y>\<CR>' : '\<CR>')
 " LanguageClient {{
 
 let g:LanguageClient_serverCommands = {
-  \ 'javascript': ['javascript-typescript-stdio'],
+  \ 'javascript.jsx': ['javascript-typescript-stdio'],
   \ 'typescript': ['javascript-typescript-stdio'],
 \ }
 
@@ -447,7 +447,6 @@ let g:jsdoc_enable_es6 = 1
 " Neomake {{
 
 let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
-let g:neomake_jsx_enabled_makers = ['eslint', 'flow']
 let g:neomake_highlight_lines = 1
 
 autocmd! BufWritePost * Neomake

@@ -53,7 +53,7 @@ class Environment(ABC):
     @property
     def cache(self):
         '''Returns the file path for this environment's cache file.'''
-        return sh.path(f'~/.cache/{self.name}_venv.tar.xz')
+        return sh.path(f'/tmp/{self.name}_venv.tar.xz')
 
     def pre_cache(self):
         '''Hook that child classes should override for pre-cache operations.'''

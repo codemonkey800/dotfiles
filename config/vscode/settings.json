@@ -6,9 +6,6 @@
   "editor.tabSize": 2,
   "editor.minimap.enabled": true,
   "editor.minimap.renderCharacters": true,
-  "editor.rulers": [
-    80
-  ],
 
   // extensions
   "extensions.autoUpdate": true,

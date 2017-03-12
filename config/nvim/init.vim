@@ -53,8 +53,9 @@ Plug 'justinj/vim-react-snippets'
 
 " syntaxes {{
 
-Plug 'ekalinin/Dockerfile.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
 " }}
 
@@ -534,7 +535,10 @@ let g:lexical#dictionary_key = '<leader>k'
 
 " vim-polyglot {{
 
-let g:polyglot_disabled = ['dockerfile']
+let g:polyglot_disabled = [
+  \ 'dockerfile',
+  \ 'typescript',
+\ ]
 
 " }}
 

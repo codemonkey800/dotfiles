@@ -2,8 +2,10 @@
 {
   // editor
   "editor.fontSize": 14,
-  "editor.fontFamily": "'Source Code Pro', monospace",
+  "editor.fontFamily": "'Source Code Pro for Powerline', monospace",
   "editor.tabSize": 2,
+  "editor.minimap.enabled": true,
+  "editor.minimap.renderCharacters": true,
   "editor.rulers": [
     80
   ],
@@ -43,6 +45,11 @@
     },
 
     {
+      "before": ["U"],
+      "after":  ["<C-r>"]
+    },
+
+    {
       "before": ["q"],
       "after": [],
       "commands": [
@@ -77,6 +84,8 @@
       "after": ["<Esc>"]
     }
   ],
+
+  // stuff
   "editor.cursorBlinking": "blink",
   "git.confirmSync": false,
   "workbench.welcome.enabled": false,

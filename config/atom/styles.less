@@ -1,6 +1,16 @@
+@keyframes cursor-history-flash {
+  from {
+    background-color: #2196F3;
+  }
+}
+
 atom-text-editor {
   .jumpy-label {
     background-color: black;
     color: white;
+  }
+
+  .editor .line.cursor-history-flash-line {
+      animation-duration: 1s;
   }
 }

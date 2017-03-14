@@ -1,0 +1,78 @@
+'body':
+  'cmd-r': 'window:reload'
+  'ctrl-tab': 'pane:show-next-item'
+  'ctrl-shift-tab': 'pane:show-previous-item'
+
+'atom-text-editor.vim-mode-plus:not(insert-mode):not(.jumpy-jump-mode)':
+  ', w': 'jumpy:toggle'
+
+'atom-text-editor.vim-mode-plus:not(.insert-mode)':
+  '0': 'unset!'
+  '$': 'unset!'
+
+  'shift-h': 'vim-mode-plus:move-to-beginning-of-line'
+  'shift-l': 'vim-mode-plus:move-to-last-character-of-line'
+
+'atom-text-editor.vim-mode-plus.normal-mode':
+  'ctrl-t': 'unset!'
+
+  'g f': 'open-this:here'
+  'ctrl-w f': 'open-this:split-down'
+  'ctrl-w F': 'open-this:split-right'
+
+  'g t': 'symbols-view:go-to-declaration'
+
+  'q': 'core:close'
+
+  'o': 'editor:newline-below'
+  'O': 'editor:newline-above'
+
+  'shift-u': 'vim-mode-plus:redo'
+
+  'alt-h': 'window:focus-pane-on-left'
+  'alt-j': 'window:focus-pane-below'
+  'alt-k': 'window:focus-pane-above'
+  'alt-l': 'window:focus-pane-on-right'
+
+  'ctrl-w H': 'paner:very-left'
+  'ctrl-w J': 'paner:very-bottom'
+  'ctrl-w K': 'paner:very-top'
+  'ctrl-w L': 'paner:very-right'
+
+'atom-text-editor.vim-mode-plus.insert-mode':
+  'j k': 'vim-mode-plus:reset-normal-mode'
+  'ctrl-j': 'editor:newline'
+  'ctrl-m': 'editor:newline'
+  'ctrl-h': 'core:backspace'
+
+'.nuclide-file-tree':
+  'h': 'nuclide-file-tree:collapse-directory'
+  'j': 'core:move-down'
+  'k': 'core:move-up'
+  'l': 'nuclide-file-tree:expand-directory'
+
+  'x': 'nuclide-file-tree:remove'
+  'o': 'nuclide-file-tree:open-selected-entry'
+  'ctrl-j': 'nuclide-file-tree:open-selected-entry'
+  'ctrl-m': 'nuclide-file-tree:open-selected-entry'
+
+  'shift-h': 'nuclide-file-tree:recursive-collapse-directory'
+  'shift-j': 'core:move-to-bottom'
+  'shift-k': 'core:move-to-top'
+  'shift-l': 'nuclide-file-tree:recursive-expand-directory'
+
+'.select-list':
+  'ctrl-n': 'core:move-down'
+  'ctrl-p': 'core:move-up'
+  'ctrl-c': 'core:cancel'
+
+'.select-list atom-text-editor.mini':
+  'ctrl-h': 'core:backspace'
+  'ctrl-j': 'core:confirm'
+  'ctrl-m': 'core:confirm'
+
+'atom-text-editor.vim-mode-plus.insert-mode.autocomplete-active':
+  'ctrl-n': 'autocomplete-plus:move-down'
+  'ctrl-p': 'autocomplete-plus:move-up'
+  'ctrl-j': 'autocomplete-plus:confirm'
+  'ctrl-m': 'autocomplete-plus:confirm'

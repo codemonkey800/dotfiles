@@ -7,7 +7,7 @@
   {
     "key": "alt+l",
     "command": "workbench.action.nextEditor",
-    "when": "editorTextFocus && !inDebugRepl && vim.mode != 'Insert'"
+    "when": "editorTextFocus && !inDebugRepl && vim.mode !== 'Insert'"
   },
   {
     "key": "ctrl+b",

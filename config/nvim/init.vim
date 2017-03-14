@@ -296,16 +296,26 @@ function! BufferCount()
   return l:len
 endfunction
 
-function! BufferDelete()
+function! BufferDelete(...)
+  let l:force = a:0 > 0 && a:1
   if winnr('$') == 1 || BufferCount() == 1
-    bdelete
+    if l:force
+        bdelete!
+    else
+        bdelete
+    endif
   elseif !&modified
     bnext
-    bdelete #
+    if l:force
+        bdelete! #
+    else
+        bdelete #
+    endif
   endif
 endfunction
 
 nnoremap <silent> <leader>w :call BufferDelete()<CR>
+nnoremap <silent> <leader>W :call BufferDelete(1)<CR>
 nnoremap <silent> <leader>l :ls<CR>
 nnoremap <silent> <leader>n :enew<CR>
 
@@ -344,9 +354,6 @@ noremap <silent> <leader>a ggvG$
 
 " open current directory with file manager
 nnoremap <silent> <leader>f :Dirvish<CR>
-
-" runs neomake on the current dir
-nnoremap <silent> <leader>b :Neomake!<CR>
 
 " Plug mappings {{
 
@@ -447,10 +454,24 @@ let g:jsdoc_enable_es6 = 1
 
 " Neomake {{
 
+let g:neomake_make_maker = {
+  \ 'exe': 'make',
+  \ 'args': [],
+  \ 'errorformat': '%f:%l:%c: %m',
+\ }
+
+let g:neomake_tex_chktex_maker = {
+  \ 'args': ['-n36', '-n1'],
+\ }
+
 let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
 let g:neomake_highlight_lines = 1
 
 autocmd! BufWritePost * Neomake
+
+nnoremap <leader>bl :NeomakeListJobs<CR>
+nnoremap <leader>bm :Neomake! make<CR>
+nnoremap <leader>bc :NeomakeSh! make clean<CR>
 
 " }}
 

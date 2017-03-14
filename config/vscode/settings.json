@@ -28,9 +28,10 @@
   "window.menuBarVisibility": "toggle",
 
   // vim
+  "vim.easymotion": true,
+  "vim.hlsearch": true,
   "vim.leader": ",",
   "vim.showcmd": false,
-  "vim.easymotion": true,
   "vim.otherModesKeyBindingsNonRecursive": [
     {
       "before": ["j"],
@@ -39,11 +40,6 @@
     {
       "before": ["k"],
       "after": ["g", "k"]
-    },
-
-    {
-      "before": ["U"],
-      "after":  ["<C-r>"]
     },
 
     {

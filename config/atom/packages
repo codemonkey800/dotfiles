@@ -3,6 +3,7 @@ atom-clock
 atom-ctags
 atom-material-syntax-dark
 atom-material-ui
+atom-ternjs
 atom-typescript
 autoclose-html
 autocomplete-emojis
@@ -14,6 +15,7 @@ autocomplete-modules
 autocomplete-paths
 autocomplete-python
 autocomplete-xml
+busy-signal
 choose-pane
 code-peek
 color-picker
@@ -26,6 +28,7 @@ go-plus
 haskell-grammar
 highlight-line
 highlight-selected
+hyperclick
 imdone-atom
 intentions
 jumpy
@@ -60,6 +63,7 @@ linter-markdown
 linter-mixed-indent
 linter-pug
 linter-spell
+linter-ui-default
 linter-write-good
 merge-conflicts
 minimap
@@ -74,6 +78,7 @@ minimap-pigments
 minimap-quick-highlight
 minimap-selection
 minimap-split-diff
+narrow
 nuclide
 nuclide-format-js
 open-this
@@ -90,5 +95,6 @@ toggle-quotes
 tool-bar
 trailing-spaces
 vim-mode-plus
-vim-mode-plus-move-selected-text
+vim-mode-plus-keymaps-for-surround
 vim-mode-plus-move-to-symbols
+vim-mode-plus-replace-with-execution

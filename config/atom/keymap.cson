@@ -47,15 +47,16 @@
   'ctrl-j': 'autocomplete-plus:confirm'
   'ctrl-m': 'autocomplete-plus:confirm'
 
-'atom-text-editor.vim-mode-plus:not(insert-mode):not(.jumpy-jump-mode)':
-  ', w': 'jumpy:toggle'
+'atom-text-editor.vim-mode-plus:not(.insert-mode):not(.jumpy-jump-mode)':
+  'f': 'jumpy:toggle'
 
-'atom-text-editor.vim-mode-plus:not(.insert-mode)':
   '0': 'unset!'
   '$': 'unset!'
 
   'H': 'vim-mode-plus:move-to-beginning-of-line'
   'L': 'vim-mode-plus:move-to-last-character-of-line'
+
+  'g c': 'vim-mode-plus:toggle-line-comments'
 
   'space o': 'narrow:symbols'
   'space s': 'narrow:scan'
@@ -69,6 +70,8 @@
   'ctrl-h': 'core:backspace'
 
 'atom-text-editor.vim-mode-plus.visual-mode':
+  ', s': 'vim-mode-plus:sort'
+  ', S': 'vim-mode-plus:reverse'
   'ctrl-j': 'vim-mode-plus:create-persistent-selection'
   'ctrl-m': 'vim-mode-plus:create-persistent-selection'
 
@@ -76,7 +79,7 @@
   ', r': 'vim-mode-plus-user:replace-with-execution'
   ', R': 'vim-mode-plus-user:replace-with-execution-keep-original-text'
 
-'atom-text-editor.vim-mode-plus.normal-mode':
+'atom-text-editor.vim-mode-plus.normal-mode:not(.jumpy-jump-mode)':
   'ctrl-t': 'unset!'
 
   'S': 'vim-mode-plus:surround-smart-word'

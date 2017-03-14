@@ -1,6 +1,8 @@
 "*":
   "atom-beautify":
     cpp: {}
+    general:
+      _analyticsUserId: "355d094d-13f2-4757-8711-cb1fd1b24767"
   "atom-clock":
     dateFormat: "hh:mm:ss a"
     refreshInterval: 1
@@ -8,6 +10,7 @@
     colors:
       abaseColor: "#2196f3"
       genAccent: true
+      paintCursor: true
       predefinedColor: "Blue"
     fonts: {}
     tabs:

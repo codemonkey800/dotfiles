@@ -1,1 +1,4 @@
-# snippets file (not found)
+'.source.js':
+  'flow':
+    'prefix': 'flow'
+    'body': '/* @flow */$2'

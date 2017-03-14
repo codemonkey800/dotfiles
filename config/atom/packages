@@ -86,7 +86,6 @@ set-syntax
 simple-drag-drop-text
 sort-lines
 split-diff
-sync-settings
 toggle-quotes
 tool-bar
 trailing-spaces

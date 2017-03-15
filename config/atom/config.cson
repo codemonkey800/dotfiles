@@ -1,6 +1,5 @@
 "*":
   "atom-beautify":
-    cpp: {}
     general:
       _analyticsUserId: "355d094d-13f2-4757-8711-cb1fd1b24767"
   "atom-clock":
@@ -25,10 +24,10 @@
     babelPluginModuleResolver: true
   "autocomplete-plus":
     suppressActivationForEditorClasses: [
-      "vim-mode-plus.normal-mode"
-      "vim-mode-plus.visual-mode"
-      "vim-mode-plus.operator-pending-mode"
       "vim-mode-plus.insert-mode.replace"
+      "vim-mode-plus.normal-mode"
+      "vim-mode-plus.operator-pending-mode"
+      "vim-mode-plus.visual-mode"
     ]
     useCoreMovementCommands: false
   "color-picker":
@@ -49,8 +48,9 @@
         "BUCK"
       ]
     disabledPackages: [
-      "tree-view"
+      "linter"
       "symbols-view"
+      "tree-view"
     ]
     ignoredNames: [
       ".git"
@@ -85,6 +85,8 @@
   jumpy:
     fontSize: 0.95
     matchPattern: "([A-EG-Z]+([0-9a-eg-z])*)|[a-egz0-9]{2,}"
+  "linter-eslint":
+    lintHtmlFiles: true
   minimap:
     plugins:
       codeglance: true
@@ -113,6 +115,7 @@
     installRecommendedPackages: true
     "nuclide-clang":
       defaultDiagnostics: true
+    "nuclide-diagnostics-ui": {}
     "nuclide-flow":
       enableReferencesHighlight: true
     "nuclide-health":

@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 
 import common
-import os
 import plumbum.cli as cli
-import sys
 
 from plumbum import local as sh
 
 VGA_SWITCH_PATH = sh.path('/sys/kernel/debug/vgaswitcheroo/switch')
+
 
 class Gpu(cli.Application):
     '''
@@ -40,4 +39,3 @@ if __name__ == '__main__':
         Gpu.run()
     except KeyboardInterrupt as e:
         pass
-

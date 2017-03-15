@@ -20,6 +20,7 @@
 ~/.gi_list
 ~/.gradle/
 ~/.gstreamer-0.10
+/home/jeremy/java_error_in_CL.hprof
 ~/.ipython
 ~/.java
 ~/javac-services.*.log

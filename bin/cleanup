@@ -3,6 +3,7 @@
 from glob import glob
 from plumbum import FG, local as sh
 
+
 def main():
     echo = sh['echo']
     pacman = sh['pacman']
@@ -22,9 +23,9 @@ def main():
 
     rmshit['-vy'] & FG
 
+
 if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt as e:
         pass
-

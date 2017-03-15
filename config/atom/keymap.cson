@@ -80,7 +80,7 @@
   ', R': 'vim-mode-plus-user:replace-with-execution-keep-original-text'
 
 'atom-text-editor.vim-mode-plus.normal-mode:not(.jumpy-jump-mode)':
-  'ctrl-t': 'unset!'
+  'ctrl-p': 'nuclide-quick-open:find-anything-via-omni-search'
 
   'S': 'vim-mode-plus:surround-smart-word'
 

@@ -1,4 +1,8 @@
 '.source.js':
-  'flow':
+  'enable flow':
     'prefix': 'flow'
-    'body': '/* @flow */$2'
+    'body': '/* @flow */$1'
+
+  'disable eslint or rule':
+    'prefix': 'eslintd'
+    'body': '/* eslint-disable $1 */$2'

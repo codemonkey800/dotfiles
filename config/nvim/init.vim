@@ -216,6 +216,7 @@ augroup mycmds
   autocmd BufLeave term://* stopinsert
   autocmd FileType help :wincmd l
   autocmd FileType vim :set foldmarker={{,}} foldlevel=0 foldmethod=marker
+  autocmd BufWritePre * :FixWhitespace
 augroup END
 
 " }}

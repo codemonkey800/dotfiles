@@ -51,6 +51,7 @@
       "linter"
       "symbols-view"
       "tree-view"
+      "whitespace"
     ]
     ignoredNames: [
       ".git"
@@ -77,7 +78,6 @@
   editor:
     fontFamily: "Source Code Pro for Powerline"
     scrollPastEnd: true
-    tabType: "soft"
   "exception-reporting":
     userId: "0e609a53-3d6f-b7e8-9c28-d81b14c383dc"
   "imdone-atom":

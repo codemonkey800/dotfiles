@@ -21,6 +21,7 @@ color-picker
 cursor-history
 docblockr
 editorconfig
+es6-javascript
 file-icons
 git-plus
 go-plus
@@ -39,6 +40,7 @@ language-lua
 language-ocaml
 language-swift
 language-thrift
+language-vue
 last-cursor-position
 latex
 latexer
@@ -86,6 +88,7 @@ paner
 pdf-view
 pigments
 preview
+react-snippets
 rest-client
 set-syntax
 simple-drag-drop-text

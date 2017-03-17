@@ -1,6 +1,5 @@
-
 acpi
-broadcom-wl
+broadcom-wl-dkms
 gpu-switch
 kbdlight
 mbpfan-git

@@ -1,12 +1,11 @@
 acpid
-aria2
 autoconf
 automake
 bash
+bauerbill
 binutils
 bison
 btrfs-progs
-buck
 bzip2
 checkupdates-aur
 coreutils
@@ -29,6 +28,8 @@ flex
 fortune-mod
 fzf
 gawk
+gcc
+gcc-libs
 gettext
 git
 git-extras
@@ -70,6 +71,7 @@ neovim
 neovim-remote
 netctl
 net-tools
+networkmanager
 ntfs-3g
 openssh
 p7zip
@@ -84,7 +86,6 @@ perl-checkupdates-aur
 pkg-config
 pkgfile
 powerline-fonts-git
-powerpill
 procps-ng
 psmisc
 pv
@@ -102,7 +103,6 @@ python-setproctitle
 python-vint
 python-virtualenv
 refind-efi
-reflector
 repose
 rmlint
 rng-tools

@@ -4,10 +4,18 @@ call plug#begin('~/.config/nvim/plugins')
 
 " autocomplete {{
 
-Plug 'alvan/vim-closetag'
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-Plug 'jiangmiao/auto-pairs'
+" nvim-completion-manager things {{
+
 Plug 'roxma/nvim-completion-manager'
+
+" }}
+
+" other autocomplete-ish plugins{{
+
+Plug 'alvan/vim-closetag'
+Plug 'jiangmiao/auto-pairs'
+
+" }}
 
 " }}
 
@@ -56,12 +64,14 @@ Plug 'justinj/vim-react-snippets'
 Plug 'sheerun/vim-polyglot'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'Shougo/neco-vim'
 
 " }}
 
 " user interface {{
 
 Plug 'Shougo/denite.nvim'
+Plug 'Shougo/echodoc.vim'
 Plug 'Tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
@@ -91,12 +101,13 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
+Plug 'vimlab/vim-json'
 
 " }}
 
 " special plugins {{
 
-" vim-devicons must be load after the other plugins
+" vim-devicons must be loaded after the other plugins
 Plug 'ryanoasis/vim-devicons'
 
 " }}
@@ -214,7 +225,7 @@ augroup mycmds
   autocmd!
   autocmd BufEnter .{babel,eslint}rc :setf json
   autocmd BufLeave term://* stopinsert
-  autocmd FileType help :wincmd l
+  autocmd FileType help :wincmd L
   autocmd FileType vim :set foldmarker={{,}} foldlevel=0 foldmethod=marker
   autocmd BufWritePre * :FixWhitespace
 augroup END
@@ -282,6 +293,7 @@ inoremap <silent> <C-s> <Esc>:w<CR>li
 nnoremap <silent> gt <C-]>
 nnoremap <silent> gT <C-t>
 nnoremap <silent> <C-]> <nop>
+nnoremap <silent> <C-t> <nop>
 
 " }}
 
@@ -317,7 +329,6 @@ endfunction
 
 nnoremap <silent> <leader>w :call BufferDelete()<CR>
 nnoremap <silent> <leader>W :call BufferDelete(1)<CR>
-nnoremap <silent> <leader>l :ls<CR>
 nnoremap <silent> <leader>n :enew<CR>
 
 " next/previous buffers
@@ -341,8 +352,8 @@ nnoremap <silent> <leader>r :call ExecuteCurrentFile()<CR>
 " }}
 
 " sort things
-noremap <silent> <leader>s :sort<CR>
-noremap <silent> <leader>S :sort!<CR>
+noremap <silent> <leader>sa :sort<CR>
+noremap <silent> <leader>sd :sort!<CR>
 
 " open nvim config for editing
 nnoremap <silent> <leader>ve :edit $MYVIMRC<CR>
@@ -387,9 +398,7 @@ tnoremap <silent> <Esc> <C-\><C-n>
 
 " }}
 
-" spell maps {
-
-" toggle {{
+" spell maps {{
 
 function! ToggleSpell()
     if &spell
@@ -403,11 +412,6 @@ nnoremap <silent> <M-s> :call ToggleSpell()<CR>
 
 " }}
 
-nnoremap <silent> gs ]s
-nnoremap <silent> gS [s
-
-" }
-
 " }}
 
 " plugin settings/keymaps {{
@@ -416,18 +420,45 @@ nnoremap <silent> gS [s
 
 " nvim-completion-manager {{
 
-inoremap <expr> <Tab> pumvisible() ? '\<C-n>' : '\<Tab>'
-inoremap <expr> <S-Tab> pumvisible() ? '\<C-p>' : '\<S-Tab>'
-inoremap <expr> <buffer> <CR> (pumvisible() ? '\<C-y>\<CR>' : '\<CR>')
+" configuration tips taken from the repo page:
+" https://github.com/roxma/nvim-completion-manager#configuration-tips
+
+set shortmess+=c
+
+let g:cm_matcher = {
+  \ 'case': 'smartcase',
+  \ 'module': 'cm_matchers.fuzzy_matcher'
+\ }
+let g:cm_matcher.case = 'smartcase'
+let g:cm_matcher.module = 'cm_matchers.fuzzy_matcher'
+
+inoremap <silent> <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
+inoremap <silent> <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
+inoremap <silent> <expr> <buffer> <CR> (pumvisible() ? '<C-y><CR>' : '<CR>')
+
+" use <Tab> for both UltiSnips and autocomplete {{
+
+let g:UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
+let g:UltiSnipsJumpForwardTrigger = '<Plug>(ultisnips_expand)'
+let g:UltiSnipsJumpBackwardTrigger = '<Plug>(ultisnips_backward)'
+let g:UltiSnipsListSnippets = '<Plug>(ultisnips_list)'
+let g:UltiSnipsRemoveSelectModeMappings = 0
+
+vnoremap <expr> <Plug>(ultisnip_expand_or_jump_result) g:ulti_expand_or_jump_res?'':"\<Tab>"
+inoremap <expr> <Plug>(ultisnip_expand_or_jump_result) g:ulti_expand_or_jump_res?'':"\<Tab>"
+imap <silent> <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<C-r>=UltiSnips#ExpandSnippetOrJump()\<cr>\<Plug>(ultisnip_expand_or_jump_result)")
+xmap <Tab> <Plug>(ultisnips_expand)
+smap <Tab> <Plug>(ultisnips_expand)
+
+vnoremap <expr> <Plug>(ultisnips_backwards_result) g:ulti_jump_backwards_res?'':"\<S-Tab>"
+inoremap <expr> <Plug>(ultisnips_backwards_result) g:ulti_jump_backwards_res?'':"\<S-Tab>"
+imap <silent> <expr> <S-Tab> (pumvisible() ? "\<C-p>" : "\<C-r>=UltiSnips#JumpBackwards()\<cr>\<Plug>(ultisnips_backwards_result)")
+xmap <S-Tab> <Plug>(ultisnips_backward)
+smap <S-Tab> <Plug>(ultisnips_backward)
+
+inoremap <silent> <C-u> <C-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<CR>
 
 " }}
-
-" LanguageClient {{
-
-let g:LanguageClient_serverCommands = {
-  \ 'javascript.jsx': ['javascript-typescript-stdio'],
-  \ 'typescript': ['javascript-typescript-stdio'],
-\ }
 
 " }}
 
@@ -465,7 +496,6 @@ let g:neomake_tex_chktex_maker = {
   \ 'args': ['-n36', '-n1'],
 \ }
 
-let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
 let g:neomake_highlight_lines = 1
 
 autocmd! BufWritePost * Neomake
@@ -494,14 +524,14 @@ nmap <silent> ga <Plug>(EasyAlign)
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 
-map s <Plug>(easymotion-bd-f2)
-nmap s <Plug>(easymotion-overwin-f2)
+map <silent> s <Plug>(easymotion-bd-f2)
+nmap <silent> s <Plug>(easymotion-overwin-f2)
 
-map <leader><leader>L <Plug>(easymotion-bd-jk)
-nmap <leader><leader>L <Plug>(easymotion-overwin-line)
+map <silent> - <Plug>(easymotion-bd-w)
+nmap <silent> - <Plug>(easymotion-overwin-w)
 
-map <leader><leader>w <Plug>(easymotion-bd-w)
-nmap <leader><leader>w <Plug>(easymotion-overwin-w)
+map <silent> <M--> <Plug>(easymotion-bd-jk)
+nmap <silent> <M--> <Plug>(easymotion-overwin-line)
 
 " }}
 
@@ -535,16 +565,12 @@ augroup lexical
   autocmd!
   autocmd FileType markdown,mkd call lexical#init()
   autocmd FileType tex call lexical#init()
-  autocmd FileType text call lexical#init({ 'spell': 0 })
+  autocmd FileType text call lexical#init()
   autocmd FileType textile call lexical#init()
 augroup END
 
 let g:lexical#thesaurus = ['~/.config/nvim/mthesaur.txt']
 let g:lexical#dictionary = ['/usr/share/dict/american-english']
-
-let g:lexical#spell_key = '<leader>t'
-let g:lexical#thesaurus_key = '<leader>T'
-let g:lexical#dictionary_key = '<leader>k'
 
 " }}
 
@@ -614,6 +640,12 @@ let g:chromatica#enable_at_startup = 1
 
 " }}
 
+" Denite {{
+
+nnoremap <silent> <leader>l :Denite buffer<CR>
+
+" }}
+
 " dirvish {{
 
 autocmd FileType dirvish call fugitive#detect(@%)
@@ -639,24 +671,29 @@ nnoremap <silent> <leader>t :Tagbar<CR>
 " utilitiy {{
 
 " fzf.vim {{
+
 let g:fzf_action = {
   \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit'}
+  \ 'ctrl-v': 'vsplit'
+\ }
+
 let g:fzf_layout = { 'down': '~30%' }
 
 function! GetFiles()
-  let l:opts = {}
-  let l:opts.down = '30%'
-  let l:opts.source = 'pt -g "" --hidden --global-gitignore --ignore .git'
+  let l:opts = {
+    \ 'down': '30%',
+    \ 'source': 'pt -g "" --hidden --global-gitignore --ignore .git',
+    \ 'options': '--multi',
+  \ }
 
   call system('git status')
 
   if v:shell_error == 0
     let l:name = 'gitfiles'
-    let l:opts.options = '--prompt "Git Files>"'
+    let l:opts.options .= ' --prompt "Git Files>"'
   else
     let l:name = 'files'
-    let l:opts.options = '--prompt "Files>"'
+    let l:opts.options .= ' --prompt "Files>"'
   endif
 
   return fzf#run(fzf#wrap(l:name, l:opts, 0))

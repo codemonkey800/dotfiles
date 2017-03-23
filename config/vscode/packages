@@ -13,11 +13,14 @@ flowtype.flow-for-vscode
 formulahendry.auto-close-tag
 formulahendry.code-runner
 hars.CppSnippets
+hollowtree.vue-snippets
 humao.rest-client
 joelday.docthis
 lukehoban.Go
 ms-vscode.cpptools
 msjsdiag.debugger-for-chrome
+octref.vetur
+oysun.vuehelper
 robertohuertasm.vscode-icons
 seanmcbreen.Spell
 vscodevim.vim

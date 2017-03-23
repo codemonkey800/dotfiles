@@ -26,6 +26,7 @@ set -gx SOFTWARE_HOME ~/share/software
 set -gx ANDROID_HOME $SOFTWARE_HOME/android/sdk
 
 # PATH stuff
+set -gx PATH $PATH ~/bin
 set -gx PATH $PATH $DOTFILES/bin
 set -gx PATH $PATH $ANDROID_HOME/platform-tools ^ /dev/null
 set -gx PATH $PATH $ANDROID_HOME/tools ^ /dev/null

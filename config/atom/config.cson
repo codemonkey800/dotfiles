@@ -54,6 +54,7 @@
       "linter"
       "symbols-view"
       "tree-view"
+      "atom-ternjs"
     ]
     ignoredNames: [
       ".git"

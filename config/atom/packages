@@ -38,6 +38,8 @@ language-graphql
 language-ini
 language-lua
 language-ocaml
+language-postcss
+language-pug
 language-swift
 language-thrift
 language-vue
@@ -47,7 +49,6 @@ latexer
 linter
 linter-alex
 linter-clang
-linter-csslint
 linter-docker
 linter-eslint
 linter-golinter
@@ -64,6 +65,7 @@ linter-spell
 linter-spell-html
 linter-spell-javascript
 linter-spell-latex
+linter-stylelint
 linter-tslint
 linter-ui-default
 linter-write-good

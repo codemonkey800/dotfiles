@@ -20,8 +20,10 @@
 ~/.gi_list
 ~/.gradle/
 ~/.gstreamer-0.10
-/home/jeremy/java_error_in_CL.hprof
+~/java_error_in_CL.hprof
+~/.idea-build
 ~/.ipython
+~/.ivy2
 ~/.java
 ~/javac-services.*.log
 ~/.jspm
@@ -40,9 +42,11 @@
 ~/.objectdb
 ~/.oracle_jre_usage
 ~/.parallel
+~/.pki
 ~/.pulse
 ~/.python_history
 ~/.recently-used
+~/.sbt
 ~/.spicec
 ~/.texlive
 ~/.thumbnails

@@ -2,6 +2,13 @@
 " that is used for IDEA based IDEs. It includes basic and mapleader
 " based mappings as well as mappings for IDE actions.
 
+" idea-vim extensions {{
+
+" vim-surround plugin
+set surround
+
+" }}
+
 " keymaps {{
 
 let g:mapleader = ','
@@ -61,23 +68,38 @@ inoremap <C-s> <Esc>:w<CR>li
 nnoremap gt <C-]>
 nnoremap gT <C-t>
 nnoremap <C-]> <nop>
+nnoremap <C-t> <nop>
 
 " }}
 
 " fancy maps {{
 
+" run file if it's executable {{
+
+function! ExecuteCurrentFile()
+  if executable(expand('%:p'))
+    !./%
+  endif
+endfunction
+
+nnoremap <leader>r :call ExecuteCurrentFile()<CR>
+
+" }}
+
 " sort things
-noremap <leader>s :sort<CR>
-noremap <leader>S :sort!<CR>
+noremap <leader>sa :sort<CR>
+noremap <leader>sd :sort!<CR>
 
 " select all text
 noremap <leader>a ggvG$
 
+" opens up command edit
+nnoremap <M-c> q:
+vnoremap <M-c> q:
+
 " }}
 
-" spell maps {
-
-" toggle {{
+" spell maps {{
 
 function! ToggleSpell()
     if &spell
@@ -91,16 +113,5 @@ nnoremap <M-s> :call ToggleSpell()<CR>
 
 " }}
 
-nnoremap  gs ]s
-nnoremap  gS [s
-
-" }
-
 " }}
 
-" extensions {{
-
-" vim-surround plugin
-set surround
-
-" }}

@@ -89,6 +89,7 @@
     fontSize: 0.95
     matchPattern: "([A-EG-Z]+([0-9a-eg-z])*)|[a-egz0-9]{2,}"
   "linter-eslint":
+    fixOnSave: true
     lintHtmlFiles: true
   minimap:
     plugins:

@@ -22,13 +22,6 @@ source $DOTFILES/config/fish/completions.fish
 # sort and keep only unique paths
 set -gx PATH (paths | sort -u)
 
-# exit if not a login shell at this point
-not status -l; and exit
-
-if test -z $DISPLAY; and test $XDG_VTNR = 1
-    exec startx -- -keeptty
-end
-
 # exit if non-interactive at this point
 not status -i; and exit
 

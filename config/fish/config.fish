@@ -22,33 +22,45 @@ source $DOTFILES/config/fish/completions.fish
 # sort and keep only unique paths
 set -gx PATH (paths | sort -u)
 
+# exit if not a login shell at this point
+not status -l; and exit
+
+if test -z $DISPLAY; and test $XDG_VTNR = 1
+    exec startx -- -keeptty
+end
+
+# exit if non-interactive at this point
 not status -i; and exit
 
-# # source profile.d stuff if a display manager
-# # isn't used
-if test -z $DISPLAY; and exists bass
-    for f in /etc/profile.d/*.sh
-        bass source $f > /dev/null ^ /dev/null
+# stuff to do if a display server isn't available
+if test -z $DISPLAY
+    # source profile.d stuff if a display manager isn't used
+    if exists bass
+        for f in /etc/profile.d/*.sh
+            bass source $f > /dev/null ^ /dev/null
+        end
+    end
+
+    # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
+    if exists keychain
+        set -l keys (
+            for f in ~/.ssh/*.pub
+                echo ~/.ssh/(basename $f .pub)
+            end
+        )
+
+        if test (count $keys) -gt 0
+            keychain --eval --agents ssh --quick --quiet --nogui $keys | source
+        end
+    end
+else
+    # Have keychain kill all ssh-agent's if any are running and $DISPLAY is defined
+    if exists keychain; and test (count (keychain -l)) -gt 0
+        keychain --quiet -k all
     end
 end
 
- if exists keychain
-     # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
-     if test -z $DISPLAY
-         set -l keys
-         for f in ~/.ssh/*.pub
-             set keys $keys ~/.ssh/(basename $f .pub)
-         end
-
-         if test (count $keys) -gt 0
-             keychain --eval --agents ssh --quick --quiet --nogui $keys | source
-         end
-     else if test (count (keychain -l)) -gt 0
-         # Have keychain kill all ssh-agent's if any are running and $DISPLAY is defined
-         keychain --quiet -k all
-     end
- end
-
+# startup tmux or connect to existing session
  if exists tmux; and test -z $TMUX
      if tmux ls | grep -q main
          exec tmux a -t (whoami)/main

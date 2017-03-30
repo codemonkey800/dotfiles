@@ -18,6 +18,8 @@ alias lsof-del 'lsof +c 0
 alias nm-restart 'sudo systemctl restart NetworkManager'
 alias paths 'echo $PATH | tr " " \n'
 alias re "sudo -E $EDITOR"
+alias r 'rm -rf'
+alias rr 'sudo rm -rf'
 alias wh 'type -P'
 
 # Conditional Aliases

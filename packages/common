@@ -94,13 +94,11 @@ python-lolcat
 python-mistune
 python-neovim
 python-pawk
-python-pip
 python-plumbum
 python-psutil
 python-setproctitle
 python-vint
 python-virtualenv
-refind-efi
 repose
 rmlint
 rng-tools

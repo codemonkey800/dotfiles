@@ -39,16 +39,12 @@ linter-alex
 linter-docker
 linter-eslint
 linter-htmlhint
-linter-js-yaml
 linter-jsonlint
+linter-js-yaml
 linter-just-say-no
 linter-markdown
 linter-mixed-indent
 linter-sass-lint
-linter-spell
-linter-spell-html
-linter-spell-javascript
-linter-spell-latex
 linter-stylelint
 linter-tslint
 linter-ui-default

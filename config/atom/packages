@@ -4,16 +4,13 @@ atom-material-syntax-dark
 atom-material-ui
 atom-typescript
 autoclose-html
-autocomplete-css
 autocomplete-emojis
 autocomplete-en-en
-autocomplete-html
 autocomplete-html-entities
 autocomplete-json
 autocomplete-modules
 autocomplete-paths
 autocomplete-python
-autocomplete-snippets
 autocomplete-xml
 busy-signal
 choose-pane

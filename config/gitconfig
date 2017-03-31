@@ -42,13 +42,6 @@
   editor = nvim
   sparsecheckout = true
 
-[diff]
-  prompt = false
-  tool = vimdiff
-
-[difftool]
-  path = nvim
-
 [filter "lfs"]
   process = git-lfs filter-process
   clean = git-lfs clean -- %f
@@ -69,6 +62,12 @@
 
 [url "git@gitlab.com:"]
   insteadOf = "gl://"
+
+[url "git@github.com:codemonkey800/"]
+  insteadOf = "me@gh://"
+
+[url "git@gitlab.com:codemonkey800/"]
+  insteadOf = "me@gl://"
 
 [url "ssh://aur@aur.archlinux.org/"]
   insteadOf = "aur://"

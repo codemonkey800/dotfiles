@@ -9,7 +9,13 @@ function deactivate
         set -gx PATH $OLD_PATH
         set -e OLD_PATH
     end
-    functions -e deactivate gopath
+    functions -e deactivate destroy gopath
+end
+
+function destroy
+    deactivate
+    set -l count (count (rm -rfv {venv_dir}))
+    echo "Deleted $count files from virtual env!"
 end
 
 function gopath

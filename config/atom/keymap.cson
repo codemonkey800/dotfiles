@@ -4,31 +4,15 @@
   'ctrl-shift-tab': 'pane:show-previous-item'
   'ctrl-alt-s': 'application:show-settings'
 
-  'ctrl-p': 'nuclide-quick-open:find-anything-via-omni-search'
+'.tree-view':
+  'x': 'tree-view:remove'
+  'H': 'tree-view:recursive-collapse-directory'
+  'L': 'tree-view:recursive-expand-directory'
 
 'atom-text-editor.mini':
   'ctrl-h': 'core:backspace'
   'ctrl-j': 'core:confirm'
   'ctrl-m': 'core:confirm'
-
-'.nuclide-file-tree':
-  '-': 'choose-pane:start'
-
-  'h': 'nuclide-file-tree:collapse-directory'
-  'j': 'core:move-down'
-  'k': 'core:move-up'
-  'l': 'nuclide-file-tree:expand-directory'
-
-  'g g': 'core:move-to-top'
-  'G': 'core:move-to-bottom'
-
-  'H': 'nuclide-file-tree:recursive-collapse-directory'
-  'L': 'nuclide-file-tree:recursive-expand-directory'
-
-  'x': 'nuclide-file-tree:remove'
-  'o': 'nuclide-file-tree:open-selected-entry'
-  'ctrl-j': 'nuclide-file-tree:open-selected-entry'
-  'ctrl-m': 'nuclide-file-tree:open-selected-entry'
 
 '.select-list':
   'ctrl-j': 'core:confirm'
@@ -64,16 +48,12 @@
   'L': 'vim-mode-plus:move-to-last-character-of-line'
 
   'g c': 'vim-mode-plus:toggle-line-comments'
+  'g t': 'tree-view:toggle'
 
   'space o': 'narrow:symbols'
   'space s': 'narrow:scan'
   'space C': 'narrow:linter'
   'space G': 'narrow:git-diff-all'
-
-  '] e': 'nuclide-diagnostics-ui:go-to-next-diagnostic'
-  '[ e': 'nuclide-diagnostics-ui:go-to-previous-diagnostic'
-  '] E': 'nuclide-diagnostics-ui:go-to-first-diagnostic'
-  '[ E': 'nuclide-diagnostics-ui:go-to-last-diagnostic'
 
 'atom-text-editor.vim-mode-plus.insert-mode':
   'j k': 'vim-mode-plus:activate-normal-mode'

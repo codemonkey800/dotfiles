@@ -2,6 +2,7 @@ adapta-backgrounds
 adapta-gtk-theme
 adwaita-icon-theme
 android-udev
+archlinux-themes-sddm
 atom-editor-beta-bin
 baobab
 clang
@@ -56,6 +57,7 @@ openjdk8-doc
 openjdk8-src
 paper-icon-theme-git
 peek
+sddm
 seahorse
 simplescreenrecorder
 spotify

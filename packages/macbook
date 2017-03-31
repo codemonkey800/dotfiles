@@ -2,6 +2,7 @@ acpi
 broadcom-wl-dkms
 gpu-switch
 kbdlight
+libva-intel-driver
 mbpfan-git
 systemd-vgaswitcheroo-units
 tlp

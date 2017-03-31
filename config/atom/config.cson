@@ -103,7 +103,10 @@
       selectionDecorationsZIndex: 0
       "split-diff": true
       "split-diffDecorationsZIndex": 0
+  "tool-bar":
+    visible: false
   "tree-view":
+    hideVcsIgnoredFiles: true
     showOnRightSide: false
   "vim-mode-plus":
     automaticallyEscapeInsertModeOnActivePaneItemChange: true

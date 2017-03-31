@@ -352,8 +352,8 @@ nnoremap <silent> <leader>r :call ExecuteCurrentFile()<CR>
 " }}
 
 " sort things
-noremap <silent> <leader>sa :sort<CR>
-noremap <silent> <leader>sd :sort!<CR>
+noremap <silent> <leader>sd :sort<CR>
+noremap <silent> <leader>sa :sort!<CR>
 
 " open nvim config for editing
 nnoremap <silent> <leader>ve :edit $MYVIMRC<CR>

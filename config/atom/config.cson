@@ -19,9 +19,6 @@
       compactList: true
     ui:
       panelShadows: true
-  "atom-ternjs":
-    inlineFnCompletionDocumentation: true
-    useSnippets: true
   "atom-typescript": {}
   "autocomplete-modules":
     babelPluginModuleResolver: true
@@ -39,23 +36,9 @@
     autoHideMenuBar: true
     customFileTypes:
       "source.ini": [
-        ".buckconfig"
-        ".hgrc"
         ".flowconfig"
       ]
-      "source.json": [
-        ".arcconfig"
-        "BUCK.autodeps"
-      ]
-      "source.python": [
-        "BUCK"
-      ]
-    disabledPackages: [
-      "linter"
-      "symbols-view"
-      "tree-view"
-      "atom-ternjs"
-    ]
+    disabledPackages: []
     ignoredNames: [
       ".git"
       ".hg"
@@ -120,51 +103,8 @@
       selectionDecorationsZIndex: 0
       "split-diff": true
       "split-diffDecorationsZIndex": 0
-  nuclide:
-    installRecommendedPackages: true
-    "nuclide-clang":
-      defaultDiagnostics: true
-    "nuclide-diagnostics-ui": {}
-    "nuclide-file-tree":
-      allowKeyboardPrefixNavigation: false
-      showOpenFiles: false
-      showUncommittedChanges: false
-    "nuclide-flow":
-      enableReferencesHighlight: true
-    "nuclide-health":
-      toolbarJewel: "Memory"
-    "nuclide-home":
-      showHome: false
-    "nuclide-outline-view": {}
-    "nuclide-python":
-      includeOptionalArguments: true
-      lintOnFly: true
-    "nuclide-working-sets": {}
-    use:
-      "nuclide-blame-provider-hg": false
-      "nuclide-bookshelf": false
-      "nuclide-buck": false
-      "nuclide-buck-ios": false
-      "nuclide-code-format": false
-      "nuclide-debugger-iwdp": false
-      "nuclide-debugger-php": false
-      "nuclide-distraction-free-mode": false
-      "nuclide-hack": false
-      "nuclide-hg-conflict-resolver": false
-      "nuclide-hg-repository": false
-      "nuclide-hhvm": false
-      "nuclide-home": false
-      "nuclide-ios-simulator-logs": false
-      "nuclide-language-hack": false
-      "nuclide-language-reason": false
-      "nuclide-objc": false
-      "nuclide-ocaml": false
-      "nuclide-remote-atom": false
-      "nuclide-remote-projects": false
-      "nuclide-swift": false
-      "nuclide-working-sets": false
   "tree-view":
-    showOnRightSide: true
+    showOnRightSide: false
   "vim-mode-plus":
     automaticallyEscapeInsertModeOnActivePaneItemChange: true
     clearHighlightSearchOnResetNormalMode: true

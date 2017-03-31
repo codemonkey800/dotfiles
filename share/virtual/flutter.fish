@@ -7,7 +7,13 @@ function deactivate
         set -gx PATH $OLD_PATH
         set -e OLD_PATH
     end
-    functions -e deactivate
+    functions -e deactivate destroy
+end
+
+function destroy
+    deactivate
+    set -l count (count (rm -rfv {venv_dir}))
+    echo "Deleted $count files from virtual env!"
 end
 
 set -gx VIRTUAL_ENV $PWD/{venv_dir}

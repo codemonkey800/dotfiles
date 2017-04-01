@@ -33,10 +33,6 @@ function __aliasif
     end
 end
 
-if exists checkupdates; and exists checkupdates-aur
-    alias check-updates 'fish -c "checkupdates; and checkupdates-aur | sort -u"'
-end
-
 __aliasif apm 'apm-beta'
 __aliasif atom 'atom-beta'
 __aliasif chrome 'google-chrome-unstable'
@@ -49,6 +45,7 @@ __aliasif npmls 'npm ls --depth=0'
 __aliasif pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
 __aliasif subl 'subl3'
 __aliasif top 'htop'
+__aliasif tree 'tree -faC'
 
 functions -e __aliasif
 

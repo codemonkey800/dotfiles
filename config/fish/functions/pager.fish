@@ -1,4 +1,4 @@
-function pager --description 'Function that pipes data or the contents of a file to $PAGER'
+function pager -d 'Function that pipes data or the contents of a file to $PAGER'
     if test (count $argv) -eq 0; and status --is-interactive
         eval $PAGER
     else if test -n $argv[1] -a -f $argv[1]

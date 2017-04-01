@@ -13,6 +13,7 @@ autocomplete-paths
 autocomplete-python
 autocomplete-xml
 build
+busy
 busy-signal
 choose-pane
 code-peek
@@ -33,6 +34,7 @@ js-hyperclick
 jumpy
 language-babel
 language-graphql
+language-ini
 language-postcss
 latex
 latexer

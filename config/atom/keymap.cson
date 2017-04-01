@@ -4,6 +4,9 @@
   'ctrl-shift-tab': 'pane:show-previous-item'
   'ctrl-alt-s': 'application:show-settings'
 
+'.platform-linux atom-workspace, .platform-linux atom-text-editor, .platform-win32 atom-workspace, .platform-win32 atom-text-editor':
+  'alt-b': 'build:trigger'
+
 '.tree-view':
   'o': 'tree-view:open-selected-entry'
   'x': 'tree-view:remove'

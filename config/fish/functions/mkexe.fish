@@ -12,7 +12,7 @@ function __mkexe_create_file
     chmod +x $argv[1]
 end
 
-function mkexe --description 'Creates a script that is executable.'
+function mkexe -d 'Creates a script that is executable.'
     set n (count $argv)
     if test $n -eq 0; or contains -- "$argv" h help -h --help
         __mkexe_help

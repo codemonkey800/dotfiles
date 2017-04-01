@@ -69,7 +69,6 @@ neovim
 neovim-remote
 netctl
 net-tools
-networkmanager
 ntfs-3g
 openssh
 p7zip
@@ -94,6 +93,7 @@ python-lolcat
 python-mistune
 python-neovim
 python-pawk
+python-pip
 python-plumbum
 python-psutil
 python-setproctitle

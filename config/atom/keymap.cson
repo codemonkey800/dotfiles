@@ -5,7 +5,10 @@
   'ctrl-alt-s': 'application:show-settings'
 
 '.tree-view':
+  'o': 'tree-view:open-selected-entry'
   'x': 'tree-view:remove'
+  'g g': 'core:move-to-top'
+  'G': 'core:move-to-bottom'
   'H': 'tree-view:recursive-collapse-directory'
   'L': 'tree-view:recursive-expand-directory'
 

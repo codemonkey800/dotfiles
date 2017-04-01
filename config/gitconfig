@@ -8,7 +8,7 @@
   aa = add --all
   # add currently staged files to previous commit
   # please don't do this for commits already pushed to remote
-  amend = commit --all --amend --no-edit
+  amend = commit --amend --no-edit
   # commit with single message
   # additional messages can be added using the -m flag
   c = commit --message

@@ -86,3 +86,4 @@ ttf-roboto-slab
 watchman
 xdg-user-dirs-gtk
 xf86-input-libinput
+xorg-xinput

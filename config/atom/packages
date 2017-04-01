@@ -13,7 +13,6 @@ autocomplete-paths
 autocomplete-python
 autocomplete-xml
 build
-build-npm-apm
 busy-signal
 choose-pane
 code-peek

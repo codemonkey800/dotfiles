@@ -15,6 +15,7 @@ set -gx DOTFILES (
     readlink -f (dirname $dir)/../..
 )
 
+source $DOTFILES/config/fish/colors.fish
 source $DOTFILES/config/fish/variables.fish
 source $DOTFILES/config/fish/aliases.fish
 source $DOTFILES/config/fish/completions.fish

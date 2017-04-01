@@ -16,6 +16,17 @@
 ---
 
 # Dotfiles :fish:
+
+## Emoji Index
+I've recently started using Emojis in a lot of my commit messages, READMEs, and
+wherever I can on GitHub. Here's what each emoji I use represents. It may be
+subject to change:
+
+- :tada: - Commits that include something so amazing that I have to celebrate :tada:
+- :wrench: - Commits that are relatively small to medium in size
+- :warning: - Commits that introduce configs or code that break things
+
+## Introduction
 Aside from being free and having a [penguin](https://en.wikipedia.org/wiki/Tux)
 for a mascot, a Linux based OS is probably *the* best for customization.
 [Dotfiles](https://en.wikipedia.org/wiki/Dotfiles) are essentially hidden files
@@ -217,7 +228,7 @@ Linux distro in a VM.
 
 Personally, I use Windows on my desktop and run Arch in VMWare Workstation.
 
-## License :octocat:
+## License :page_with_curl:
 The MIT License (MIT)
 
 Copyright (c) 2016 Jeremy Asuncion

@@ -12,6 +12,8 @@ autocomplete-modules
 autocomplete-paths
 autocomplete-python
 autocomplete-xml
+build
+build-npm-apm
 busy-signal
 choose-pane
 code-peek
@@ -21,6 +23,7 @@ docblockr
 editorconfig
 es6-javascript
 file-icons
+flow-ide
 git-plus
 highlight-line
 highlight-selected
@@ -39,8 +42,8 @@ linter-alex
 linter-docker
 linter-eslint
 linter-htmlhint
-linter-jsonlint
 linter-js-yaml
+linter-jsonlint
 linter-just-say-no
 linter-markdown
 linter-mixed-indent

@@ -8,7 +8,7 @@ function serve -d 'Starts a static HTTP server in the current dir.'
 
     set cmd "$cmd $port"
 
-    if test $port -eq 8080
+    if test $port -eq 80
         set cmd "sudo $cmd"
     end
 

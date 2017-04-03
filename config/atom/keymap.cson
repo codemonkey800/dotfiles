@@ -120,5 +120,6 @@
   '-': 'choose-pane:start'
 
 'atom-text-editor.vim-mode-plus.normal-mode:not(.jumpy-jump-mode)[data-grammar^="source ts"]':
+  'alt-a': 'typescript:quick-fix'
   'g d': 'typescript:go-to-declaration'
   'g D': 'typescript:return-from-declaration'

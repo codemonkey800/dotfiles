@@ -79,6 +79,7 @@
   "linter-eslint":
     fixOnSave: true
     lintHtmlFiles: true
+  "linter-ui-default": {}
   minimap:
     plugins:
       codeglance: true

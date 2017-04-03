@@ -3,17 +3,28 @@
   'ctrl-tab': 'pane:show-next-item'
   'ctrl-shift-tab': 'pane:show-previous-item'
   'ctrl-alt-s': 'application:show-settings'
-
-'.platform-linux atom-workspace, .platform-linux atom-text-editor, .platform-win32 atom-workspace, .platform-win32 atom-text-editor':
-  'alt-b': 'build:trigger'
+  'ctrl-shift-d': 'user:dismiss-notifications'
 
 '.tree-view':
   'o': 'tree-view:open-selected-entry'
-  'x': 'tree-view:remove'
+  'x': 'tree-view:cut'
+  'y': 'tree-view:copy'
+  'p': 'tree-view:paste'
+  'd': 'permanent-delete:delete'
+
   'g g': 'core:move-to-top'
+
   'G': 'core:move-to-bottom'
   'H': 'tree-view:recursive-collapse-directory'
   'L': 'tree-view:recursive-expand-directory'
+  'Y': 'tree-view:copy-full-path'
+
+'atom-text-editor':
+  # keymap gets overwritten by build, so i'm manually adding it here to enforce it
+  'ctrl-alt-b': 'atom-beautify:beautify-editor'
+
+  'alt-b': 'build:trigger'
+  'alt-/': 'find-and-replace:show'
 
 'atom-text-editor.mini':
   'ctrl-h': 'core:backspace'
@@ -78,7 +89,6 @@
   ', R': 'vim-mode-plus-user:replace-with-execution-keep-original-text'
 
 'atom-text-editor.vim-mode-plus.normal-mode:not(.jumpy-jump-mode)':
-
   'S': 'vim-mode-plus:surround-smart-word'
 
   'g f': 'open-this:here'
@@ -108,3 +118,7 @@
   'ctrl-w L': 'paner:very-right'
 
   '-': 'choose-pane:start'
+
+'atom-text-editor.vim-mode-plus.normal-mode:not(.jumpy-jump-mode)[data-grammar^="source ts"]':
+  'g d': 'typescript:go-to-declaration'
+  'g D': 'typescript:return-from-declaration'

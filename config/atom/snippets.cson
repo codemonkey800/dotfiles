@@ -6,3 +6,8 @@
   'disable eslint or rule':
     'prefix': 'eslintd'
     'body': '/* eslint-disable $1 */$2'
+
+'.source.ts':
+  'disable tslint or rule':
+    'prefix': 'tslintd'
+    'body': '/* tslint:disable $1 */$2'

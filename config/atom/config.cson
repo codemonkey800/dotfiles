@@ -103,6 +103,8 @@
       selectionDecorationsZIndex: 0
       "split-diff": true
       "split-diffDecorationsZIndex": 0
+  "permanent-delete":
+    confirmDelete: false
   "tool-bar":
     visible: false
   "tree-view":

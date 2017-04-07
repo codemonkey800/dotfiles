@@ -20,8 +20,7 @@
     ui:
       panelShadows: true
   "atom-typescript": {}
-  "autocomplete-modules":
-    babelPluginModuleResolver: true
+  "autocomplete-modules": {}
   "autocomplete-plus":
     suppressActivationForEditorClasses: [
       "vim-mode-plus.insert-mode.replace"

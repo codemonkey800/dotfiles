@@ -8,6 +8,26 @@
     'body': '/* eslint-disable $1 */$2'
 
 '.source.ts':
+  'import all as':
+    'prefix': 'ima'
+    'body': 'import * as $1 from \'$2\';'
+
+  'import named':
+    'prefix': 'imn'
+    'body': 'import { $1 } from \'$2\';'
+
+  'export all from':
+    'prefix': 'exa'
+    'body': 'export * from \'$1\';'
+
+  'export named from':
+    'prefix': 'exm'
+    'body': 'export { $1 } from \'$2\';'
+
+  'export function':
+    'prefix': 'exf'
+    'body': 'export function $1($2): $3 {\n\t$4\n}'
+
   'disable tslint or rule':
     'prefix': 'tslintd'
     'body': '/* tslint:disable $1 */$2'

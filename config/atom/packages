@@ -33,9 +33,9 @@ intentions
 js-hyperclick
 jumpy
 language-babel
+language-docker
 language-graphql
 language-ini
-language-postcss
 latex
 latexer
 linter
@@ -49,6 +49,10 @@ linter-just-say-no
 linter-markdown
 linter-mixed-indent
 linter-sass-lint
+linter-spell
+linter-spell-html
+linter-spell-javascript
+linter-spell-latex
 linter-stylelint
 linter-tslint
 linter-ui-default

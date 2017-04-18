@@ -7,6 +7,10 @@
     'prefix': 'eslintd'
     'body': '/* eslint-disable $1 */$2'
 
+  'import for effoects':
+    'prefix': 'ime'
+    'body': 'import \'$1\';'
+
 '.source.ts':
   'import all as':
     'prefix': 'ima'

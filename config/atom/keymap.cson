@@ -10,7 +10,7 @@
   'x': 'tree-view:cut'
   'y': 'tree-view:copy'
   'p': 'tree-view:paste'
-  'd': 'permanent-delete:delete'
+  'd': 'user:tree-view-delete'
 
   'g g': 'core:move-to-top'
 

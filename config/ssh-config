@@ -4,7 +4,7 @@ Host github.com gitlab.com bitbucket.com
     User git
 
 Host dev
-    HostName jeremyasuncion.io
+    HostName home.jeremyasuncion.io
     IdentityFile ~/.ssh/vps
     User jeremy
 

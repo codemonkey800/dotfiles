@@ -9,6 +9,7 @@ autocomplete-emojis
 autocomplete-en-en
 autocomplete-html-entities
 autocomplete-json
+autocomplete-lodash
 autocomplete-modules
 autocomplete-paths
 autocomplete-python
@@ -37,6 +38,7 @@ language-babel
 language-docker
 language-graphql
 language-ini
+language-pug
 latex
 latexer
 linter

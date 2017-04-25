@@ -1,5 +1,6 @@
 atom-beautify
 atom-clock
+atom-import-sort
 atom-material-syntax-dark
 atom-material-ui
 atom-typescript
@@ -49,10 +50,6 @@ linter-just-say-no
 linter-markdown
 linter-mixed-indent
 linter-sass-lint
-linter-spell
-linter-spell-html
-linter-spell-javascript
-linter-spell-latex
 linter-stylelint
 linter-tslint
 linter-ui-default

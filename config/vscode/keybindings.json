@@ -2,17 +2,17 @@
   {
     "key": "alt+h",
     "command": "workbench.action.previousEditor",
-    "when": "editorTextFocus && !inDebugRepl && vim.mode != 'Insert'"
+    "when": "editorTextFocus && !inDebugRepl"
   },
   {
     "key": "alt+l",
     "command": "workbench.action.nextEditor",
-    "when": "editorTextFocus && !inDebugRepl && vim.mode !== 'Insert'"
+    "when": "editorTextFocus && !inDebugRepl"
   },
   {
     "key": "ctrl+b",
     "command": "editor.action.goToDeclaration",
-    "when": "editorTextFocus && !inDebugRepl && vim.mode !== 'Insert'"
+    "when": "editorTextFocus && !inDebugRepl"
   },
   {
     "key": "meta+r",

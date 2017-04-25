@@ -2,7 +2,7 @@
 {
   // editor
   "editor.fontSize": 14,
-  "editor.fontFamily": "'Source Code Pro for Powerline', monospace",
+  "editor.fontFamily": "'Hack', monospace",
   "editor.tabSize": 2,
   "editor.minimap.enabled": true,
   "editor.minimap.renderCharacters": true,
@@ -57,6 +57,7 @@
       "before": ["o"],
       "after": ["o", "<Esc>", "k"]
     },
+
     {
       "before": ["O"],
       "after": ["O", "<Esc>"]
@@ -79,8 +80,5 @@
   ],
 
   // stuff
-  "editor.cursorBlinking": "blink",
-  "git.confirmSync": false,
-  "workbench.welcome.enabled": false,
   "vsicons.projectDetection.autoReload": true
 }

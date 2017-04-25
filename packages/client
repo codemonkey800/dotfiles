@@ -9,13 +9,13 @@ clang
 cmake
 dconf-editor
 eog
+escrotum-git
 evince
 gdm
 gitg
 gnome-control-center
 gnome-font-viewer
 gnome-keyring
-gnome-screenshot
 gnome-session
 gnome-settings-daemon
 gnome-shell
@@ -57,6 +57,7 @@ openjdk8-doc
 openjdk8-src
 paper-icon-theme-git
 peek
+python2-numpy
 sddm
 seahorse
 simplescreenrecorder

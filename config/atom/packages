@@ -5,6 +5,7 @@ atom-material-syntax-dark
 atom-material-ui
 atom-typescript
 autoclose-html
+autocomplete-clang
 autocomplete-emojis
 autocomplete-en-en
 autocomplete-html-entities
@@ -43,8 +44,10 @@ latex
 latexer
 linter
 linter-alex
+linter-clang
 linter-docker
 linter-eslint
+linter-flake8
 linter-htmlhint
 linter-js-yaml
 linter-jsonlint
@@ -75,6 +78,7 @@ paner
 pdf-view
 pigments
 preview
+python-tools
 react-snippets
 set-syntax
 sort-lines

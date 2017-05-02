@@ -72,7 +72,7 @@ Plug 'Shougo/neco-vim'
 
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/echodoc.vim'
-Plug 'Tagbar'
+Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
 Plug 'arakashic/chromatica.nvim', { 'for': ['c', 'cpp'] }
@@ -87,11 +87,11 @@ Plug 'wellle/visual-split.vim'
 
 " utility {{
 
-Plug 'ansiesc.vim'
+Plug 'vim-scripts/ansiesc.vim'
 Plug 'brooth/far.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'gitignore'
+Plug 'gisphm/vim-gitignore'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'

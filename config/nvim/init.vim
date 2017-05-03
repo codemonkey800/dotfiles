@@ -682,7 +682,7 @@ let g:fzf_layout = { 'down': '~30%' }
 function! GetFiles()
   let l:opts = {
     \ 'down': '30%',
-    \ 'source': 'pt -g "" --hidden --global-gitignore --ignore .git',
+    \ 'source': 'ag -g "" --hidden --ignore .git',
     \ 'options': '--multi',
   \ }
 

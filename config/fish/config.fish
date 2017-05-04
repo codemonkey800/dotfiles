@@ -21,7 +21,7 @@ source $DOTFILES/config/fish/aliases.fish
 source $DOTFILES/config/fish/completions.fish
 
 # sort and keep only unique paths
-set -gx PATH (paths | sort -u)
+set PATH (paths | sort -u)
 
 # exit if non-interactive at this point
 not status -i; and exit

@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 
 from glob import glob
-from plumbum import FG, local as sh
+from plumbum import FG
+from plumbum.cmd import (
+    echo,
+    pacman,
+    rm,
+    rmshit,
+    sudo,
+)
 
 
 def main():
-    echo = sh['echo']
-    pacman = sh['pacman']
-    rm = sh['rm']
-    rmshit = sh['rmshit']
-    sudo = sh['sudo']
-
     chain = echo['-e', 'y\ny\n'] | sudo[pacman['-Scc']]
     print(chain())
 

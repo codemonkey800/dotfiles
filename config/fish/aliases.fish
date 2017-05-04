@@ -1,8 +1,8 @@
 # Aliases
 alias dotfiles "fish -c '
-    cd $DOTFILES;
-    echo Control-D to go back.;
-    exec fish
+  cd $DOTFILES;
+  echo Control-D to go back.;
+  exec fish
 '"
 alias e "$EDITOR"
 alias exists 'type -q'
@@ -11,9 +11,9 @@ alias gr 'cd (git rev-parse --show-toplevel)'
 alias info 'info --vi-keys'
 alias lns 'ln -svf'
 alias lsof-del 'lsof +c 0
-    | grep -w DEL
-    | pawk \'"{}: {}".format(f[0], f[-1:])\'
-    | sort -u
+  | grep -w DEL
+  | pawk \'"{}: {}".format(f[0], f[-1:])\'
+  | sort -u
 '
 alias nm-restart 'sudo systemctl restart NetworkManager'
 alias paths 'echo $PATH | tr " " \n'
@@ -28,9 +28,9 @@ alias wh 'type -P'
 # setting aliases.
 # Usage: __aliasif <alias> <command>
 function __aliasif
-    if exists (echo $argv[2] | pawk f[0])
-        alias $argv[1] $argv[2]
-    end
+  if exists (echo $argv[2] | pawk f[0])
+    alias $argv[1] $argv[2]
+  end
 end
 
 __aliasif apm 'apm-beta'

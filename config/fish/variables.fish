@@ -25,45 +25,45 @@ set PATH $PATH $DOTFILES/bin
 
 # FZF stuff
 if type -q fzf
-    set -gx FZF_TMUX 1
+  set -gx FZF_TMUX 1
 
-    # set fzf find file command to use the_silver_searcher
-    # this includes hidden files and directories by default
-    set -gx FZF_FIND_FILE_COMMAND '
-        if git status > /dev/null ^&1
-            set -l files (
-                ag -g "" \
-                   --hidden \
-                   --ignore .git \
-                   ^ /dev/null
-            )
-            for f in $files
-                echo $f
-                dirname $f
-            end | sort -fru
-    '
+  # set fzf find file command to use the_silver_searcher
+  # this includes hidden files and directories by default
+  set -gx FZF_FIND_FILE_COMMAND '
+    if git status > /dev/null ^&1
+      set -l files (
+        ag -g "" \
+           --hidden \
+           --ignore .git \
+           ^ /dev/null
+      )
+      for f in $files
+        echo $f
+        dirname $f
+      end | sort -fru
+  '
 
-    # set fzf cd command to use the_silver_searcher
-    set -gx FZF_CD_COMMAND '
-        set -l files (ag -g "" --ignore .git ^ /dev/null)
-        for f in $files
-            set -l dir (dirname $f)
-            test "$dir" != "."; and echo $dir
-        end | sort -fru
-    '
+  # set fzf cd command to use the_silver_searcher
+  set -gx FZF_CD_COMMAND '
+    set -l files (ag -g "" --ignore .git ^ /dev/null)
+    for f in $files
+      set -l dir (dirname $f)
+      test "$dir" != "."; and echo $dir
+    end | sort -fru
+  '
 
-    # set fzf cd with hidden command to use the platinum_searcher if in git repo,
-    # otherwise use find command
-    set -gx FZF_CD_WITH_HIDDEN_COMMAND '
-        set -l files (
-            ag -fg "" \
-               --hidden \
-               --ignore .git \
-               ^ /dev/null
-        )
-        for f in $files
-            dirname $f
-        end | sort -fru
-    '
+  # set fzf cd with hidden command to use the platinum_searcher if in git repo,
+  # otherwise use find command
+  set -gx FZF_CD_WITH_HIDDEN_COMMAND '
+    set -l files (
+      ag -fg "" \
+         --hidden \
+         --ignore .git \
+         ^ /dev/null
+    )
+    for f in $files
+      dirname $f
+    end | sort -fru
+  '
 end
 

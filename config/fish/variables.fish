@@ -20,8 +20,8 @@ set -gx LANG en_US.UTF-8
 set -gx PAGER less
 
 # PATH stuff
-set -gx PATH $PATH ~/bin
-set -gx PATH $PATH $DOTFILES/bin
+set PATH $PATH ~/bin
+set PATH $PATH $DOTFILES/bin
 
 # FZF stuff
 if type -q fzf

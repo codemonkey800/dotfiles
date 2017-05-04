@@ -20,7 +20,7 @@ class Gpu(cli.Application):
         'status',
         'on',
         'off',
-        case_sensitive=False
+        case_sensitive=False,
     ))
     def main(self, command='status'):
         common.check_linux()

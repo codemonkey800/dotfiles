@@ -122,7 +122,7 @@ class Environment(ABC):
             '-z', '-x',
             '-f', '-',
             '-C', self.dest,
-            '--strip-components', 1
+            '--strip-components', 1,
         ]
 
         for link in self.links:
@@ -206,7 +206,7 @@ class PythonEnvironment(Environment):
         sh['ln'](
             '-s',
             sh.cwd / f'{dest}/bin/activate.fish',
-            sh.cwd / f'{dest}/activate.fish'
+            sh.cwd / f'{dest}/activate.fish',
         )
 
     def fetch(self, force=False):

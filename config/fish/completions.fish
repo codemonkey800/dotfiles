@@ -20,16 +20,16 @@ complete --command gpu --long-option on --description 'Turns on discrete gpu'
 complete --command gpu --long-option off --description 'Turns off discrete gpu'
 complete --command gpu --long-option help --description 'Prints help message'
 complete --command update \
-         --no-files \
-         --short-option l --long-option list \
-         --description 'List available updates.'
+     --no-files \
+     --short-option l --long-option list \
+     --description 'List available updates.'
 # complete --command update \
-#          --exclusive \
-#          --short-option p --long-option package-manager \
-#          --arguments (update --list-package-managers) \
-#          --description 'Updates packages for a specific manager.'
+#      --exclusive \
+#      --short-option p --long-option package-manager \
+#      --arguments (update --list-package-managers) \
+#      --description 'Updates packages for a specific manager.'
 complete --command update \
-         --no-files \
-         --long-option list-package-managers \
-         --description 'Lists all available package managers.'
+     --no-files \
+     --long-option list-package-managers \
+     --description 'Lists all available package managers.'
 

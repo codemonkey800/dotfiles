@@ -8,7 +8,7 @@ from plumbum import local as sh
 VGA_SWITCH_PATH = sh.path('/sys/kernel/debug/vgaswitcheroo/switch')
 
 
-class Gpu(cli.Application):
+class App(cli.Application):
     '''
         Manages the power state of the MacBook discrete GPU using vgaswitcharoo
     '''
@@ -36,6 +36,6 @@ class Gpu(cli.Application):
 
 if __name__ == '__main__':
     try:
-        Gpu.run()
+        App.run()
     except KeyboardInterrupt as e:
         pass

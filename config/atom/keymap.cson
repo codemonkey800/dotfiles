@@ -58,9 +58,6 @@
 'atom-text-editor.vim-mode-plus:not(.insert-mode):not(.jumpy-jump-mode)':
   'f': 'jumpy:toggle'
 
-  '0': 'unset!'
-  '$': 'unset!'
-
   'H': 'vim-mode-plus:move-to-beginning-of-line'
   'L': 'vim-mode-plus:move-to-last-character-of-line'
 
@@ -123,3 +120,8 @@
   'alt-a': 'typescript:quick-fix'
   'g d': 'typescript:go-to-declaration'
   'g D': 'typescript:return-from-declaration'
+
+'atom-text-editor.vim-mode-plus.normal-mode:not(.jumpy-jump-mode)[data-grammar^="source python"]':
+  'g d': 'autocomplete-python:go-to-definition'
+  'g D': 'python-tools:goto-definition'
+  ', u': 'python-tools:show-usages'

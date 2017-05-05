@@ -28,13 +28,6 @@ not status -i; and exit
 
 # stuff to do if a display server isn't available
 if test -z $DISPLAY
-  # source profile.d stuff if a display manager isn't used
-  if exists bass
-    for f in /etc/profile.d/*.sh
-      bass source $f > /dev/null ^ /dev/null
-    end
-  end
-
   # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
   if exists keychain
     set -l keys (

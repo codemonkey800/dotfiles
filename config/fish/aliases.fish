@@ -1,9 +1,5 @@
 # Aliases
-alias dotfiles "fish -c '
-  cd $DOTFILES;
-  echo Control-D to go back.;
-  exec fish
-'"
+alias dotfiles "cd $DOTFILES"
 alias e "$EDITOR"
 alias exists 'type -q'
 alias g 'git'

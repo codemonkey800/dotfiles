@@ -9,12 +9,12 @@ from plumbum import FG, local as sh
 CONFIG_FILE = sh.path(path.expandvars('$DOTFILES/share/shittyfiles'))
 
 
-def expandPath(p):
+def expand_path(p):
     '''Expands a path's glob and tilde syntax if they're present.'''
     return glob(path.expanduser(p))
 
 
-class RmShit(cli.Application):
+class App(cli.Application):
     '''
         A script for removing user defined shitty files.  Also has support for
         directory specific shitty config files.
@@ -64,7 +64,7 @@ class RmShit(cli.Application):
         files = [
             sh.path(f)
             for pattern in files
-            for f in expandPath(pattern)
+            for f in expand_path(pattern)
         ]
 
         if len(files) == 0:
@@ -91,6 +91,6 @@ class RmShit(cli.Application):
 
 if __name__ == '__main__':
     try:
-        RmShit.run()
+        App.run()
     except KeyboardInterrupt as e:
         pass

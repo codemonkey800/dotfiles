@@ -32,7 +32,6 @@ gettext
 git
 git-extras
 git-lfs
-git-secret
 glibc
 grep
 groff

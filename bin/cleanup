@@ -5,13 +5,11 @@ from plumbum import FG, local as sh
 
 
 def main():
-    echo = sh['echo']
     pacman = sh['pacman']
     rm = sh['rm']
-    rmshit = sh['rmshit']
     sudo = sh['sudo']
 
-    chain = echo['-e', 'y\ny\n'] | sudo[pacman['-Scc']]
+    chain = sh['echo']['-e', 'y\ny\n'] | sudo[pacman['-Scc']]
     print(chain())
 
     pkgs = pacman('-Qqdt', retcode=None).split('\n')[:-1]
@@ -21,7 +19,7 @@ def main():
     rm('-rf', glob('/tmp/npm*'))
     rm('-rf', glob('/tmp/yaourt*'))
 
-    rmshit['-vy'] & FG
+    sh['rmshit']['-vy'] & FG
 
 
 if __name__ == '__main__':

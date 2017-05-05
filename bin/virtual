@@ -6,7 +6,7 @@ import plumbum.cli as cli
 from virtual import ENVIRONMENTS
 
 
-class Virtual(cli.Application):
+class App(cli.Application):
     '''
         A simple cli script that creates a virtual environment
         and activation file.
@@ -45,6 +45,6 @@ class Virtual(cli.Application):
 
 if __name__ == '__main__':
     try:
-        Virtual.run()
+        App.run()
     except KeyboardInterrupt as e:
         pass

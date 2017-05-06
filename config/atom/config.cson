@@ -50,8 +50,8 @@
       "desktop.ini"
       ".venv"
     ]
-    openEmptyEditorOnStart: false
     projectHome: "/home/jeremy/src/node"
+    restorePreviousWindowsOnStart: false
     telemetryConsent: "no"
     themes: [
       "atom-material-ui"

@@ -1,5 +1,6 @@
 ~/.adobe
 ~/.babel*
+~/.bash_history
 ~/.bazaar
 ~/.bundle
 ~/.byobu
@@ -19,12 +20,12 @@
 ~/.gi_list
 ~/.gradle/
 ~/.gstreamer-0.10
-~/java_error_in_CL.hprof
 ~/.idea-build
 ~/.ipython
 ~/.ivy2
 ~/.java
 ~/javac-services.*.log
+~/java_error_in_CL.hprof
 ~/.jspm
 ~/.jupyter
 ~/.lesshst

@@ -116,12 +116,18 @@
 
   '-': 'choose-pane:start'
 
-'atom-text-editor.vim-mode-plus.normal-mode:not(.jumpy-jump-mode)[data-grammar^="source ts"]':
-  'alt-a': 'typescript:quick-fix'
-  'g d': 'typescript:go-to-declaration'
-  'g D': 'typescript:return-from-declaration'
+'atom-text-editor.vim-mode-plus.normal-mode:not(.jumpy-jump-mode)[data-grammar^="source c"]':
+  'g d': 'autocomplete-clang:go-declaration'
+
+'atom-text-editor.vim-mode-plus.normal-mode:not(.jumpy-jump-mode)[data-grammar^="source cpp"]':
+  'g d': 'autocomplete-clang:go-declaration'
 
 'atom-text-editor.vim-mode-plus.normal-mode:not(.jumpy-jump-mode)[data-grammar^="source python"]':
   'g d': 'autocomplete-python:go-to-definition'
   'g D': 'python-tools:goto-definition'
   ', u': 'python-tools:show-usages'
+
+'atom-text-editor.vim-mode-plus.normal-mode:not(.jumpy-jump-mode)[data-grammar^="source ts"]':
+  'alt-a': 'typescript:quick-fix'
+  'g d': 'typescript:go-to-declaration'
+  'g D': 'typescript:return-from-declaration'

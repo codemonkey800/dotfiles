@@ -6,6 +6,7 @@ atom-material-ui
 atom-typescript
 autoclose-html
 autocomplete-clang
+autocomplete-cmake
 autocomplete-emojis
 autocomplete-en-en
 autocomplete-html-entities
@@ -36,11 +37,14 @@ intentions
 js-hyperclick
 jumpy
 language-babel
+language-cmake
 language-docker
 language-graphql
 language-ini
+language-latex
 language-pug
 latex
+latex-autocomplete
 latexer
 linter
 linter-alex

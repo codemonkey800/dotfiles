@@ -21,6 +21,8 @@
     ui:
       panelShadows: true
   "atom-typescript": {}
+  "autocomplete-clang":
+    includeNonDoxygenCommentsAsDocumentation: true
   "autocomplete-modules":
     babelPluginModuleResolver: true
   "autocomplete-plus":
@@ -77,6 +79,7 @@
     taggedTemplateGrammar: [
       "\"(?<=<style jsx>{)|(?<=<style jsx global>{)\":source.css.styled"
     ]
+  "linter-clang": {}
   "linter-eslint":
     fixOnSave: true
     lintHtmlFiles: true

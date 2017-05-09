@@ -42,8 +42,10 @@ if test -z $DISPLAY
   end
 else
   # Have keychain kill all ssh-agent's if any are running and $DISPLAY is defined
-  if exists keychain; and test -f ~/.keychain; and test (count (keychain -l)) -gt 0
+  if exists keychain; and test (count (keychain -l)) -gt 0
     keychain --quiet -k all
+  end
+  if test -f ~/.keychain
     rm -rf ~/.keychain
   end
 end

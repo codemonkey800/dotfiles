@@ -41,7 +41,7 @@ __aliasif npmls 'npm ls --depth=0'
 __aliasif pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
 __aliasif subl 'subl3'
 __aliasif top 'htop'
-__aliasif tree 'tree -faC'
+__aliasif tree 'tree -aC'
 
 functions -e __aliasif
 

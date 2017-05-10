@@ -33,7 +33,7 @@ if type -q fzf
   end
 
   function __fzf_user_cd \
-    -d 'Finds directories to potentially cd into'S
+    -d 'Finds directories to potentially cd into'
     find . \
       -type d \
       -not \( \

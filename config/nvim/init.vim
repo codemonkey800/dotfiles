@@ -682,21 +682,10 @@ let g:fzf_layout = { 'down': '~30%' }
 function! GetFiles()
   let l:opts = {
     \ 'down': '30%',
-    \ 'source': 'ag -g "" --hidden --ignore .git',
-    \ 'options': '--multi',
+    \ 'source': 'bash -c "ag -l --hidden --ignore .git | sort -fu"',
+    \ 'options': '--multi --prompt "Files>"',
   \ }
-
-  call system('git status')
-
-  if v:shell_error == 0
-    let l:name = 'gitfiles'
-    let l:opts.options .= ' --prompt "Git Files>"'
-  else
-    let l:name = 'files'
-    let l:opts.options .= ' --prompt "Files>"'
-  endif
-
-  return fzf#run(fzf#wrap(l:name, l:opts, 0))
+  return fzf#run(fzf#wrap('files', l:opts, 0))
 endfunction
 
 nnoremap <silent> <C-p> :call GetFiles()<CR>

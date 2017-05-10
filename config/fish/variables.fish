@@ -27,43 +27,35 @@ set PATH $PATH $DOTFILES/bin
 if type -q fzf
   set -gx FZF_TMUX 1
 
-  # set fzf find file command to use the_silver_searcher
-  # this includes hidden files and directories by default
-  set -gx FZF_FIND_FILE_COMMAND '
-    if git status > /dev/null ^&1
-      set -l files (
-        ag -g "" \
-           --hidden \
-           --ignore .git \
-           ^ /dev/null
-      )
-      for f in $files
-        echo $f
-        dirname $f
-      end | sort -fru
-  '
+  function __fzf_user_find \
+    -d 'Finds files in the current directory'
+    ag -l --hidden --ignore .git | sort -fu
+  end
 
-  # set fzf cd command to use the_silver_searcher
-  set -gx FZF_CD_COMMAND '
-    set -l files (ag -g "" --ignore .git ^ /dev/null)
-    for f in $files
-      set -l dir (dirname $f)
-      test "$dir" != "."; and echo $dir
-    end | sort -fru
-  '
+  function __fzf_user_cd \
+    -d 'Finds directories to potentially cd into'S
+    find . \
+      -type d \
+      -not \( \
+        -path '\.' \
+        -o -path '*/\.*' \
+      \) \
+    | sed 's|\./||' | sort -fu
+  end
+  function __fzf_user_cd_hidden \
+    -d 'Finds directories to potentially cd into, including hidden dirs'
+    find . \
+      -type d \
+      -not \( \
+        -path '\.' \
+        -o -path '*/\.git' \
+        -o -path '*/\.git/*' \
+      \) \
+    | sed 's|\./||' | sort -fu
+  end
 
-  # set fzf cd with hidden command to use the platinum_searcher if in git repo,
-  # otherwise use find command
-  set -gx FZF_CD_WITH_HIDDEN_COMMAND '
-    set -l files (
-      ag -fg "" \
-         --hidden \
-         --ignore .git \
-         ^ /dev/null
-    )
-    for f in $files
-      dirname $f
-    end | sort -fru
-  '
+  set -gx FZF_FIND_FILE_COMMAND '__fzf_user_find'
+  set -gx FZF_CD_COMMAND '__fzf_user_cd'
+  set -gx FZF_CD_WITH_HIDDEN_COMMAND '__fzf_user_cd_hidden'
 end
 

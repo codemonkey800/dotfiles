@@ -3,6 +3,7 @@ autoconf
 automake
 bash
 bauerbill
+bazel
 binutils
 bison
 btrfs-progs
@@ -19,6 +20,7 @@ docker
 docker-compose
 e2fsprogs
 exfat-utils
+expac
 fakeroot
 file
 filesystem
@@ -69,6 +71,8 @@ neovim-remote
 netctl
 net-tools
 networkmanager
+nodejs
+npm
 ntfs-3g
 openssh
 p7zip
@@ -100,7 +104,6 @@ python-setproctitle
 python-vint
 python-virtualenv
 repose
-rmlint
 rng-tools
 rsync
 sed
@@ -132,5 +135,6 @@ words
 xfsprogs
 xsel
 yaourt
+yarn
 youtube-dl
 zip

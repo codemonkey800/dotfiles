@@ -1,3 +1,5 @@
+~/.FRD
+~/.ICEauthority
 ~/.adobe
 ~/.babel*
 ~/.bash_history
@@ -5,16 +7,14 @@
 ~/.bundle
 ~/.byobu
 ~/.bzr.log
-~/ca2
-~/ca2~
 ~/.cache/*
+~/.cache/.*
 ~/.config/enchant
 ~/.config/yarn
 ~/.dbus
 ~/.distlib
 ~/.dropbox-dist
 ~/.esd_auth
-~/.FRD
 ~/.gconf
 ~/.gconfd
 ~/.gi_list
@@ -24,8 +24,6 @@
 ~/.ipython
 ~/.ivy2
 ~/.java
-~/javac-services.*.log
-~/java_error_in_CL.hprof
 ~/.jspm
 ~/.jupyter
 ~/.lesshst
@@ -37,7 +35,6 @@
 ~/.node-gyp
 ~/.node_repl_history
 ~/.npm
-~/npm-debug.log
 ~/.nv
 ~/.objectdb
 ~/.oracle_jre_usage
@@ -57,3 +54,8 @@
 ~/.xsession-error*
 ~/.yarn*
 ~/.yjp
+~/ca2
+~/ca2~
+~/java_error_in_CL.hprof
+~/javac-services.*.log
+~/npm-debug.log

@@ -41,7 +41,6 @@
       "source.ini": [
         ".flowconfig"
       ]
-    disabledPackages: []
     ignoredNames: [
       ".git"
       ".hg"

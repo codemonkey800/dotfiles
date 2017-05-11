@@ -8,3 +8,5 @@ systemd-vgaswitcheroo-units
 tlp
 xf86-video-intel
 xf86-video-nouveau
+archlinux-themes-sddm
+sddm

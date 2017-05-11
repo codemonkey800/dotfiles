@@ -3,7 +3,7 @@
   'ctrl-tab': 'pane:show-next-item'
   'ctrl-shift-tab': 'pane:show-previous-item'
   'ctrl-alt-s': 'application:show-settings'
-  'ctrl-shift-d': 'user:dismiss-notifications'
+  'ctrl-alt-d': 'user:dismiss-notifications'
 
 '.tree-view':
   'o': 'tree-view:open-selected-entry'
@@ -22,8 +22,6 @@
 'atom-text-editor':
   # keymap gets overwritten by build, so i'm manually adding it here to enforce it
   'ctrl-alt-b': 'atom-beautify:beautify-editor'
-
-  'alt-b': 'build:trigger'
   'alt-/': 'find-and-replace:show'
 
 'atom-text-editor.mini':
@@ -38,7 +36,7 @@
   'ctrl-n': 'core:move-down'
   'ctrl-p': 'core:move-up'
 
-'atom-text-editor.vim-mode-plus-search.mini':
+'atom-text-editor.mini.vim-mode-plus-search':
   'ctrl-j': 'core:confirm'
   'ctrl-m': 'core:confirm'
   'ctrl-c': 'core:cancel'
@@ -115,6 +113,10 @@
   'ctrl-w L': 'paner:very-right'
 
   '-': 'choose-pane:start'
+
+'atom-text-editor.narrow.narrow-editor.vim-mode-plus.normal-mode[data-grammar="source narrow"]':
+  'ctrl-j': 'core:confirm'
+  'ctrl-m': 'core:confirm'
 
 'atom-text-editor.vim-mode-plus.normal-mode:not(.jumpy-jump-mode)[data-grammar^="source c"]':
   'g d': 'autocomplete-clang:go-declaration'

@@ -1,12 +1,12 @@
 acpi
+archlinux-themes-sddm
 broadcom-wl-dkms
 gpu-switch
 kbdlight
 libva-intel-driver
 mbpfan-git
+sddm
 systemd-vgaswitcheroo-units
 tlp
 xf86-video-intel
 xf86-video-nouveau
-archlinux-themes-sddm
-sddm

@@ -30,6 +30,8 @@ flex
 fortune-mod
 fzf
 gawk
+gcc
+gcc-libs
 gettext
 git
 git-extras
@@ -104,7 +106,6 @@ python-setproctitle
 python-vint
 python-virtualenv
 repose
-rng-tools
 rsync
 sed
 shadow

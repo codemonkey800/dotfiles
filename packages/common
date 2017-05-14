@@ -3,7 +3,6 @@ autoconf
 automake
 bash
 bauerbill
-bazel
 binutils
 bison
 btrfs-progs
@@ -75,6 +74,7 @@ net-tools
 networkmanager
 nodejs
 npm
+npm-check-updates
 ntfs-3g
 openssh
 p7zip

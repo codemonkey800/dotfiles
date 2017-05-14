@@ -682,7 +682,7 @@ let g:fzf_layout = { 'down': '~30%' }
 function! GetFiles()
   let l:opts = {
     \ 'down': '30%',
-    \ 'source': 'bash -c "ag -l --hidden --ignore .git | sort -fu"',
+    \ 'source': 'ag -g "" --hidden --ignore .git',
     \ 'options': '--multi --prompt "Files>"',
   \ }
   return fzf#run(fzf#wrap('files', l:opts, 0))

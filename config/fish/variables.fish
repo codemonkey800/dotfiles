@@ -23,38 +23,11 @@ set -gx PAGER less
 set PATH $PATH ~/bin
 set PATH $PATH $DOTFILES/bin
 set PATH $PATH ./node_modules/.bin
+set PATH $PATH ./.yarn/bin
 
 # FZF stuff
 if type -q fzf
   set -gx FZF_TMUX 1
-
-  function __fzf_user_find \
-    -d 'Finds files in the current directory'
-    ag -l --hidden --ignore .git | sort -fu
-  end
-
-  function __fzf_user_cd \
-    -d 'Finds directories to potentially cd into'
-    find . \
-      -type d \
-      -not \( \
-        -path '\.' \
-        -o -path '*/\.*' \
-      \) \
-    | sed 's|\./||' | sort -fu
-  end
-  function __fzf_user_cd_hidden \
-    -d 'Finds directories to potentially cd into, including hidden dirs'
-    find . \
-      -type d \
-      -not \( \
-        -path '\.' \
-        -o -path '*/\.git' \
-        -o -path '*/\.git/*' \
-      \) \
-    | sed 's|\./||' | sort -fu
-  end
-
   set -gx FZF_FIND_FILE_COMMAND '__fzf_user_find'
   set -gx FZF_CD_COMMAND '__fzf_user_cd'
   set -gx FZF_CD_WITH_HIDDEN_COMMAND '__fzf_user_cd_hidden'

@@ -9,10 +9,11 @@ function __update_pacman_db
     # Removes mirrorlist.pacnew if it exists
     sudo rm -fv /etc/pacman.d/mirrorlist.pacnew
 
-    # Gets a list of mirrors sorted by rate using n threads
-    sudo reflector -p http -p https -c US --verbose \
-                   --threads (nproc) --sort rate \
-                   --save /etc/pacman.d/mirrorlist
+    # Save 6 of the fastest mirrors in the US
+    sudo reflector \
+        --verbose --threads (nproc) \
+        --sort rate --save /etc/pacman.d/mirrorlist \
+        --country US --fastest 6
 end
 
 function print_help
@@ -77,6 +78,8 @@ function list
     if test (count $unsupported) -gt 0
         echo -e "\nUnsupported Package Managers: " (string join ', ' $unsupported)
     end
+
+    functions -e __indent
 end
 
 function update

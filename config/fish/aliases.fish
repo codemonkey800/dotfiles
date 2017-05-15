@@ -1,5 +1,8 @@
-# Aliases
+# Quick access to certain directories via commands
 alias dotfiles "cd $DOTFILES"
+alias tmpd 'cd ~/var/tmp'
+
+# Aliases
 alias e "$EDITOR"
 alias exists 'type -q'
 alias g 'git'
@@ -13,8 +16,8 @@ alias lsof-del 'lsof +c 0
 '
 alias nm-restart 'sudo systemctl restart NetworkManager'
 alias paths 'echo $PATH | tr " " \n'
-alias re "sudo -E $EDITOR"
 alias r 'rm -rf'
+alias re "sudo -E $EDITOR"
 alias rr 'sudo rm -rf'
 alias wh 'type -P'
 

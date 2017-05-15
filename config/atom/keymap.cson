@@ -64,7 +64,7 @@
 
   'space o': 'narrow:symbols'
   'space s': 'narrow:scan'
-  'space C': 'narrow:linter'
+  'space c': 'narrow:linter'
   'space G': 'narrow:git-diff-all'
 
 'atom-text-editor.vim-mode-plus.insert-mode':

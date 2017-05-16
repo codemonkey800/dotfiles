@@ -14,7 +14,6 @@ alias lsof-del 'lsof +c 0
   | pawk \'"{}: {}".format(f[0], f[-1:])\'
   | sort -u
 '
-alias nm-restart 'sudo systemctl restart NetworkManager'
 alias paths 'echo $PATH | tr " " \n'
 alias r 'rm -rf'
 alias re "sudo -E $EDITOR"

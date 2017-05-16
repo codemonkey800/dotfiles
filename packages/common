@@ -18,6 +18,7 @@ diffutils
 docker
 docker-compose
 e2fsprogs
+efibootmgr
 exfat-utils
 expac
 fakeroot

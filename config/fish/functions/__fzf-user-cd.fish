@@ -1,4 +1,4 @@
-function __fzf_user_cd  -d 'Finds directories to potentially cd into'
+function __fzf-user-cd  -d 'Finds directories to potentially cd into'
   find . \
     -type d \
     -not \( \

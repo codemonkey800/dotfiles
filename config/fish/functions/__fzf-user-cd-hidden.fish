@@ -1,4 +1,4 @@
-function __fzf_user_cd_hidden -d 'Finds directories to potentially cd into, including hidden dirs'
+function __fzf-user-cd-hidden -d 'Finds directories to potentially cd into, including hidden dirs'
   find . \
     -type d \
     -not \( \

@@ -31,7 +31,6 @@ fortune-mod
 fzf
 gawk
 gcc
-gcc-libs
 gettext
 git
 git-extras

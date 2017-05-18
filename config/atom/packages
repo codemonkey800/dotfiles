@@ -35,6 +35,7 @@ language-babel
 language-bazel
 language-cmake
 language-docker
+language-fish-shell
 language-graphql
 language-ini
 language-latex

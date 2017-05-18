@@ -54,7 +54,7 @@
   'ctrl-o': 'cursor-history:prev'
 
 'atom-text-editor.vim-mode-plus:not(.insert-mode):not(.jumpy-jump-mode)':
-  'f': 'jumpy:toggle'
+  ', f': 'jumpy:toggle'
 
   'H': 'vim-mode-plus:move-to-beginning-of-line'
   'L': 'vim-mode-plus:move-to-last-character-of-line'

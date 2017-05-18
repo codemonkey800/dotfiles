@@ -1,23 +1,13 @@
 [
   {
-    "key": "alt+h",
-    "command": "workbench.action.previousEditor",
-    "when": "editorTextFocus && !inDebugRepl"
-  },
-  {
     "key": "alt+l",
-    "command": "workbench.action.nextEditor",
-    "when": "editorTextFocus && !inDebugRepl"
+    "command": "workbench.action.nextEditor"
   },
   {
-    "key": "ctrl+b",
-    "command": "editor.action.goToDeclaration",
-    "when": "editorTextFocus && !inDebugRepl"
+    "key": "alt+h",
+    "command": "workbench.action.previousEditor"
   },
-  {
-    "key": "meta+r",
-    "command": "workbench.action.reloadWindow"
-  },
+
   {
     "key": "ctrl+tab",
     "command": "workbench.action.nextEditor"
@@ -25,5 +15,36 @@
   {
     "key": "ctrl+shift+tab",
     "command": "workbench.action.previousEditor"
+  },
+
+
+  {
+    "key": "meta+r",
+    "command": "workbench.action.reloadWindow"
+  },
+
+  {
+    "key": "alt+\\",
+    "command": "workbench.action.focusSideBar"
+  },
+  {
+    "key": "ctrl+0",
+    "command": "-workbench.action.focusSideBar"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "workbench.action.editor.changeLanguageMode"
+  },
+  {
+    "key": "ctrl+k m",
+    "command": "-workbench.action.editor.changeLanguageMode"
+  },
+  {
+    "key": "ctrl+\\",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "ctrl+b",
+    "command": "-workbench.action.toggleSidebarVisibility"
   }
 ]

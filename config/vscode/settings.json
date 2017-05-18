@@ -1,37 +1,36 @@
-// Place your settings in this file to overwrite the default settings
 {
-  // editor
-  "editor.fontSize": 14,
   "editor.fontFamily": "'Hack', monospace",
-  "editor.tabSize": 2,
+  "editor.fontSize": 16,
+  "editor.formatOnPaste": true,
   "editor.minimap.enabled": true,
-  "editor.minimap.renderCharacters": true,
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "boundary",
 
-  // extensions
   "extensions.autoUpdate": true,
 
-  // files
-  "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/.DS_Store": true,
-    "**/.venv": true
-  },
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
 
-  // terminal
   "terminal.external.linuxExec": "termite",
 
-  // window
   "window.menuBarVisibility": "toggle",
 
-  // vim
   "vim.easymotion": true,
+  "vim.easymotionMarkerBackgroundColor": "#212121",
+  "vim.easymotionMarkerForegroundColorOneChar": "#e040fb",
+  "vim.easymotionMarkerForegroundColorTwoChar": "#e040fb",
   "vim.hlsearch": true,
-  "vim.leader": ",",
   "vim.showcmd": false,
+  "vim.leader": ",",
+  "vim.surround": true,
+  "vim.useSystemClipboard": true,
+
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false,
+    "<C-n>": false,
+    "<C-w>": false
+  },
   "vim.otherModesKeyBindingsNonRecursive": [
     {
       "before": ["j"],
@@ -43,21 +42,9 @@
     },
 
     {
-      "before": ["q"],
-      "after": [],
-      "commands": [
-        {
-          "command": "workbench.action.closeActiveEditor",
-          "args": []
-        }
-      ]
-    },
-
-    {
       "before": ["o"],
       "after": ["o", "<Esc>", "k"]
     },
-
     {
       "before": ["O"],
       "after": ["O", "<Esc>"]
@@ -70,6 +57,45 @@
     {
       "before": ["L"],
       "after": ["$"]
+    },
+    {
+      "before": ["<leader>", "s"],
+      "after": [],
+      "commands": [
+        { "command": ":sort" },
+        { "command": "extension.vim_escape" },
+        { "command": "extension.vim_ctrl+o" }
+      ]
+    },
+    {
+      "before": ["<leader>", "S"],
+      "after": [],
+      "commands": [
+        { "command": ":sort!" },
+        { "command": "extension.vim_escape" },
+        { "command": "extension.vim_ctrl+o" }
+      ]
+    },
+
+    {
+      "before": ["U"],
+      "after": ["<C-r>"]
+    },
+    {
+      "before": ["q"],
+      "after": [],
+      "commands": [
+        { "command": ":quit" }
+      ]
+    },
+    {
+      "before": ["g", "a"],
+      "after": [],
+      "commands": [
+        { "command": "extension.align" },
+        { "command": "extension.vim_escape" },
+        { "command": "extension.vim_ctrl+o" }
+      ]
     }
   ],
   "vim.insertModeKeyBindingsNonRecursive": [
@@ -79,6 +105,7 @@
     }
   ],
 
-  // stuff
-  "vsicons.projectDetection.autoReload": true
+  "vsicons.projectDetection.autoReload": true,
+
+  "workbench.colorTheme": "One Dark Pro"
 }

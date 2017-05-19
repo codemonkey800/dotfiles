@@ -7,11 +7,11 @@
     refreshInterval: 1
   "atom-material-ui":
     colors:
-      abaseColor: "#2196f3"
-      accentColor: "#ff8b2e"
+      abaseColor: "#7e57c2"
+      accentColor: "#b0e457"
       genAccent: true
       paintCursor: true
-      predefinedColor: "Blue"
+      predefinedColor: "Purple"
     fonts: {}
     tabs:
       compactTabs: true

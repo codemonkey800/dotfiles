@@ -3,7 +3,7 @@
 import core.common as common
 import plumbum.cli as cli
 
-from virtual import ENVIRONMENTS
+from core.virtual import ENVIRONMENTS
 
 
 class App(cli.Application):

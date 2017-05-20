@@ -19,6 +19,9 @@ alias r 'rm -rf'
 alias re "sudo -E $EDITOR"
 alias rr 'sudo rm -rf'
 alias wh 'type -P'
+alias ya 'yaourt'
+alias yas 'yaourt -S'
+alias yar 'yaourt -Rscun'
 
 # Conditional Aliases
 

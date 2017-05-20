@@ -8,7 +8,7 @@
   "atom-material-ui":
     colors:
       abaseColor: "#7e57c2"
-      accentColor: "#b0e457"
+      accentColor: "#acdd55"
       genAccent: true
       paintCursor: true
       predefinedColor: "Purple"
@@ -41,6 +41,9 @@
       "source.ini": [
         ".flowconfig"
       ]
+    disabledPackages: [
+      "language-shellscript"
+    ]
     ignoredNames: [
       ".git"
       ".hg"
@@ -52,7 +55,6 @@
       ".venv"
     ]
     projectHome: "/home/jeremy/src/node"
-    restorePreviousWindowsOnStart: false
     telemetryConsent: "no"
     themes: [
       "atom-material-ui"
@@ -82,7 +84,8 @@
   "linter-eslint":
     fixOnSave: true
     lintHtmlFiles: true
-  "linter-ui-default": {}
+  "linter-ui-default":
+    panelHeight: 81
   minimap:
     plugins:
       codeglance: true

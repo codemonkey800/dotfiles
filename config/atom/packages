@@ -40,6 +40,7 @@ language-graphql
 language-ini
 language-latex
 language-pug
+language-unix-shell
 latex
 latexer
 linter

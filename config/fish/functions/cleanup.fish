@@ -5,7 +5,11 @@ function cleanup --description 'Runs several cleanup utilities on my computer'
         sudo pacman -Rscun --noconfirm $packages
     end
 
-    eval 'sudo rm -rf /tmp/{flow,fzf,npm,nvim,yaourt}*' ^ /dev/null
+    set -l tmpfiles /tmp/{flow,fzf,npm,nvim,yaourt}*
+    if test (count $tmpfiles) -gt 0
+      echo "Removing "(count $tmpfiles)" temporary files!"
+      sudo rm -rf $tmpfiles
+    end
 
     rmshit -vy > /dev/null ^&1
 

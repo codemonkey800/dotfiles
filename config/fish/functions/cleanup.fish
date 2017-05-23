@@ -5,7 +5,7 @@ function cleanup --description 'Runs several cleanup utilities on my computer'
         sudo pacman -Rscun --noconfirm $packages
     end
 
-    eval 'sudo rm -rf /tmp/{flow,fzf,npm,nvim,yaourt}*'
+    eval 'sudo rm -rf /tmp/{flow,fzf,npm,nvim,yaourt}*' > /dev/null ^&1
 
     rmshit -vy > /dev/null ^&1
 

@@ -39,6 +39,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'michaeljsmith/vim-indent-object'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 

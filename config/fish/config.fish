@@ -2,8 +2,8 @@
 # Code shamelessly copied from: https://github.com/fisherman/fisherman/wiki/Bootstrap
 if not test -f ~/.config/fish/functions/fisher.fish
   echo "==> Fisherman not found. Installing."
-  curl -sLo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
-  fisher
+  curl -sLo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
+  echo 'Fisher installed. Restart your shell and use the "fisher" command.'
 end
 
 # Dotfiles path

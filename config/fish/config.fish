@@ -70,7 +70,7 @@ else
   if exists keychain; and test (count (keychain -l)) -gt 0
     keychain --quiet -k all
   end
-  if test -f ~/.keychain
+  if test -e ~/.keychain
     rm -rf ~/.keychain
   end
 

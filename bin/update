@@ -1,204 +1,23 @@
 #!/usr/bin/env fish
 
-if test (uname) != 'Linux'; or test (lsb_release -d | pawk f[1:]) != 'Arch Linux'
-    echo 'This script can only be run on Arch Linux!'
-    exit -1
+if not lsb_release -d | grep -q 'Arch Linux'
+  echo 'This script can only be run on Arch Linux!'
+  exit -1
 end
 
-function __update_pacman_db
-    # Removes mirrorlist.pacnew if it exists
-    sudo rm -fv /etc/pacman.d/mirrorlist.pacnew
+# Update pacman db
+sudo reflector \
+  --verbose \
+  --threads (nproc) \
+  --sort score \
+  --save /etc/pacman.d/mirrorlist \
+  --country US \
+  --fastest 10
 
-    # Save 6 of the fastest mirrors in the US
-    sudo reflector \
-        --verbose --threads (nproc) \
-        --sort rate --save /etc/pacman.d/mirrorlist \
-        --country US --fastest 6
-end
+# Update fisher packages and re-link fish functions from $DOTFILES
+fisher up
+and ln -svf $DOTFILES/config/fish/functions/* ~/etc/fish/functions/
 
-function print_help
-    echo 'Usage: update <options>'
-    echo
-    echo 'Options:'
-    echo '  -l, --list                           ' \
-         'List available updates.'
-    echo '  -p, --package-manager=package-manager' \
-         'Updates packages for a specific manager.'
-    echo '  --list-package-managers              ' \
-         'Lists all available package managers.'
-    echo
-    echo 'Notes:'
-    echo '  - Using --list with --package-manager will' \
-         'list updates available for that package manager.'
-    echo '  - You can specify multiple --package-manager' \
-         'flags to update or list the specified package managers.'
-end
-
-function list
-    function __indent
-        set size 2
-        if test (count $argv) -gt 0; and test $argv[1] -eq $argv[1]
-            set size $argv[1]
-        end
-
-        set indent
-        for i in (seq $size)
-            set indent "$indent "
-        end
-
-        eval "sed 's/^/$indent/g'"
-    end
-    set unsupported
-
-    for package_manager in (list-package-managers | string split ' ')
-        if test -z $package_manager
-            continue
-        end
-
-        if test $argv[1] = 'all'; or contains $package_manager -- $argv
-            switch $package_manager
-                case apm
-                    echo 'apm:'
-                    apm upgrade --list | __indent
-                case npm
-                    echo 'npm:'
-                    npm -g outdated ^ /dev/null | __indent
-                case pacman
-                    echo 'pacman:'
-                    echo '  Official:'
-                    checkupdates | __indent 4
-                    echo '  AUR:'
-                    checkupdates-aur | __indent 4
-                case '*'
-                    set unsupported $unsupported $package_manager
-            end
-        end
-    end
-
-    if test (count $unsupported) -gt 0
-        echo -e "\nUnsupported Package Managers: " (string join ', ' $unsupported)
-    end
-
-    functions -e __indent
-end
-
-function update
-    for package_manager in (list-package-managers | string split ' ')
-        if test -z $package_manager
-            continue
-        end
-
-        if test $argv[1] = 'all'; or contains $package_manager -- $argv
-            switch $package_manager
-                case apm
-                    echo 'TODO apm'
-                case npm
-                    echo 'TODO apm'
-                case yarn
-                    echo 'TODO yarn'
-                case fish
-                    fisher up
-                case nvim
-                    nvim +PlugInstall +PlugUpdate \
-                         +UpdateRemotePlugins +PlugUpgrade +PlugClean! +qall
-
-                    rm -fv ~/.config/nvim/autoload/plug.vim.old
-
-                case pacman
-                    if contains pacmandb -- $argv
-                        __update_pacman_db
-                    end
-
-                    if exists yaourt
-                        yaourt -Syua --noconfirm
-                    else
-                        sudo pacman -Syu --noconfirm
-                    end
-                case pacmandb
-                    if not contains pacman -- $argv
-                        __update_pacman_db
-                    end
-                case pkgfile
-                    sudo pkgfile -u
-            end
-        end
-    end
-
-    if contains fish -- $argv; or contains pacman -- $argv
-        fish_update_completions
-    end
-end
-
-function list-package-managers
-    set package_managers ''
-
-    function _add --no-scope-shadowing
-        set package_managers $package_managers $argv[1]
-    end
-
-    type -q apm-beta; and _add apm-beta
-    type -q apm; and _add apm
-    type -q fisher; and _add fisher
-    type -q npm; and _add npm
-    type -q nvim; and _add nvim
-    type -q pacman; and _add pacman
-    type -q pkgfile; and _add pkgfile
-    type -q reflector; and _add pacmandb
-    type -q yarn; and _add yarn
-
-    echo $package_managers
-end
-
-function main
-    if test (count $argv) -eq 0
-        update all
-        return 0
-    end
-
-    set list false
-    set package_managers
-
-    getopts $argv | while read -l flag val
-        switch $flag
-            case l list
-                set list true
-
-            case p package-manager
-                if test -z $val
-                    echo 'Package manager not specified.'
-                    return -1
-                end
-
-                set package_managers $package_managers $val
-
-            case list-package-managers
-                echo (list-package-managers)
-                return 0
-
-            case h help
-                print_help
-                return 0
-
-            case '*'
-                echo "Invalid flag $flag"
-                print_help
-                return -1
-
-        end
-    end
-
-    eval (
-        eval $list;
-        and echo list
-        or echo update
-    ) (
-        test (count $package_managers) -gt 0
-        and echo $package_managers
-        or echo all
-    )
-
-    return 0
-end
-
-main $argv
+# Update pacman packages from official and aur
+yaourt -Syua --force --noconfirm
 

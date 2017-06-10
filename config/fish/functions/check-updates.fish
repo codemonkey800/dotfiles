@@ -12,7 +12,14 @@ function check-updates -d 'Checks updates for Arch ABS and AUR'
   end
 
   if not eval "$checkupdates_found; and $checkupdates_aur_found"
-    echo 'checkupdates nor checkupdate-aur were found.'
+    if not eval "$checkupdates_found"
+      echo "checkupdates not found"
+    end
+
+    if not eval "$checkupdates_aur_found"
+      echo "checkupdates-aur not found"
+    end
+
     return -1
   else
     if eval $checkupdates_found

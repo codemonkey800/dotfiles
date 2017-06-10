@@ -1,7 +1,0 @@
-ddclient
-lib32-gcc-libs
-lib32-ncurses5-compat-libs
-rtl8812au-dkms-git
-ssmtp
-wpa_actiond
-wpa_supplicant

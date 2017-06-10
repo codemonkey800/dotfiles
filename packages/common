@@ -7,7 +7,6 @@ binutils
 bison
 btrfs-progs
 bzip2
-checkupdates-aur
 coreutils
 cowsay
 cryptsetup
@@ -84,7 +83,6 @@ patch
 pciutils
 pcmciautils
 perl
-perl-checkupdates-aur
 pkg-config
 pkgfile
 powerline-fonts-git

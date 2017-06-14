@@ -262,6 +262,7 @@ nnoremap <silent> <expr> a SmartInsert('a')
 nnoremap <silent> <C-l> :nohlsearch<CR> :diffupdate<CR> :syntax sync fromstart<CR><C-l>
 
 " escape insert mode
+inoremap <silent> <C-c> <esc>
 inoremap <silent> jk <esc>
 
 " move vertically by visual line
@@ -433,9 +434,12 @@ let g:cm_matcher = {
 let g:cm_matcher.case = 'smartcase'
 let g:cm_matcher.module = 'cm_matchers.fuzzy_matcher'
 
-inoremap <silent> <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
-inoremap <silent> <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
-inoremap <silent> <expr> <buffer> <CR> (pumvisible() ? '<C-y><CR>' : '<CR>')
+" keymaps {{
+
+inoremap <silent> <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" }}
 
 " use <Tab> for both UltiSnips and autocomplete {{
 

@@ -78,13 +78,13 @@ else
 end
 
 # startup tmux or connect to existing session
- if exists tmux; and test -z $TMUX
-   if tmux ls | grep -q main
-     exec tmux a -t (whoami)/main
-   else
-     exec tmux new -s (whoami)/main
-   end
- end
+if exists tmux; and test -z $TMUX
+  if tmux ls | grep -q main
+    exec tmux a -t (whoami)/main
+  else
+    exec tmux new -s (whoami)/main
+  end
+end
 
  clear-functions __config
 

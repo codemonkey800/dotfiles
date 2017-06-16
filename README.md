@@ -5,12 +5,12 @@
 </p>
 
 <p align="center">
-    <a href="http://forthebadge.com/" target="_blank">
-      <img src="http://forthebadge.com/images/badges/compatibility-club-penguin.svg">
-    </a>
-    <a href="http://forthebadge.com/" target="_blank">
-      <img src="http://forthebadge.com/images/badges/certified-snoop-lion.svg">
-    </a>
+  <a href="http://forthebadge.com/" target="_blank">
+    <img src="http://forthebadge.com/images/badges/compatibility-club-penguin.svg">
+  </a>
+  <a href="http://forthebadge.com/" target="_blank">
+    <img src="http://forthebadge.com/images/badges/certified-snoop-lion.svg">
+  </a>
 </p>
 
 ---

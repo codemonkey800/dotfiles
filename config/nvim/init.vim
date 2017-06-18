@@ -9,6 +9,9 @@ call plug#begin('~/.config/nvim/plugins')
 Plug 'roxma/clang_complete'
 Plug 'roxma/nvim-completion-manager'
 
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neoinclude.vim'
+
 " }}
 
 " other autocomplete-ish plugins{{

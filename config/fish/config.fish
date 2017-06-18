@@ -56,7 +56,7 @@ if test -z $DISPLAY
     )
 
     if test (count $keys) -gt 0
-      keychain --eval --agents ssh --quick --quiet --nogui $keys | source
+      env SHELL=fish keychain --eval --agents ssh --quick --quiet --nogui $keys | source
     end
   end
 

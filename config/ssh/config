@@ -6,7 +6,7 @@ Host github.com gitlab.com bitbucket.com
 Host dev
     HostName jeremyasuncion.io
     IdentityFile ~/.ssh/vps
-    User jeremy
+    User root
 
 Host aur
     HostName aur.archlinux.org

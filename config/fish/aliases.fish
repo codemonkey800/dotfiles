@@ -3,6 +3,7 @@ alias dotfiles "cd $DOTFILES"
 alias tmpd 'cd ~/var/tmp'
 
 # Aliases
+alias dokku 'ssh dev dokku --'
 alias e "$EDITOR"
 alias exists 'type -q'
 alias g 'git'

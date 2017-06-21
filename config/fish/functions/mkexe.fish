@@ -1,31 +1,38 @@
-function __mkexe_help
-  echo 'Usage: mkexe filename [command|exe_path]'
-  echo
-  echo 'Arguments:'
-  echo '  filename - The filename of the new executable script'
-  echo '  command  - A command to run through "type"'
-  echo '  exe_path - An absolute or relative path to an executable'
-end
-
-function __mkexe_create_file
-  touch $argv[1]
-  chmod +x $argv[1]
-end
-
 function mkexe -d 'Creates a script that is executable.'
+  function __mkexe_help
+    echo 'Usage: mkexe filename [command|exe_path]'
+    echo
+    echo 'Arguments:'
+    echo '  filename - The filename of the new executable script'
+    echo '  command  - A command to run through "type"'
+    echo '  exe_path - An absolute or relative path to an executable'
+  end
+
+  function __mkexe_create_file
+    touch $argv[1]
+    chmod +x $argv[1]
+  end
+
+  function __mkexe_exit
+    clear-functions __mkexe
+    set exit_status 0
+    if set -q argv[1]
+      set exit_status $argv[1]
+    end
+    exit $argv[1]
+  end
+
   set n (count $argv)
   if test $n -eq 0; or contains -- "$argv" h help -h --help
     __mkexe_help
-    return 0
+    __mkexe_exit
   end
 
   set file $argv[1]
 
-  if test -f $file
-    if set -l shebang (head -n 1 $file | grep '#!' ^ /dev/null)
-      echo "'$file' already has the following shebang: '$shebang'"
-      return -1
-    end
+  if test -f $file; and set shebang (head -n 1 $file | grep '#!' ^ /dev/null)
+    echo "'$file' already has the following shebang: '$shebang'"
+    __mkexe_exit -1
   end
 
   set shebang '/usr/bin/env fish'
@@ -50,5 +57,4 @@ function mkexe -d 'Creates a script that is executable.'
   chmod +x $file
   echo -e "#!$shebang\n" | cat - $file | sponge $file
 end
-
 

@@ -1,4 +1,4 @@
-function cleanup --description 'Runs several cleanup utilities on my computer'
+function cleanup -d 'Runs several cleanup utilities on my computer'
 	echo 'y' | sudo pacman -Scc > /dev/null ^&1
 
     if set -l packages (pacman -Qqdtt)

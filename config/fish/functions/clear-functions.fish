@@ -12,7 +12,7 @@ function clear-functions -d 'Erases a set of functions by namespace. Useful for 
     return 0
   end
 
-  set -l funcs (
+  set funcs (
     functions -a \
       | string split ',' \
       | grep -E "^$argv[1]"

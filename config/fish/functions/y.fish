@@ -18,8 +18,8 @@ function y -d 'Small, opinionated wrapper over Yarn.' -w yarn
     return -1
   end
 
-  set -l yarn_dir $PWD/.yarn
-  set -l flags "--mutex file:$yarn_dir/mutex"
+  set yarn_dir $PWD/.yarn
+  set flags "--mutex file:$yarn_dir/mutex"
 
   if set -q argv[1]
     switch $argv[1]

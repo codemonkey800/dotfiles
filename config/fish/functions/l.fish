@@ -41,7 +41,7 @@ function l -d 'Lists all files in a directory or reads a file'
       end
     end
 
-    set -l cmd 'ls -CAF'
+    set cmd 'ls -CAF'
 
     if test (uname) = 'Linux'
       set cmd "$cmd --color=auto"

@@ -3,10 +3,12 @@ autoconf
 automake
 bash
 bauerbill
+bazel
 binutils
 bison
 btrfs-progs
 bzip2
+checkupdates-aur
 coreutils
 cowsay
 cryptsetup

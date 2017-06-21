@@ -1,7 +1,7 @@
 function check-updates -d 'Checks updates for Arch ABS and AUR'
-  set -l base_cmd "sort -u | sed 's/^/  /'"
-  set -l checkupdates_found false
-  set -l checkupdates_aur_found false
+  set base_cmd "sort -u | sed 's/^/  /'"
+  set checkupdates_found false
+  set checkupdates_aur_found false
 
   if exists checkupdates
     set checkupdates_found true

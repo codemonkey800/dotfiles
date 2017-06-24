@@ -1,4 +1,4 @@
-function y -d 'Small, opinionated wrapper over Yarn.' -w yarn
+function y -w yarn -d 'Small, opinionated wrapper over Yarn.'
   function __y_check_exe
     type -q $argv[1]; and return
     echo "$argv[1] is not installed! Run the following to install:"

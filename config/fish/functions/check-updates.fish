@@ -22,7 +22,7 @@ function check-updates -d 'Checks updates for Arch ABS and AUR'
 
     return -1
   else
-    if eval $checkupdates_found
+    if eval "$checkupdates_found"
       echo 'ABS:'
       eval "checkupdates | $base_cmd"
     end

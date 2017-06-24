@@ -2,7 +2,7 @@ function serve -d 'Starts a static HTTP server in the current dir.'
   set cmd "python3 -m http.server"
   set port 8080
 
-  if set -q argv[1]
+  if set -q 'argv[1]'
     set port $argv[1]
   end
 
@@ -15,6 +15,6 @@ function serve -d 'Starts a static HTTP server in the current dir.'
   end
 
   set cmd "$cmd $port"
-  eval $cmd
+  eval "$cmd"
 end
 

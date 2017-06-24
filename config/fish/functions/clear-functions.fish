@@ -20,7 +20,7 @@ function clear-functions -d 'Erases a set of functions by namespace. Useful for 
 
   if test (count $funcs) -gt 0
     for f in $funcs
-      functions -e $f
+      functions -e "$f"
     end
   else
     return -1

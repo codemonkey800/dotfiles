@@ -9,6 +9,7 @@ alias exists 'type -q'
 alias g 'git'
 alias gr 'cd (git rev-parse --show-toplevel)'
 alias info 'info --vi-keys'
+alias ll 'l -l'
 alias lns 'ln -svf'
 alias lsof-del 'lsof +c 0
   | grep -w DEL
@@ -16,6 +17,7 @@ alias lsof-del 'lsof +c 0
   | sort -u
 '
 alias paths 'echo $PATH | tr " " \n'
+alias public-ip 'curl -q "http://ipinfo.io/ip"'
 alias r 'rm -rf'
 alias re "sudo -E $EDITOR"
 alias rr 'sudo rm -rf'

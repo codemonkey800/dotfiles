@@ -7,7 +7,6 @@ alias dokku 'ssh dev dokku --'
 alias e "$EDITOR"
 alias exists 'type -q'
 alias g 'git'
-alias gr 'cd (git rev-parse --show-toplevel)'
 alias info 'info --vi-keys'
 alias ll 'l -l'
 alias lns 'ln -svf'

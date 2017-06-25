@@ -23,7 +23,7 @@ function y -w yarn -d 'Small, opinionated wrapper over Yarn.'
     end
   end
 
-  eval "env HOME=$yarn_dir yarn $argv $flags"
+  env HOME=$yarn_dir yarn $flags $argv
 
   clear-functions '__y'
 end

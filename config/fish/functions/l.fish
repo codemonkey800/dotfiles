@@ -1,4 +1,4 @@
-function l -d 'Lists all files in a directory or reads a file'
+function l -w ls -d 'Lists all files in a directory or reads a file'
   set pager false
   set args
   set files
@@ -6,7 +6,7 @@ function l -d 'Lists all files in a directory or reads a file'
   for i in (seq (count $argv))
     set -l arg $argv[$i]
     switch $arg
-      case -p --pager
+      case --pager
         set pager true
       case '--*' '-*'
         set args $args $arg

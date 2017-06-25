@@ -56,16 +56,10 @@ or even take a subset of my dotfiles and incorporate it into your own.
   - Configuration files split into settings modules
 - LaTeX
   - Makefile for compiling LaTeX documents that make use of `pythontex`
-  - Template files: `basic.tex` and `math-template.tex`
+  - Template files: `basic.tex` and `math.tex`
 - A bunch of useful scripts
-  - `copy` - Convenience scrpt for the command `rsync -aP`
   - `rmshit` - Sources a list of files to delete file named `~/.shittyfiles`
   - `update` - A big ass script that runs updates
-- Arch Linux PKGBUILDs
-  - python-click-completion
-  - python-click-didyoumean
-  - python-pawk
-  - refind-theme-regular-git
 - Pacman
   - Yaourt for package management and Powerpill for parallel and segmented downloads
 - Git
@@ -94,11 +88,6 @@ setting up everything are below.
 Note: A `x -> y` will indicate that a symbolic link `y` points to `x`.
 
 ```
-bin/ # The directory organization is for development purposes. It's best you flatten out your symbolic links
-  cleanup           -> ~/.local/bin/cleanup
-  copy              -> ~/.local/bin/copy
-  docker-clean      -> ~/.local/bin/docker-clean
-  ...
 config/
   fish/
     aliases.fish      -> ~/.config/fish/aliases.fish
@@ -115,16 +104,13 @@ config/
     spell             -> ~/.config/nvim/spell
     UltiSnips         -> ~/.config/nvim/UltiSnips/
     vintrc.yaml       -> ~/.vintrc.yaml
+etc/
   pacman/ # The following symlinks require root permission
     makepkg.conf      -> /etc/pacman.d/makepkg.conf
     pacman-aria2.conf ->/etc/pacman.d/pacman-aria2.conf
     pacman.conf       -> /etc/pacman.conf
     powerpill.json    -> /etc/powerpill/powerpill.json
     yaourtrc          -> /etc/yaourtrc
-  ssh-config          -> ~/.ssh/config # Note: You most likely won't be using this *as is*
-  terminator-config   -> ~/.config/terminator/config
-misc/
-  shittyfiles         -> ~/.shittyfiles
 ```
 
 ## Installation :wrench:
@@ -135,16 +121,8 @@ able to convert the shell code below into bash or zsh.
 Of course, you'll need to clone the dotfiles somewhere. For the sake of
 simplicity, we'll clone it to `$HOME`:
 ```fish
-$ git clone git://github.com/codemonkey800/dotfiles.git ~/dotfiles
-$ cd ~/dotfiles
-```
-
-### `bin/` Scripts
-First, create directory at `~/bin/` and then copy every file in
-`~/dotfiles/bin/` to that directory:
-```fish
-$ mkdir -p ~/bin
-$ ln -svf $PWD/* ~/bin
+$ git clone git://github.com/codemonkey800/dotfiles.git ~/.dotfiles
+$ cd ~/.dotfiles
 ```
 
 ### Backup Package Listings
@@ -183,9 +161,6 @@ $ curl -fLO ~/.config/nvim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
-Once you've symlinked everything correctly, you can run `update-plug` do a
-quick and easy installation.
-
 ### Pacman
 Warning: You need to have installed Powerpill before symlinking
 `config/pacman/yaourtrc -> /etc/yaourtrc`.  Failing to do so will cause an
@@ -208,13 +183,6 @@ Once you've installed Atom and APM, you can run:
 $ apm install (cat packages/apm)
 ```
 
-### npm
-I local Node.js/npm distrubtions using `fnm`. However, I still do use global
-modules with those distributions. You can run:
-```fish
-$ npm -g i (cat packages/npm)
-```
-
 ## macOS/Windows Support :computer:
 Some of my dotfiles will be incompatible with macOS and Windows. For example,
 anything pacman related cannot be used.  Any other settings that are highly
@@ -226,7 +194,7 @@ For Windows, you'll most likely either need to install
 Subsystem](https://msdn.microsoft.com/en-us/commandline/wsl/about), or run a
 Linux distro in a VM.
 
-Personally, I use Windows on my desktop and run Arch in VMWare Workstation.
+Personally, I use Windows on my desktop and run Arch in VMWare Workstation. For my laptop, I dual boot with MacOS and Arch.
 
 ## License :page_with_curl:
 The MIT License (MIT)

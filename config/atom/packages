@@ -41,6 +41,7 @@ language-ini
 language-latex
 language-pug
 language-unix-shell
+language-vue
 latex
 latexer
 linter
@@ -84,3 +85,6 @@ vim-mode-plus
 vim-mode-plus-keymaps-for-surround
 vim-mode-plus-move-to-symbols
 vim-mode-plus-replace-with-execution
+vue-hyperclick
+vue2-autocomplete
+vuejs2-snippets

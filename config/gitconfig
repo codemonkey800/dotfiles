@@ -58,19 +58,22 @@
   command = xz -c
 
 [url "git@github.com:"]
-  insteadOf = "gh://"
+  insteadOf = "gh:"
 
 [url "git@gitlab.com:"]
-  insteadOf = "gl://"
+  insteadOf = "gl:"
 
 [url "git@github.com:codemonkey800/"]
-  insteadOf = "me@gh://"
+  insteadOf = "gh:me/"
 
 [url "git@gitlab.com:codemonkey800/"]
-  insteadOf = "me@gl://"
+  insteadOf = "gl:me/"
+
+[url "dokku@jeremyasuncion.io:"]
+  insteadOf = "dokku@"
 
 [url "ssh://aur@aur.archlinux.org/"]
-  insteadOf = "aur://"
+  insteadOf = "aur@"
 
 [user]
   email = "jeremyasuncion808@gmail.com"

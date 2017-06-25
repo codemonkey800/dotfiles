@@ -3,7 +3,7 @@ function y -w yarn -d 'Small, opinionated wrapper over Yarn.'
     type -q $argv[1]; and return
     echo "$argv[1] is not installed! Run the following to install:"
     echo "  \$ sudo pacman -S $argv[1]"
-    clear-functions 'y::'
+    clear-functions '__y'
     exit -1
   end
 

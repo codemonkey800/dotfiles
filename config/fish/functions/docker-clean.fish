@@ -1,25 +1,21 @@
 function docker-clean -d 'Cleans up non-running contains, <none> images, and volumes.'
-  echo 'Removing non-running containers'
-  if docker ps -a | egrep 'Created|Exited'
-      docker rm -f (docker ps -a | egrep 'Created|Exited' | pawk 'f[0]')
-  else
-      echo 'No containers to remove'
+  set volumes (docker volume ls -qf 'dangling=true')
+  set containers (docker ps -qf 'status=exited')
+  set images (docker images -qf 'dangling=true')
+
+  set volume_count (count $volumes)
+  if test $volume_count -gt 0
+    docker volume rm $volumes
   end
 
-  echo 'Removing <none> images'
-  if docker images | grep '<none>'
-      docker rmi -f (docker images | grep '<none>' | pawk 'f[2]')
-  else
-      echo 'No images to remove'
+  set container_count (count $containers)
+  if test $container_count -gt 0
+    docker rm $containers
   end
 
-  echo 'Removing volumes'
-  if docker volume ls | grep local
-      docker volume rm (docker volume ls | grep local | pawk 'f[1]')
-  else
-      echo 'No volumes to remove'
+  set image_count (count $images)
+  if test $image_count -gt 0
+    docker rmi $images
   end
-
-  echo 'All done!'
 end
 

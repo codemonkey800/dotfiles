@@ -70,10 +70,10 @@
   insteadOf = "gl:me/"
 
 [url "dokku@jeremyasuncion.io:"]
-  insteadOf = "dokku@"
+  insteadOf = "dokku:"
 
 [url "ssh://aur@aur.archlinux.org/"]
-  insteadOf = "aur@"
+  insteadOf = "aur:"
 
 [user]
   email = "jeremyasuncion808@gmail.com"

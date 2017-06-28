@@ -13,7 +13,7 @@ function docker-clean -d 'Cleans up non-running contains, <none> images, and vol
   if test $container_count -gt 0
     docker rm $containers > /dev/null ^&1
   end
-  echo "Removed $countainer_count containers."
+  echo "Removed $container_count containers."
 
   set image_count (count $images)
   if test $image_count -gt 0

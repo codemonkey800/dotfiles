@@ -445,30 +445,6 @@ inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " }}
 
-" use <Tab> for both UltiSnips and autocomplete {{
-
-let g:UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
-let g:UltiSnipsJumpForwardTrigger = '<Plug>(ultisnips_expand)'
-let g:UltiSnipsJumpBackwardTrigger = '<Plug>(ultisnips_backward)'
-let g:UltiSnipsListSnippets = '<Plug>(ultisnips_list)'
-let g:UltiSnipsRemoveSelectModeMappings = 0
-
-vnoremap <expr> <Plug>(ultisnip_expand_or_jump_result) g:ulti_expand_or_jump_res?'':"\<Tab>"
-inoremap <expr> <Plug>(ultisnip_expand_or_jump_result) g:ulti_expand_or_jump_res?'':"\<Tab>"
-imap <silent> <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<C-r>=UltiSnips#ExpandSnippetOrJump()\<cr>\<Plug>(ultisnip_expand_or_jump_result)")
-xmap <Tab> <Plug>(ultisnips_expand)
-smap <Tab> <Plug>(ultisnips_expand)
-
-vnoremap <expr> <Plug>(ultisnips_backwards_result) g:ulti_jump_backwards_res?'':"\<S-Tab>"
-inoremap <expr> <Plug>(ultisnips_backwards_result) g:ulti_jump_backwards_res?'':"\<S-Tab>"
-imap <silent> <expr> <S-Tab> (pumvisible() ? "\<C-p>" : "\<C-r>=UltiSnips#JumpBackwards()\<cr>\<Plug>(ultisnips_backwards_result)")
-xmap <S-Tab> <Plug>(ultisnips_backward)
-smap <S-Tab> <Plug>(ultisnips_backward)
-
-inoremap <silent> <C-u> <C-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<CR>
-
-" }}
-
 " }}
 
 " }}

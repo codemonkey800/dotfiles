@@ -1,15 +1,20 @@
 function node-deps -d ''
   set filter '.dependencies, .devDependencies'
   switch "$argv[1]"
-    case '-d' '--development'
+    case ''
+    case 'dev'
       set filter '.devDependencies'
-    case '-p' '--production'
+    case 'prod'
       set filter '.dependencies'
     case '*'
-      echo -e 'Usage: node-deps [options]\n'
-      echo 'Options:'
-      echo '  -d, --development - Lists only development dependencies'
-      echo '  -p, --production  - Lists only production dependencies'
+      echo -e 'Usage: node-deps [type]'
+      echo
+      echo 'Arguments:'
+      echo '  type - The type of dependencies to list. Defaults to both.'
+      echo
+      echo 'Types:'
+      echo '  dev  - Lists only development dependencies'
+      echo '  prod - Lists only production dependencies'
       return
   end
 

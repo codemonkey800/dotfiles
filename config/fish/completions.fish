@@ -12,10 +12,8 @@ complete -c re -w nvim
 # Function completions
 complete -c l -l pager -d 'Pipes output into $PAGER'
 
-complete -c node-deps -l development -d 'Lists only development dependencies'
-complete -c node-deps -l production -d 'Lists only production dependencies'
-complete -c node-deps -s d -d 'Lists only development dependencies'
-complete -c node-deps -s p -d 'Lists only production dependencies'
+complete -f -c node-deps -a dev -d 'Lists only development dependencies'
+complete -f -c node-deps -a prod -d 'Lists only production dependencies'
 
 # Script completions
 complete -c gpu -l help -d 'Prints help message'

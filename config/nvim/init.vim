@@ -7,6 +7,7 @@ call plug#begin('~/.config/nvim/plugins')
 " nvim-completion-manager things {{
 
 Plug 'roxma/clang_complete'
+Plug 'roxma/ncm-flow'
 Plug 'roxma/nvim-completion-manager'
 
 Plug 'Shougo/neco-syntax'

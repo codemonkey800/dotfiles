@@ -11,19 +11,26 @@ function y -w yarn -d 'Small, opinionated wrapper over Yarn.'
   __y_check_exe npm
 
   set yarn_dir $PWD/.yarn
-  set flags "--mutex file:$yarn_dir/mutex"
+
+  function __y_wrapper
+    env HOME=$yarn_dir yarn $argv
+  end
 
   if set -q argv[1]
     switch $argv[1]
       case 'init'
         npm init
         return
+      case 'ls'
+        npm ls
+        return
       case 'global'
-        set flags "--prefix $yarn_dir $flags"
+        set -e argv[1]
+        __y_wrapper global --prefix=$yarn_dir $argv
+      case '*'
+        __y_wrapper $argv
     end
   end
-
-  env HOME=$yarn_dir yarn $argv $flags
 
   clear-functions '__y'
 end

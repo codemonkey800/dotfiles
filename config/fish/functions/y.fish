@@ -27,10 +27,11 @@ function y -w yarn -d 'Small, opinionated wrapper over Yarn.'
       case 'global'
         set -e argv[1]
         __y_wrapper global --prefix=$yarn_dir $argv
-      case '*'
-        __y_wrapper $argv
+        return
     end
   end
+
+  __y_wrapper $argv
 
   clear-functions '__y'
 end

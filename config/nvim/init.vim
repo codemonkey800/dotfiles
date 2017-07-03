@@ -4,14 +4,26 @@ call plug#begin('~/.config/nvim/plugins')
 
 " autocomplete {{
 
-" nvim-completion-manager things {{
+" deoplete {{
 
-Plug 'roxma/clang_complete'
-Plug 'roxma/ncm-flow'
-Plug 'roxma/nvim-completion-manager'
-
+Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neco-vim'
 Plug 'Shougo/neoinclude.vim'
+Plug 'tweekmonster/deoplete-clang2'
+Plug 'wellle/tmux-complete.vim'
+Plug 'zchee/deoplete-jedi'
+Plug 'ponko2/deoplete-fish'
+Plug 'fszymanski/deoplete-emoji'
+
+" deoplete plugins {{
+
+Plug 'Shougo/context_filetype.vim'
+Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/neoinclude.vim'
+Plug 'Shougo/neopairs.vim'
+
+" }}
 
 " }}
 
@@ -425,24 +437,31 @@ nnoremap <silent> <M-s> :call ToggleSpell()<CR>
 
 " autocomplete {{
 
-" nvim-completion-manager {{
+" deoplete {{
 
-" configuration tips taken from the repo page:
-" https://github.com/roxma/nvim-completion-manager#configuration-tips
+let g:deoplete#enable_at_startup = 1
 
-set shortmess+=c
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
 
-let g:cm_matcher = {
-  \ 'case': 'smartcase',
-  \ 'module': 'cm_matchers.fuzzy_matcher'
-\ }
-let g:cm_matcher.case = 'smartcase'
-let g:cm_matcher.module = 'cm_matchers.fuzzy_matcher'
+call deoplete#custom#set('_', 'matchers', [
+  \ 'matcher_full_fuzzy',
+  \ 'matcher_fuzzy',
+  \ 'matcher_length',
+\ ])
+call deoplete#custom#set('_', 'converters', [
+  \ 'converter_auto_delimiter',
+  \ 'converter_auto_paren',
+  \ 'converter_remove_overlap',
+  \ 'converter_truncate_abbr',
+  \ 'converter_truncate_menu',
+\ ])
 
-" keymaps {{
+" deoplete keymaps {{
 
-inoremap <silent> <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <silent> <expr> <C-h> deoplete#smart_close_popup() . '\<C-h>'
+inoremap <silent> <expr> <BS> deoplete#smart_close_popup() . '\<C-h>'
 
 " }}
 

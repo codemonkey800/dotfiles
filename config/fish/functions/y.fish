@@ -4,34 +4,36 @@ function y -w yarn -d 'Small, opinionated wrapper over Yarn.'
     echo "$argv[1] is not installed! Run the following to install:"
     echo "  \$ sudo pacman -S $argv[1]"
     clear-functions '__y'
-    exit -1
+    return -1
   end
 
-  __y_check_exe yarn
-  __y_check_exe npm
+  __y_check_exe yarn; or return -1
+  __y_check_exe npm; or return -1
 
   set yarn_dir $PWD/.yarn
+  set cmd "env HOME=$yarn_dir yarn"
 
-  function __y_wrapper
-    env HOME=$yarn_dir yarn $argv
-  end
-
-  if set -q argv[1]
+  if test (count $argv) -gt 0
     switch $argv[1]
       case 'init'
-        npm init
-        return
+        set cmd 'npm init'
       case 'ls'
-        npm ls
-        return
+        set cmd 'npm ls'
       case 'global'
         set -e argv[1]
-        __y_wrapper global --prefix=$yarn_dir $argv
-        return
+        set cmd "$cmd global --prefix=$yarn_dir"
+        if set -q argv[1]; and test "$argv[1]" = 'ls'
+          set -e argv[1]
+          set cmd "$cmd list $argv"
+        else
+          set cmd "$cmd $argv"
+        end
+      case '*'
+        set cmd "$cmd $argv"
     end
   end
 
-  __y_wrapper $argv
+  eval "$cmd"
 
   clear-functions '__y'
 end

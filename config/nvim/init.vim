@@ -6,15 +6,19 @@ call plug#begin('~/.config/nvim/plugins')
 
 " deoplete {{
 
+" Core
 Plug 'Shougo/deoplete.nvim'
+
+" Plugins/Autocomplete Providers
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neoinclude.vim'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'fszymanski/deoplete-emoji'
+Plug 'ponko2/deoplete-fish'
 Plug 'tweekmonster/deoplete-clang2'
 Plug 'wellle/tmux-complete.vim'
 Plug 'zchee/deoplete-jedi'
-Plug 'ponko2/deoplete-fish'
-Plug 'fszymanski/deoplete-emoji'
 
 " deoplete plugins {{
 

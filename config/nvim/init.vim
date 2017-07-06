@@ -247,9 +247,10 @@ augroup mycmds
   autocmd!
   autocmd BufEnter .{babel,eslint}rc :setf json
   autocmd BufLeave term://* stopinsert
-  autocmd FileType help :wincmd L
-  autocmd FileType vim :set foldmarker={{,}} foldlevel=0 foldmethod=marker
   autocmd BufWritePre * :FixWhitespace
+  autocmd FileType help :wincmd L
+  autocmd FileType java setlocal omnifunc=javacomplete#Complete
+  autocmd FileType vim :set foldmarker={{,}} foldlevel=0 foldmethod=marker
 augroup END
 
 " }}

@@ -22,6 +22,7 @@ alias re "sudo -E $EDITOR"
 alias rr 'sudo rm -rf'
 alias wh 'type -P'
 alias ya 'yaourt'
+alias yag 'yaourt -G'
 alias yaq 'yaourt -Q'
 alias yar 'yaourt -Rscun'
 alias yas 'yaourt -S'

@@ -20,7 +20,6 @@ set -gx LANG en_US.UTF-8
 set -gx PAGER less
 
 # PATH stuff
-set PATH $PATH ~/bin
 set PATH $PATH $DOTFILES/bin
 set PATH $PATH ./node_modules/.bin
 set PATH $PATH ./.yarn/bin

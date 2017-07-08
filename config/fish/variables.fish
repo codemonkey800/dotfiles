@@ -3,7 +3,6 @@ set -gx LESS '-R'
 set -gx LESSOPEN '|pygmentize -g %s'
 
 # development environment
-set -gx DIRENV_LOG_FORMAT
 set -gx EDITOR (type -p nvim)
 set -gx NVIM_LISTEN_ADDRESS /tmp/nvim-(whoami).socket
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1

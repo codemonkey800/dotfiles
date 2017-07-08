@@ -36,8 +36,6 @@ function __aliasif
   end
 end
 
-__aliasif apm 'apm-beta'
-__aliasif atom 'atom-beta'
 __aliasif chrome 'google-chrome-unstable'
 __aliasif copy 'rsync -aP'
 __aliasif g 'hub'
@@ -45,7 +43,6 @@ __aliasif git "hub"
 __aliasif lsports 'netstat -pelnut ^ /dev/null'
 __aliasif npmls 'npm ls --depth=0'
 __aliasif pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
-__aliasif subl 'subl3'
 __aliasif top 'htop'
 __aliasif tree 'tree -aC'
 

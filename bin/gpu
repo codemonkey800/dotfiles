@@ -26,6 +26,11 @@ class App(cli.Application):
         common.check_linux()
         common.check_root()
 
+        if not VGA_SWITCH_PATH.exists():
+            print(f'"{VGA_SWITCH_PATH}" doesn\'t exist!')
+            print('Are you running Arch on a MacBook Pro?')
+            return -1
+
         if command == 'status':
             print(VGA_SWITCH_PATH.read())
         elif command == 'on':

@@ -1,21 +1,14 @@
-TEX = $(shell which pdflatex)
+TEX = pdflatex
 TEX_FLAGS = -interaction=nonstopmode -shell-escape
 
-BUILD_DIR = build/
-SRC_FILES = $(wildcard *.tex) $(wildcard **/*.tex)
-OUT_FILES = $(SRC_FILES:%.tex=$(BUILD_DIR)/%.pdf)
+all: build/resume.pdf
 
-all: $(OUT_FILES)
-	@mkdir -vp $(BUILD_DIR)
-
-$(BUILD_DIR)/%.pdf: %.tex
-	@mkdir -vp $(dir $@)
-	$(TEX) $(TEX_FLAGS) -output-directory=$(dir $<) $<
-	@mv -v $(<:.tex=.pdf) $@
+build/resume.pdf: resume.tex
+	@mkdir -vp build
+	$(TEX) $(TEX_FLAGS) -output-directory=build $<
 
 clean:
-	@rm -rfv $(shell find -name "*.aux" -o -name "*.log" -o -name "*_minted")
-	@rm -rfv $(BUILD_DIR)
+	@rm -rfv build
 
 .PHONY: all clean
 

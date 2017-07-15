@@ -7,11 +7,15 @@
     'prefix': 'eslintd'
     'body': '/* eslint-disable $1 */$2'
 
-  'import for effoects':
+  'import for effects':
     'prefix': 'ime'
     'body': 'import \'$1\';'
 
 '.source.ts':
+  'import module':
+    'prefix': 'imm'
+    'body': 'import $1 from \'$2\';'
+
   'import all as':
     'prefix': 'ima'
     'body': 'import * as $1 from \'$2\';'
@@ -34,4 +38,4 @@
 
   'disable tslint or rule':
     'prefix': 'tslintd'
-    'body': '/* tslint:disable $1 */$2'
+    'body': '/* tslint:disable:$1 */$2'

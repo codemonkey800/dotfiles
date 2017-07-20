@@ -66,14 +66,11 @@ texlive-core
 texlive-fontsextra
 texlive-formatsextra
 texlive-games
-texlive-genericextra
-texlive-htmlxml
 texlive-humanities
 texlive-latexextra
 texlive-localmanager-git
 texlive-music
 texlive-pictures
-texlive-plainextra
 texlive-pstricks
 texlive-publishers
 texlive-science
@@ -85,3 +82,4 @@ watchman
 xdg-user-dirs-gtk
 xf86-input-libinput
 xorg-xinput
+intellij-idea-community-edition

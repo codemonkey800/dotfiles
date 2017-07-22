@@ -65,13 +65,9 @@ function gitignore -d "Retrieves gitignore files from gitignore.io"
         set -l response (__gitignore_fetch "$argv[1]")
         set IFS "$current_ifs"
 
-        if __gitignore_check_response "$response"
-          echo "$response"
-        else
-          set exit_code -1
-        end
-
-        echo "$response"
+        __gitignore_check_response "$response"
+        and echo "$response"
+        or set exit_code -1
     end
   else
     set -l endpoint (string join ',' $argv)
@@ -80,13 +76,11 @@ function gitignore -d "Retrieves gitignore files from gitignore.io"
     set -l response (__gitignore_fetch "$endpoint")
     set IFS "$current_ifs"
 
-    if __gitignore_check_response "$response"
-      echo "$response"
-    else
-      set exit_code -1
-    end
+    __gitignore_check_response "$response"
+    and echo "$response"
+    or set exit_code -1
   end
 
-  clear-functions __gitignore
+  clear-functions '__gitignore'
   return $exit_code
 end

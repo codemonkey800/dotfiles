@@ -9,6 +9,7 @@
   # add currently staged files to previous commit
   # please don't do this for commits already pushed to remote
   amend = commit --amend --no-edit
+  b = branch
   # commit with single message
   # additional messages can be added using the -m flag
   c = commit --message
@@ -79,4 +80,3 @@
   email = "jeremyasuncion808@gmail.com"
   name = "Jeremy Asuncion"
   signingkey = "3FCC32880193C153"
-

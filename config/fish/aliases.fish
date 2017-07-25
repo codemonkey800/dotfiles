@@ -3,6 +3,7 @@ alias dotfiles "cd $DOTFILES"
 alias tmpd 'cd ~/var/tmp'
 
 # Aliases
+alias cpu-temps 'watch -n 0.5 "sensors -f | grep Core"'
 alias dokku 'ssh dev dokku --'
 alias exists 'type -q'
 alias g 'git'

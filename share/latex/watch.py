@@ -1,7 +1,7 @@
 import http.server as http
 from socket import gethostname
 from socketserver import TCPServer
-from subprocess import call
+from subprocess import run
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
@@ -13,8 +13,8 @@ class ResumeBuilderEventHandler(FileSystemEventHandler):
     def on_modified(self, event):
         if event.is_directory or event.src_path != './resume.tex':
             return
-        call(['clear'])
-        call(['make'])
+        run(['clear'])
+        run(['make'])
 
 
 def main():

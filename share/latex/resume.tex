@@ -5,6 +5,7 @@
 \usepackage{multicol}
 \usepackage{tabularx}
 \usepackage{enumitem}
+\usepackage{textcomp}
 
 \pagenumbering{gobble}
 
@@ -20,6 +21,10 @@
   \hrule
   \vspace{0.05in}
 }
+
+% Nicer tilde from:
+% https://tex.stackexchange.com/questions/312/correctly-typesetting-a-tilde/377#377
+\newcommand{\textapprox}{\raisebox{0.5ex}{\texttildelow}}
 
 \begin{document}
 
@@ -64,7 +69,7 @@
               \item Reduced Gmail initial load JS heap by about 5\%-10\%
               \item Consolidated legacy Closure templates and removed old duplicated code
               \item Worked closely with designers to develop new Gmail initial loading bar
-              \item Expected impact of Gmail project: \textbf{~1.2 Billion Users}
+              \item Expected impact of Gmail project: \textbf{\textapprox 1.2 Billion Users}
             \end{itemize}
         \item
           \textbf{Google} --- Engineering Practicum Intern \hfill  \textbf{May 2016 --- August 2016}

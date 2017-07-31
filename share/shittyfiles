@@ -15,6 +15,7 @@
 ~/.distlib
 ~/.dropbox-dist
 ~/.esd_auth
+~/.flow-typed
 ~/.gconf
 ~/.gconfd
 ~/.gi_list

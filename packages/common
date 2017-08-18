@@ -3,7 +3,6 @@ autoconf
 automake
 bash
 bauerbill
-bazel
 binutils
 bison
 btrfs-progs

@@ -1,6 +1,18 @@
 # Quick access to certain directories via commands
-alias dotfiles "cd $DOTFILES"
-alias tmpd 'cd ~/var/tmp'
+alias dotfiles '
+  if status -c;
+    echo "$DOTFILES";
+  else;
+    cd "$DOTFILES";
+  end
+'
+alias tmpd '
+  if status -c;
+    echo ~/var/tmp;
+  else;
+    cd ~/var/tmp;
+  end
+'
 
 # Aliases
 alias cpu-temps 'watch -n 0.5 "sensors -f | grep Core"'

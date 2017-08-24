@@ -44,7 +44,9 @@ gvfs-nfs
 gvfs-smb
 handbrake-cli
 hunspell-en
+intellij-idea-community-edition
 jdk8-openjdk
+lib32-gcc-libs
 logmein-hamachi
 mit-scheme
 mousetweaks
@@ -82,4 +84,3 @@ watchman
 xdg-user-dirs-gtk
 xf86-input-libinput
 xorg-xinput
-intellij-idea-community-edition

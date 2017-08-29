@@ -125,7 +125,6 @@
     flashOnMoveToOccurrence: true
     highlightSearch: true
     incrementalSearch: true
-    keepColumnOnSelectTextObject: true
     showHoverSearchCounter: true
     stayOnDelete: true
     stayOnTransformString: true

@@ -63,7 +63,6 @@ linter-write-good
 merge-conflicts
 minimap
 minimap-codeglance
-minimap-cursorline
 minimap-find-and-replace
 minimap-git-diff
 minimap-hide

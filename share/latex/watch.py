@@ -1,4 +1,5 @@
 import http.server as http
+import os.path as path
 from socket import gethostname
 from socketserver import TCPServer
 from subprocess import run
@@ -18,6 +19,9 @@ class ResumeBuilderEventHandler(FileSystemEventHandler):
 
 
 def main():
+    if not path.exists('build'):
+        run(['make'])
+
     observer = Observer()
     observer.schedule(ResumeBuilderEventHandler(), '.')
     observer.start()

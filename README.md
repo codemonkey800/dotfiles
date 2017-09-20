@@ -199,7 +199,7 @@ Personally, I use Windows on my desktop and run Arch in VMWare Workstation. For 
 ## License :page_with_curl:
 The MIT License (MIT)
 
-Copyright (c) 2016 Jeremy Asuncion
+Copyright (c) 2017 Jeremy Asuncion
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -36,17 +36,17 @@ function run -d 'Runs the specified file using the correct execution environment
           rm -f "$name"
         case 'java'
           javac "$exe"
-          and java "$name $argv"
+          and java "$name" "$argv"
           set exit_code $status
-          rm -f "$name.class"
+          and rm -f "$name.class"
         case 'fish'
-          fish "$exe $argv"
+          fish "$exe" "$argv"
           set exit_code $status
         case 'py'
-          python3 "$exe $argv"
+          python3 "$exe" "$argv"
           set exit_code $status
         case 'sh'
-          bash "$exe $argv"
+          bash "$exe" "$argv"
           set exit_code $status
       end
     end

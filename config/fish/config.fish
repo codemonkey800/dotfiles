@@ -26,25 +26,6 @@ set PATH (paths | sort -u)
 # exit if non-interactive at this point
 not status -i; and exit
 
-function __config-set-gpg-agent-type
-  set -l gpg_agent_conf_path "$DOTFILES/config/gnugpg/gpg-agent%s.conf"
-
-  switch $argv[1]
-    case 'tty'
-      set gpg_agent_conf_path (printf $gpg_agent_conf_path '-tty')
-    case '*'
-      set gpg_agent_conf_path (printf $gpg_agent_conf_path '')
-  end
-
-  if test \
-    -f $gpg_agent_conf_path \
-    -a -d ~/.gnupg \
-    -a $gpg_agent_conf_path != (readlink ~/.gnupg/gpg-agent.conf)
-    ln -sf $gpg_agent_conf_path ~/.gnupg/gpg-agent.conf
-    gpg-connect-agent reloadagent /bye
-  end
-end
-
 # stuff to do if a display server isn't available
 if test -z $DISPLAY
   # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
@@ -60,21 +41,22 @@ if test -z $DISPLAY
     end
   end
 
-  __config-set-gpg-agent-type tty
-
-  if test -d ~/.gnupg -a $DOTFILES/config/gnugpg/gpg-agent-tty.conf != ~/.gnupg/gpg-agent.conf
-    ln -sf $DOTFILES/config/gnugpg/gpg-agent-tty.conf ~/.gnupg/gpg-agent.conf
+  if test (readlink ~/.gnupg/gpg-agent.conf) = $DOTFILES/config/gnugpg/gpg-agent.conf
+    toggle-pinentry > /dev/null
   end
 else
   # Have keychain kill all ssh-agent's if any are running and $DISPLAY is defined
   if exists keychain; and test (count (keychain -l)) -gt 0
     keychain --quiet -k all
   end
+
   if test -e ~/.keychain
     rm -rf ~/.keychain
   end
 
-  __config-set-gpg-agent-type default
+  if test (readlink ~/.gnupg/gpg-agent.conf) = $DOTFILES/config/gnugpg/gpg-agent-tty.conf
+    toggle-pinentry > /dev/null
+  end
 end
 
 # startup tmux or connect to existing session
@@ -85,6 +67,4 @@ if exists tmux; and test -z $TMUX
     exec tmux new -s (whoami)/main
   end
 end
-
- clear-functions __config
 

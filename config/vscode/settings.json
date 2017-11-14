@@ -4,7 +4,6 @@
   "editor.formatOnPaste": true,
   "editor.minimap.enabled": true,
   "editor.tabSize": 2,
-  "editor.renderWhitespace": "boundary",
 
   "extensions.autoUpdate": true,
 
@@ -19,9 +18,10 @@
   "vim.easymotionMarkerBackgroundColor": "#212121",
   "vim.easymotionMarkerForegroundColorOneChar": "#e040fb",
   "vim.easymotionMarkerForegroundColorTwoChar": "#e040fb",
+  "vim.enableNeovim": true,
   "vim.hlsearch": true,
-  "vim.showcmd": false,
   "vim.leader": ",",
+  "vim.showcmd": false,
   "vim.surround": true,
   "vim.useSystemClipboard": true,
 
@@ -107,5 +107,6 @@
 
   "vsicons.projectDetection.autoReload": true,
 
-  "workbench.colorTheme": "One Dark Pro"
+  "workbench.colorTheme": "Monokai Dimmed",
+  "workbench.iconTheme": "vscode-icons"
 }

@@ -17,7 +17,6 @@
     "command": "workbench.action.previousEditor"
   },
 
-
   {
     "key": "meta+r",
     "command": "workbench.action.reloadWindow"
@@ -31,6 +30,7 @@
     "key": "ctrl+0",
     "command": "-workbench.action.focusSideBar"
   },
+
   {
     "key": "ctrl+shift+l",
     "command": "workbench.action.editor.changeLanguageMode"
@@ -39,6 +39,7 @@
     "key": "ctrl+k m",
     "command": "-workbench.action.editor.changeLanguageMode"
   },
+
   {
     "key": "ctrl+\\",
     "command": "workbench.action.toggleSidebarVisibility"
@@ -46,5 +47,32 @@
   {
     "key": "ctrl+b",
     "command": "-workbench.action.toggleSidebarVisibility"
+  },
+
+  {
+    "key": "alt-1",
+    "command": "workbench.view.explorer"
+  },
+  {
+    "key": "alt-2",
+    "command": "workbench.view.search"
+  },
+  {
+    "key": "alt-3",
+    "command": "workbench.view.scm"
+  },
+  {
+    "key": "alt-4",
+    "command": "workbench.view.debug"
+  },
+  {
+    "key": "alt-5",
+    "command": "workbench.view.extensions"
+  },
+
+  {
+    "key": "ctrl-j",
+    "command": "editor.action.insertLineAfter",
+    "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode == 'Insert'"
   }
 ]

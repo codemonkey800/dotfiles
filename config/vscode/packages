@@ -3,7 +3,6 @@ christian-kohler.npm-intellisense
 christian-kohler.path-intellisense
 dbaeumer.vscode-eslint
 donjayamanne.githistory
-donjayamanne.python
 DotJoshJohnson.xml
 EditorConfig.EditorConfig
 eg2.vscode-npm-script
@@ -18,7 +17,6 @@ lukehoban.Go
 msjsdiag.debugger-for-chrome
 ms-vscode.cpptools
 PeterJausovec.vscode-docker
-pprice.better-merge
 robertohuertasm.vscode-icons
 steve8708.Align
 streetsidesoftware.code-spell-checker

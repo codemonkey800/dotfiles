@@ -57,6 +57,7 @@ __aliasif copy 'rsync -aP'
 __aliasif g 'hub'
 __aliasif git "hub"
 __aliasif lsports 'netstat -pelnut ^ /dev/null'
+__aliasif move 'rsync -aP --remove-source-files'
 __aliasif npmls 'npm ls --depth=0'
 __aliasif pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
 __aliasif top 'htop'

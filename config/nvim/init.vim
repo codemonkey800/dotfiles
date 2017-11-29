@@ -506,9 +506,12 @@ let g:neomake_tex_chktex_maker = {
   \ 'args': ['-n36', '-n1'],
 \ }
 
+let g:neomake_cpp_enabled_makers = ['cppclang']
+let g:neomake_cpp_cppclang_maker = neomake#makers#ft#cpp#clang()
+
 let g:neomake_highlight_lines = 1
 
-autocmd! BufWritePost * Neomake
+call neomake#configure#automake('w')
 
 nnoremap <leader>bl :NeomakeListJobs<CR>
 nnoremap <leader>bm :Neomake! make<CR>
@@ -647,6 +650,7 @@ let g:airline#extensions#tabline#enabled = 1
 " chromatica.nvim {{
 
 let g:chromatica#enable_at_startup = 1
+let g:chromatica#responsive_mode=1
 
 " }}
 

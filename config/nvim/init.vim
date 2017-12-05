@@ -11,15 +11,15 @@ Plug 'Shougo/deoplete.nvim'
 
 " Plugins/Autocomplete Providers
 Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim'
+Plug 'Shougo/neco-vim', { 'for': ['vim'] }
 Plug 'Shougo/neoinclude.vim'
-Plug 'artur-shaik/vim-javacomplete2'
+Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
 Plug 'fszymanski/deoplete-emoji'
-Plug 'ponko2/deoplete-fish'
-Plug 'tweekmonster/deoplete-clang2'
+Plug 'ponko2/deoplete-fish', { 'for': ['fish'] }
+Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
 Plug 'wellle/tmux-complete.vim'
-Plug 'zchee/deoplete-jedi'
-Plug 'mhartington/nvim-typescript'
+Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
+Plug 'mhartington/nvim-typescript', { 'for': ['typescript'] }
 
 " deoplete plugins {{
 
@@ -43,7 +43,7 @@ Plug 'jiangmiao/auto-pairs'
 
 " language utilities {{
 
-Plug 'flowtype/vim-flow', { 'for': ['javascript', 'jsx'] }
+Plug 'flowtype/vim-flow', { 'for': ['javascript'] }
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'typescript'] }
 
 " }}
@@ -78,7 +78,7 @@ Plug 'reedes/vim-wordy'
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'justinj/vim-react-snippets'
+Plug 'justinj/vim-react-snippets', { 'for': ['jsx', 'typescript'] }
 
 " }}
 

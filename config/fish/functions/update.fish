@@ -1,8 +1,18 @@
 function update -d 'Runs various updates on my Arch system.'
-  # Run only on Arch Linux
-  if not lsb_release -d | grep -q 'Arch Linux'
-    echo 'This script can only be run on Arch Linux!'
-    exit -1
+  if test (count $argv) -gt 0
+    if contains -- -h $argv; or contains -- --help $argv
+      echo 'Usage: update [tmp-dir]'
+      echo
+      echo 'Arguments:'
+      echo '  tmp-dir - Specify to use alternative directory to $TMPDIR for yaourt.'
+      return
+    end
+  end
+
+  set tmp_dir
+  if test (count $argv) -gt 0
+    mkdir -vp $argv[1]
+    set tmp_dir $argv[1]
   end
 
   # Update pacman db
@@ -29,6 +39,6 @@ function update -d 'Runs various updates on my Arch system.'
   end
 
   # Update pacman packages from official and aur
-  yaourt -Syua --force --noconfirm
+  env TMPDIR=$tmp_dir yaourt -Syua --force --noconfirm
 end
 

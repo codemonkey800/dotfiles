@@ -35,7 +35,7 @@ function gitignore -d "Retrieves gitignore files from gitignore.io"
     if test (count $matches) -eq 0
       return
     else
-      echo 'The following templates don\'t exist:'
+      echo "The following templates don't exist:"
       for match in $matches
         echo "  $match"
       end

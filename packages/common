@@ -100,7 +100,6 @@ python-pip
 python-plumbum
 python-psutil
 python-setproctitle
-python-vint
 python-virtualenv
 reflector
 repose

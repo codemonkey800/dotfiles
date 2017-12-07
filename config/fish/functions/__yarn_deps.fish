@@ -1,4 +1,5 @@
-function node-deps -d ''
+function __yarn_deps -d 'Prints dependencies or devDependencies of a toplevel package.json'
+
   set filter '.dependencies, .devDependencies'
   switch "$argv[1]"
     case ''
@@ -7,7 +8,7 @@ function node-deps -d ''
     case 'prod'
       set filter '.dependencies'
     case '*'
-      echo -e 'Usage: node-deps [type]'
+      echo -e 'Usage: yarn deps [type]'
       echo
       echo 'Arguments:'
       echo '  type - The type of dependencies to list. Defaults to both.'

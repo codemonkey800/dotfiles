@@ -1,43 +1,16 @@
-function yarn -w yarn -d 'Small, opinionated wrapper over Yarn.'
-  function __yarn_check_exe
-    type -q $argv[1]; and return
-    echo "$argv[1] is not installed! Run the following to install:"
-    echo "  \$ sudo pacman -S $argv[1]"
+function yarn -w yarn -d 'Small, opinionated wrapper over Yarn. Similar to git command where __yarn-<cmd> is called with yarn <cmd>.'
+  if not type -qf yarn
+    echo 'Yarn is not installed!'
     return -1
   end
 
-  set yarn_dir $PWD/.yarn
-  set cmd 'yarn'
-  set exit_code 0
+  set cmd 'command yarn'
 
-  __yarn_check_exe yarn
-  or set exit_code -1
-
-  __yarn_check_exe npm
-  or set exit_code -1
-
-  test (count $argv) -gt 0
-  and switch "$argv[1]"
-    case 'init'
-      set cmd 'npm init'
-    case 'ls'
-      set cmd 'npm ls'
-    case 'global'
-      set -e argv[1]
-      set cmd "$cmd global --prefix=$yarn_dir"
-      if set -q argv[1]; and test "$argv[1]" = 'ls'
-        set -e argv[1]
-        set cmd "$cmd list $argv"
-      else
-        set cmd "$cmd $argv"
-      end
-    case '*'
-      set cmd "$cmd $argv"
+  # If the first arg is a subcommand, then search for subcommands of yarn.
+  if not string match -qr -- '-[a-zA-Z0-9]+' "$argv[1]"; and type -q "__yarn_$argv[1]"
+    set cmd "__yarn_$argv[1]"
+    set -e argv[1]
   end
 
-  eval "command $cmd"
-  set exit_code $status
-
-  clear-functions '__yarn'
-  return $exit_code
+  eval "$cmd $argv"
 end

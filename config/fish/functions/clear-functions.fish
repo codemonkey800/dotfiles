@@ -3,7 +3,7 @@ function clear-functions -d 'Erases a set of functions by namespace. Useful for 
     echo 'Usage: clear-functions <namespace>'
     echo
     echo 'Arguments:'
-    echo '  namespace - The namespace, usually prefixed by two underscores'
+    echo '  namespace - The namespace, usually prefixed by two underscores.'
     echo
     echo 'Example:'
     echo '  Clears all functions under the __fish namespace.'

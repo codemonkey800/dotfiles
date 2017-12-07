@@ -1,23 +1,23 @@
-function check-updates -d 'Checks updates for Arch ABS and AUR'
+function check-updates -d 'Checks updates for Arch ABS and AUR.'
   set base_cmd "sort -u | sed 's/^/  /'"
   set checkupdates_found false
   set checkupdates_aur_found false
 
-  if exists checkupdates
+  if type -qf checkupdates
     set checkupdates_found true
   end
 
-  if exists checkupdates-aur
+  if type -qf checkupdates-aur
     set checkupdates_aur_found true
   end
 
   if not eval "$checkupdates_found; and $checkupdates_aur_found"
     if not eval "$checkupdates_found"
-      echo "checkupdates not found"
+      echo "checkupdates not found."
     end
 
     if not eval "$checkupdates_aur_found"
-      echo "checkupdates-aur not found"
+      echo "checkupdates-aur not found."
     end
 
     return -1

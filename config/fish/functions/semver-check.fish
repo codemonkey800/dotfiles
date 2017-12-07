@@ -1,4 +1,4 @@
-function semver-check -d 'Uses semver.io to check versions for node, npm, and yarn'
+function semver-check -d 'Uses semver.io to check versions for node, npm, and yarn.'
   # Mapping of variable name to friendly string name
   set -l node 'Node'
   set -l npm 'NPM'

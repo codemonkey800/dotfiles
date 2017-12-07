@@ -50,7 +50,7 @@ function __mkexe_create_file
 end
 
 function __mkexe_exit
-  clear-functions '__mkexe'
+  clear-functions __mkexe
   set exit_status 0
   if set -q 'argv[1]'
     set exit_status "$argv[1]"

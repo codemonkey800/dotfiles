@@ -33,7 +33,7 @@ function update -d 'Runs various updates on my Arch system.'
 
   # Update atom packages
   for x in apm{,-beta}
-    if type -q $x
+    if type -qf $x
       eval $x upgrade --no-confirm
     end
   end

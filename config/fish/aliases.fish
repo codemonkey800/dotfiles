@@ -1,6 +1,7 @@
 alias apm 'apm-beta'
 alias atom 'atom-beta'
 alias chrome 'google-chrome-unstable'
+alias code 'code-insiders'
 alias copy 'rsync -aP'
 alias cpu-temps 'watch -n 0.5 "sensors -f | grep Core"'
 alias dokku 'ssh dev dokku --'

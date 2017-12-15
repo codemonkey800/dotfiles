@@ -16,8 +16,9 @@
 
   "vim.easymotion": true,
   "vim.easymotionMarkerBackgroundColor": "#212121",
-  "vim.easymotionMarkerForegroundColorOneChar": "#e040fb",
-  "vim.easymotionMarkerForegroundColorTwoChar": "#e040fb",
+  "vim.easymotionMarkerFontSize": "18",
+  "vim.easymotionMarkerForegroundColorOneChar": "#ff0",
+  "vim.easymotionMarkerForegroundColorTwoChar": "#0ff",
   "vim.enableNeovim": true,
   "vim.hlsearch": true,
   "vim.leader": ",",
@@ -26,7 +27,6 @@
   "vim.useSystemClipboard": true,
 
   "vim.handleKeys": {
-    "<C-a>": false,
     "<C-f>": false,
     "<C-n>": false,
     "<C-w>": false

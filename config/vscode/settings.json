@@ -3,6 +3,7 @@
   "editor.fontSize": 16,
   "editor.formatOnPaste": true,
   "editor.minimap.enabled": true,
+  "editor.renderIndentGuides": false,
   "editor.tabSize": 2,
 
   "extensions.autoUpdate": true,

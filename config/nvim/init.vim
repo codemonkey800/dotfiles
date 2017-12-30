@@ -16,8 +16,7 @@ Plug 'Shougo/neoinclude.vim'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
 Plug 'fszymanski/deoplete-emoji'
 Plug 'ponko2/deoplete-fish', { 'for': ['fish'] }
-" Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
-Plug 'codemonkey800/deoplete-clang2', { 'for': ['c', 'cpp'] }
+Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
 Plug 'wellle/tmux-complete.vim'
 Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
 Plug 'mhartington/nvim-typescript', { 'for': ['typescript'] }

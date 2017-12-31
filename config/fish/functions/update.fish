@@ -30,6 +30,7 @@ function update -d 'Runs various updates on my Arch system.'
   # Update fisher packages and re-link fish functions from $DOTFILES
   fisher up
   and ln -svf $DOTFILES/config/fish/functions/* ~/etc/fish/functions/
+  fish_update_completions
 
   # Update atom packages
   for x in apm{,-beta}

@@ -13,8 +13,3 @@ Host prod
     IdentityFile ~/.ssh/vps
     User root
 
-Host stage
-    HostName stage.jeremyasuncion.io
-    IdentityFile ~/.ssh/vps
-    User root
-

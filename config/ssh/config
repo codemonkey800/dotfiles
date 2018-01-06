@@ -8,13 +8,13 @@ Host github.com gitlab.com bitbucket.com
     IdentityFile ~/.ssh/vcs
     User git
 
-Host dev
+Host prod
     HostName jeremyasuncion.io
     IdentityFile ~/.ssh/vps
     User root
 
 Host stage
-    HostName staging.jeremyasuncion.io
+    HostName stage.jeremyasuncion.io
     IdentityFile ~/.ssh/vps
     User root
 

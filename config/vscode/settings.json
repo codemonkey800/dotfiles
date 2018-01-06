@@ -108,5 +108,6 @@
   "vsicons.projectDetection.autoReload": true,
 
   "workbench.colorTheme": "Monokai Dimmed",
-  "workbench.iconTheme": "vscode-icons"
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.startupEditor": "newUntitledFile"
 }

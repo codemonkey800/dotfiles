@@ -1,3 +1,8 @@
+Host aur
+    HostName aur.archlinux.org
+    IdentityFile ~/.ssh/aur
+    User aur
+
 Host github.com gitlab.com bitbucket.com
     HostName %h
     IdentityFile ~/.ssh/vcs
@@ -8,8 +13,8 @@ Host dev
     IdentityFile ~/.ssh/vps
     User root
 
-Host aur
-    HostName aur.archlinux.org
-    IdentityFile ~/.ssh/aur
-    User aur
+Host stage
+    HostName staging.jeremyasuncion.io
+    IdentityFile ~/.ssh/vps
+    User root
 

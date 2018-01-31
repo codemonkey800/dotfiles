@@ -27,6 +27,7 @@
 ~/.java
 ~/.jspm
 ~/.jupyter
+~/.keras
 ~/.lesshst
 ~/.local/share/gegl-0.2
 ~/.local/share/recently-used.xbel
@@ -42,6 +43,7 @@
 ~/.parallel
 ~/.pki
 ~/.pulse
+~/.python_history
 ~/.python_history
 ~/.recently-used
 ~/.rnd

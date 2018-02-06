@@ -39,8 +39,12 @@ function dotfiles -d 'Switches to or prints (in command substitution) the dotfil
     # If a virtual env isn't present, create one.
     if test ! -f .venv/bin/activate.fish
       python -m venv .venv
+      source .venv/bin/activate.fish
+      pip install -r requirements.txt
     end
-    source .venv/bin/activate.fish
+    if set -e VIRTUAL_ENV
+      source .venv/bin/activate.fish
+    end
     # Remove file arg and pass editor args.
     set -e argv[1]
     eval "$EDITOR $argv $file"

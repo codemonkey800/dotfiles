@@ -8,11 +8,10 @@ end
 
 # Dotfiles path
 set -gx DOTFILES (
-  set dir (status -f)
-  if test -L $dir
-    set dir (readlink $dir)
-  end
-  readlink -f (dirname $dir)/../..
+  set config_file (status -f)
+  set config_file (readlink -e $config_file)
+  set dir (dirname $config_file)
+  readlink -e $dir/../..
 )
 
 source $DOTFILES/config/fish/colors.fish
@@ -23,48 +22,47 @@ source $DOTFILES/config/fish/completions.fish
 # sort and keep only unique paths
 set PATH (paths | sort -u)
 
-# exit if non-interactive at this point
-not status -i; and exit
-
+if status -i
 # stuff to do if a display server isn't available
-if test -z $DISPLAY
-  # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
-  if exists keychain
-    set -l keys (
-      for f in ~/.ssh/*.pub
-        echo ~/.ssh/(basename $f .pub)
-      end
-    )
+  if test -z $DISPLAY
+    # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
+    if exists keychain
+      set -l keys (
+        for f in ~/.ssh/*.pub
+          echo ~/.ssh/(basename $f .pub)
+        end
+      )
 
-    if test (count $keys) -gt 0
-      env SHELL=fish keychain --eval --agents ssh --quick --quiet --nogui $keys | source
+      if test (count $keys) -gt 0
+        env SHELL=fish keychain --eval --agents ssh --quick --quiet --nogui $keys | source
+      end
+    end
+
+    if test (readlink ~/.gnupg/gpg-agent.conf) = $DOTFILES/config/gnugpg/gpg-agent.conf
+      toggle-pinentry > /dev/null
+    end
+  else
+    # Have keychain kill all ssh-agent's if any are running and $DISPLAY is defined
+    if exists keychain; and test (count (keychain -l)) -gt 0
+      keychain --quiet -k all
+    end
+
+    if test -e ~/.keychain
+      rm -rf ~/.keychain
+    end
+
+    if test (readlink ~/.gnupg/gpg-agent.conf) = $DOTFILES/config/gnugpg/gpg-agent-tty.conf
+      toggle-pinentry > /dev/null
     end
   end
 
-  if test (readlink ~/.gnupg/gpg-agent.conf) = $DOTFILES/config/gnugpg/gpg-agent.conf
-    toggle-pinentry > /dev/null
-  end
-else
-  # Have keychain kill all ssh-agent's if any are running and $DISPLAY is defined
-  if exists keychain; and test (count (keychain -l)) -gt 0
-    keychain --quiet -k all
-  end
-
-  if test -e ~/.keychain
-    rm -rf ~/.keychain
-  end
-
-  if test (readlink ~/.gnupg/gpg-agent.conf) = $DOTFILES/config/gnugpg/gpg-agent-tty.conf
-    toggle-pinentry > /dev/null
-  end
-end
-
 # startup tmux or connect to existing session
-if exists tmux; and test -z $TMUX
-  if tmux ls | grep -q main
-    exec tmux a -t (whoami)/main
-  else
-    exec tmux new -s (whoami)/main
+  if exists tmux; and test -z $TMUX
+    if tmux ls | grep -q main
+      exec tmux a -t (whoami)/main
+    else
+      exec tmux new -s (whoami)/main
+    end
   end
 end
 

@@ -42,9 +42,11 @@ function dotfiles -d 'Switches to or prints (in command substitution) the dotfil
       source .venv/bin/activate.fish
       pip install -r requirements.txt
     end
-    if set -e VIRTUAL_ENV
+
+    if not set -q VIRTUAL_ENV
       source .venv/bin/activate.fish
     end
+
     # Remove file arg and pass editor args.
     set -e argv[1]
     eval "$EDITOR $argv $file"

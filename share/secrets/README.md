@@ -3,6 +3,7 @@
 Collection of any sensitive data of mine that has to be kept secret.
 
 ## Usage
+
 The `secrets.py` script leverages git and a `.gitignore` file to determine what
 files are secrets. The `.gitignore` file in the current working directory
 ignores everything by default and maintains a whitelist of files not to ignore.

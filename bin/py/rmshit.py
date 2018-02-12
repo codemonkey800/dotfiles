@@ -19,7 +19,6 @@ class App(cli.Application):
     '''
 
     PROGNAME = 'rmshit'
-    VERSION = '0.2.0'
 
     config = cli.SwitchAttr(
         ['-c', '--config'],

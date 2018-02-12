@@ -20,8 +20,6 @@ def list_secrets():
 class App(cli.Application):
     '''Hides or reveals secrets encrypted with gpg in the dotfiles repo.'''
 
-    VERSION = '0.1.0'
-
     hide_secrets = cli.Flag(
         '--hide',
         help='Compresses and encrypts files inside the $DOTFILES/secrets dir',

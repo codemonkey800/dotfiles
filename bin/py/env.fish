@@ -1,12 +1,14 @@
 set venv $DOTFILES/.venv
-set activate_script $venv/bin/activate.fish
+set activate_file $venv/bin/activate.fish
 
-if test ! -f $activate_script
+if not test -f $activate_file
   echo 'Environment not available. Creating one.'
   python3 -m venv $venv
-  source $activate_script
+  source $activate_file
   pip install -r $DOTFILES/requirements.txt
 end
 
-source $activate_script
+if not set -q VIRTUAL_ENV
+  source $activate_file
+end
 

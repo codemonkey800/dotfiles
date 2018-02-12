@@ -25,7 +25,7 @@ function dotfiles -d 'Switches to or prints (in command substitution) the dotfil
 
   # A directory is a file, so we make no distinction here.
   set file $DOTFILES/$argv[1]
-  if test ! -e $file
+  if not test -e $file
     echo "'$file' does not exist!"
     return -1
   end
@@ -37,7 +37,7 @@ function dotfiles -d 'Switches to or prints (in command substitution) the dotfil
 
   pushd $DOTFILES
     # If a virtual env isn't present, create one.
-    if test ! -f .venv/bin/activate.fish
+    if not test -f .venv/bin/activate.fish
       python -m venv .venv
       source .venv/bin/activate.fish
       pip install -r requirements.txt

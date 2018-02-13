@@ -1,42 +1,40 @@
-import os.path as path
 import plumbum.cli as cli
 
 from glob import glob
 from plumbum import FG, local as sh
 
-CONFIG_FILE = sh.path(path.expandvars('$DOTFILES/share/shittyfiles'))
+CONFIG_FILE = sh.path(sh.env.expand('$DOTFILES/share/shittyfiles'))
 
 
 def expand_path(p):
     '''Expands a path's glob and tilde syntax if they're present.'''
-    return glob(path.expanduser(p))
+    return glob(sh.env.expand(p))
 
 
 class App(cli.Application):
     '''
-        A script for removing user defined shitty files.  Also has support for
+        A script for removing user defined shitty files. Also has support for
         directory specific shitty config files.
     '''
 
     PROGNAME = 'rmshit'
 
     config = cli.SwitchAttr(
-        ['-c', '--config'],
-        cli.ExistingFile,
-        help='Specify a specific config file to load',
+        names=('c', 'config'),
+        argtype=cli.ExistingFile,
+        argname='config-file',
         default=CONFIG_FILE,
+        help='Specify a specific config file to load',
     )
 
     noconfirm = cli.Flag(
-        ['-y', '--no-confirm'],
+        names=('y', 'no-confirm'),
         help='Delete shitty files without confirmation',
-        default=False,
     )
 
     verbose = cli.Flag(
-        ['-v', '--verbose'],
+        names=('v', 'verbose'),
         help='Print out files as they\'re being deleted',
-        default=False,
     )
 
     def main(self):

@@ -17,82 +17,78 @@ def list_secrets():
     return _list_secrets(retcode=None).split('\n')[:-1]
 
 
+def hide_secrets(gpg, compress, secrets_archive, secrets_encrypted_archive):
+    secrets = list_secrets()
+
+    if not secrets:
+        print('No secrets found!')
+        return
+
+    print('Compressing secrets...')
+    compress(secrets_archive, *secrets)
+
+    if secrets_encrypted_archive.exists():
+        print('Removing old encrypted secrets archive...')
+        secrets_encrypted_archive.delete()
+
+    print('Encrypting secrets with gpg2...')
+    gpg(
+        '--output', secrets_encrypted_archive,
+        '--symmetric',
+        secrets_archive,
+    )
+
+    print('Removing secrets...')
+    secrets_archive.delete()
+    for secret in secrets:
+        f = sh.cwd / secret
+        if f.exists():
+            f.delete()
+
+    print('Done !')
+    print('Secrets Added:')
+    print(textwrap.indent('\n'.join(secrets), '  '))
+
+
+def show_secrets(gpg, decompress, secrets_archive, secrets_encrypted_archive):
+    if not secrets_encrypted_archive.exists():
+        print((
+            'Secrets archive '
+            f'"{secrets_encrypted_archive.basename}" '
+            'does not exist'
+        ))
+        print(f'Run `{__file__} --hide` to hide secrets')
+        return
+
+    print('Decrypting secrets with gpg2...')
+    gpg(
+        '--output', secrets_archive,
+        '--decrypt', secrets_encrypted_archive,
+    )
+
+    print('Extracting secrets...')
+    decompress(secrets_archive)
+
+    print('Removing secrets archive...')
+    secrets_archive.delete()
+
+    secrets = list_secrets()
+    print('Done!')
+    print('Secrets Revelead:')
+    print(textwrap.indent('\n'.join(secrets), '  '))
+
+
 class App(cli.Application):
     '''Hides or reveals secrets encrypted with gpg in the dotfiles repo.'''
 
     hide_secrets = cli.Flag(
-        '--hide',
+        names='hide',
         help='Compresses and encrypts files inside the $DOTFILES/secrets dir',
     )
     show_secrets = cli.Flag(
-        '--show',
+        names='show',
         help='Decrypts and extracts secrets to the $DOTFILES/secrets dir',
     )
-
-    def _hide_secrets(
-        self,
-        gpg, compress,
-        secrets_archive, secrets_encrypted_archive,
-    ):
-        secrets = list_secrets()
-
-        if len(secrets) == 0:
-            print('No secrets found!')
-        else:
-            print('Compressing secrets...')
-            compress(secrets_archive, *secrets)
-
-            if secrets_encrypted_archive.exists():
-                print('Removing old encrypted secrets archive...')
-                secrets_encrypted_archive.delete()
-
-            print('Encrypting secrets with gpg2...')
-            gpg(
-                '--output', secrets_encrypted_archive,
-                '--symmetric',
-                secrets_archive,
-            )
-
-            print('Removing secrets...')
-            secrets_archive.delete()
-            for secret in secrets:
-                f = sh.cwd / secret
-                if f.exists():
-                    f.delete()
-
-            print('Done !')
-            print('Secrets Added:')
-            print(textwrap.indent('\n'.join(secrets), '  '))
-
-    def _show_secrets(
-        self,
-        gpg, decompress,
-        secrets_archive, secrets_encrypted_archive,
-    ):
-        if not secrets_encrypted_archive.exists():
-            print((
-                'Secrets archive '
-                f'"{secrets_encrypted_archive.basename}" '
-                'does not exist'
-            ))
-            print(f'Run `{__file__} --hide` to hide secrets')
-        else:
-            print('Decrypting secrets with gpg2...')
-            gpg(
-                '--output', secrets_archive,
-                '--decrypt', secrets_encrypted_archive,
-            )
-
-            print('Extracting secrets...')
-            decompress(secrets_archive)
-
-            print('Removing secrets archive...')
-            secrets_archive.delete()
-
-            secrets = list_secrets()
-            print('Done!')
-            print('Secrets Revelead:')
-            print(textwrap.indent('\n'.join(secrets), '  '))
 
     def main(self):
         gpg = sh['gpg2']
@@ -106,12 +102,12 @@ class App(cli.Application):
         secrets_encrypted_archive = sh.cwd / f'{secrets_archive}.gpg'
 
         if self.hide_secrets:
-            self._hide_secrets(
+            hide_secrets(
                 gpg, compress,
                 secrets_archive, secrets_encrypted_archive,
             )
         elif self.show_secrets:
-            self._show_secrets(
+            show_secrets(
                 gpg, decompress,
                 secrets_archive, secrets_encrypted_archive,
             )

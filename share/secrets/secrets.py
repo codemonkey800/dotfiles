@@ -2,7 +2,7 @@
 
 import plumbum.cli as cli
 
-from plumbum import local as sh
+from plumbum import colors, local as sh
 
 # Commands
 _7z = sh['7z']['-aoa', '-y', '-mx9']
@@ -42,7 +42,7 @@ class App(cli.Application):
         help='List the secrets that would be added to the archive',
     )
     def list_secrets(self):
-        print('Secrets:')
+        colors.green.print('Secrets:')
         for secret in list_secrets():
             print(f'  {secret}')
 
@@ -55,10 +55,10 @@ class App(cli.Application):
         secrets = list_secrets()
 
         if not secrets:
-            print('No secrets found!')
+            colors.red.print('No secrets found!')
             return
 
-        print('Compressing secrets...')
+        colors.green.print('Compressing secrets...')
         with sh.cwd(_secrets_root):
             _7z('a', _secrets_archive, *secrets)
 
@@ -66,22 +66,23 @@ class App(cli.Application):
             print('Removing old encrypted secrets archive...')
             _secrets_encrypted_archive.delete()
 
-        print('Encrypting secrets with gpg2...')
+        colors.green.print('Encrypting secrets with gpg2...')
         gpg(
             '--output', _secrets_encrypted_archive,
             '--symmetric',
             _secrets_archive,
         )
 
-        print('Removing secrets...')
+        colors.green.print('Removing secrets...')
         _secrets_archive.delete()
         for secret in secrets:
             f = sh.cwd / secret
             if f.exists():
                 f.delete()
 
-        print('Done!')
-        print('Secrets Added:')
+        with colors.green:
+            print('Done!')
+            print('Secrets Added:')
         for secret in secrets:
             print(f'  {secret}')
 
@@ -92,33 +93,34 @@ class App(cli.Application):
     )
     def show_secrets(self):
         if not _secrets_encrypted_archive.exists():
-            print((
-                'Secrets archive '
-                f'"{_secrets_encrypted_archive.basename}" '
-                'does not exist'
-            ))
-            print(f'Run `{__file__} --hide` to hide secrets')
+            with colors.red:
+                print((
+                    'Secrets archive '
+                    f'"{_secrets_encrypted_archive.basename}" '
+                    'does not exist'
+                ))
+                print(f'Run `{__file__} --hide` to hide secrets')
             return
 
         prev_secrets = list_secrets()
 
-        print('Decrypting secrets with gpg2...')
+        colors.green.print('Decrypting secrets with gpg2...')
         gpg(
             '--output', _secrets_archive,
             '--decrypt', _secrets_encrypted_archive,
         )
 
-        print('Extracting secrets...')
+        colors.green.print('Extracting secrets...')
         with sh.cwd(_secrets_root):
             _7z('x', _secrets_archive)
 
-        print('Removing secrets archive...')
+        colors.green.print('Removing secrets archive...')
         _secrets_archive.delete()
 
         revealed_secrets = set(list_secrets()) - set(prev_secrets)
         print('Done!')
         if revealed_secrets:
-            print('Secrets Revelead:')
+            colors.green.print('Secrets Revelead:')
             for secret in sorted(revealed_secrets):
                 print(f'  {secret}')
         else:

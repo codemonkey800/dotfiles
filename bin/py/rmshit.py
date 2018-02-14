@@ -1,9 +1,10 @@
 import plumbum.cli as cli
 
+from common import dotfiles_path
 from glob import glob
-from plumbum import FG, local as sh
+from plumbum import FG, colors, local as sh
 
-CONFIG_FILE = sh.path(sh.env.expand('$DOTFILES/share/shittyfiles'))
+CONFIG_FILE = dotfiles_path / 'share/shittyfiles'
 
 
 def expand_path(p):
@@ -46,13 +47,14 @@ class App(cli.Application):
 
         if not config.exists():
             should_delete = False
-            print('Your shitty config file does not exist!')
-            print(f'Create the file at "{config}"')
+            with colors.red:
+                print('Your shitty config file does not exist!')
+                print(f'Create the file at "{config}"')
         else:
             files.extend(config.read().splitlines())
 
         if local_config.exists():
-            print(f'local shittyfiles config found at {sh.cwd}')
+            colors.green.print(f'local shittyfiles config found at {sh.cwd}')
             should_delete = True
             files.extend(local_config.read().splitlines())
 
@@ -76,7 +78,7 @@ class App(cli.Application):
 
         if should_delete:
             rm['-rfv' if self.verbose else '-rf', files] & FG
-            print(f'{len(files)} files deleted!')
+            colors.green.print(f'{len(files)} files deleted!')
         else:
             if len(files) > 0:
                 print('Nothing was deleted!')

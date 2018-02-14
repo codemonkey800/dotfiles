@@ -1,6 +1,10 @@
 import os
 import sys
 
+from plumbum import local as sh
+
+dotfiles_path = sh.path(sh.env.expand('$DOTFILES'))
+
 
 def check_linux():
     '''Checks if the the current script is running on Linux.'''

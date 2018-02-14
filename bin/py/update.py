@@ -2,26 +2,16 @@ import os
 import plumbum.cli as cli
 
 from pyfiglet import Figlet
-from plumbum import FG, colors, local as sh
+from plumbum import FG, colors, commands, local as sh
 from common import dotfiles_path
-
-# Commands
-echo = sh['echo']
-find = sh['find']
-fish = sh['fish']
-git = sh['git']
-ln = sh['ln']
-lolcat = sh['lolcat']
-pacman = sh['pacman']
-pkgfile = sh['pkgfile']
-reflector = sh['reflector']
-sudo = sh['sudo']
-yaourt = sh['yaourt']
 
 _figlet = Figlet()
 
 
 def print_banner(text, updating=True):
+    echo = sh['echo']
+    lolcat = sh['lolcat']
+
     if updating:
         text = f'Updating {text}'
     text = _figlet.renderText(text)
@@ -48,6 +38,9 @@ class App(cli.Application):
         ),
     )
     def update_fish(self):
+        fish = sh['fish']
+        ln = sh['ln']
+
         print_banner('fish')
 
         fish['-c', 'fisher up'] & FG
@@ -68,6 +61,9 @@ class App(cli.Application):
         help='Updates repos located in ~/src',
     )
     def update_git(self):
+        find = sh['find']
+        git = sh['git']
+
         print_banner('git')
 
         git_dirs = find(sh.env.expand('~/src'), '-name', '.git')
@@ -81,15 +77,15 @@ class App(cli.Application):
             repo_dir = git_dir.dirname
             repo = repo_dir.basename
 
-            with colors.green:
-                print(f'Pulling from {repo}')
+            colors.green.print(f'Pulling from {repo}')
             with sh.cwd(repo_dir):
                 try:
                     git('diff-index', '--quiet', 'HEAD', retcode=0)
-                except:
-                    with colors.red:
-                        print(f'Skipping {git_dir} because it has uncommitted changes')
-                    print()
+                except commands.ProcessExecutionError:
+                    colors.red.print((
+                        f'Skipping {git_dir} because '
+                        'it has uncommitted changes\n'
+                    ))
                     continue
 
                 current_branch = git(
@@ -108,9 +104,10 @@ class App(cli.Application):
         help='Updates pacman and aur packages using `yaourt`',
     )
     def update_aur(self):
+        yaourt = sh['yaourt']
+
         print_banner('aur')
-        with sh.as_root():
-            pacman['-Syu'] & FG
+        yaourt['-Syua', '--force', '--noconfirm'] & FG
 
         self.updated = True
 
@@ -120,9 +117,11 @@ class App(cli.Application):
         help='Updates pacman packages using `pacman`',
     )
     def update_pacman(self):
+        pacman = sh['pacman']
+
         print_banner('pacman')
         with sh.as_root():
-            pacman['-Syu'] & FG
+            pacman['-Syu', '--force', '--noconfirm'] & FG
 
         self.updated = True
 
@@ -131,6 +130,8 @@ class App(cli.Application):
         help='Updates pacman database using `reflector`',
     )
     def update_pacmandb(self):
+        reflector = sh['reflector']
+
         print_banner('pacmandb')
         with sh.as_root():
             reflector[
@@ -149,6 +150,8 @@ class App(cli.Application):
         help='Updates using `pkgfile`',
     )
     def update_pkgfile(self):
+        pkgfile = sh['pkgfile']
+
         print_banner('pkgfile')
         with sh.as_root():
             pkgfile['-u'] & FG
@@ -162,7 +165,7 @@ class App(cli.Application):
             self.update_pacmandb()
             self.update_pkgfile()
             self.update_aur()
-        print(_figlet.renderText('Done Updating!'))
+        print_banner('Done Updating!', updating=False)
 
 
 if __name__ == '__main__':

@@ -15,6 +15,17 @@ function update -d 'Runs various updates on my Arch system.'
     set tmp_dir $argv[1]
   end
 
+  # Update git repos under ~/src
+  for git_dir in (find ~/src -name '*.git')
+    set repo_dir (dirname $git_dir)
+    set repo (basename $repo_dir)
+
+    echo "Pulling from $repo"
+    pushd $repo_dir
+      git pull origin master
+    popd
+  end
+
   # Update pacman db
   sudo reflector \
     --verbose \

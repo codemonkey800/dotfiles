@@ -4,13 +4,6 @@ import plumbum.cli as cli
 
 from plumbum import colors, local as sh
 
-# Commands
-_7z = sh['7z']['-aoa', '-y', '-mx9']
-git = sh['git']
-gpg = sh['gpg2']
-grep = sh['grep']
-pawk = sh['pawk']
-
 _secrets_root = sh.path(sh.env.expand('$DOTFILES/share/secrets'))
 _secrets_archive = _secrets_root.join('secrets.7z')
 _secrets_encrypted_archive = _secrets_archive.with_suffix('.gpg')
@@ -18,6 +11,10 @@ _secrets_encrypted_archive = _secrets_archive.with_suffix('.gpg')
 
 # Convenience function to parse the data from the list_secrets command
 def list_secrets():
+    git = sh['git']
+    grep = sh['grep']
+    pawk = sh['pawk']
+
     # Chained command for getting secrets as per defined by the .gitignore file
     _list_secrets = git['status', '--ignored', '-s', _secrets_root]
     _list_secrets |= grep['!!']
@@ -52,6 +49,9 @@ class App(cli.Application):
         help='Compresses and encrypts files inside the $DOTFILES/secrets dir',
     )
     def hide_secrets(self):
+        _7z = sh['7z']['-aoa', '-y', '-mx9']
+        gpg = sh['gpg2']
+
         secrets = list_secrets()
 
         if not secrets:
@@ -92,6 +92,9 @@ class App(cli.Application):
         help='Decrypts and extracts secrets to the $DOTFILES/secrets dir',
     )
     def show_secrets(self):
+        _7z = sh['7z']['-aoa', '-y', '-mx9']
+        gpg = sh['gpg2']
+
         if not _secrets_encrypted_archive.exists():
             with colors.red:
                 print((

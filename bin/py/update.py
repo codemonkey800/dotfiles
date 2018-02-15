@@ -1,8 +1,14 @@
 import os
-import plumbum.cli as cli
 
 from pyfiglet import Figlet
-from plumbum import FG, colors, commands, local as sh
+from plumbum import (
+    FG,
+    TF,
+    cli,
+    colors,
+    commands,
+    local as sh,
+)
 from common import dotfiles_path
 
 _figlet = Figlet()
@@ -79,9 +85,8 @@ class App(cli.Application):
 
             colors.green.print(f'Pulling from {repo}')
             with sh.cwd(repo_dir):
-                try:
-                    git('diff-index', '--quiet', 'HEAD', retcode=0)
-                except commands.ProcessExecutionError:
+                clean = git['diff-index', '--quiet', 'HEAD'] & TF(0)
+                if not clean:
                     colors.red.print((
                         f'Skipping {git_dir} because '
                         'it has uncommitted changes\n'
@@ -92,9 +97,11 @@ class App(cli.Application):
                     'rev-parse',
                     '--abbrev-ref', 'HEAD',
                 ).strip()
-                git['pull', 'origin', current_branch] & FG
-
-                print()
+                try:
+                    git['pull', 'origin', current_branch] & FG
+                    print()
+                except commands.ProcessExecutionError:
+                    colors.red.print('Unable to pull from repo\n')
 
         self.updated = True
 
@@ -108,6 +115,10 @@ class App(cli.Application):
 
         print_banner('aur')
         yaourt['-Syua', '--force', '--noconfirm'] & FG
+
+        for yaourt_dir in sh.path('/tmp').glob('yaourt-*'):
+            with sh.as_root():
+                yaourt_dir.delete()
 
         self.updated = True
 

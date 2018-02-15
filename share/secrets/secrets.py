@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-import plumbum.cli as cli
-
-from plumbum import colors, local as sh
+from plumbum import cli, colors, local as sh
 
 _secrets_root = sh.path(sh.env.expand('$DOTFILES/share/secrets'))
 _secrets_archive = _secrets_root.join('secrets.7z')

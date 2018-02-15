@@ -1,8 +1,11 @@
-import plumbum.cli as cli
-
 from common import dotfiles_path
 from glob import glob
-from plumbum import FG, colors, local as sh
+from plumbum import (
+    FG,
+    cli,
+    colors,
+    local as sh,
+)
 
 CONFIG_FILE = dotfiles_path / 'share/shittyfiles'
 

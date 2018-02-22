@@ -11,12 +11,10 @@ eg2.vscode-npm-script
 flowtype.flow-for-vscode
 formulahendry.auto-close-tag
 formulahendry.auto-rename-tag
-hars.CppSnippets
 HookyQR.beautify
+humao.rest-client
 joelday.docthis
-lukehoban.Go
 msjsdiag.debugger-for-chrome
-ms-vscode.cpptools
 ms-vscode.node-debug2
 PeterJausovec.vscode-docker
 robertohuertasm.vscode-icons

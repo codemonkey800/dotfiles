@@ -493,18 +493,17 @@ let g:jsdoc_enable_es6 = 1
 
 " Neomake {{
 
+" Makers {{
+
 let g:neomake_make_maker = {
   \ 'exe': 'make',
   \ 'args': [],
   \ 'errorformat': '%f:%l:%c: %m',
 \ }
 
-let g:neomake_tex_chktex_maker = {
-  \ 'args': ['-n36', '-n1'],
-\ }
+" }}
 
-let g:neomake_cpp_enabled_makers = ['cppclang']
-let g:neomake_cpp_cppclang_maker = neomake#makers#ft#cpp#clang()
+" Neomake Settings {{
 
 let g:neomake_highlight_lines = 1
 
@@ -513,6 +512,8 @@ call neomake#configure#automake('w')
 nnoremap <leader>bl :NeomakeListJobs<CR>
 nnoremap <leader>bm :Neomake! make<CR>
 nnoremap <leader>bc :NeomakeSh! make clean<CR>
+
+" }}
 
 " }}
 

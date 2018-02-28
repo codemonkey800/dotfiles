@@ -1,13 +1,22 @@
 function yarn -w yarn -d 'Small, opinionated wrapper over Yarn. Similar to git command where __yarn-<cmd> is called with yarn <cmd>.'
-  if not type -qf yarn
+  if not type --no-functions --quiet yarn
     echo 'Yarn is not installed!'
     return -1
   end
 
   set cmd 'command yarn'
+  set is_subcommand false
+  set is_user_command false
 
-  # If the first arg is a subcommand, then search for subcommands of yarn.
-  if not string match -qr -- '-[a-zA-Z0-9]+' "$argv[1]"; and type -q "__yarn_$argv[1]"
+  if not string match -qr -- '-[a-zA-Z0-9]+' "$argv[1]"
+    set is_subcommand true
+  end
+
+  if type -q "__yarn_$argv[1]"
+    set is_user_command true
+  end
+
+  if eval "eval $is_subcommand; and $is_user_command"
     set cmd "__yarn_$argv[1]"
     set -e argv[1]
   end

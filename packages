@@ -21,6 +21,7 @@ ctags
 dconf-editor
 device-mapper
 dhcpcd
+diff-so-fancy
 diffutils
 docker
 docker-compose

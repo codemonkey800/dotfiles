@@ -36,8 +36,9 @@
   gpgsign = true
 
 [core]
-  excludesfile = /home/jeremy/.gitignore_global
   editor = nvim
+  excludesfile = /home/jeremy/.gitignore_global
+  pager = diff-so-fancy | less --tabs=4 -RFX
   sparsecheckout = true
 
 [filter "lfs"]
@@ -77,3 +78,4 @@
   email = "jeremyasuncion808@gmail.com"
   name = "Jeremy Asuncion"
   signingkey = "3FCC32880193C153"
+

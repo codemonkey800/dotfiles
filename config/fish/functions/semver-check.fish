@@ -1,8 +1,8 @@
 function semver-check -d 'Uses semver.io to check versions for node, npm, and yarn.'
   # Mapping of variable name to friendly string name
-  set -l node 'Node'
-  set -l npm 'NPM'
-  set -l yarn 'Yarn'
+  set node 'Node'
+  set npm 'NPM'
+  set yarn 'Yarn'
 
   for x in 'node' 'npm' 'yarn'
     set -l current_version (eval "$x" -v | string replace 'v' '')

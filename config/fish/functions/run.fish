@@ -1,6 +1,6 @@
 function run -d 'Runs the specified file using the correct execution environment'
-  set -l exe "$argv[1]"
-  set -l exit_code 0
+  set exe "$argv[1]"
+  set exit_code 0
 
   set -e argv[1]
 

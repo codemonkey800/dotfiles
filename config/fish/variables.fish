@@ -26,8 +26,8 @@ set PATH $PATH ./.yarn/bin
 # FZF stuff
 if type -q fzf
   set -gx FZF_TMUX 1
-  set _gx FZF_FIND_FILE_COMMAND '__fzf_user_find'
-  set _gx FZF_CD_COMMAND '__fzf_user_cd'
-  set _gx FZF_CD_WITH_HIDDEN_COMMAND '__fzf_user_cd_hidden'
+  set -gx FZF_FIND_FILE_COMMAND '__fzf_user_find'
+  set -gx FZF_CD_COMMAND '__fzf_user_cd'
+  set -gx FZF_CD_WITH_HIDDEN_COMMAND '__fzf_user_cd_hidden'
 end
 

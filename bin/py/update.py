@@ -56,7 +56,7 @@ class App(cli.Application):
 
         if fish_funcs:
             dest = sh.env.expand('~/etc/fish/functions')
-            ln['-svf', fish_func_dir.glob('*.fish'), dest] & FG
+            ln['-sf', fish_func_dir.glob('*.fish'), dest] & FG
 
         fish['-c', 'fish_update_completions'] & FG
 

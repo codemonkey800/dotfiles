@@ -1,8 +1,7 @@
 function __yarn_global -d 'Wrapper over yarn global subcommand.'
   if test "$argv[1]" = 'ls'
-    set -e argv[1]
-    set cmd "$cmd list"
+    set argv[1] 'list'
   end
 
-  eval "$cmd $argv"
+  eval "command yarn global $argv"
 end

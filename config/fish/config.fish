@@ -14,10 +14,10 @@ set -gx DOTFILES (
   readlink -e $dir/../..
 )
 
-source $DOTFILES/config/fish/colors.fish
-source $DOTFILES/config/fish/variables.fish
-source $DOTFILES/config/fish/aliases.fish
-source $DOTFILES/config/fish/completions.fish
+# Source everything in core dir using file ordering
+for core_script in $DOTFILES/config/fish/core/*.fish
+  source $core_script
+end
 
 # sort and keep only unique paths
 set PATH (paths | sort -u)

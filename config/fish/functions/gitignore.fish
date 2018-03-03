@@ -52,7 +52,7 @@ function gitignore -d "Retrieves gitignore files from gitignore.io"
         | fzf-tmux -m
     )
 
-    if test -z $selected
+    if test -z "$selected"
       echo 'No templates selected.'
       return
     end

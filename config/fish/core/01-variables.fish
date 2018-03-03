@@ -21,6 +21,7 @@ set -gx PAGER less
 # PATH stuff
 set PATH $PATH $DOTFILES/bin
 set PATH $PATH (yarn global bin)
+set PATH $PATH ./node_modules/.bin
 
 # FZF stuff
 if type -q fzf

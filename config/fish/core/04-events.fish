@@ -1,5 +1,5 @@
 # Event handler that monitors current working directory an adds $PWD/node_modules/.bin to $PATH if it exists.
-function node-modules-bin -v PWD
+function __node_modules_bin -v PWD
   set dir $PWD/node_modules/.bin
 
   if test -d $dir
@@ -25,3 +25,5 @@ function node-modules-bin -v PWD
     echo "Removed $dir from your PATH"
   end
 end
+__node_modules_bin
+

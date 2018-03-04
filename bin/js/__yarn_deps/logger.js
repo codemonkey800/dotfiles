@@ -6,8 +6,7 @@ export function deps(label, dependencies) {
   for (const dep of dependencies) console.log(`  ${dep}`);
 }
 
-export function depsRaw(prodDeps, devDeps, peerDeps) {
-  const dependencies = [].concat(prodDeps, devDeps, peerDeps);
+export function depsRaw(dependencies) {
   for (const dep of dependencies) console.log(dep);
 }
 

@@ -5,6 +5,7 @@ import PackageConfig from './package-config';
 import * as logger from './logger';
 
 export const parserOptions = {
+  alias: { help: 'h' },
   boolean: [
     'dev',
     'peer',
@@ -14,7 +15,7 @@ export const parserOptions = {
 };
 
 export default function main(args) {
-  if (args.help || args.h) {
+  if (args.help) {
     logger.help();
     return true;
   }
@@ -28,11 +29,12 @@ export default function main(args) {
     else config.loadLocalPackage(localManifest);
 
     if (args.raw) {
-      logger.depsRaw(
+      const deps = [].concat(
         config.getDependencies(),
         config.getDependencies('dev'),
         config.getDependencies('peer'),
       );
+      logger.depsRaw(deps);
 
       return true;
     }

@@ -509,9 +509,7 @@ let g:neomake_highlight_lines = 1
 
 call neomake#configure#automake('w')
 
-nnoremap <leader>bl :NeomakeListJobs<CR>
-nnoremap <leader>bm :Neomake! make<CR>
-nnoremap <leader>bc :NeomakeSh! make clean<CR>
+nnoremap <leader>b :Neomake<CR>
 
 " }}
 

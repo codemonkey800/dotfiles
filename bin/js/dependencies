@@ -1,0 +1,3 @@
+@std/esm
+chalk
+minimist

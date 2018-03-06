@@ -5,7 +5,6 @@ android-udev
 atom-editor-beta-bin
 autoconf
 automake
-baobab
 bash
 binutils
 bison
@@ -18,7 +17,6 @@ coreutils
 cowsay
 cryptsetup
 ctags
-dconf-editor
 device-mapper
 dhcpcd
 diff-so-fancy
@@ -69,7 +67,6 @@ gnome-themes-standard
 gnome-tweak-tool
 gnome-user-share
 google-chrome-dev
-gparted
 grep
 grilo-plugins
 groff
@@ -165,7 +162,6 @@ repose
 rsync
 sed
 shadow
-simplescreenrecorder
 smartmontools
 s-nail
 speedtest-cli
@@ -206,11 +202,9 @@ usbutils
 util-linux
 visual-studio-code-insiders
 watchdog
-watchman
 wget
 which
 whois
-wireshark-cli
 words
 xdg-user-dirs-gtk
 xf86-input-libinput

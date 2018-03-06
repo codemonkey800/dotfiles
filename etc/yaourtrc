@@ -52,7 +52,7 @@ USECOLOR=1
 #TERMINALTITLE=1
 
 # Command
-#PACMAN="/usr/bin/bauerbill"
+#PACMAN="pacman"
 #MAKEPKG="makepkg"
 #DIFFEDITCMD="vimdiff"
 

@@ -54,7 +54,7 @@
       "desktop.ini"
       ".venv"
     ]
-    projectHome: "/home/jeremy/src/node"
+    projectHome: "/home/jeremy/projects/node"
     telemetryConsent: "no"
     themes: [
       "atom-material-ui"

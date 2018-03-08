@@ -1,8 +1,1 @@
-#!/usr/bin/env fish
-
-source $DOTFILES/bin/py/env.fish
-
-python $DOTFILES/bin/py/serve.py $argv
-
-deactivate
-
+py/run.fish

@@ -64,7 +64,7 @@ class App(cli.Application):
 
     @cli.switch(
         names='git',
-        help='Updates repos located in ~/src',
+        help='Updates repos located in ~/projects',
     )
     def update_git(self):
         find = sh['find']
@@ -72,7 +72,7 @@ class App(cli.Application):
 
         print_banner('git')
 
-        git_dirs = find(sh.env.expand('~/src'), '-name', '.git')
+        git_dirs = find(sh.env.expand('~/projects'), '-name', '.git')
         git_dirs = [
             sh.path(git_dir.strip())
             for git_dir in git_dirs.split('\n')

@@ -141,7 +141,8 @@ class App(cli.Application):
         help='Updates pacman database using `reflector`',
     )
     def update_pacmandb(self):
-        reflector = sh['reflector']
+        # We have to use the Python module directly using the host interpreter.
+        reflector = sh['/bin/python3']['-m', 'Reflector']
 
         print_banner('pacmandb')
         with sh.as_root():

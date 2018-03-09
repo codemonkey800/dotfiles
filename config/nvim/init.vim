@@ -13,7 +13,6 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim', { 'for': ['vim'] }
 Plug 'Shougo/neoinclude.vim'
-Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
 Plug 'fszymanski/deoplete-emoji'
 Plug 'ponko2/deoplete-fish', { 'for': ['fish'] }
 Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
@@ -244,12 +243,9 @@ endif
 " autocmd {{
 
 augroup mycmds
-  autocmd!
-  autocmd BufEnter .{babel,eslint}rc :setf json
   autocmd BufLeave term://* stopinsert
   autocmd BufWritePre * :FixWhitespace
   autocmd FileType help :wincmd L
-  autocmd FileType java setlocal omnifunc=javacomplete#Complete
   autocmd FileType vim :set foldmarker={{,}} foldlevel=0 foldmethod=marker
 augroup END
 

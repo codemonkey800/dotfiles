@@ -9,7 +9,7 @@ set script (
 )
 
 source $root/env.fish
-echo python $script $argv
+python $script $argv
 
 deactivate
 

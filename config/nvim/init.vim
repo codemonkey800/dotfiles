@@ -244,9 +244,10 @@ endif
 
 augroup mycmds
   autocmd BufLeave term://* stopinsert
-  autocmd BufWritePre * :FixWhitespace
-  autocmd FileType help :wincmd L
-  autocmd FileType vim :set foldmarker={{,}} foldlevel=0 foldmethod=marker
+  autocmd BufRead .babelrc setf json
+  autocmd BufWritePre * FixWhitespace
+  autocmd FileType help wincmd L
+  autocmd FileType vim set foldmarker={{,}} foldlevel=0 foldmethod=marker
 augroup END
 
 " }}

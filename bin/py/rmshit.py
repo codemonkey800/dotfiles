@@ -17,8 +17,8 @@ def expand_path(p):
 
 class App(cli.Application):
     '''
-        A script for removing user defined shitty files. Also has support for
-        directory specific shitty config files.
+    A script for removing user defined shitty files. Also has support for
+    directory specific shitty config files.
     '''
 
     PROGNAME = 'rmshit'

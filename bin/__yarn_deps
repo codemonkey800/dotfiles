@@ -1,15 +1,1 @@
-#!/usr/bin/env fish
-
-set name (basename (status -f))
-set root $DOTFILES/bin/js
-set pkg $root/$name
-
-# Setup script Node.js environment. This installs script dependencies and
-# runtime dependencies globally using yarn.
-fish $root/env.fish $pkg
-
-set globals ~/.config/yarn/global/node_modules
-
-# Run script with ES Modules support using @std/esm in cjs mode.
-env NODE_PATH=$globals node $root/run-script $pkg $argv
-
+py/run.fish

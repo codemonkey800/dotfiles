@@ -27,11 +27,14 @@ def print_banner(text, updating=True):
 
 
 class App(cli.Application):
+    '''
+    If you omit the switches, then updates will follow this order:\n
+        git -> fish -> pacmandb -> pkgfile -> aur
+    '''
+
     PROGNAME = 'update'
 
     DESCRIPTION = (
-        'If you omit the switches, then updates will follow this order:\n'
-        '  git -> fish -> pacmandb -> pkgfile -> aur'
     )
 
     updated = False

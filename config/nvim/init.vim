@@ -44,6 +44,7 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'flowtype/vim-flow', { 'for': ['javascript'] }
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'typescript'] }
+Plug 'jparise/vim-graphql'
 
 " }}
 

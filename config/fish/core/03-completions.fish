@@ -54,6 +54,8 @@ complete -c dotfiles -f -a '(__core_list_files $DOTFILES)'
 complete -c gr -f -n '__core_is_git_dir' -a '(__core_list_dirs (git rev-parse --show-toplevel))'
 
 # Script completions
+complete -c gitignore -f -l list -s l -d 'List gitignore templates'
+
 complete -c rmshit -r -l config -s c -d 'Specify a specific config file to load'
 complete -c rmshit -f -l verbose -s v -d "Print out files as they're being deleted"
 complete -c rmshit -f -l no-confirm -s y -d 'Delete shitty files without confirmation'

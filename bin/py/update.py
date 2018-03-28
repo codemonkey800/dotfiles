@@ -34,9 +34,6 @@ class App(cli.Application):
 
     PROGNAME = 'update'
 
-    DESCRIPTION = (
-    )
-
     updated = False
 
     @cli.switch(
@@ -88,8 +85,9 @@ class App(cli.Application):
 
             colors.green.print(f'Pulling from {repo}')
             with sh.cwd(repo_dir):
-                clean = git['diff-index', '--quiet', 'HEAD'] & TF(0)
-                if not clean:
+                try:
+                    git('diff-index', 'HEAD')
+                except commands.ProcessExecutionError:
                     colors.red.print((
                         f'Skipping {git_dir} because '
                         'it has uncommitted changes\n'
@@ -100,6 +98,7 @@ class App(cli.Application):
                     'rev-parse',
                     '--abbrev-ref', 'HEAD',
                 ).strip()
+
                 try:
                     git['pull', 'origin', current_branch] & FG
                     print()

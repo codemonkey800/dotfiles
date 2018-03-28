@@ -1,7 +1,7 @@
 import json
-import plumbum.cli as cli
 
 from plumbum import (
+    cli,
     colors,
     commands,
     local as sh,

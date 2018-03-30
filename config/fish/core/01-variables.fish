@@ -20,7 +20,7 @@ set -gx PAGER less
 
 # PATH stuff
 set PATH $PATH $DOTFILES/bin
-set PATH $PATH ~/.yarn/bin
+set PATH $PATH ~/.yarn/bin ^ /dev/null
 set PATH $PATH ./node_modules/.bin
 
 # FZF stuff

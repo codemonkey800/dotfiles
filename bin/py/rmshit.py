@@ -1,4 +1,4 @@
-from common import dotfiles_path
+from common.linux import dotfiles_path
 from glob import glob
 from plumbum import (
     FG,

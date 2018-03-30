@@ -63,8 +63,8 @@ gnome-shell-extension-pixel-saver-git
 gnome-shell-extensions
 gnome-shell-extension-topicons-plus-git
 gnome-system-monitor
-gnome-themes-standard
-gnome-tweak-tool
+gnome-themes-extra
+gnome-tweaks
 gnome-user-share
 google-chrome-dev
 grep
@@ -216,4 +216,5 @@ xsel
 yaourt
 yarn
 youtube-dl
+zerotier-one
 zip

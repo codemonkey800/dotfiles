@@ -8,8 +8,21 @@ Host github.com gitlab.com bitbucket.com
     IdentityFile ~/.ssh/vcs
     User git
 
+Host desktop
+    HostName desktop.vpn.jeremyasuncion.io
+    IdentityFile ~/.ssh/vps
+
+Host laptop
+    HostName laptop.vpn.jeremyasuncion.io
+    IdentityFile ~/.ssh/vps
+
+Host servervm
+    HostName servervm.vpn.jeremyasuncion.io
+    IdentityFile ~/.ssh/vps
+    User root
+
 Host prod
-    HostName jeremyasuncion.io
+    HostName vpn.jeremyasuncion.io
     IdentityFile ~/.ssh/vps
     User root
 

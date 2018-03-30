@@ -1,11 +1,5 @@
-import json
-
-from plumbum import (
-    cli,
-    colors,
-    commands,
-    local as sh,
-)
+from common import yarn
+from plumbum import cli
 
 
 class App(cli.Application):
@@ -14,21 +8,17 @@ class App(cli.Application):
     '''
 
     def main(self, pkg):
-        yarn = sh['yarn']
+        config = yarn.PackageConfig()
 
         try:
-            response = yarn('info', '--json', pkg, 'dist-tags')
-            data = json.loads(response)['data']
-        except commands.ProcessExecutionError:
-            print(colors.red & colors.bold | 'Package not found:', end=' ')
-            colors.green.print(pkg)
+            config.load_remote(pkg)
+        except ValueError:
+            yarn.print_not_found(pkg)
             return -1
 
-        print(colors.green & colors.bold | f'Dist Tags for `{pkg}`')
-        keys = sorted(data.keys())
-        for key in keys:
-            val = data[key]
-            print(f'  {key}@{val}')
+        yarn.print_label(f'Dist Tags for `{pkg}`')
+        for tag in yarn.format_versions(config['dist-tags']):
+            print(f'  {tag}')
 
 
 if __name__ == '__main__':

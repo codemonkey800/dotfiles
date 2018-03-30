@@ -43,12 +43,12 @@ class PackageConfig:
         try:
             data = yarn('--json', 'info', pkg)
         except commands.ProcessExecutionError as e:
-            colors.red.print('Package not found:', end='')
-            colors.green.print(pkg)
-            raise e
+            return False
 
         manifest = json.loads(data)['data']
         self.set_packages(manifest)
+
+        return True
 
 
 class App(cli.Application):
@@ -105,7 +105,7 @@ class App(cli.Application):
                 print(package)
             return
 
-        colors.green.print(f'{label} Dependencies:')
+        print(colors.green & colors.bold | f'{label} Dependencies:')
         for package in packages:
             print(f'  {package}')
 
@@ -115,8 +115,10 @@ class App(cli.Application):
         pkg_file = sh.path(pkg)
         if pkg_file.exists():
             config.load_local(pkg_file)
-        else:
-            config.load_remote(pkg)
+        elif not config.load_remote(pkg):
+            print(colors.red & colors.bold | 'Package not found: ', end='')
+            colors.green.print(pkg)
+            return -1
 
         show_all = not (self.dev or self.peer or self.prod)
         if self.prod or show_all:

@@ -98,6 +98,8 @@ class App(cli.Application):
         if not packages:
             return
 
+        packages = sorted(packages)
+
         if self.raw:
             for package in packages:
                 print(package)

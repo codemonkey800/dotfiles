@@ -63,8 +63,8 @@ gnome-shell-extension-pixel-saver-git
 gnome-shell-extensions
 gnome-shell-extension-topicons-plus-git
 gnome-system-monitor
-gnome-themes-standard
-gnome-tweak-tool
+gnome-themes-extra
+gnome-tweaks
 gnome-user-share
 google-chrome-dev
 grep
@@ -90,7 +90,6 @@ intellij-idea-ultimate-edition-jre
 intel-ucode
 iproute2
 iputils
-ipython
 jdk8-openjdk
 jfsutils
 jq
@@ -154,8 +153,6 @@ python-lolcat
 python-neovim
 python-pawk
 python-pip
-python-psutil
-python-setproctitle
 python-virtualenv
 reflector
 repose

@@ -1,15 +1,14 @@
 import os
 
+from common.linux import dotfiles_path
 from pyfiglet import Figlet
 from plumbum import (
     FG,
-    TF,
     cli,
     colors,
     commands,
     local as sh,
 )
-from common import dotfiles_path
 
 _figlet = Figlet()
 

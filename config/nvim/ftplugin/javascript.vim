@@ -3,11 +3,6 @@ if exists('g:loaded_ftplugin_javascript')
 endif
 let g:loaded_ftplugin_javascript = 1
 
-augroup javascript
-  autocmd!
-  autocmd BufEnter .{babel,eslint}rc :setf json
-augroup END
-
 let s:eslint = FindEslint()
 if s:eslint ==? ''
   finish

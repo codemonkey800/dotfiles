@@ -1,4 +1,4 @@
-function docker-clean -d 'Cleans up non-running contains, <none> images, and volumes.'
+function __do_clean -d 'Cleans up non-running contains, <none> images, and volumes.'
   set volumes (docker volume ls -qf 'dangling=true')
   set containers (docker ps -qf 'status=exited')
   set images (docker images -qf 'dangling=true')

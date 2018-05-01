@@ -84,10 +84,11 @@ Plug 'justinj/vim-react-snippets', { 'for': ['jsx', 'typescript'] }
 
 " syntaxes {{
 
-Plug 'sheerun/vim-polyglot'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'ekalinin/Dockerfile.vim'
 Plug 'Shougo/neco-vim'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'tasn/vim-tsx'
 
 " }}
 
@@ -445,12 +446,12 @@ let g:deoplete#enable_camel_case = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 
-call deoplete#custom#set('_', 'matchers', [
+call deoplete#custom#source('_', 'matchers', [
   \ 'matcher_full_fuzzy',
   \ 'matcher_fuzzy',
   \ 'matcher_length',
 \ ])
-call deoplete#custom#set('_', 'converters', [
+call deoplete#custom#source('_', 'converters', [
   \ 'converter_auto_delimiter',
   \ 'converter_auto_paren',
   \ 'converter_remove_overlap',

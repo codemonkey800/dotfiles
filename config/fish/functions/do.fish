@@ -1,4 +1,4 @@
-function do -d 'Wrapper for docker command.'
+function do -w docker -d 'Wrapper for docker command.'
   if type -q "__do_$argv[1]"
     set -l command "$argv[1]"
     set -e argv[1]

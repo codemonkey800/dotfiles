@@ -8,8 +8,3 @@ Host github.com gitlab.com bitbucket.com
     IdentityFile ~/.ssh/vcs
     User git
 
-Host prod
-    HostName jeremyasuncion.io
-    IdentityFile ~/.ssh/vps
-    User root
-

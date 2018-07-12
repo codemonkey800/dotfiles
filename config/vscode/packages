@@ -1,6 +1,7 @@
 anseki.vscode-color
 christian-kohler.npm-intellisense
 christian-kohler.path-intellisense
+CoenraadS.bracket-pair-colorizer
 DavidAnson.vscode-markdownlint
 dbaeumer.vscode-eslint
 donjayamanne.githistory
@@ -14,6 +15,7 @@ formulahendry.auto-rename-tag
 HookyQR.beautify
 humao.rest-client
 joelday.docthis
+lunaryorn.fish-ide
 msjsdiag.debugger-for-chrome
 ms-vscode.node-debug2
 PeterJausovec.vscode-docker
@@ -21,7 +23,6 @@ robertohuertasm.vscode-icons
 shanoor.vscode-nginx
 steve8708.Align
 streetsidesoftware.code-spell-checker
-TeddyDD.fish
 vscodevim.vim
 vsmobile.vscode-react-native
 xabikos.JavaScriptSnippets

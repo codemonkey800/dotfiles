@@ -18,7 +18,10 @@ Plug 'ponko2/deoplete-fish', { 'for': ['fish'] }
 Plug 'tweekmonster/deoplete-clang2', { 'for': ['c', 'cpp'] }
 Plug 'wellle/tmux-complete.vim'
 Plug 'zchee/deoplete-jedi', { 'for': ['python'] }
-Plug 'mhartington/nvim-typescript', { 'for': ['typescript'] }
+Plug 'mhartington/nvim-typescript', {
+  \ 'do': './install.sh',
+  \ 'for': ['typescript'],
+\ }
 
 " deoplete plugins {{
 

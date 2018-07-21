@@ -8,12 +8,13 @@
 
   "extensions.autoUpdate": true,
 
-  "files.trimTrailingWhitespace": true,
+  "files.exclude": {
+    "node_modules": true
+  },
   "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
 
   "terminal.external.linuxExec": "termite",
-
-  "window.menuBarVisibility": "toggle",
 
   "vim.easymotion": true,
   "vim.easymotionMarkerBackgroundColor": "#212121",
@@ -24,6 +25,7 @@
   "vim.hlsearch": true,
   "vim.leader": ",",
   "vim.showcmd": false,
+  "vim.sneak": true,
   "vim.surround": true,
   "vim.useSystemClipboard": true,
 
@@ -31,8 +33,8 @@
     "<C-f>": false,
     "<C-n>": false
   },
-  "vim.otherModesKeyBindingsNonRecursive": [
-    {
+  "vim.normalModeKeyBindingsNonRecursive": [
+     {
       "before": ["j"],
       "after": ["g", "j"]
     },
@@ -58,39 +60,44 @@
       "before": ["L"],
       "after": ["$"]
     },
-    {
-      "before": ["<leader>", "s"],
-      "after": [],
-      "commands": [
-        { "command": ":sort" },
-        { "command": "extension.vim_escape" },
-        { "command": "extension.vim_ctrl+o" }
-      ]
-    },
-    {
-      "before": ["<leader>", "S"],
-      "after": [],
-      "commands": [
-        { "command": ":sort!" },
-        { "command": "extension.vim_escape" },
-        { "command": "extension.vim_ctrl+o" }
-      ]
-    },
 
     {
       "before": ["U"],
       "after": ["<C-r>"]
     },
+
     {
       "before": ["q"],
-      "after": [],
       "commands": [
         { "command": ":quit" }
       ]
     },
     {
+      "before": ["Q"],
+      "commands": [
+        { "command": ":quit!" }
+      ]
+    }
+ ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+     {
+      "before": ["j"],
+      "after": ["g", "j"]
+    },
+    {
+      "before": ["k"],
+      "after": ["g", "k"]
+    },
+    {
+      "before": ["H"],
+      "after": ["0"]
+    },
+    {
+      "before": ["L"],
+      "after": ["$"]
+    },
+    {
       "before": ["g", "a"],
-      "after": [],
       "commands": [
         { "command": "extension.align" },
         { "command": "extension.vim_escape" },
@@ -98,6 +105,7 @@
       ]
     }
   ],
+
   "vim.insertModeKeyBindingsNonRecursive": [
     {
       "before": ["j", "k"],

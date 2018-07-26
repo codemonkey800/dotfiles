@@ -5,7 +5,7 @@ function l -w ls -d 'Lists all files in a directory or reads a file'
 
   for i in (seq (count $argv))
     set -l arg $argv[$i]
-    switch $arg
+    switch "$arg"
       case --pager
         set pager true
       case '--*' '-*'

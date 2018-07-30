@@ -7,8 +7,6 @@ alias cpu-temps 'watch -n 0.5 "sensors -f | grep Core"'
 alias dc 'docker-compose'
 alias dokku 'ssh prod dokku --'
 alias exists 'type -q'
-alias g 'hub'
-alias git 'hub'
 alias info 'info --vi-keys'
 alias ll 'l -l'
 alias lns 'ln -svf'
@@ -33,4 +31,11 @@ alias yag 'ya -G'
 alias yaq 'ya -Q'
 alias yar 'ya -Rscun'
 alias yas 'ya -S'
+
+# macOS aliases and overrides
+if test (uname) = 'Darwin'
+  alias code '/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin/code'
+  # Sudo required for macOS
+  alias top 'sudo htop'
+end
 

@@ -171,6 +171,32 @@ class App(cli.Application):
 
         self.updated = True
 
+    @cli.switch(
+        names='brew',
+        help='Updates using brew.',
+    )
+    def update_brew(self):
+        brew = sh['brew']
+
+        print_banner('brew')
+
+        print('$ brew update')
+        brew['update'] & FG
+
+        print('$ brew upgrade')
+        brew['upgrade'] & FG
+
+        print('$ brew cask upgrade')
+        brew['cask', 'upgrade'] & FG
+
+        print('$ brew cleanup')
+        brew['cleanup'] & FG
+
+        print('$ brew cask cleanup')
+        brew['cask', 'cleanup'] & FG
+
+        self.updated = True
+
     def main(self):
         if not self.updated:
             self.update_git()

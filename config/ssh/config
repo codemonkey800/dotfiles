@@ -1,23 +1,10 @@
-Host github.com
-  AddKeysToAgent yes
-  UseKeychain yes
-  IdentityFile ~/.ssh/id_rsa
+Host aur
+    HostName aur.archlinux.org
+    IdentityFile ~/.ssh/aur
+    User aur
 
-Host dev-local
-  AddKeysToAgent yes
-  HostName 192.168.1.129
-  IdentityFile ~/.ssh/id_rsa
-  RemoteCommand fish
-  RequestTTY yes
-  UseKeychain yes
-  User jeremy
-
-Host dev-remote
-  AddKeysToAgent yes
-  HostName 4.20.0.2
-  IdentityFile ~/.ssh/id_rsa
-  RemoteCommand fish
-  RequestTTY yes
-  UseKeychain yes
-  User jeremy
+Host github.com gitlab.com bitbucket.com
+    HostName %h
+    IdentityFile ~/.ssh/vcs
+    User git
 

@@ -27,6 +27,17 @@ end
 # sort and keep only unique paths
 set PATH (paths | sort -u)
 
+# Symlink ssh configs if needed
+if test (uname) = 'Darwin'
+  if test (readlink ~/.ssh/config) = $DOTFILES/config/ssh/config
+    ln -sf $DOTFILES/config/ssh/config-macos ~/.ssh/config
+  end
+else
+  if test (readlink ~/.ssh/config) = $DOTFILES/config/ssh/config-macos
+    ln -sf $DOTFILES/config/ssh/config ~/.ssh/config
+  end
+end
+
 if status -i
   # Don't use keychain or automatic gpg server conf switching for macOS
   if test (uname) != 'Darwin'

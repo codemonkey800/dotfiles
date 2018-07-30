@@ -23,6 +23,15 @@ set PATH $PATH $DOTFILES/bin
 set PATH $PATH ~/.yarn/bin ^ /dev/null
 set PATH $PATH ./node_modules/.bin
 
+# macOS specific vars
+if test (uname) = 'Darwin'
+  # Java stuff
+  set JAVA_HOME (/usr/libexec/java_home)
+
+  # PATH stuff
+  set PATH $PATH ~/.nodejs/{node,yarn}/bin
+end
+
 # FZF stuff
 if type -q fzf
   set -gx FZF_TMUX 1

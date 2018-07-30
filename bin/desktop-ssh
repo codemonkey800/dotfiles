@@ -1,0 +1,20 @@
+#!/usr/local/bin/fish
+
+function is_connected_to_vpn
+  scutil --nc list | grep 'jeremy-dev-vpn' | grep -q 'Connected'
+end
+
+function main
+  if test (uname) != 'Darwin'
+    echo 'This command is only supported on macOS.'
+    return -1
+  end
+
+  if is_connected_to_vpn
+    exec ssh dev-remote
+  end
+  exec ssh dev-local
+end
+
+main
+

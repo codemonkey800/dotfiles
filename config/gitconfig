@@ -37,7 +37,7 @@
 
 [core]
   editor = nvim
-  excludesfile = /home/jeremy/.gitignore_global
+  excludesfile = ~/.gitignore-global
   pager = diff-so-fancy | less --tabs=4 -RFX
   sparsecheckout = true
 
@@ -48,7 +48,7 @@
   required = true
 
 [gpg]
-  program = /usr/local/MacGPG2/bin/gpg2
+  program = /usr/bin/gpg2
 
 [hub]
   protocol = ssh

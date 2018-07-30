@@ -39,39 +39,22 @@ begin
 end
 
 if status -i
-  # Don't use keychain or automatic gpg server conf switching for macOS
+  # Don't use keychain for macOS
   if test (uname) != 'Darwin'
-    # stuff to do if a display server isn't available
-    if test -z $DISPLAY
-      # Start keychain for when the $DISPLAY variable isn't defined and fish is interactive
-      if exists keychain
-        set -l keys (
-          for f in ~/.ssh/*.pub
-            echo ~/.ssh/(basename $f .pub)
-          end
-        )
+    set -l keys (
+      for f in ~/.ssh/*.pub
+        echo ~/.ssh/(basename $f .pub)
+      end
+    )
 
-        if test (count $keys) -gt 0
-          env SHELL=fish keychain --eval --agents ssh --quick --quiet --nogui $keys | source
-        end
-      end
-
-      if test (readlink ~/.gnupg/gpg-agent.conf) = $DOTFILES/config/gnugpg/gpg-agent.conf
-        toggle-pinentry > /dev/null
-      end
-    else
-      # Have keychain kill all ssh-agent's if any are running and $DISPLAY is defined
-      if exists keychain; and test (count (keychain -l)) -gt 0
-        keychain --quiet -k all
-      end
-
-      if test -e ~/.keychain
-        rm -rf ~/.keychain
-      end
-
-      if test (readlink ~/.gnupg/gpg-agent.conf) = $DOTFILES/config/gnugpg/gpg-agent-tty.conf
-        toggle-pinentry > /dev/null
-      end
+    if test (count $keys) -gt 0
+      env SHELL=fish keychain \
+        --agents ssh \
+        --eval \
+        --nogui \
+        --quick \
+        --quiet \
+        $keys | source
     end
   end
 

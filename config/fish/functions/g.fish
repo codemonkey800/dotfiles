@@ -1,8 +1,10 @@
 function g -d 'Git wrapper with added sugar on top.'
   set git '/usr/bin/git'
+  set is_macos false
 
   if test (uname) = 'Darwin'
     set git '/usr/local/bin/git'
+    set is_macos true
     eval "$git config --global gpg.program /usr/local/MacGPG2/bin/gpg2"
   else
     eval "$git config --global gpg.program /usr/bin/gpg2"
@@ -14,6 +16,10 @@ function g -d 'Git wrapper with added sugar on top.'
     eval "$git config --global user.email jeremyasuncion808@gmail.com"
   end
 
-  eval $git $argv
+  if eval $is_macos
+    /usr/local/bin/git $argv
+  else
+    /usr/bin/git $argv
+  end
 end
 

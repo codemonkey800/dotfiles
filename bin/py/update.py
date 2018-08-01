@@ -115,7 +115,7 @@ class App(cli.Application):
         yaourt = sh['yaourt']
 
         print_banner('aur')
-        yaourt['-Syua', '--force', '--noconfirm'] & FG
+        yaourt['-Syua', '--overwrite', '--noconfirm'] & FG
 
         for yaourt_dir in sh.path('/tmp').glob('yaourt-*'):
             with sh.as_root():
@@ -133,7 +133,7 @@ class App(cli.Application):
 
         print_banner('pacman')
         with sh.as_root():
-            pacman['-Syu', '--force', '--noconfirm'] & FG
+            pacman['-Syu', '--overwrite', '--noconfirm'] & FG
 
         self.updated = True
 

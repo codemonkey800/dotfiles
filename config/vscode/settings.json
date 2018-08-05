@@ -77,6 +77,20 @@
       "commands": [
         { "command": ":quit!" }
       ]
+    },
+
+    {
+      "before": ["Y"],
+      "commands": [
+        { "command": "copyRelativeFilePath" }
+      ]
+    },
+
+    {
+      "before": ["g", "r"],
+      "commands": [
+        { "command": "editor.action.referenceSearch.trigger" }
+      ]
     }
  ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -117,5 +131,9 @@
 
   "workbench.colorTheme": "Monokai Dimmed",
   "workbench.iconTheme": "vscode-icons",
-  "workbench.startupEditor": "newUntitledFile"
+  "workbench.startupEditor": "newUntitledFile",
+  "gitlens.advanced.messages": {
+    "suppressCommitNotFoundWarning": true,
+    "suppressShowKeyBindingsNotice": true
+  }
 }

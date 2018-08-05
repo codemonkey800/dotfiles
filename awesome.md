@@ -23,3 +23,7 @@ case, a list of tools and libraries that I find interesting and relevant to me.
 - [Next.js](https://github.com/zeit/next.js)
 - [Razzle](https://github.com/jaredpalmer/razzle)
 
+## Interview Prep
+- [Frontend Interview Handbook](https://github.com/yangshun/front-end-interview-handbook)
+- [Tech Interview Handbook](https://github.com/yangshun/tech-interview-handbook)
+

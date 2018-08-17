@@ -21,7 +21,7 @@ function njs -d 'Simplescript for installing node.js and yarn'
       set version (curl -sL 'https://semver.io/node/unstable')
       set update_npm true
     case 'sumo'
-      set version '8.11.3'
+      set version '8.11.4'
   end
 
   mkdir -p ~/.nodejs

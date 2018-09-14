@@ -48,7 +48,7 @@
   required = true
 
 [gpg]
-  program = /usr/bin/gpg2
+	program = /usr/local/MacGPG2/bin/gpg2
 
 [hub]
   protocol = ssh
@@ -72,7 +72,7 @@
   insteadOf = aur:
 
 [user]
-  email = jeremyasuncion808@gmail.com
+	email = jeremyasuncion808@gmail.com
   name = Jeremy Asuncion
   signingkey = 3FCC32880193C153
 

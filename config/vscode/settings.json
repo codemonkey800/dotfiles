@@ -91,6 +91,13 @@
       "commands": [
         { "command": "editor.action.referenceSearch.trigger" }
       ]
+    },
+
+    {
+      "before": ["<leader>", "k"],
+      "commands": [
+        { "command": "workbench.action.keepEditor" }
+      ]
     }
  ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -102,6 +109,7 @@
       "before": ["k"],
       "after": ["g", "k"]
     },
+
     {
       "before": ["H"],
       "after": ["0"]
@@ -110,12 +118,25 @@
       "before": ["L"],
       "after": ["$"]
     },
+
     {
       "before": ["g", "a"],
       "commands": [
         { "command": "extension.align" },
-        { "command": "extension.vim_escape" },
-        { "command": "extension.vim_ctrl+o" }
+        { "command": "extension.vim_escape" }
+      ]
+    },
+
+    {
+      "before": ["<leader>", "s", "d"],
+      "commands": [
+        { "command": "editor.action.sortLinesDescending" }
+      ]
+    },
+    {
+      "before": ["<leader>", "s", "a"],
+      "commands": [
+        { "command": "editor.action.sortLinesAscending" }
       ]
     }
   ],
@@ -135,5 +156,6 @@
   "gitlens.advanced.messages": {
     "suppressCommitNotFoundWarning": true,
     "suppressShowKeyBindingsNotice": true
-  }
+  },
+  "window.zoomLevel": 0
 }

@@ -4,9 +4,10 @@ Host github.com
   IdentityFile ~/.ssh/id_rsa
 
 Host gitlab.com
-    HostName %h
-    IdentityFile ~/.ssh/vcs
-    User git
+  HostName %h
+  IdentityFile ~/.ssh/vcs
+  UseKeychain yes
+  User git
 
 Host dev-local
   AddKeysToAgent yes

@@ -157,5 +157,8 @@
     "suppressCommitNotFoundWarning": true,
     "suppressShowKeyBindingsNotice": true
   },
-  "window.zoomLevel": 0
+  "window.zoomLevel": 0,
+  "explorer.confirmDragAndDrop": false,
+  "breadcrumbs.enabled": true,
+  "git.confirmSync": false
 }

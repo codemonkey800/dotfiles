@@ -192,9 +192,6 @@ class App(cli.Application):
         print('$ brew cleanup')
         brew['cleanup'] & FG
 
-        print('$ brew cask cleanup')
-        brew['cask', 'cleanup'] & FG
-
         self.updated = True
 
     def main(self):

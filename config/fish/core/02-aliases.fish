@@ -34,7 +34,8 @@ alias yas 'ya -S'
 
 # macOS aliases and overrides
 if test (uname) = 'Darwin'
-  alias code '/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin/code'
+  alias code '/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
+  alias code-insiders '/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin/code'
   alias git '/usr/local/bin/git'
   # Sudo required for macOS
   alias top 'sudo htop'

@@ -14,6 +14,8 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
 
+  "search.useRipgrep": true,
+
   "terminal.external.linuxExec": "termite",
 
   "vim.easymotion": true,
@@ -22,6 +24,7 @@
   "vim.easymotionMarkerForegroundColorOneChar": "#ff0",
   "vim.easymotionMarkerForegroundColorTwoChar": "#0ff",
   "vim.enableNeovim": true,
+  "vim.neovimPath": "/usr/local/bin/nvim",
   "vim.hlsearch": true,
   "vim.leader": ",",
   "vim.showcmd": false,

@@ -1,9 +1,5 @@
-futures==3.2.0
-greenlet==0.4.14
-msgpack==0.5.6
-neovim==0.2.6
-pip==18.0
-setuptools==40.0.0
+pip==18.1
+pynvim==0.3.1
+setuptools==40.6.2
 six==1.11.0
-trollius==2.2
-wheel==0.31.1
+wheel==0.32.3

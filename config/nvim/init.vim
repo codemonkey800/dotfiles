@@ -697,7 +697,7 @@ function! GetFiles()
     \ 'source': 'ag -g "" --hidden --ignore .git',
     \ 'options': '--multi --prompt "Files>"',
   \ }
-  return fzf#run(fzf#wrap('files', l:opts, 0))
+  return fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case', 1)
 endfunction
 
 nnoremap <silent> <C-p> :call GetFiles()<CR>

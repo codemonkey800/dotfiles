@@ -694,10 +694,10 @@ let g:fzf_layout = { 'down': '~30%' }
 function! GetFiles()
   let l:opts = {
     \ 'down': '30%',
-    \ 'source': 'ag -g "" --hidden --ignore .git',
+    \ 'source': 'rg --files --hidden --follow',
     \ 'options': '--multi --prompt "Files>"',
   \ }
-  return fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case', 1)
+  return fzf#run(fzf#wrap('files', l:opts, 0))
 endfunction
 
 nnoremap <silent> <C-p> :call GetFiles()<CR>

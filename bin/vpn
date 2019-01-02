@@ -1,26 +1,22 @@
 #!/usr/local/bin/fish
 
-function applescript
+function run_script
   set script_name $argv[1]
   set -e argv[1]
 
   set script $DOTFILES/share/vpn/$script_name.template.applescript
 
-  set old_ifs $IFS
-  set IFS ''
-  set script (cat $script)
-  set script (printf $script $argv)
-  set IFS $old_ifs
-
-  echo $script | osascript
+  cat $script \
+    | sed "s/\${SERVICE}/jeremy-dev-vpn/g" \
+    | osascript
 end
 
 function connect_to_vpn
-  applescript 'connect-to-vpn' 'jeremy-dev-vpn' > /dev/null
+  run_script 'connect-to-vpn' > /dev/null
 end
 
 function disconnect_from_vpn
-  applescript 'disconnect-from-vpn' 'jeremy-dev-vpn' > /dev/null
+  run_script 'disconnect-from-vpn' > /dev/null
 end
 
 function is_connected_to_vpn

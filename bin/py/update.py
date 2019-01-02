@@ -48,7 +48,7 @@ class App(cli.Application):
 
         print_banner('fish')
 
-        fish['-c', 'fisher up'] & FG
+        fish['-c', 'fisher'] & FG
 
         fish_func_dir = dotfiles_path / 'config/fish/functions'
         fish_funcs = fish_func_dir.glob('*.fish')

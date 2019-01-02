@@ -115,7 +115,7 @@ class App(cli.Application):
         yaourt = sh['yaourt']
 
         print_banner('aur')
-        yaourt['-Syua', '--overwrite', '--noconfirm'] & FG
+        yaourt['-Syu', '--aur', '--noconfirm'] & FG
 
         for yaourt_dir in sh.path('/tmp').glob('yaourt-*'):
             with sh.as_root():

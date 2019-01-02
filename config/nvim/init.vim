@@ -425,6 +425,9 @@ nnoremap <silent> ~ :edit term://fish<CR>i
 tnoremap <silent> jk <C-\><C-n>
 tnoremap <silent> <Esc> <C-\><C-n>
 
+" Search for visually selected text
+vnoremap <silent> * y/<C-R>"<CR>
+
 " }}
 
 " spell maps {{
@@ -563,9 +566,9 @@ function! s:FuzzyAll(...) abort
   \ }), get(a:, 1, {}))
 endfunction
 
-map <silent> / <Plug>(incsearch-fuzzy-/)
-map <silent> ? <Plug>(incsearch-fuzzy-?)
-map <silent> g/ <Plug>(incsearch-fuzzy-stay)
+" map <silent> / <Plug>(incsearch-fuzzy-/)
+" map <silent> ? <Plug>(incsearch-fuzzy-?)
+" map <silent> g/ <Plug>(incsearch-fuzzy-stay)
 
 noremap <silent> <expr> z/ incsearch#go(<SID>FuzzyAll())
 noremap <silent> <expr> z? incsearch#go(<SID>FuzzyAll({ 'command': '?' ))

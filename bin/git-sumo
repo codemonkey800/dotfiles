@@ -1,0 +1,112 @@
+#!/usr/bin/env fish
+
+function is_clean
+  g s | rg -q 'nothing to commit, working tree clean'
+end
+
+function current_branch
+  g symbolic-ref --short HEAD
+end
+
+function run
+  echo "\$ $argv"
+  eval $argv
+end
+
+function update
+  set force false
+
+  for arg in $argv
+    switch "$arg"
+      case '-f' '--force'
+        set force true
+    end
+  end
+
+  if not eval $force; and not is_clean
+    echo 'Branch is dirty'
+    return -1
+  end
+
+  run g pu
+  run g fetch -a
+  run g r prune origin
+end
+
+function get_user_branches
+  for line in (g b $argv | rg (whoami))
+    if echo "$line" | rg -q '\*'
+      set line (echo "$line" | pawk 'f[1]')
+      echo "$line *"
+    else
+      echo "$line" | pawk 'f[0]'
+    end
+  end
+end
+
+function my_branches
+  set local (get_user_branches)
+  set remote
+  set local_and_remote
+
+  echo 'Local branches:'
+  for branch in $local
+    echo "  $branch"
+  end
+
+  echo 'Remote branches'
+  for branch in (get_user_branches -a)
+    echo "$branch" | rg -q 'remotes'; or continue
+    set branch (echo "$branch" | pawk -F/ 'f[2]')
+    echo "  $branch"
+  end
+end
+
+function branch
+  if not set -q 'argv[1]'
+    my_branches
+    return
+  end
+
+  set delete_flag
+  switch "$argv[1]"
+    case '-d' '-D'
+      set delete_flag "$argv[1]"
+      set -e 'argv[1]'
+  end
+
+  set identifier "$argv[1]"
+  set branches (get_user_branches)
+  set branch (whoami)"-sumo-$identifier"
+  set args
+
+  if test -n "$delete_flag"
+    set args 'b' "$delete_flag" "$branch"
+  else
+    set args 'checkout'
+    if test "$identifier" = 'master'
+      set args $args 'master'
+    else if contains "$branch" $branches
+      set args $args "$branch"
+    else
+      set args $args '-b' "$branch"
+    end
+  end
+
+
+  g $args
+end
+
+function main
+  switch "$argv[1]"
+    case 'u' 'update'
+      set -e argv[1]
+      update $argv
+    case 'b' 'branch'
+      set -e argv[1]
+      branch $argv
+  end
+end
+
+main $argv
+

@@ -21,7 +21,8 @@ function njs -d 'Simple script for installing node.js and yarn'
       set node_version (curl -sL 'https://semver.io/node/unstable')
       set update_npm true
     case 'sumo'
-      set node_version '8.11.4'
+      set node_version '12.7.0'
+      set is_sumo true
     case '*'
       echo "Invalid node_version: '$node_version'"
       exit -1
@@ -41,10 +42,18 @@ function njs -d 'Simple script for installing node.js and yarn'
     mv yarn-* yarn
   popd
 
+  set global_packages neovim npm-check-updates
+
   if eval $update_npm
     echo 'Updating npm!'
-    npm -g install npm@next
+    set global_packages $global_packages npm@next
   end
+
+  echo 'Installing global packages:'
+  for package in $global_packages
+    echo "  $package"
+  end
+  npm -g install $global_packages
 
   echo 'Done!'
 end

@@ -7,6 +7,9 @@
 " vim-surround plugin
 set surround
 
+" commentary.vim
+set commentary
+
 " }}
 
 " keymaps {{

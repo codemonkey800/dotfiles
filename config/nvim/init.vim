@@ -48,6 +48,10 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'flowtype/vim-flow', { 'for': ['javascript'] }
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'typescript'] }
 Plug 'jparise/vim-graphql'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn',
+  \ 'for': ['javascript', 'typescript'],
+\ }
 
 " }}
 
@@ -213,6 +217,7 @@ set nowrap
 set number
 set report=0
 set showmatch
+set relativenumber
 
 if (has('termguicolors'))
  set termguicolors
@@ -672,12 +677,6 @@ nnoremap <silent> <leader>l :Denite buffer<CR>
 " next/prev diff chunk
 nmap <silent> ]h <Plug>GitGutterNextHunk
 nmap <silent> [h <Plug>GitGutterPrevHunk
-
-" }}
-
-" Tagbar {{
-
-nnoremap <silent> <leader>t :Tagbar<CR>
 
 " }}
 

@@ -19,9 +19,11 @@ set -gx LANG en_US.UTF-8
 set -gx PAGER less
 
 # PATH stuff
-set PATH $PATH $DOTFILES/bin
-set PATH $PATH ~/.nodejs/{node,yarn}/bin ^ /dev/null
-set PATH $PATH ./node_modules/.bin
+set PATH $PATH \
+  $DOTFILES/bin \
+  ~/.nodejs/{node,yarn}/bin \
+  ./node_modules/.bin \
+  ~/Library/Android/sdk/{emulator,platform-tools}
 
 # macOS specific vars
 if test (uname) = 'Darwin'

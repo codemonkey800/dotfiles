@@ -101,6 +101,13 @@
       "commands": [
         { "command": "workbench.action.keepEditor" }
       ]
+    },
+
+    {
+      "before": ["g", "o"],
+      "commands": [
+        { "command": "editor.action.openLink" }
+      ]
     }
  ],
   "vim.visualModeKeyBindingsNonRecursive": [

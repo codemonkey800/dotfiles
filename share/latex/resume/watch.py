@@ -1,4 +1,5 @@
 import http.server as http
+import os
 import os.path as path
 from socket import gethostname
 from socketserver import TCPServer
@@ -6,7 +7,39 @@ from subprocess import run
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
+IMAGE_NAME = 'resume-builder'
 PORT = 8080
+
+observer = None
+
+
+def is_resume_image_built():
+    result = run(f'docker images | rg -q {IMAGE_NAME}', shell=True)
+    return result.returncode == 0
+
+
+def build_resume_image():
+    print(f'Building "{IMAGE_NAME}"')
+    result = run(['docker', 'build', '--rm', '-t', IMAGE_NAME, '.'])
+    return result.returncode == 0
+
+
+def build_resume():
+    if not is_resume_image_built() and not build_resume_image():
+        print(f'Unable to build "{IMAGE_NAME}"')
+        observer.stop()
+        return
+
+    resume_dir = os.getcwd()
+    run([
+        'docker',
+        'run',
+        '--rm',
+        '-it',
+        '-v',
+        f'{resume_dir}:/resume',
+        IMAGE_NAME,
+    ])
 
 
 class ResumeBuilderEventHandler(FileSystemEventHandler):
@@ -14,13 +47,14 @@ class ResumeBuilderEventHandler(FileSystemEventHandler):
     def on_modified(self, event):
         if event.is_directory or event.src_path != './resume.tex':
             return
+
         run(['clear'])
-        run(['make'])
+        build_resume()
 
 
 def main():
     if not path.exists('build'):
-        run(['make'])
+        build_resume()
 
     observer = Observer()
     observer.schedule(ResumeBuilderEventHandler(), '.')

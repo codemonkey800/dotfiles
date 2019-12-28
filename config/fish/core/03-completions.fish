@@ -1,6 +1,3 @@
-# Command Completions
-complete -c hub -w git
-
 # Alias completions
 complete -c e -w nvim
 complete -c lc -w ls

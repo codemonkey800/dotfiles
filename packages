@@ -41,7 +41,6 @@ groff
 gzip
 handbrake-cli
 htop
-hub
 hunspell-en
 inetutils
 intel-ucode
@@ -125,7 +124,6 @@ texlive-pstricks
 texlive-publishers
 texlive-science
 thermald
-the_silver_searcher
 time
 tmux
 tree
@@ -142,6 +140,6 @@ xf86-input-vmmouse
 xfsprogs
 xorg-xinput
 xsel
-yaourt
+yay
 youtube-dl
 zip

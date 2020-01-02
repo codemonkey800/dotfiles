@@ -12,7 +12,6 @@ alias lsof-del 'lsof +c 0
 '
 alias move 'rsync -aP --remove-source-files'
 alias paths 'echo $PATH | tr " " \n'
-alias pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
 alias public-ip 'curl -q "http://ipinfo.io/ip"'
 alias r 'rm -rf'
 alias re 'eval sudo -E $EDITOR'
@@ -25,6 +24,7 @@ switch (uname)
 case Linux
   alias cpu-temps 'watch -n 0.5 "sensors -f | grep Core"'
   alias lsports 'netstat -pelnut ^ /dev/null'
+  alias pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
   alias ya 'yay'
   alias yag 'ya -G'
   alias yaq 'ya -Q'

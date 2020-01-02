@@ -46,7 +46,78 @@ function __core_is_git_dir
   git rev-parse --show-toplevel ^&1 /dev/null
 end
 
-complete -c dotfiles -f -a '(__core_list_files $DOTFILES)'
+function __core_get_function_description
+  set match (
+    string match -r "description '(.*)'" \
+      (functions "$argv[1]" | head)
+  )
+  echo "$match[2]"
+end
+
+set __core_dotfiles_functions (
+  functions -a \
+    | rg '__dotfiles' \
+    | string replace '__dotfiles_' ''
+)
+
+function __core_dotfiles_is_root_command
+  set tokens (commandline -co)
+  set command $tokens[2]
+  not contains -- $command $__core_dotfiles_functions
+end
+
+function __core_dotfiles_is_subcommand
+  set tokens (commandline -co)
+  set command $tokens[2]
+  test "$command" = "$argv[1]"
+end
+
+function __core_dotfiles_is_on_path_arg
+  set token (commandline -t)
+  string match -q '/*' $token
+end
+
+# Completions for dotfile commands
+for f in $__core_dotfiles_functions
+  complete \
+    -c dotfiles \
+    -f \
+    -n '__core_dotfiles_is_root_command' \
+    -a "$f" \
+    -d (__core_get_function_description "__dotfiles_$f")
+end
+
+complete \
+  -c dotfiles \
+  -f \
+  -n '__core_dotfiles_is_root_command' \
+  -a '/' \
+  -d 'Open/Print dotfiles file'
+
+complete \
+  -c dotfiles \
+  -f \
+  -n '__core_dotfiles_is_root_command && __core_dotfiles_is_on_path_arg' \
+  -a '(__core_list_files $DOTFILES)'
+
+complete \
+  -c dotfiles \
+  -f \
+  -n '__core_dotfiles_is_subcommand fish' \
+  -l 'setup-functions' \
+  -d (__core_get_function_description '__dotfiles_fish')
+
+complete \
+  -c dotfiles \
+  -f \
+  -n '__core_dotfiles_is_subcommand open' \
+  -a '(__core_list_files $DOTFILES)'
+
+complete \
+  -c dotfiles \
+  -f \
+  -n '__core_dotfiles_is_subcommand print' \
+  -a '(__core_list_files $DOTFILES)'
 
 complete -c gr -f -n '__core_is_git_dir' -a '(__core_list_dirs (git rev-parse --show-toplevel))'
 

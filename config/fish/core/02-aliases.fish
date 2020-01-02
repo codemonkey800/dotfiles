@@ -1,3 +1,4 @@
+alias cat 'bat'
 alias copy 'rsync -aP'
 alias dc 'docker-compose'
 alias exists 'type -q'

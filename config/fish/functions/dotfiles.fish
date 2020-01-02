@@ -1,56 +1,52 @@
-function dotfiles -d 'Switches to or prints (in command substitution) the dotfiles repo.'
-  if status -c
-    echo $DOTFILES
-    return
-  end
+function dotfiles -d 'Utility command for working with my dotfiles.'
+  set functions (
+    functions -a \
+      | rg '__dotfiles' \
+      | string replace '__dotfiles_' ''
+  )
 
-  if test (count $argv) -eq 0
-    cd $DOTFILES
-    return
-  end
-
-  if contains -- -h $argv; or contains -- --help $argv
-    echo 'Usage: dotfiles [directory|file] [editor-args]'
+  if set -q argv[1] && contains -- $argv[1] '-h' '--help' 'h' 'help'
+    echo 'Usage: dotfiles [command]'
     echo
-    echo 'Ommitting arguments has different results. If the command'
-    echo 'is in command substitution, then the dotfiles directory is printed.'
-    echo 'Otherwise, cd into the directory.'
+    echo 'The default command used is `open` or `print` in command substitution'
     echo
-    echo 'Arguments:'
-    echo '  directory   - Switch to a specific directory.'
-    echo '  file        - Activates the dotfiles virtualenv and opens a file for editing.'
-    echo '  editor-args - Arguments to pass to $EDITOR if a file is specified.'
-    return
-  end
+    echo 'Commands:'
 
-  # A directory is a file, so we make no distinction here.
-  set file $DOTFILES/$argv[1]
-  if not test -e $file
-    echo "'$file' does not exist!"
-    return -1
-  end
-
-  if test -d $file
-    cd $file
-    return
-  end
-
-  pushd $DOTFILES
-    # If a virtual env isn't present, create one.
-    if not test -f .venv/bin/activate.fish
-      python -m venv .venv
-      source .venv/bin/activate.fish
-      pip install -r requirements.txt
+    set max_name_length 0
+    for f in $functions
+      set name_length (string length "$f")
+      if test $name_length -gt $max_name_length
+        set max_name_length $name_length
+      end
     end
 
-    if not set -q VIRTUAL_ENV
-      source .venv/bin/activate.fish
+    for f in $functions
+      set match (
+        string match -r "description '(.*)'" \
+          (functions "__dotfiles_$f" | head)
+      )
+      set name_length (string length "$f")
+      set padding_length (math "$max_name_length - $name_length")
+      set padding ''
+
+      for i in (seq $padding_length)
+        set padding "$padding "
+      end
+
+      echo "  $f $padding- $match[2]"
     end
 
-    # Remove file arg and pass editor args.
+    return
+  end
+
+  if contains -- $argv[1] $functions
+    set command $argv[1]
     set -e argv[1]
-    eval "$EDITOR $argv $file"
-    deactivate
-  popd
-end
+  else if status -c
+    set command print
+  else
+    set command open
+  end
 
+  eval "__dotfiles_$command $argv"
+end

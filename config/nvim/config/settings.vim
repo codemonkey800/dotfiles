@@ -220,7 +220,7 @@ let g:vim_markdown_new_list_item_indent = 2
 " Airline {{
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'jellybeans'
+let g:airline_theme = 'minimalist'
 let g:airline#extensions#tabline#enabled = 1
 
 " }}

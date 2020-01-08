@@ -34,14 +34,45 @@ function update
 end
 
 function get_user_branches
-  for line in (g b $argv | rg (whoami))
-    if echo "$line" | rg -q '\*'
+  set is_remote false
+  set args
+  if test "$argv" = 'remote'
+    set is_remote true
+    set args '-a'
+  end
+
+
+  for line in (g b $args | rg (whoami))
+    set is_selected (
+      if echo "$line" | rg -q '\*'
+        echo true
+      else
+        echo false
+      end
+    )
+
+    if eval $is_selected
       set line (echo "$line" | pawk 'f[1]')
+    end
+
+
+    if eval $is_remote
+      set line (echo "$line" | pawk -F/ 'f[2]')
+    end
+
+    if eval $is_selected
       echo "$line *"
     else
       echo "$line" | pawk 'f[0]'
     end
   end
+end
+
+function get_jira_from_branch
+  set whoami (whoami)
+  set match (echo "$argv" | string match -r "$whoami-(\S+-\d+).*")
+  set jira (echo $match[2] | string upper)
+  echo "https://jira.kumoroku.com/jira/browse/$jira"
 end
 
 function my_branches
@@ -51,15 +82,29 @@ function my_branches
 
   echo 'Local branches:'
   for branch in $local
-    echo "  $branch"
+    set jira (get_jira_from_branch $branch)
+    echo "  $branch: $jira"
   end
 
   echo 'Remote branches'
-  for branch in (get_user_branches -a)
-    echo "$branch" | rg -q 'remotes'; or continue
-    set branch (echo "$branch" | pawk -F/ 'f[2]')
-    echo "  $branch"
+  for branch in (get_user_branches remote)
+    set jira (get_jira_from_branch $branch)
+    echo "  $branch: $jira"
   end
+end
+
+function branch_help
+  echo 'Usage: git-sumo branch'
+  echo '       git-sumo branch <identifier> [options]'
+  echo '       git-sumo branch <project> <identifier> [options]'
+  echo
+  echo 'Arguments:'
+  echo '  identifier - Jira ID (ex. 12345)'
+  echo '  project    - Jira Project (default: `SUMO`)'
+  echo
+  echo 'Options:'
+  echo '  -d - Delete the branch specified'
+  echo '  -D - Force delete the branch'
 end
 
 function branch
@@ -75,9 +120,18 @@ function branch
       set -e 'argv[1]'
   end
 
-  set identifier "$argv[1]"
-  set branches (get_user_branches)
-  set branch (whoami)"-sumo-$identifier"
+  if set -q argv[2]
+    set project "$argv[1]"
+    set identifier "$argv[2]"
+  else
+    set project "sumo"
+    set identifier "$argv[1]"
+  end
+
+  set branches (get_user_branches) (get_user_branches remote)
+  set project (echo $project | string lower)
+  set whoami (whoami)
+  set branch "$whoami-$project-$identifier"
   set args
 
   if test -n "$delete_flag"
@@ -94,7 +148,53 @@ function branch
   end
 
 
-  g $args
+  run g $args
+end
+
+function commit
+  if contains -- "$argv[1]" '-h' '--help' 'h' 'help'
+    echo 'Usage: git-sumo commit <message> [options]'
+    echo
+    echo 'Options:'
+    echo '  All options supported by `git-commit` are suppoprted'
+    return
+  end
+
+  set whoami (whoami)
+  set match (current_branch | string match -r "$whoami-(\S*-\d*)")
+
+  if test -z "$match"
+    echo 'Current branch is not a Sumo branch'
+    exit -1
+  end
+
+  set prefix (echo "$match[2]" | string upper)
+  run "g c '$prefix $argv'"
+end
+
+function save_work
+  if contains -- "$argv[1]" '-h' '--help' 'h' 'help'
+    echo 'Usage: git-sumo save'
+    return
+  end
+
+  if g show -q | rg -q 'save work'
+    echo 'Restoring saved work'
+    run g reset HEAD~1
+  else
+    echo 'Saving work to temporary commit'
+    run 'g ca "save work" --no-verify'
+  end
+end
+
+function help_main
+  echo 'Usage: git-sumo <command> [options]'
+  echo
+  echo 'Commands:'
+  echo '  u, update - Fetches all refs and updates current branch'
+  echo '  b, branch - Operations for listing, creating, and deleting branches'
+  echo '  c, commit - Commits currently staged files with project and Jira ID prefix'
+  echo '  s, save   - Saves/Restores current changes into/from temporary save commit'
 end
 
 function main
@@ -105,6 +205,14 @@ function main
     case 'b' 'branch'
       set -e argv[1]
       branch $argv
+    case 'c' 'commit'
+      set -e argv[1]
+      commit $argv
+    case 's' 'save'
+      set -e argv[1]
+      save_work
+    case '*'
+      help_main
   end
 end
 

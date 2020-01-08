@@ -228,18 +228,6 @@ noremap <silent> <expr> zg/ incsearch#go(<SID>FuzzyAll({ 'is_stay': 1 }))
 
 " }}
 
-" user interface {{
-
-" gitgutter {{
-
-" next/prev diff chunk
-nmap <silent> ]h <Plug>GitGutterNextHunk
-nmap <silent> [h <Plug>GitGutterPrevHunk
-
-" }}
-
-" }}
-
 " utilitiy {{
 
 " fzf.vim {{
@@ -283,13 +271,6 @@ tnoremap <silent> <A-h> <C-\><C-n> :TmuxNavigateLeft<CR>
 tnoremap <silent> <A-j> <C-\><C-n> :TmuxNavigateDown<CR>
 tnoremap <silent> <A-k> <C-\><C-n> :TmuxNavigateUp<CR>
 tnoremap <silent> <A-l> <C-\><C-n> :TmuxNavigateRight<CR>
-
-" }}
-
-" undotree {{
-
-" show/hide undotree
-nnoremap <silent> <leader>u :UndotreeToggle<CR>
 
 " }}
 

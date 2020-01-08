@@ -1,24 +1,27 @@
 function __dotfiles_open -d 'Opens a directory or file in $EDITOR with virtualenv activated'
-  set is_no_env false
+  set use_env false
+  set argc (count $argv)
 
-  for i in (seq (count $argv))[-1..1]
-    set arg $argv[$i]
+  if test $argc -gt 0
+    for i in (seq (count $argv))[-1..1]
+      set arg $argv[$i]
 
-    switch $arg
-      case '--no-env'
-        set -e argv[$i]
-        set is_no_env true
-      case '-h' '--help' 'h' 'help'
-        echo 'Usage: dotfiles open [options] [directory|file] [editor-args]'
-        echo
-        echo 'Options:'
-        echo '  --no-env    - Don\'t use virtualenv'
-        echo
-        echo 'Arguments:'
-        echo '  directory   - Switch to a specific directory.'
-        echo '  file        - Activates the dotfiles virtualenv and opens a file for editing.'
-        echo '  editor-args - Arguments to pass to $EDITOR if a file is specified.'
-        return
+      switch $arg
+        case '--env'
+          set -e argv[$i]
+          set use_env true
+        case '-h' '--help' 'h' 'help'
+          echo 'Usage: dotfiles open [options] [directory|file] [editor-args]'
+          echo
+          echo 'Options:'
+          echo '  --env    - Force use virtualenv'
+          echo
+          echo 'Arguments:'
+          echo '  directory   - Switch to a specific directory.'
+          echo '  file        - Activates the dotfiles virtualenv and opens a file for editing.'
+          echo '  editor-args - Arguments to pass to $EDITOR if a file is specified.'
+          return
+      end
     end
   end
 
@@ -32,14 +35,8 @@ function __dotfiles_open -d 'Opens a directory or file in $EDITOR with virtualen
     return -1
   end
 
-  if eval $is_no_env
-    if test -d $file
-      cd $file
-    else
-      # Remove file arg and pass editor args.
-      set -e argv[1]
-      eval "$EDITOR $argv $file"
-    end
+  if not eval $use_env && test -d $file
+    cd $file
   else
     pushd $DOTFILES
       # If a virtual env isn't present, create one.

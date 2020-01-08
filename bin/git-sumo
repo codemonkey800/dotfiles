@@ -35,14 +35,19 @@ end
 
 function get_user_branches
   set is_remote false
-  set args
   if test "$argv" = 'remote'
     set is_remote true
-    set args '-a'
   end
 
+  set branches (
+    if eval $is_remote
+      g b -a | rg (whoami) | rg 'remotes'
+    else
+      g b | rg (whoami)
+    end
+  )
 
-  for line in (g b $args | rg (whoami))
+  for line in $branches
     set is_selected (
       if echo "$line" | rg -q '\*'
         echo true
@@ -128,13 +133,27 @@ function branch
     set identifier "$argv[1]"
   end
 
+  set allowed_projects 'sumo' 'yama' 'ux'
+  if not contains $project $allowed_projects
+    echo "$project is not a valid project"
+    echo "Valid projects: $allowed_projects"
+    return -1
+  end
+
+  if not test "$identifier" = 'master' && not string match -qr '^\d+$' $identifier
+    echo "$identifier is not an integer"
+    return -1
+  end
+
   set branches (get_user_branches) (get_user_branches remote)
   set project (echo $project | string lower)
   set whoami (whoami)
   set branch "$whoami-$project-$identifier"
   set args
 
-  if test -n "$delete_flag"
+  if test (current_branch) = "$branch"
+    return
+  else if test -n "$delete_flag"
     set args 'b' "$delete_flag" "$branch"
   else
     set args 'checkout'
@@ -165,7 +184,7 @@ function commit
 
   if test -z "$match"
     echo 'Current branch is not a Sumo branch'
-    exit -1
+    return -1
   end
 
   set prefix (echo "$match[2]" | string upper)

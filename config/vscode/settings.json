@@ -166,7 +166,7 @@
     "svelte"
   ],
 
-  "workbench.colorTheme": "Material Theme Darker High Contrast",
+  "workbench.colorTheme": "Legacy - Material Theme Darker High Contrast",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "newUntitledFile",
   "gitlens.advanced.messages": {

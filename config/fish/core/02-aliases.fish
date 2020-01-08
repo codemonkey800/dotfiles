@@ -37,5 +37,13 @@ case Darwin
   alias git '/usr/local/bin/git'
   # Sudo required for macOS
   alias top 'sudo htop'
+
+  # Sumo specific aliases
+  if test (whoami) = 'jasuncion'
+    alias gsu 'g sumo u'
+    alias gsb 'g sumo b'
+    alias gsc 'g sumo c'
+    alias gss 'g sumo s'
+  end
 end
 

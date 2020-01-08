@@ -58,9 +58,6 @@ Plug 'justinj/vim-react-snippets', { 'for': ['jsx', 'typescript'] }
 
 " syntaxes {{
 
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'Shougo/neco-vim'
-Plug 'ekalinin/Dockerfile.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tasn/vim-tsx'
 
@@ -68,12 +65,10 @@ Plug 'tasn/vim-tsx'
 
 " user interface {{
 
-Plug 'Shougo/echodoc.vim'
-Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
-Plug 'arakashic/chromatica.nvim', { 'for': ['c', 'cpp'] }
 Plug 'flazz/vim-colorschemes'
+Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -83,21 +78,14 @@ Plug 'wellle/visual-split.vim'
 
 " utility {{
 
-Plug 'vim-scripts/ansiesc.vim'
-Plug 'brooth/far.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'gisphm/vim-gitignore'
-Plug 'jmcantrell/vim-virtualenv'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'mbbill/undotree'
-Plug 'moll/vim-node'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rhubarb'
-Plug 'vimlab/vim-json'
+Plug 'vim-scripts/ansiesc.vim'
 
 " }}
 

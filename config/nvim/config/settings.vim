@@ -57,7 +57,6 @@ set smartindent
 
 " user interface {{
 
-set cmdheight=1
 set completeopt=menu,menuone,noinsert,noselect
 set foldlevelstart=10
 set foldmethod=syntax
@@ -76,7 +75,7 @@ endif
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-colorscheme jellybeans
+colorscheme minimalist
 hi Normal ctermbg=none guibg=none
 hi NonText ctermbg=none guibg=none
 hi LineNr ctermbg=none guibg=none
@@ -174,21 +173,11 @@ let g:lexical#dictionary = ['/usr/share/dict/american-english']
 
 " vim-polyglot {{
 
-let g:polyglot_disabled = [
-  \ 'dockerfile',
-  \ 'typescript',
-\ ]
+let g:javascript_plugin_jsdoc = 1
 
 " }}
 
 " syntax configurations {{
-
-" vim-javascript {{
-
-let g:javascript_plugin_flow = 1
-let g:javascript_plugin_jsdoc = 1
-
-" }}
 
 " vim-json {{
 
@@ -245,12 +234,6 @@ let g:tmux_navigator_no_mappings = 1
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " }}
-
-" undotree {{
-
-let g:undotree_WindowLayout = 1
-let g:undotree_SplitWidth = 50
-let g:undotree_DiffpanelHeight = 20
 
 " }}
 

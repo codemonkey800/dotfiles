@@ -7,6 +7,14 @@
     "key": "alt+h",
     "command": "workbench.action.focusLeftGroup"
   },
+  {
+    "key": "alt+j",
+    "command": "workbench.action.focusBelowGroup"
+  },
+  {
+    "key": "alt+k",
+    "command": "workbench.action.focusAboveGroup"
+  },
 
   {
     "key": "ctrl+tab",

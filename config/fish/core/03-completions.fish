@@ -42,8 +42,8 @@ function __core_list_dirs
   end
 end
 
-function __core_is_git_dir
-  git rev-parse --show-toplevel ^&1 /dev/null
+function __core_es_git_dir
+  git rev-parse --show-toplevel &> /dev/null
 end
 
 function __core_get_function_description

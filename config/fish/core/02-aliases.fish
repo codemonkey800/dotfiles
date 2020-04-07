@@ -22,6 +22,7 @@ alias wh 'type -P'
 
 switch (uname)
 case Linux
+  alias g '/bin/git'
   alias cpu-temps 'watch -n 0.5 "sensors -f | grep Core"'
   alias lsports 'netstat -pelnut ^ /dev/null'
   alias pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
@@ -32,18 +33,9 @@ case Linux
   alias yas 'ya -S'
 case Darwin
   alias chrome '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
-  alias code '/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
-  alias code-insiders '/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin/code'
+  alias g '/usr/local/bin/git'
   alias git '/usr/local/bin/git'
   # Sudo required for macOS
   alias top 'sudo htop'
-
-  # Sumo specific aliases
-  if test (whoami) = 'jasuncion'
-    alias gsu 'g sumo u'
-    alias gsb 'g sumo b'
-    alias gsc 'g sumo c'
-    alias gss 'g sumo s'
-  end
 end
 

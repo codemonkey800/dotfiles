@@ -22,13 +22,11 @@ set -gx PAGER less
 set PATH $PATH \
   $DOTFILES/bin \
   ~/.nodejs/{node,yarn}/bin \
-  ./node_modules/.bin \
-  ~/Library/Android/sdk/{emulator,platform-tools}
+  ./node_modules/.bin
 
 # macOS specific vars
 if test (uname) = 'Darwin'
-  # Java stuff
-  set JAVA_HOME (/usr/libexec/java_home)
+  set PATH $PATH ~/bin ~/Library/Python/*/bin
 end
 
 # FZF stuff

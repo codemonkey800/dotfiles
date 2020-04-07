@@ -12,7 +12,6 @@ function njs -d 'Simple script for installing node.js and yarn'
     echo
     echo 'Examples with profiles:'
     echo '  $ njs current'
-    echo '  $ njs sumo'
     return
   end
 
@@ -20,9 +19,6 @@ function njs -d 'Simple script for installing node.js and yarn'
     case 'current'
       set node_version (curl -sL 'https://semver.io/node/unstable')
       set update_npm true
-    case 'sumo'
-      set node_version '12.7.0'
-      set is_sumo true
     case '*'
       echo "Invalid node_version: '$node_version'"
       exit -1

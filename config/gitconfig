@@ -48,7 +48,7 @@
   required = true
 
 [gpg]
-	program = /usr/bin/gpg2
+  program = /usr/local/bin/gpg
 
 [hub]
   protocol = ssh

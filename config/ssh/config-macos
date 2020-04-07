@@ -1,19 +1,6 @@
-Host github.com
-  AddKeysToAgent yes
+Host github.com gitlab.com
   UseKeychain yes
   IdentityFile ~/.ssh/id_rsa
-
-Host gitlab.com
-  HostName %h
-  IdentityFile ~/.ssh/vcs
-  UseKeychain yes
+  AddKeysToAgent yes
   User git
-
-Host dev-local
-  AddKeysToAgent yes
-  HostName 192.168.0.113
-  IdentityFile ~/.ssh/id_rsa
-  RequestTTY yes
-  UseKeychain yes
-  User jeremy
 

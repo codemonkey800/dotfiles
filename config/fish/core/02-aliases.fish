@@ -31,6 +31,11 @@ case Linux
   alias yaq 'ya -Q'
   alias yar 'ya -Rscun'
   alias yas 'ya -S'
+
+  # Use systemd genie in WSL
+  if string match -qr 'microsoft' (uname -a)
+    alias systemctl 'genie -c sudo systemctl'
+  end
 case Darwin
   alias chrome '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
   alias g '/usr/local/bin/git'

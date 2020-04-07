@@ -116,6 +116,24 @@ augroup END
 
 " }}
 
+" clipboard {{
+
+if stridx(system('uname -a'), 'Microsoft') != -1
+  let g:clipboard = {
+  \   'name': 'DerpBoard',
+  \   'copy': {
+  \     '+': 'clip.exe',
+  \     '*': 'clip.exe',
+  \   },
+  \   'paste': {
+  \     '+': 'powershell.exe -Command Get-Clipboard',
+  \     '*': 'powershell.exe -Command Get-Clipboard',
+  \   },
+  \ }
+endif
+
+" }}
+
 " }}
 
 " plugin {{

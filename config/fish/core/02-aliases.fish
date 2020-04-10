@@ -22,7 +22,6 @@ alias wh 'type -P'
 
 switch (uname)
 case Linux
-  alias g '/bin/git'
   alias cpu-temps 'watch -n 0.5 "sensors -f | grep Core"'
   alias lsports 'netstat -pelnut ^ /dev/null'
   alias pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'
@@ -38,8 +37,6 @@ case Linux
   end
 case Darwin
   alias chrome '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
-  alias g '/usr/local/bin/git'
-  alias git '/usr/local/bin/git'
   # Sudo required for macOS
   alias top 'sudo htop'
 end

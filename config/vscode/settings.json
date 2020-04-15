@@ -14,9 +14,10 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
 
-  "search.useRipgrep": true,
-
   "terminal.external.linuxExec": "termite",
+
+  // "vetur.experimental.templateInterpolationService": true,
+  "vetur.useWorkspaceDependencies": true,
 
   "vim.easymotion": true,
   "vim.easymotionMarkerBackgroundColor": "#212121",
@@ -163,7 +164,7 @@
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "svelte"
+    "vue"
   ],
 
   "workbench.colorTheme": "Material Theme Darker",
@@ -177,6 +178,7 @@
   "explorer.confirmDragAndDrop": false,
   "breadcrumbs.enabled": true,
   "git.confirmSync": false,
+
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -184,7 +186,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
-    "editor.defaultFormatter": "HookyQR.beautify"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -199,6 +201,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

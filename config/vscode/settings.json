@@ -5,6 +5,11 @@
   "editor.minimap.enabled": true,
   "editor.renderIndentGuides": false,
   "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
 
   "extensions.autoUpdate": true,
 
@@ -14,9 +19,11 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
 
+"search.quickOpen.includeHistory": false,
+
   "terminal.external.linuxExec": "termite",
 
-  // "vetur.experimental.templateInterpolationService": true,
+  "vetur.experimental.templateInterpolationService": true,
   "vetur.useWorkspaceDependencies": true,
 
   "vim.easymotion": true,

@@ -1,4 +1,5 @@
 [
+  // Keybindings to move between editor groups
   {
     "key": "alt+l",
     "command": "workbench.action.focusRightGroup"
@@ -16,6 +17,25 @@
     "command": "workbench.action.focusAboveGroup"
   },
 
+  // Keybindings to move editors around
+  {
+    "key": "alt+shift+l",
+    "command": "workbench.action.moveEditorToRightGroup"
+  },
+  {
+    "key": "alt+shift+h",
+    "command": "workbench.action.moveEditorToLeftGroup"
+  },
+  {
+    "key": "alt+shift+j",
+    "command": "workbench.action.moveEditorToBelowGroup"
+  },
+  {
+    "key": "alt+shift+k",
+    "command": "workbench.action.moveEditorToAboveGroup"
+  },
+
+  // wtf is vscode tab switcher
   {
     "key": "ctrl+tab",
     "command": "workbench.action.nextEditor"
@@ -48,7 +68,7 @@
   },
   {
     "key": "alt+\\",
-    "command": "workbench.action.lastEditorInGroup",
+    "command": "workbench.action.focusActiveEditorGroup",
     "when": "!editorFocus"
   },
 

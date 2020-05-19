@@ -21,6 +21,9 @@
   r = remote
   s = status
 
+  update = !git fetch -f --all && git r prune origin && git pu
+  u = update
+
   # some handy dandy aliases borrowed from Rob Miller (https://github.com/robmiller)
   # https://gist.github.com/robmiller/6018582
   branch-name = !git rev-parse --abbrev-ref HEAD

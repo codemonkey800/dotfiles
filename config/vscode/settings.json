@@ -19,7 +19,7 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
 
-"search.quickOpen.includeHistory": false,
+  "search.quickOpen.includeHistory": false,
 
   "terminal.external.linuxExec": "termite",
 
@@ -45,7 +45,7 @@
     "<C-n>": false
   },
   "vim.normalModeKeyBindingsNonRecursive": [
-     {
+    {
       "before": ["j"],
       "after": ["g", "j"]
     },
@@ -79,47 +79,35 @@
 
     {
       "before": ["q"],
-      "commands": [
-        { "command": ":quit" }
-      ]
+      "commands": [{ "command": ":quit" }]
     },
     {
       "before": ["Q"],
-      "commands": [
-        { "command": ":quit!" }
-      ]
+      "commands": [{ "command": ":quit!" }]
     },
 
     {
       "before": ["Y"],
-      "commands": [
-        { "command": "copyRelativeFilePath" }
-      ]
+      "commands": [{ "command": "copyRelativeFilePath" }]
     },
 
     {
       "before": ["g", "r"],
-      "commands": [
-        { "command": "editor.action.referenceSearch.trigger" }
-      ]
+      "commands": [{ "command": "editor.action.referenceSearch.trigger" }]
     },
 
     {
       "before": ["<leader>", "k"],
-      "commands": [
-        { "command": "workbench.action.keepEditor" }
-      ]
+      "commands": [{ "command": "workbench.action.keepEditor" }]
     },
 
     {
       "before": ["g", "o"],
-      "commands": [
-        { "command": "editor.action.openLink" }
-      ]
+      "commands": [{ "command": "editor.action.openLink" }]
     }
- ],
+  ],
   "vim.visualModeKeyBindingsNonRecursive": [
-     {
+    {
       "before": ["j"],
       "after": ["g", "j"]
     },
@@ -147,15 +135,11 @@
 
     {
       "before": ["<leader>", "s", "d"],
-      "commands": [
-        { "command": "editor.action.sortLinesDescending" }
-      ]
+      "commands": [{ "command": "editor.action.sortLinesDescending" }]
     },
     {
       "before": ["<leader>", "s", "a"],
-      "commands": [
-        { "command": "editor.action.sortLinesAscending" }
-      ]
+      "commands": [{ "command": "editor.action.sortLinesAscending" }]
     }
   ],
 

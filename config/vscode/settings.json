@@ -73,8 +73,12 @@
     },
 
     {
+      "before": ["u"],
+      "commands": [{ "command": "undo" }]
+    },
+    {
       "before": ["U"],
-      "after": ["<C-r>"]
+      "commands": [{ "command": "redo" }]
     },
 
     {
@@ -104,6 +108,11 @@
     {
       "before": ["g", "o"],
       "commands": [{ "command": "editor.action.openLink" }]
+    },
+
+    {
+      "before": ["<leader>", "f"],
+      "commands": [{ "command": "editor.action.formatDocument" }]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -140,6 +149,15 @@
     {
       "before": ["<leader>", "s", "a"],
       "commands": [{ "command": "editor.action.sortLinesAscending" }]
+    },
+
+    {
+      "before": ["<leader>", "g", "s"],
+      "commands": [{ "command": "git.stageSelectedRanges" }]
+    },
+    {
+      "before": ["<leader>", "g", "u"],
+      "commands": [{ "command": "git.unstageSelectedRanges" }]
     }
   ],
 

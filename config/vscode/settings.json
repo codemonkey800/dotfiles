@@ -78,7 +78,7 @@
     "suppressShowKeyBindingsNotice": true
   },
 
-  "vetur.experimental.templateInterpolationService": true,
+  "vetur.experimental.templateInterpolationService": false,
   "vetur.useWorkspaceDependencies": true,
 
   "vim.easymotion": true,
@@ -214,6 +214,10 @@
       "before": ["<leader>", "g", "u"],
       "commands": [{ "command": "git.unstageSelectedRanges" }]
     }
+    {
+      "before": ["<leader>", "g", "r"],
+      "commands": [{ "command": "git.revertSelectedRanges" }]
+    }
   ],
 
   "vim.insertModeKeyBindingsNonRecursive": [
@@ -221,5 +225,6 @@
       "before": ["j", "k"],
       "after": ["<Esc>"]
     }
-  ]
+  ],
+  "python.languageServer": "Pylance"
 }

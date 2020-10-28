@@ -1,0 +1,3 @@
+[submodule "config/fish/fzf.fish"]
+	path = config/fish/fzf.fish
+	url = gh:me/fzf.fish

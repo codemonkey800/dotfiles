@@ -7,7 +7,7 @@ function fish_greeting -d 'Displays a fortune in a cowsay cow and pipes it to lo
 
   fortune -n $fortunes \
     | cowsay -nf (random-cow) \
-    | lolcat
+    | lolcat ^ /dev/null
   echo
 end
 

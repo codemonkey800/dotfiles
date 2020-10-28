@@ -10,6 +10,7 @@
   # commit with single message
   # additional messages can be added using the -m flag
   c = commit --message
+  ch = checkout
   # same as above, but add all files beforehand
   ca = !git aa && git c
   d = diff

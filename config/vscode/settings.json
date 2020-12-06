@@ -83,9 +83,7 @@
 
   "vim.easymotion": true,
   "vim.easymotionMarkerBackgroundColor": "#212121",
-  "vim.easymotionMarkerFontSize": "18",
   "vim.easymotionMarkerForegroundColorOneChar": "#ff0",
-  "vim.easymotionMarkerForegroundColorTwoChar": "#0ff",
   "vim.enableNeovim": true,
   "vim.neovimPath": "/usr/local/bin/nvim",
   "vim.hlsearch": true,

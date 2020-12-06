@@ -1,11 +1,10 @@
 function size -d 'Calculates the size of a file or list of files and sorts them.'
-  set cmd "du -csh $argv"
-  set sort 'sort -h'
+  set sort 'sort'
 
   if test (uname) = 'Darwin'
-    set sort 'gsort -h'
+    set sort 'gsort'
   end
 
-  eval "$cmd | $sort"
+  du -csh $argv | $sort -h
 end
 

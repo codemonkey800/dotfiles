@@ -13,7 +13,19 @@ function l -w ls -d 'Lists all files in a directory or reads a file'
   end
 
   if test (count $files) -eq 1 -a ! -d "$files[1]"
-    set cmd 'bat'
+    switch "$files[1]"
+      case '*.tar.gz'
+        set cmd 'tar'
+        set flags $flags '-tf'
+      case '*.7z'
+        set cmd '7z'
+        set flags $flags 'l'
+      case '*.zip'
+        set cmd 'unzip'
+        set flags $flags '-l'
+      case '*'
+        set cmd 'bat'
+    end
   else
     set cmd 'ls'
     set flags $flags '-AFG'

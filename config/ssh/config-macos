@@ -4,3 +4,9 @@ Host github.com gitlab.com
   AddKeysToAgent yes
   User git
 
+Host bigchungus
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+  AddKeysToAgent yes
+  User jeremy
+

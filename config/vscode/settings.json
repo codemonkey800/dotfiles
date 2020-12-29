@@ -31,6 +31,9 @@
   "breadcrumbs.enabled": true,
   "git.confirmSync": false,
 
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "off",
+
   // Formatter settings
 
   "[typescriptreact]": {
@@ -223,6 +226,5 @@
       "before": ["j", "k"],
       "after": ["<Esc>"]
     }
-  ],
-  "python.languageServer": "Pylance"
+  ]
 }

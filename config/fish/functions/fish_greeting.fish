@@ -1,5 +1,5 @@
 function fish_greeting -d 'Displays a fortune in a cowsay cow and pipes it to lolcat for color.'
-  set fortunes 'long' 'computers' 'off' 'myfortunes'
+  set fortunes 'computers' 'drugs' 'food' 'myfortunes'
 
   if test (uname) != 'Darwin'
     set fortunes $fortunes 'linux'

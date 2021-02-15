@@ -6,7 +6,7 @@ set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 set -gx GPG_TTY (tty)
 
 # pager stuff
-set -gx PAGER bat
+set -gx PAGER less
 
 # PATH stuff
 set PATH $PATH \

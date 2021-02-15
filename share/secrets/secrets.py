@@ -48,7 +48,7 @@ class App(cli.Application):
     )
     def hide_secrets(self):
         _7z = sh['7z']['-aoa', '-y', '-mx9']
-        gpg = sh['gpg2']
+        gpg = sh['gpg']
 
         secrets = list_secrets()
 
@@ -64,7 +64,7 @@ class App(cli.Application):
             print('Removing old encrypted secrets archive...')
             _secrets_encrypted_archive.delete()
 
-        colors.green.print('Encrypting secrets with gpg2...')
+        colors.green.print('Encrypting secrets with gpg...')
         gpg(
             '--output', _secrets_encrypted_archive,
             '--symmetric',
@@ -91,7 +91,7 @@ class App(cli.Application):
     )
     def show_secrets(self):
         _7z = sh['7z']['-aoa', '-y', '-mx9']
-        gpg = sh['gpg2']
+        gpg = sh['gpg']
 
         if not _secrets_encrypted_archive.exists():
             with colors.red:
@@ -105,7 +105,7 @@ class App(cli.Application):
 
         prev_secrets = list_secrets()
 
-        colors.green.print('Decrypting secrets with gpg2...')
+        colors.green.print('Decrypting secrets with gpg...')
         gpg(
             '--output', _secrets_archive,
             '--decrypt', _secrets_encrypted_archive,

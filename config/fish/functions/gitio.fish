@@ -13,7 +13,7 @@ function gitio
     set short_url (
       curl -si 'https://git.io' -F "url=$url" \
         | rg 'Location' \
-        | pawk f[1]
+        | awk '{print $2}'
     )
 
     set created_pr_link false

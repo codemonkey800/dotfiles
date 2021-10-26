@@ -9,10 +9,10 @@ set -gx GPG_TTY (tty)
 set -gx PAGER less
 
 # PATH stuff
-set PATH $PATH \
+set PATH \
   $DOTFILES/bin \
-  ~/.nodejs/{node,yarn}/bin \
-  ./node_modules/.bin
+  ./node_modules/.bin \
+  $PATH
 
 # macOS specific vars
 if test (uname) = 'Darwin'

@@ -13,7 +13,10 @@
   ch = checkout
   # same as above, but add all files beforehand
   ca = !git aa && git c
+  cp = cherry-pick
   d = diff
+  dcom = diff-commit
+  dc = diff --cached
   dt = difftool
   l = log --show-signature --name-status --color=always
   ls = ls-files
@@ -28,7 +31,6 @@
   # some handy dandy aliases borrowed from Rob Miller (https://github.com/robmiller)
   # https://gist.github.com/robmiller/6018582
   branch-name = !git rev-parse --abbrev-ref HEAD
-  dc = diff --cached
   pub = !git push -u origin $(git branch-name)
   unpub = !git push origin :$(git branch-name)
   unstage = reset HEAD

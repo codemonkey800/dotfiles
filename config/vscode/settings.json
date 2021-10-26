@@ -1,15 +1,20 @@
 {
-  "editor.fontFamily": "'Hack', monospace",
+  "editor.fontFamily": "'Hack Nerd Font Mono', 'Hack', monospace",
   "editor.fontSize": 16,
   "editor.formatOnPaste": true,
   "editor.minimap.enabled": true,
   "editor.renderIndentGuides": false,
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
+  "editor.detectIndentation": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+
+  "emmet.showAbbreviationSuggestions": false,
+  "emmet.showSuggestionsAsSnippets": false,
+  "emmet.showExpandedAbbreviation": "never",
 
   "extensions.autoUpdate": true,
 
@@ -21,18 +26,21 @@
 
   "search.quickOpen.includeHistory": false,
 
-  "terminal.external.linuxExec": "termite",
-
   "workbench.colorTheme": "Material Theme Darker",
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.iconTheme": "eq-material-theme-icons",
   "workbench.startupEditor": "newUntitledFile",
-  "window.zoomLevel": 0,
   "explorer.confirmDragAndDrop": false,
   "breadcrumbs.enabled": true,
   "git.confirmSync": false,
 
   "python.languageServer": "Pylance",
   "python.analysis.typeCheckingMode": "off",
+
+  "scss.validate": false,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "editor.autoClosingQuotes": "always",
 
   // Formatter settings
 
@@ -63,6 +71,9 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
 
   // Extension settings
 
@@ -73,11 +84,13 @@
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "vue"
+    "vue",
+    "svelte"
   ],
 
   "gitlens.advanced.messages": {
     "suppressCommitNotFoundWarning": true,
+    "suppressGitMissingWarning": true,
     "suppressShowKeyBindingsNotice": true
   },
 
@@ -214,7 +227,7 @@
     {
       "before": ["<leader>", "g", "u"],
       "commands": [{ "command": "git.unstageSelectedRanges" }]
-    }
+    },
     {
       "before": ["<leader>", "g", "r"],
       "commands": [{ "command": "git.revertSelectedRanges" }]
@@ -226,5 +239,22 @@
       "before": ["j", "k"],
       "after": ["<Esc>"]
     }
-  ]
+  ],
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDelete": false,
+  "editor.cursorStyle": "line",
+  "editor.insertSpaces": true,
+  "editor.lineNumbers": "on",
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "editor.wordWrap": "off",
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "window.zoomLevel": 1
 }

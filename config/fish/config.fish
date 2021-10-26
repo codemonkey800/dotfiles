@@ -24,8 +24,8 @@ for core_script in $DOTFILES/config/fish/core/*.fish
   source $core_script
 end
 
-# sort and keep only unique paths
-set PATH (paths | sort -u)
+# keep only unique paths
+set PATH (paths | awk '!x[$0]++')
 
 # Symlink ssh configs if needed
 begin
@@ -69,4 +69,11 @@ if status -i
     end
   end
 end
+
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /Users/jasuncion/miniconda3/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<
 

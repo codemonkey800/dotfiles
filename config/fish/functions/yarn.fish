@@ -1,5 +1,5 @@
 function yarn -w yarn -d 'Small, opinionated wrapper over Yarn. Similar to git command where __yarn-<cmd> is called with yarn <cmd>.'
-  if not type --no-functions --quiet yarn
+  if not type --no-functions --query yarn
     echo 'Yarn is not installed!'
     return -1
   end
@@ -12,7 +12,7 @@ function yarn -w yarn -d 'Small, opinionated wrapper over Yarn. Similar to git c
     set is_subcommand true
   end
 
-  if type -q "__yarn_$argv[1]"
+  if type --query "__yarn_$argv[1]"
     set is_user_command true
   end
 

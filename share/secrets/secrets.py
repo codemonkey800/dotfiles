@@ -11,12 +11,12 @@ _secrets_encrypted_archive = _secrets_archive.with_suffix('.gpg')
 def list_secrets():
     git = sh['git']
     grep = sh['grep']
-    pawk = sh['pawk']
+    choose = sh['choose']
 
     # Chained command for getting secrets as per defined by the .gitignore file
     _list_secrets = git['status', '--ignored', '-s', _secrets_root]
     _list_secrets |= grep['!!']
-    _list_secrets |= pawk['f[1]']
+    _list_secrets |= choose['1']
 
     secrets = _list_secrets(retcode=None).split('\n')[:-1]
     secrets = [sh.path(secret).basename for secret in secrets if secret]

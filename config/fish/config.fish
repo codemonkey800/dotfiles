@@ -1,22 +1,11 @@
-# Automatically download and setup fisher if it's not installed
-# Code shamelessly copied from: https://github.com/fisherman/fisherman/wiki/Bootstrap
-if not test -f ~/.config/fish/functions/fisher.fish
-  echo "==> Fisherman not found. Installing."
-  curl -sLo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fAhtr
-  echo 'Fisher installed. Restart your shell and use the "fisher" command.'
-end
-
 # Dotfiles path
 set -gx DOTFILES (
-  set -l rl 'readlink'
-  if test (uname) = 'Darwin'
-    set rl 'greadlink'
-  end
-
-  set -l config_file (status -f)
-  set -l config_file (eval "$rl -e $config_file")
+  set -l config_file (readlink (status -f))
   set -l dir (dirname $config_file)
-  eval "$rl -e $dir/../.."
+  pushd $dir
+    cd ../..
+    pwd
+  popd
 )
 
 # Source everything in core dir using file ordering
@@ -69,11 +58,4 @@ if status -i
     end
   end
 end
-
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /Users/jasuncion/miniconda3/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
 

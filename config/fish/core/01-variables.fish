@@ -10,6 +10,7 @@ set -gx PAGER less
 
 # PATH stuff
 set PATH \
+  /opt/homebrew/bin \
   $DOTFILES/bin \
   ./node_modules/.bin \
   $PATH

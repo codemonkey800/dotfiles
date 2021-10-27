@@ -12,15 +12,15 @@ if test "$fish_key_bindings" = 'fish_vi_key_bindings'
 
 
   # FZF bindings
-  bind -M insert \ef '__fzf_search_current_dir'
+  bind -M insert \ef '_fzf_search_directory'
   bind -M insert \ed '__fzf_search_dir'
-  bind -M insert \ec '__fzf_search_history'
+  bind -M insert \ec '_fzf_search_history'
   bind -M insert \eb '__fzf_search_branch'
 else
   # FZF bindings
-  bind \ez '__fzf_search_current_dir'
+  bind \ez '_fzf_search_directory'
   bind \ex '__fzf_search_dir'
-  bind \ec '__fzf_search_history'
+  bind \ec '_fzf_search_history'
   bind \ev '__fzf_search_branch'
 end
 

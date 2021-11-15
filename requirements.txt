@@ -7,7 +7,7 @@ flake8-commas==2.0.0
 idna==2.8
 mccabe==0.6.1
 pathtools==0.1.2
-pip==19.3.1
+pip==21.1
 plumbum==1.6.8
 pycodestyle==2.5.0
 pyfiglet==0.8.post1

@@ -54,7 +54,7 @@
   required = true
 
 [gpg]
-  program = /opt/homebrew/bin/gpg
+  program = /bin/gpg
 
 [hub]
   protocol = ssh

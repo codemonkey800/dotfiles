@@ -4,6 +4,8 @@
   "editor.formatOnPaste": true,
   "editor.minimap.enabled": true,
   "editor.renderIndentGuides": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.detectIndentation": true,
@@ -104,8 +106,7 @@
   "vim.easymotion": true,
   "vim.easymotionMarkerBackgroundColor": "#212121",
   "vim.easymotionMarkerForegroundColorOneChar": "#ff0",
-  "vim.enableNeovim": true,
-  "vim.neovimPath": "/opt/homebrew/bin/nvim",
+  "vim.enableNeovim": false,
   "vim.hlsearch": true,
   "vim.leader": ",",
   "vim.showcmd": false,
@@ -260,5 +261,6 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "markdown-preview-enhanced.scrollSync": true
 }

@@ -1,9 +1,9 @@
-CoenraadS.bracket-pair-colorizer
 DavidAnson.vscode-markdownlint
 DotJoshJohnson.xml
 EditorConfig.EditorConfig
 Equinusocio.vsc-community-material-theme
 Equinusocio.vsc-material-theme
+GitHub.vscode-pull-request-github
 MariusAlchimavicius.json-to-ts
 Orta.vscode-jest
 aaron-bond.better-comments
@@ -12,7 +12,6 @@ arcanis.vscode-zipfs
 bierner.comment-tagged-templates
 bierner.emojisense
 bierner.markdown-emoji
-bierner.markdown-preview-github-styles
 bradlc.vscode-tailwindcss
 christian-kohler.npm-intellisense
 christian-kohler.path-intellisense
@@ -27,6 +26,7 @@ humao.rest-client
 jpoissonnier.vscode-styled-components
 lightyen.tailwindcss-intellisense-twin
 lunaryorn.fish-ide
+mrmlnc.vscode-json5
 ms-azuretools.vscode-docker
 ms-python.python
 ms-python.vscode-pylance
@@ -38,10 +38,8 @@ ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
 ms-vscode-remote.remote-wsl
 ms-vscode-remote.vscode-remote-extensionpack
-ms-vscode.node-debug2
 ms-vscode.vscode-typescript-next
 ms-vsliveshare.vsliveshare
-msjsdiag.debugger-for-chrome
 msjsdiag.vscode-react-native
 shanoor.vscode-nginx
 shd101wyy.markdown-preview-enhanced
@@ -53,3 +51,4 @@ svelte.svelte-vscode
 vscode-icons-team.vscode-icons
 vscodevim.vim
 xabikos.JavaScriptSnippets
+yzhang.markdown-all-in-one

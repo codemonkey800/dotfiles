@@ -15,4 +15,4 @@ pyflakes==2.1.1
 PyYAML==5.2
 requests==2.22.0
 setuptools==42.0.2
-urllib3==1.25.7
+urllib3==1.26.5

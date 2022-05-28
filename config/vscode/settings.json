@@ -262,5 +262,6 @@
     "jupyter-notebook": "left"
   },
   "window.zoomLevel": 1,
-  "markdown-preview-enhanced.scrollSync": true
+  "markdown-preview-enhanced.scrollSync": true,
+  "editor.guides.indentation": false
 }

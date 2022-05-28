@@ -12,7 +12,7 @@ plumbum==1.6.8
 pycodestyle==2.5.0
 pyfiglet==0.8.post1
 pyflakes==2.1.1
-PyYAML==5.2
+PyYAML==5.4
 requests==2.22.0
 setuptools==42.0.2
 urllib3==1.25.7

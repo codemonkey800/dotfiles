@@ -81,7 +81,7 @@ class NewDotfilesScript implements Script {
     }
   }
 
-  validateName(name: string) {
+  private validateName(name: string) {
     if (!name) {
       throw new Error('Name not provided')
     }

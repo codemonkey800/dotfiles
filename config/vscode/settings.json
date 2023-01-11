@@ -1,9 +1,12 @@
 {
+  "git.mergeEditor": false,
+  "search.showLineNumbers": true,
+  "search.smartCase": true,
+  "search.sortOrder": "fileNames",
   "editor.fontFamily": "'Hack Nerd Font Mono', 'Hack', monospace",
   "editor.fontSize": 14,
   "editor.formatOnPaste": true,
   "editor.minimap.enabled": true,
-  "editor.renderIndentGuides": false,
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
   "editor.tabSize": 2,
@@ -261,6 +264,8 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "window.zoomLevel": 1,
-  "markdown-preview-enhanced.scrollSync": true
+  "markdown-preview-enhanced.scrollSync": true,
+  "editor.guides.indentation": false,
+  "githubPullRequests.pullBranch": "never",
+  "window.zoomLevel": 1
 }

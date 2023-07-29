@@ -1,4 +1,4 @@
-#!/usr/bin/env esno
+#!/usr/bin/env tsx
 
 import path from 'path'
 

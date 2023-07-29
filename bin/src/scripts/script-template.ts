@@ -1,6 +1,8 @@
+import 'zx/globals'
+
 import { program } from 'commander'
 
-import { Script } from '../types'
+import { Script } from 'src/types'
 
 class NewScript implements Script {
   async run() {

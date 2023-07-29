@@ -4,7 +4,8 @@ import fs from 'fs-extra'
 import om from 'omelette'
 import path from 'path'
 
-import { Script } from '../types'
+import { Script } from 'src/types'
+
 import { getDotfilesPath } from '../utils'
 
 const MAIN_SCRIPT = getDotfilesPath('bin/src/main.ts')

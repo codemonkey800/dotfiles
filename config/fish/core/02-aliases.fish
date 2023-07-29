@@ -18,7 +18,7 @@ end
 
 __alias c 'copy'
 __alias cat 'bat'
-__alias copy 'rsync -aP'
+__alias copy 'rsync -aP --filter=":- .gitignore"'
 __alias dc 'docker-compose'
 __alias e 'nvim'
 __alias exists 'type -q'

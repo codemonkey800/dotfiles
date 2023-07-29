@@ -59,3 +59,12 @@ if status -i
   end
 end
 
+# Load completions from bin
+begin
+  set -l scripts (fd -d 1 -t l . $DOTFILES/bin)
+  for x in $scripts
+    $x --completion-fish | source
+  end
+end
+
+setup-autoenv

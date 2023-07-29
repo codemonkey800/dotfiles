@@ -88,7 +88,7 @@ set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete\ Mono\ 14
 
 if system('uname') =~ 'Darwin'
   let g:python_host_prog =  '/opt/homebrew/bin/python2'
-  let g:python3_host_prog = '/opt/homebrew/bin/python3'
+  let g:python3_host_prog = '/opt/homebrew/bin/python3.10'
 else
   let g:python_host_prog = '/usr/bin/python2'
   let g:python3_host_prog = '/usr/bin/python3'

@@ -78,14 +78,8 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[svelte]": {
-    "editor.defaultFormatter": "svelte.svelte-vscode"
-  },
 
   // Extension settings
-
-  "markdown-preview-enhanced.breakOnSingleNewLine": false,
-
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -100,9 +94,6 @@
     "suppressGitMissingWarning": true,
     "suppressShowKeyBindingsNotice": true
   },
-
-  "vetur.experimental.templateInterpolationService": false,
-  "vetur.useWorkspaceDependencies": true,
 
   "vim.easymotion": true,
   "vim.easymotionMarkerBackgroundColor": "#212121",
@@ -198,6 +189,15 @@
           "when": "editorLangId == 'mongodb'"
         }
       ]
+    },
+
+    {
+      "before": ["<leader>", "5"],
+      "commands": [
+        {
+          "command": "editor.emmet.action.matchTag"
+        }
+      ]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -247,6 +247,14 @@
     {
       "before": ["<leader>", "g", "r"],
       "commands": [{ "command": "git.revertSelectedRanges" }]
+    },
+    {
+      "before": ["<leader>", "5"],
+      "commands": [
+        {
+          "command": "editor.emmet.action.matchTag"
+        }
+      ]
     }
   ],
 
@@ -272,8 +280,8 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "window.zoomLevel": 1,
   "markdown-preview-enhanced.scrollSync": true,
   "editor.guides.indentation": false,
-  "githubPullRequests.pullBranch": "never"
+  "githubPullRequests.pullBranch": "never",
+  "window.zoomLevel": 1
 }

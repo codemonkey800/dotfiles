@@ -267,5 +267,13 @@
   "markdown-preview-enhanced.scrollSync": true,
   "editor.guides.indentation": false,
   "githubPullRequests.pullBranch": "never",
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "[python]": {
+    "editor.formatOnType": true,
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "[feature]": {
+    "editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
+  },
+  "editor.inlineSuggest.enabled": true
 }

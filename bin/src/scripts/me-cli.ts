@@ -59,16 +59,10 @@ class MagicEdenCLI implements Script {
 
   getAutocomplete() {
     return om`me-cli ${['build-package', 'clean']} ${({
-      fragment,
       line,
       before,
       reply,
     }) => {
-      fs.appendFileSync(
-        'derp.log',
-        `[${new Date().toISOString()}] fragment="${fragment}" line="${line}" before="${before}"\n`,
-      )
-
       // Allow partial completions
       if (line.includes('me-cli build-package') && before !== 'build-package') {
         const packages = this.getAllPackages()

@@ -1,4 +1,8 @@
 {
+  "files.associations": {
+    "*.vim": "vimrc"
+  },
+
   "git.mergeEditor": false,
   "search.showLineNumbers": true,
   "search.smartCase": true,

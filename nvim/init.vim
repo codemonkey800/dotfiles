@@ -1,7 +1,7 @@
 function IncludeSource(file)
   execute 'source '
     \ . $DOTFILES
-    \ . '/config/nvim/config/'
+    \ . '/nvim/config/'
     \ . a:file
     \ . '.vim'
 endfunction

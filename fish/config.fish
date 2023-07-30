@@ -3,31 +3,18 @@ set -gx DOTFILES (
   set -l config_file (readlink (status -f))
   set -l dir (dirname $config_file)
   pushd $dir
-    cd ../..
+    cd ..
     pwd
   popd
 )
 
 # Source everything in core dir using file ordering
-for core_script in $DOTFILES/config/fish/core/*.fish
+for core_script in $DOTFILES/fish/core/*.fish
   source $core_script
 end
 
 # keep only unique paths
 set PATH (paths | awk '!x[$0]++')
-
-# Symlink ssh configs if needed
-begin
-  set -l ssh_config (readlink ~/.ssh/config)
-
-  if test (uname) = 'Darwin'
-    if test "$ssh_config" = $DOTFILES/config/ssh/config
-      ln -sf $DOTFILES/config/ssh/config-macos ~/.ssh/config
-    end
-  else if test "$ssh_config" = $DOTFILES/config/ssh/config-macos
-    ln -sf $DOTFILES/config/ssh/config ~/.ssh/config
-  end
-end
 
 if status -i
   # Don't use keychain for macOS

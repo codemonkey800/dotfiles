@@ -17,7 +17,7 @@ function __dotfiles_fish -d 'Commands related to my fish setup'
   if eval $setup_functions
     pushd ~/.config/fish/functions
       echo 'Linking fish functions:'
-      ln -svf $DOTFILES/config/fish/functions/* $PWD
+      ln -svf $DOTFILES/fish/functions/* $PWD
       echo
 
       echo 'Cleaning broken links:'

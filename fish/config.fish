@@ -53,5 +53,3 @@ begin
     $x --completion-fish | source
   end
 end
-
-setup-autoenv

@@ -218,6 +218,15 @@
     {
       "before": ["<leader>", "B"],
       "commands": ["bookmarks.listFromAllFiles"]
+    },
+
+    {
+      "before": ["<leader>", "p"],
+      "commands": [
+        {
+          "command": "workbench.panel.chatSidebar.copilot"
+        }
+      ]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [

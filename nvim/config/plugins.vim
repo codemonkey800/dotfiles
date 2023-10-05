@@ -50,7 +50,7 @@ Plug 'reedes/vim-wordy'
 
 " snippets {{
 
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'justinj/vim-react-snippets', { 'for': ['jsx', 'typescript'] }
 

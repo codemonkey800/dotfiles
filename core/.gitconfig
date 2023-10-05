@@ -18,12 +18,15 @@
   dcom = diff-commit
   dc = diff --cached
   dt = difftool
+  dp = d HEAD~1 HEAD~0
   l = log --show-signature --name-status --color=always
   ls = ls-files
   p = push
   pu = pull
   r = remote
+  rc = reset HEAD~1
   s = status
+  sw = ca 'save work' --no-verify
 
   update = !git fetch -f --all && git r prune origin && git pu
   u = update

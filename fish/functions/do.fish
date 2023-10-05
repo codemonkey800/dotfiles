@@ -1,10 +1,10 @@
 function do -w docker -d 'Wrapper for docker command.'
-  if type -q "__do_$argv[1]"
-    set -l command "$argv[1]"
-    set -e argv[1]
-    eval "__do_$command $argv"
+  set command "$argv[1]"
+
+  if type -q "__do_$command"
+    echo eval "__do_$command $argv[2..-1]"
   else
-    docker $argv
+    echo docker $argv
   end
 end
 

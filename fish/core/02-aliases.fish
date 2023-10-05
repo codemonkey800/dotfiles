@@ -11,8 +11,7 @@ function ls-aliases
     set -l alias $parts[1]
     set -l command "$parts[2..-1]"
 
-    echo "$alias:"
-    echo "  $command"
+    echo "$alias: $command"
   end
 end
 
@@ -20,6 +19,7 @@ __alias c 'copy'
 __alias cat 'bat'
 __alias copy 'rsync -aP --filter=":- .gitignore"'
 __alias dc 'docker-compose'
+__alias dotfiles 'cd $DOTFILES'
 __alias e 'nvim'
 __alias exists 'type -q'
 __alias info 'info --vi-keys'

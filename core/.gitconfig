@@ -21,10 +21,14 @@
   dp = d HEAD~1 HEAD~0
   l = log --show-signature --name-status --color=always
   ls = ls-files
+  main = ch main
   p = push
   pu = pull
   r = remote
   rc = reset HEAD~1
+  rb = rebase -i
+  rbi = rebase --ignore-date
+  rbc = rebase --con
   s = status
   sw = ca 'save work' --no-verify
 
@@ -42,7 +46,7 @@
   ui = true
 
 [commit]
-  gpgsign = true
+	gpgsign = true
 
 [core]
   editor = nvim
@@ -57,7 +61,7 @@
   required = true
 
 [gpg]
-  program = /opt/homebrew/bin/gpg
+	format = ssh
 
 [hub]
   protocol = ssh
@@ -83,5 +87,8 @@
 [user]
 	email = jeremyasuncion808@gmail.com
   name = Jeremy Asuncion
-  signingkey = 3FCC32880193C153
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAr5xGcZUnm371sT72acNK+2CtNRXYALA3XpkRgtxg6n
 
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = /Users/jasuncion/.ssh/allowed_signers

@@ -205,6 +205,19 @@
           "command": "editor.emmet.action.matchTag"
         }
       ]
+    },
+
+    {
+      "before": ["<leader>", "m"],
+      "commands": ["bookmarks.toggle"]
+    },
+    {
+      "before": ["<leader>", "b"],
+      "commands": ["bookmarks.list"]
+    },
+    {
+      "before": ["<leader>", "B"],
+      "commands": ["bookmarks.listFromAllFiles"]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -298,5 +311,8 @@
   "[feature]": {
     "editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
   },
-  "editor.inlineSuggest.enabled": true
+  "editor.inlineSuggest.enabled": true,
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
 }

@@ -3,6 +3,8 @@
     "*.vim": "vimrc"
   },
 
+  "tailwindcss.hoverColorHint": "hex",
+
   "git.mergeEditor": false,
   "search.showLineNumbers": true,
   "search.smartCase": true,
@@ -147,64 +149,55 @@
 
     {
       "before": ["u"],
-      "commands": [{ "command": "undo" }]
+      "commands": ["undo"]
     },
     {
       "before": ["U"],
-      "commands": [{ "command": "redo" }]
+      "commands": ["redo"]
     },
 
     {
       "before": ["q"],
-      "commands": [{ "command": ":quit" }]
+      "commands": [":quit"]
     },
     {
       "before": ["Q"],
-      "commands": [{ "command": ":quit!" }]
+      "commands": [":quit!"]
     },
 
     {
       "before": ["Y"],
-      "commands": [{ "command": "copyRelativeFilePath" }]
+      "commands": ["copyRelativeFilePath"]
     },
 
     {
       "before": ["g", "r"],
-      "commands": [{ "command": "editor.action.referenceSearch.trigger" }]
+      "commands": ["editor.action.referenceSearch.trigger"]
     },
 
     {
       "before": ["<leader>", "k"],
-      "commands": [{ "command": "workbench.action.keepEditor" }]
+      "commands": ["workbench.action.keepEditor"]
     },
 
     {
       "before": ["g", "o"],
-      "commands": [{ "command": "editor.action.openLink" }]
+      "commands": ["editor.action.openLink"]
     },
 
     {
       "before": ["<leader>", "f"],
-      "commands": [{ "command": "editor.action.formatDocument" }]
+      "commands": ["editor.action.formatDocument"]
     },
 
     {
       "before": ["<leader>", "r"],
-      "commands": [
-        {
-          "command": "mdb.runAllPlaygroundBlocks",
-          "when": "editorLangId == 'mongodb'"
-        }
-      ]
+      "commands": ["eslint.restart", "typescript.restartTsServer"]
     },
 
     {
       "before": ["<leader>", "5"],
-      "commands": [
-        {
-          "command": "editor.emmet.action.matchTag"
-        }
-      ]
+      "commands": ["editor.emmet.action.matchTag"]
     },
 
     {
@@ -222,11 +215,11 @@
 
     {
       "before": ["<leader>", "p"],
-      "commands": [
-        {
-          "command": "workbench.panel.chatSidebar.copilot"
-        }
-      ]
+      "commands": ["workbench.panel.chatSidebar.copilot"]
+    },
+    {
+      "before": ["<leader>", "d"],
+      "commands": ["figma.views.files.focus"]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -250,40 +243,33 @@
 
     {
       "before": ["g", "a"],
-      "commands": [
-        { "command": "extension.align" },
-        { "command": "extension.vim_escape" }
-      ]
+      "commands": ["extension.align", "extension.vim_escape"]
     },
 
     {
       "before": ["<leader>", "s", "d"],
-      "commands": [{ "command": "editor.action.sortLinesDescending" }]
+      "commands": ["editor.action.sortLinesDescending"]
     },
     {
       "before": ["<leader>", "s", "a"],
-      "commands": [{ "command": "editor.action.sortLinesAscending" }]
+      "commands": ["editor.action.sortLinesAscending"]
     },
 
     {
       "before": ["<leader>", "g", "s"],
-      "commands": [{ "command": "git.stageSelectedRanges" }]
+      "commands": ["git.stageSelectedRanges"]
     },
     {
       "before": ["<leader>", "g", "u"],
-      "commands": [{ "command": "git.unstageSelectedRanges" }]
+      "commands": ["git.unstageSelectedRanges"]
     },
     {
       "before": ["<leader>", "g", "r"],
-      "commands": [{ "command": "git.revertSelectedRanges" }]
+      "commands": ["git.revertSelectedRanges"]
     },
     {
       "before": ["<leader>", "5"],
-      "commands": [
-        {
-          "command": "editor.emmet.action.matchTag"
-        }
-      ]
+      "commands": ["editor.emmet.action.matchTag"]
     }
   ],
 
@@ -323,5 +309,6 @@
   "editor.inlineSuggest.enabled": true,
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
-  }
+  },
+  "figma.autocompleteBlocks": true
 }

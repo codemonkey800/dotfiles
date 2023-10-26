@@ -14,6 +14,7 @@ set -g theme_nerd_fonts yes
 # PATH stuff
 set PATH \
   /opt/homebrew/bin \
+  /opt/homebrew/opt/libpq/bin \
   $DOTFILES/bin \
   ./node_modules/.bin \
   $PATH

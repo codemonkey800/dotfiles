@@ -220,6 +220,10 @@
     {
       "before": ["<leader>", "d"],
       "commands": ["figma.views.files.focus"]
+    },
+    {
+      "before": ["<leader>", "t"],
+      "commands": ["editor.emmet.action.matchTag"]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -268,7 +272,7 @@
       "commands": ["git.revertSelectedRanges"]
     },
     {
-      "before": ["<leader>", "5"],
+      "before": ["<leader>", "t"],
       "commands": ["editor.emmet.action.matchTag"]
     }
   ],

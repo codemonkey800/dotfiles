@@ -19,7 +19,9 @@
   dc = diff --cached
   dt = difftool
   dp = d HEAD~1 HEAD~0
-  l = log --show-signature --name-status --color=always
+  l = log --color --graph --date=format:'%Y-%m-%d %H:%M:%S' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'
+  lm = l main..HEAD
+  lmf = lm --name-status
   ls = ls-files
   main = ch main
   p = push
@@ -28,7 +30,7 @@
   rc = reset HEAD~1
   rb = rebase -i
   rbi = rebase --ignore-date
-  rbc = rebase --con
+  rbc = !git aa && git rebase --continue
   s = status
   sw = ca 'save work' --no-verify
 

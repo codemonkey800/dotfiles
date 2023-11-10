@@ -9,14 +9,14 @@ function g -d 'Wrapper over git' -w git
 
   if string match "$HOME/dev/me/*" $PWD > /dev/null
     set email 'jeremy@magiceden.io'
-
-    if test $argv[1] = 'c'
-      set extra_args '--no-verify'
-    end
   end
 
   if test ($git config --global user.email) != "$email"
     $git config --global user.email $email
+  end
+
+  if test $argv[1] = 'c'
+    set extra_args '--no-verify'
   end
 
   $git $argv $extra_args

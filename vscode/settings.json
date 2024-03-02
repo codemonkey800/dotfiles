@@ -20,7 +20,7 @@
   "editor.detectIndentation": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "mdb.confirmRunAll": false,
 
@@ -192,7 +192,11 @@
 
     {
       "before": ["<leader>", "r"],
-      "commands": ["eslint.restart", "typescript.restartTsServer"]
+      "commands": [
+        "eslint.restart",
+        "typescript.restartTsServer",
+        "stylelint.restart"
+      ]
     },
 
     {
@@ -302,7 +306,6 @@
   "markdown-preview-enhanced.scrollSync": true,
   "editor.guides.indentation": false,
   "githubPullRequests.pullBranch": "never",
-  "window.zoomLevel": 1,
   "[python]": {
     "editor.formatOnType": true,
     "editor.defaultFormatter": "ms-python.black-formatter"
@@ -314,5 +317,11 @@
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
   },
-  "figma.autocompleteBlocks": true
+  "figma.autocompleteBlocks": true,
+  "window.zoomLevel": 1,
+  "svelte.enable-ts-plugin": true,
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "errorLens.enabled": true
 }

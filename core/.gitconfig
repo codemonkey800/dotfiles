@@ -27,6 +27,10 @@
   p = push
   pu = pull
   r = remote
+  rb = rebase -i
+  rba = rebase --abort
+  rbc = rebase --con
+  rbi = rebase --ignore-date
   rc = reset HEAD~1
   rb = rebase -i
   rba = rebase --abort

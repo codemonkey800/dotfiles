@@ -23,3 +23,7 @@ set PATH \
 if test (uname) = 'Darwin'
   set PATH $PATH ~/Library/Python/*/bin
 end
+
+if test (hostname) = 'jeremy-dev-me'
+  set -gx AWS_PROFILE eng
+end

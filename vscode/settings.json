@@ -200,8 +200,12 @@
     },
 
     {
-      "before": ["<leader>", "5"],
-      "commands": ["editor.emmet.action.matchTag"]
+      "before": ["<leader>", "t"],
+      "commands": [
+        {
+          "command": "editor.emmet.action.matchTag"
+        }
+      ]
     },
 
     {

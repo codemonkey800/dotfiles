@@ -328,5 +328,8 @@
     "editor.defaultFormatter": "svelte.svelte-vscode"
   },
   "errorLens.enabled": true,
-  "gitlens.mode.active": "review"
+  "gitlens.mode.active": "review",
+  "github.copilot.editor.enableAutoCompletions": true,
+  "prisma.showPrismaDataPlatformNotification": false,
+  "security.promptForLocalFileProtocolHandling": false
 }

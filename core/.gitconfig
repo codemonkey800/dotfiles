@@ -57,7 +57,7 @@
 	gpgsign = true
 
 [core]
-  editor = nvim
+  editor = code --wait
   excludesfile = ~/.gitignore-global
   pager = diff-so-fancy | less --tabs=4 -RFX
   sparsecheckout = true
@@ -93,10 +93,11 @@
   insteadOf = aur:
 
 [user]
-	email = jeremyasuncion808@gmail.com
-  name = Jeremy Asuncion
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAr5xGcZUnm371sT72acNK+2CtNRXYALA3XpkRgtxg6n
+  email = jeremyasuncion808@gmail.com
+  name = Jeremy
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAr5xGcZUnm371sT72acNK+2CtNRXYALA3XpkRgtxg6n
 
 [gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-	allowedSignersFile = /Users/jasuncion/.ssh/allowed_signers
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[http]
+	sslbackend = openssl

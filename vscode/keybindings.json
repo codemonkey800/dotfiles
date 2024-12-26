@@ -1,4 +1,15 @@
 [
+  // Temporary keybindings to split editors using vim keys until it's fixed:'
+  // https://github.com/VSCodeVim/Vim/issues/9061
+  {
+    "key": "ctrl+w v",
+    "command": "workbench.action.splitEditor"
+  },
+  {
+    "key": "ctrl+w s",
+    "command": "workbench.action.splitEditorDown"
+  },
+
   // Keybindings to move between editor groups
   {
     "key": "alt+l",

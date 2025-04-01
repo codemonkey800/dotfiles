@@ -41,9 +41,6 @@
   "files.trimTrailingWhitespace": true,
 
   "search.quickOpen.includeHistory": false,
-
-  "workbench.colorTheme": "Material Theme Darker",
-  "workbench.iconTheme": "eq-material-theme-icons",
   "workbench.startupEditor": "newUntitledFile",
   "explorer.confirmDragAndDrop": false,
   "breadcrumbs.enabled": true,
@@ -331,5 +328,14 @@
   "gitlens.mode.active": "review",
   "github.copilot.editor.enableAutoCompletions": true,
   "prisma.showPrismaDataPlatformNotification": false,
-  "security.promptForLocalFileProtocolHandling": false
+  "security.promptForLocalFileProtocolHandling": false,
+  "workbench.colorTheme": "One Dark Pro Night Flat",
+  "workbench.iconTheme": "material-icon-theme",
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    "class:list",
+    "classes"
+  ]
 }

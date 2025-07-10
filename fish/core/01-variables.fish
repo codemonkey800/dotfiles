@@ -21,5 +21,12 @@ set PATH \
 
 # macOS specific vars
 if test (uname) = 'Darwin'
-  set PATH $PATH ~/Library/Python/*/bin
+  set JAVA_HOME /Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+  set ANDROID_HOME /Users/jasuncion/Library/Android/sdk
+  set PATH \
+      $PATH \
+      ~/Library/Python/*/bin \
+      $ANDROID_HOME/emulator \
+      $ANDROID_HOME/platform-tools \
+      ~/.claude/local
 end

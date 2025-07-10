@@ -18,7 +18,6 @@ set t_vb=
 " encoding {{
 
 set fileencoding=utf-8
-set termencoding=utf-8
 
 " }}
 

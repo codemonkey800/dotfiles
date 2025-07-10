@@ -118,5 +118,13 @@
     "key": "ctrl-j",
     "command": "editor.action.insertLineAfter",
     "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode == 'Insert'"
-  }
+},
+{
+    "key": "shift+enter",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+        "text": "\\\r\n"
+    },
+    "when": "terminalFocus"
+}
 ]

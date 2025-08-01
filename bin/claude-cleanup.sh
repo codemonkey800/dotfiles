@@ -1,0 +1,334 @@
+#!/bin/bash
+
+# Claude Project Cleanup Script
+# Removes projects or cleans project history from ~/.claude.json using regex patterns
+
+set -euo pipefail
+
+# Default values
+CLAUDE_JSON="${CLAUDE_JSON:-$HOME/.claude.json}"
+PATTERN=""
+OPERATION=""
+DRY_RUN=false
+BACKUP_SUFFIX=".backup"
+VERBOSE=false
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Print colored output
+print_error() { echo -e "${RED}Error: $1${NC}" >&2; }
+print_success() { echo -e "${GREEN}$1${NC}"; }
+print_warning() { echo -e "${YELLOW}$1${NC}"; }
+print_info() { echo -e "${BLUE}$1${NC}"; }
+
+# Usage information
+show_help() {
+    cat << EOF
+Claude Project Cleanup Script
+
+USAGE:
+    $0 --operation [remove|clean-history|list] [options]
+
+OPERATIONS:
+    remove          Remove entire project entries matching the pattern
+    clean-history   Clear conversation history for matching projects
+    list            List projects with conversation history counts
+
+REQUIRED OPTIONS:
+    --operation OPERATION   Operation to perform (remove, clean-history, or list)
+
+CONDITIONAL OPTIONS:
+    --pattern "regex"       Regex pattern to match project paths
+                           (required for remove/clean-history, optional for list)
+
+OPTIONAL FLAGS:
+    --dry-run              Preview changes without modifying files (remove/clean-history only)
+    --backup-suffix SUFFIX Custom backup file suffix (default: .backup)
+    --verbose              Show detailed output
+    --help                 Show this help message
+
+EXAMPLES:
+    # List all projects with history counts
+    $0 --operation list
+
+    # List projects matching a pattern
+    $0 --operation list --pattern ".*temp.*"
+
+    # Remove all temporary projects
+    $0 --pattern ".*temp.*" --operation remove
+
+    # Clean history for old projects (dry run)
+    $0 --pattern "/old/.*" --operation clean-history --dry-run
+
+    # Remove test projects with verbose output
+    $0 --pattern "test.*" --operation remove --verbose
+
+    # Clean history with custom backup suffix
+    $0 --pattern ".*legacy.*" --operation clean-history --backup-suffix .old
+
+EOF
+}
+
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --pattern)
+            PATTERN="$2"
+            shift 2
+            ;;
+        --operation)
+            OPERATION="$2"
+            shift 2
+            ;;
+        --dry-run)
+            DRY_RUN=true
+            shift
+            ;;
+        --backup-suffix)
+            BACKUP_SUFFIX="$2"
+            shift 2
+            ;;
+        --verbose)
+            VERBOSE=true
+            shift
+            ;;
+        --help)
+            show_help
+            exit 0
+            ;;
+        *)
+            print_error "Unknown option: $1"
+            show_help
+            exit 1
+            ;;
+    esac
+done
+
+# Validate required arguments
+if [[ -z "$OPERATION" ]]; then
+    print_error "Operation is required. Use --operation [remove|clean-history|list]"
+    show_help
+    exit 1
+fi
+
+if [[ "$OPERATION" != "remove" && "$OPERATION" != "clean-history" && "$OPERATION" != "list" ]]; then
+    print_error "Invalid operation: $OPERATION. Must be 'remove', 'clean-history', or 'list'"
+    exit 1
+fi
+
+# Pattern is required for remove and clean-history operations, optional for list
+if [[ "$OPERATION" != "list" && -z "$PATTERN" ]]; then
+    print_error "Pattern is required for '$OPERATION' operation. Use --pattern \"regex\""
+    show_help
+    exit 1
+fi
+
+# Check dependencies
+if ! command -v jq &> /dev/null; then
+    print_error "jq is required but not installed. Please install jq first."
+    exit 1
+fi
+
+# Check if Claude JSON file exists
+if [[ ! -f "$CLAUDE_JSON" ]]; then
+    print_error "Claude configuration file not found: $CLAUDE_JSON"
+    exit 1
+fi
+
+# Check if file is readable
+if [[ ! -r "$CLAUDE_JSON" ]]; then
+    print_error "Cannot read Claude configuration file: $CLAUDE_JSON"
+    exit 1
+fi
+
+# Validate JSON structure
+if ! jq empty "$CLAUDE_JSON" 2>/dev/null; then
+    print_error "Invalid JSON in Claude configuration file"
+    exit 1
+fi
+
+# Check if projects key exists
+if ! jq -e '.projects' "$CLAUDE_JSON" >/dev/null 2>&1; then
+    print_error "No 'projects' key found in Claude configuration"
+    exit 1
+fi
+
+print_info "Claude Project Cleanup Script"
+if [[ -n "$PATTERN" ]]; then
+    print_info "Pattern: $PATTERN"
+fi
+print_info "Operation: $OPERATION"
+if [[ "$DRY_RUN" == true ]]; then
+    print_warning "DRY RUN MODE - No changes will be made"
+fi
+echo
+
+# Handle list operation separately
+if [[ "$OPERATION" == "list" ]]; then
+    print_info "Projects in $CLAUDE_JSON:"
+    echo
+    
+    # Get all projects or filtered projects based on pattern
+    if [[ -n "$PATTERN" ]]; then
+        # Filter projects by pattern and show with history counts
+        jq -r --arg pattern "$PATTERN" '
+            .projects | 
+            to_entries | 
+            map(select(.key | test($pattern))) |
+            map("\(.key)\t\(.value.history | length)")[] 
+        ' "$CLAUDE_JSON" 2>/dev/null | while IFS=$'\t' read -r project_path history_count; do
+            printf "  %-50s [%d conversations]\n" "$project_path" "$history_count"
+        done
+        
+        # Count filtered projects
+        filtered_count=$(jq -r --arg pattern "$PATTERN" '
+            .projects | 
+            to_entries | 
+            map(select(.key | test($pattern))) | 
+            length
+        ' "$CLAUDE_JSON" 2>/dev/null)
+        
+        echo
+        if [[ "$filtered_count" -eq 0 ]]; then
+            print_warning "No projects found matching pattern: $PATTERN"
+        else
+            print_info "Total: $filtered_count project(s) matching pattern '$PATTERN'"
+        fi
+    else
+        # Show all projects with history counts
+        jq -r '
+            .projects | 
+            to_entries | 
+            map("\(.key)\t\(.value.history | length)")[] 
+        ' "$CLAUDE_JSON" 2>/dev/null | while IFS=$'\t' read -r project_path history_count; do
+            printf "  %-50s [%d conversations]\n" "$project_path" "$history_count"
+        done
+        
+        # Count total projects
+        total_count=$(jq -r '.projects | length' "$CLAUDE_JSON" 2>/dev/null)
+        
+        echo
+        print_info "Total: $total_count project(s)"
+    fi
+    
+    exit 0
+fi
+
+# Find matching projects for remove/clean-history operations
+matching_projects=$(jq -r '.projects | keys[] | select(test("'"$PATTERN"'"))' "$CLAUDE_JSON" 2>/dev/null || true)
+
+if [[ -z "$matching_projects" ]]; then
+    print_warning "No projects found matching pattern: $PATTERN"
+    exit 0
+fi
+
+# Show matching projects
+echo "Projects matching pattern '$PATTERN':"
+echo "$matching_projects" | while read -r project; do
+    echo "  - $project"
+done
+echo
+
+project_count=$(echo "$matching_projects" | wc -l | tr -d ' ')
+print_info "Found $project_count matching project(s)"
+echo
+
+# Create backup if not in dry-run mode
+backup_file="${CLAUDE_JSON}${BACKUP_SUFFIX}"
+if [[ "$DRY_RUN" == false ]]; then
+    if cp "$CLAUDE_JSON" "$backup_file"; then
+        print_success "Backup created: $backup_file"
+    else
+        print_error "Failed to create backup file"
+        exit 1
+    fi
+fi
+
+# Perform the requested operation
+case $OPERATION in
+    "remove")
+        print_info "Removing matching projects..."
+        
+        if [[ "$VERBOSE" == true ]]; then
+            print_info "jq command: del(.projects | to_entries[] | select(.key | test(\"$PATTERN\")) | .key)"
+        fi
+        
+        if [[ "$DRY_RUN" == true ]]; then
+            print_warning "DRY RUN: Would remove $project_count project(s)"
+        else
+            # Remove projects matching the pattern
+            jq --arg pattern "$PATTERN" '
+                .projects |= with_entries(select(.key | test($pattern) | not))
+            ' "$CLAUDE_JSON" > "${CLAUDE_JSON}.tmp"
+            
+            if mv "${CLAUDE_JSON}.tmp" "$CLAUDE_JSON"; then
+                print_success "Successfully removed $project_count project(s)"
+            else
+                print_error "Failed to update configuration file"
+                # Restore backup
+                if [[ -f "$backup_file" ]]; then
+                    cp "$backup_file" "$CLAUDE_JSON"
+                    print_info "Restored from backup"
+                fi
+                exit 1
+            fi
+        fi
+        ;;
+        
+    "clean-history")
+        print_info "Cleaning history for matching projects..."
+        
+        if [[ "$VERBOSE" == true ]]; then
+            print_info "jq command: .projects |= with_entries(if (.key | test(\"$PATTERN\")) then .value.history = [] else . end)"
+        fi
+        
+        if [[ "$DRY_RUN" == true ]]; then
+            print_warning "DRY RUN: Would clean history for $project_count project(s)"
+        else
+            # Clean history for projects matching the pattern
+            jq --arg pattern "$PATTERN" '
+                .projects |= with_entries(
+                    if (.key | test($pattern)) then 
+                        .value.history = [] 
+                    else . 
+                    end
+                )
+            ' "$CLAUDE_JSON" > "${CLAUDE_JSON}.tmp"
+            
+            if mv "${CLAUDE_JSON}.tmp" "$CLAUDE_JSON"; then
+                print_success "Successfully cleaned history for $project_count project(s)"
+            else
+                print_error "Failed to update configuration file"
+                # Restore backup
+                if [[ -f "$backup_file" ]]; then
+                    cp "$backup_file" "$CLAUDE_JSON"
+                    print_info "Restored from backup"
+                fi
+                exit 1
+            fi
+        fi
+        ;;
+esac
+
+# Final validation
+if [[ "$DRY_RUN" == false ]]; then
+    if ! jq empty "$CLAUDE_JSON" 2>/dev/null; then
+        print_error "Resulting JSON is invalid! Restoring from backup..."
+        if [[ -f "$backup_file" ]]; then
+            cp "$backup_file" "$CLAUDE_JSON"
+            print_info "Restored from backup: $backup_file"
+        fi
+        exit 1
+    fi
+    
+    print_success "Operation completed successfully!"
+    if [[ "$VERBOSE" == true ]]; then
+        print_info "Configuration file updated: $CLAUDE_JSON"
+        print_info "Backup available at: $backup_file"
+    fi
+fi

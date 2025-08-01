@@ -345,5 +345,7 @@
   "github.copilot.chat.search.keywordSuggestions": true,
   "gitlens.rebaseEditor.ordering": "asc",
   "github.copilot.nextEditSuggestions.enabled": true,
-  "terminal.integrated.defaultProfile.osx": "fish"
+  "terminal.integrated.defaultProfile.osx": "fish",
+  "markdown-preview-enhanced.revealjsTheme": "black.css",
+  "markdown-preview-enhanced.previewTheme": "monokai.css"
 }

@@ -10,7 +10,6 @@ CLAUDE_JSON="${CLAUDE_JSON:-$HOME/.claude.json}"
 PATTERN=""
 OPERATION=""
 DRY_RUN=false
-BACKUP_SUFFIX=".backup"
 VERBOSE=false
 
 # Colors for output
@@ -32,66 +31,49 @@ show_help() {
 Claude Project Cleanup Script
 
 USAGE:
-    $0 --operation [remove|clean-history|list] [options]
+    $0 OPERATION [PATTERN] [options]
 
-OPERATIONS:
+OPERATIONS (positional argument):
     remove          Remove entire project entries matching the pattern
     clean-history   Clear conversation history for matching projects
     list            List projects with conversation history counts
 
-REQUIRED OPTIONS:
-    --operation OPERATION   Operation to perform (remove, clean-history, or list)
-
-CONDITIONAL OPTIONS:
-    --pattern "regex"       Regex pattern to match project paths
-                           (required for remove/clean-history, optional for list)
+PATTERN (positional argument):
+    "regex"         Regex pattern to match project paths
+                   (required for remove/clean-history, optional for list)
 
 OPTIONAL FLAGS:
-    --dry-run              Preview changes without modifying files (remove/clean-history only)
-    --backup-suffix SUFFIX Custom backup file suffix (default: .backup)
-    --verbose              Show detailed output
-    --help                 Show this help message
+    --dry-run      Preview changes without modifying files (remove/clean-history only)
+    --verbose      Show detailed output
+    --help         Show this help message
 
 EXAMPLES:
     # List all projects with history counts
-    $0 --operation list
+    $0 list
 
     # List projects matching a pattern
-    $0 --operation list --pattern ".*temp.*"
+    $0 list ".*temp.*"
 
     # Remove all temporary projects
-    $0 --pattern ".*temp.*" --operation remove
+    $0 remove ".*temp.*"
 
     # Clean history for old projects (dry run)
-    $0 --pattern "/old/.*" --operation clean-history --dry-run
+    $0 clean-history "/old/.*" --dry-run
 
     # Remove test projects with verbose output
-    $0 --pattern "test.*" --operation remove --verbose
-
-    # Clean history with custom backup suffix
-    $0 --pattern ".*legacy.*" --operation clean-history --backup-suffix .old
+    $0 remove "test.*" --verbose
 
 EOF
 }
 
 # Parse command line arguments
+POSITIONAL_COUNT=0
+
 while [[ $# -gt 0 ]]; do
     case $1 in
-        --pattern)
-            PATTERN="$2"
-            shift 2
-            ;;
-        --operation)
-            OPERATION="$2"
-            shift 2
-            ;;
         --dry-run)
             DRY_RUN=true
             shift
-            ;;
-        --backup-suffix)
-            BACKUP_SUFFIX="$2"
-            shift 2
             ;;
         --verbose)
             VERBOSE=true
@@ -101,17 +83,36 @@ while [[ $# -gt 0 ]]; do
             show_help
             exit 0
             ;;
-        *)
+        -*)
             print_error "Unknown option: $1"
             show_help
             exit 1
+            ;;
+        *)
+            # Handle positional arguments
+            POSITIONAL_COUNT=$((POSITIONAL_COUNT + 1))
+            case $POSITIONAL_COUNT in
+                1)
+                    OPERATION="$1"
+                    shift
+                    ;;
+                2)
+                    PATTERN="$1"
+                    shift
+                    ;;
+                *)
+                    print_error "Too many positional arguments. Expected: OPERATION [PATTERN]"
+                    show_help
+                    exit 1
+                    ;;
+            esac
             ;;
     esac
 done
 
 # Validate required arguments
 if [[ -z "$OPERATION" ]]; then
-    print_error "Operation is required. Use --operation [remove|clean-history|list]"
+    print_error "Operation is required. Usage: $0 OPERATION [PATTERN] [options]"
     show_help
     exit 1
 fi
@@ -123,7 +124,7 @@ fi
 
 # Pattern is required for remove and clean-history operations, optional for list
 if [[ "$OPERATION" != "list" && -z "$PATTERN" ]]; then
-    print_error "Pattern is required for '$OPERATION' operation. Use --pattern \"regex\""
+    print_error "Pattern is required for '$OPERATION' operation. Usage: $0 $OPERATION PATTERN [options]"
     show_help
     exit 1
 fi
@@ -239,7 +240,7 @@ print_info "Found $project_count matching project(s)"
 echo
 
 # Create backup if not in dry-run mode
-backup_file="${CLAUDE_JSON}${BACKUP_SUFFIX}"
+backup_file="${CLAUDE_JSON}.backup"
 if [[ "$DRY_RUN" == false ]]; then
     if cp "$CLAUDE_JSON" "$backup_file"; then
         print_success "Backup created: $backup_file"

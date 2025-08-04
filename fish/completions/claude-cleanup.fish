@@ -3,23 +3,16 @@
 # Disable file completions for most options
 complete -c claude-cleanup -f
 
-# Operations
-complete -c claude-cleanup -l operation -d "Operation to perform" -xa "remove clean-history list"
-complete -c claude-cleanup -l operation -d "Remove entire project entries" -xa "remove"
-complete -c claude-cleanup -l operation -d "Clear conversation history" -xa "clean-history"
-complete -c claude-cleanup -l operation -d "List projects with history counts" -xa "list"
+# First positional argument: operations
+complete -c claude-cleanup -n '__fish_is_first_token' -a 'remove' -d 'Remove entire project entries matching pattern'
+complete -c claude-cleanup -n '__fish_is_first_token' -a 'clean-history' -d 'Clear conversation history for matching projects'
+complete -c claude-cleanup -n '__fish_is_first_token' -a 'list' -d 'List projects with conversation history counts'
 
-# Pattern option
-complete -c claude-cleanup -l pattern -d "Regex pattern to match project paths"
+# Second positional argument: directory completions for remove/clean-history, pattern for list
+complete -c claude-cleanup -n '__fish_seen_subcommand_from remove clean-history' -a '(claude-cleanup list 2>/dev/null | sed -n "s/^[[:space:]]*\\([^[:space:]].*[^[:space:]]\\)[[:space:]]*\\[.*\\]\$/\\1/p")' -d 'Project directory'
+complete -c claude-cleanup -n '__fish_seen_subcommand_from list' -a '' -d 'Regex pattern to match project paths (optional)'
 
 # Flags
-complete -c claude-cleanup -l dry-run -d "Preview changes without modifying files"
-complete -c claude-cleanup -l verbose -d "Show detailed output"
-complete -c claude-cleanup -l help -d "Show help message"
-
-# Backup suffix option
-complete -c claude-cleanup -l backup-suffix -d "Custom backup file suffix (default: .backup)"
-
-# Enable file completion only for pattern and backup-suffix arguments
-complete -c claude-cleanup -l pattern -r
-complete -c claude-cleanup -l backup-suffix -r
+complete -c claude-cleanup -l dry-run -d 'Preview changes without modifying files'
+complete -c claude-cleanup -l verbose -d 'Show detailed output'
+complete -c claude-cleanup -l help -d 'Show help message'

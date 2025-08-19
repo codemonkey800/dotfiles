@@ -36,12 +36,16 @@ if status -i
     end
   end
 
-  # startup tmux or connect to existing session
-  if exists tmux; and test -z $TMUX
-    if tmux ls | grep -q main
-      exec tmux a -t (whoami)/main
-    else
-      exec tmux new -s (whoami)/main
+  echo $SKIP_TMUX
+
+  if not set -q SKIP_TMUX
+    # startup tmux or connect to existing session
+    if exists tmux; and test -z $TMUX
+      if tmux ls | grep -q main
+        exec tmux a -t (whoami)/main
+      else
+        exec tmux new -s (whoami)/main
+      end
     end
   end
 end

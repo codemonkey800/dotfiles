@@ -56,8 +56,10 @@ begin
   end
 end
 
-# setup pyenv
-set -Ux PYENV_ROOT $HOME/.pyenv
-fish_add_path $PYENV_ROOT/bin
-pyenv init - fish | source
+# setup pyenv if available
+if type -q pyenv
+  set -Ux PYENV_ROOT $HOME/.pyenv
+  fish_add_path $PYENV_ROOT/bin
+  pyenv init - fish | source
+end
 

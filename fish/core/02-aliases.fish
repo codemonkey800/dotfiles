@@ -38,6 +38,7 @@ __alias wh 'type -P'
 
 switch (uname)
   case Linux
+    __alias claude '/home/jeremy/.claude/local/claude'
     __alias cpu-temps 'watch -n 0.5 "sensors -f | grep Core"'
     __alias lsports 'netstat -pelnut ^ /dev/null'
     __alias pdflatex 'pdflatex -interaction=nonstopmode -shell-escape'

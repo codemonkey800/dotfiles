@@ -36,8 +36,6 @@ if status -i
     end
   end
 
-  echo $SKIP_TMUX
-
   if not set -q SKIP_TMUX
     # startup tmux or connect to existing session
     if exists tmux; and test -z $TMUX

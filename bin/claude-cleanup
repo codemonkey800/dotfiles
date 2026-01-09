@@ -7,10 +7,12 @@ set -euo pipefail
 
 # Default values
 CLAUDE_JSON="${CLAUDE_JSON:-$HOME/.claude.json}"
+CLAUDE_PROJECTS_DIR="${CLAUDE_PROJECTS_DIR:-$HOME/.claude/projects}"
 PATTERN=""
 OPERATION=""
 DRY_RUN=false
 VERBOSE=false
+FORCE=false
 
 # Colors for output
 RED='\033[0;31m'
@@ -25,6 +27,120 @@ print_success() { echo -e "${GREEN}$1${NC}"; }
 print_warning() { echo -e "${YELLOW}$1${NC}"; }
 print_info() { echo -e "${BLUE}$1${NC}"; }
 
+# Convert project path to directory name
+# /Users/jasuncion/.dotfiles -> -Users-jasuncion--dotfiles
+escape_project_path() {
+    local path="$1"
+    # Remove leading ~/ if present and replace with home directory
+    path="${path/#\~/$HOME}"
+    # Replace all / and . with -
+    echo "$path" | sed 's|[/.]|-|g'
+}
+
+# Convert directory name back to project path
+# -Users-jasuncion--dotfiles -> /Users/jasuncion/.dotfiles
+unescape_project_path() {
+    local dir_name="$1"
+    # Replace - with / but handle -- (which represents /.)
+    echo "$dir_name" | sed 's|^-|/|' | sed 's|-|/|g'
+}
+
+# Get directory information for a project
+# Returns: size|file_count|last_activity_timestamp
+get_project_dir_info() {
+    local project_path="$1"
+    local dir_name
+    dir_name=$(escape_project_path "$project_path")
+    local dir_path="$CLAUDE_PROJECTS_DIR/$dir_name"
+
+    if [[ ! -d "$dir_path" ]]; then
+        echo "0|0|0"
+        return
+    fi
+
+    # Get directory size in bytes
+    local size_bytes
+    if [[ "$(uname)" == "Darwin" ]]; then
+        size_bytes=$(find "$dir_path" -type f -exec stat -f%z {} + 2>/dev/null | awk '{s+=$1} END {print s+0}')
+    else
+        size_bytes=$(find "$dir_path" -type f -exec stat -c%s {} + 2>/dev/null | awk '{s+=$1} END {print s+0}')
+    fi
+
+    # Get file count (JSONL files)
+    local file_count
+    file_count=$(find "$dir_path" -type f -name "*.jsonl" 2>/dev/null | wc -l | tr -d ' ')
+
+    # Get last modified timestamp of any file
+    local last_activity=0
+    if [[ "$(uname)" == "Darwin" ]]; then
+        last_activity=$(find "$dir_path" -type f -exec stat -f%m {} + 2>/dev/null | sort -rn | head -1)
+    else
+        last_activity=$(find "$dir_path" -type f -exec stat -c%Y {} + 2>/dev/null | sort -rn | head -1)
+    fi
+    last_activity=${last_activity:-0}
+
+    echo "${size_bytes}|${file_count}|${last_activity}"
+}
+
+# Format bytes to human readable size
+format_bytes() {
+    local bytes=$1
+    if [[ $bytes -eq 0 ]]; then
+        echo "0B"
+    elif [[ $bytes -lt 1024 ]]; then
+        echo "${bytes}B"
+    elif [[ $bytes -lt 1048576 ]]; then
+        echo "$((bytes / 1024))K"
+    elif [[ $bytes -lt 1073741824 ]]; then
+        echo "$((bytes / 1048576))M"
+    else
+        echo "$((bytes / 1073741824))G"
+    fi
+}
+
+# Format timestamp to date
+format_date() {
+    local timestamp=$1
+    if [[ $timestamp -eq 0 ]]; then
+        echo "never"
+    else
+        date -r "$timestamp" "+%Y-%m-%d" 2>/dev/null || echo "unknown"
+    fi
+}
+
+# Delete project directory
+delete_project_directory() {
+    local project_path="$1"
+    local dir_name
+    dir_name=$(escape_project_path "$project_path")
+    local dir_path="$CLAUDE_PROJECTS_DIR/$dir_name"
+
+    if [[ ! -d "$dir_path" ]]; then
+        if [[ "$VERBOSE" == true ]]; then
+            print_info "  No directory found for: $project_path"
+        fi
+        return 0
+    fi
+
+    if [[ "$DRY_RUN" == true ]]; then
+        local size
+        size=$(du -sh "$dir_path" 2>/dev/null | cut -f1)
+        print_warning "  Would delete directory: $dir_path ($size)"
+        return 0
+    fi
+
+    local size
+    size=$(du -sh "$dir_path" 2>/dev/null | cut -f1)
+
+    if rm -rf "$dir_path" 2>/dev/null; then
+        print_success "  Deleted directory: $dir_path ($size freed)"
+        return 0
+    else
+        print_error "  Failed to delete directory: $dir_path"
+        return 1
+    fi
+}
+
 # Usage information
 show_help() {
     cat << EOF
@@ -34,31 +150,42 @@ USAGE:
     $0 OPERATION [PATTERN] [options]
 
 OPERATIONS (positional argument):
-    remove          Remove entire project entries matching the pattern
-    clean-history   Clear conversation history for matching projects
-    list            List projects with conversation history counts
+    remove           Remove entire project entries and their directories
+    clean-history    Clear conversation history for matching projects
+    list             List projects with conversation history and directory info
+    remove-orphans   Remove project directories without .claude.json entries
 
 PATTERN (positional argument):
-    "regex"         Regex pattern to match project paths
-                   (required for remove/clean-history, optional for list)
+    "regex"          Regex pattern to match project paths
+                    (required for remove/clean-history, optional for list)
 
 OPTIONAL FLAGS:
-    --dry-run      Preview changes without modifying files (remove/clean-history only)
-    --verbose      Show detailed output
-    --help         Show this help message
+    --dry-run       Preview changes without modifying files
+    --verbose       Show detailed output
+    --force         Skip confirmation prompts for directory deletion
+    --help          Show this help message
+
+DIRECTORY MANAGEMENT:
+    - Project directories are stored in ~/.claude/projects/
+    - 'remove' operation deletes both .claude.json entry and directory
+    - 'remove-orphans' cleans up directories without .claude.json entries
+    - 'list' operation shows directory size, session count, and last activity
 
 EXAMPLES:
-    # List all projects with history counts
+    # List all projects with directory info
     $0 list
 
     # List projects matching a pattern
     $0 list ".*temp.*"
 
-    # Remove all temporary projects
+    # Remove all temporary projects and their directories
     $0 remove ".*temp.*"
 
     # Clean history for old projects (dry run)
     $0 clean-history "/old/.*" --dry-run
+
+    # Remove orphaned project directories
+    $0 remove-orphans
 
     # Remove test projects with verbose output
     $0 remove "test.*" --verbose
@@ -77,6 +204,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --verbose)
             VERBOSE=true
+            shift
+            ;;
+        --force)
+            FORCE=true
             shift
             ;;
         --help)
@@ -117,13 +248,13 @@ if [[ -z "$OPERATION" ]]; then
     exit 1
 fi
 
-if [[ "$OPERATION" != "remove" && "$OPERATION" != "clean-history" && "$OPERATION" != "list" ]]; then
-    print_error "Invalid operation: $OPERATION. Must be 'remove', 'clean-history', or 'list'"
+if [[ "$OPERATION" != "remove" && "$OPERATION" != "clean-history" && "$OPERATION" != "list" && "$OPERATION" != "remove-orphans" ]]; then
+    print_error "Invalid operation: $OPERATION. Must be 'remove', 'clean-history', 'list', or 'remove-orphans'"
     exit 1
 fi
 
-# Pattern is required for remove and clean-history operations, optional for list
-if [[ "$OPERATION" != "list" && -z "$PATTERN" ]]; then
+# Pattern is required for remove and clean-history operations, optional for list and remove-orphans
+if [[ "$OPERATION" == "remove" || "$OPERATION" == "clean-history" ]] && [[ -z "$PATTERN" ]]; then
     print_error "Pattern is required for '$OPERATION' operation. Usage: $0 $OPERATION PATTERN [options]"
     show_help
     exit 1
@@ -173,27 +304,39 @@ echo
 if [[ "$OPERATION" == "list" ]]; then
     print_info "Projects in $CLAUDE_JSON:"
     echo
-    
+
     # Get all projects or filtered projects based on pattern
     if [[ -n "$PATTERN" ]]; then
         # Filter projects by pattern and show with history counts
         jq -r --arg pattern "$PATTERN" '
-            .projects | 
-            to_entries | 
+            .projects |
+            to_entries |
             map(select(.key | test($pattern))) |
-            map("\(.key)\t\(.value.history | length)")[] 
+            map("\(.key)\t\(.value.history | length)")[]
         ' "$CLAUDE_JSON" 2>/dev/null | while IFS=$'\t' read -r project_path history_count; do
-            printf "  %-50s [%d conversations]\n" "$project_path" "$history_count"
+            # Get directory info
+            dir_info=$(get_project_dir_info "$project_path")
+            IFS='|' read -r size_bytes file_count last_activity <<< "$dir_info"
+
+            size_human=$(format_bytes "$size_bytes")
+            last_date=$(format_date "$last_activity")
+
+            if [[ $size_bytes -eq 0 ]]; then
+                printf "  %-60s [%d conv, no dir]\n" "$project_path" "$history_count"
+            else
+                printf "  %-60s [%d conv, %s, %d sessions, last: %s]\n" \
+                    "$project_path" "$history_count" "$size_human" "$file_count" "$last_date"
+            fi
         done
-        
+
         # Count filtered projects
         filtered_count=$(jq -r --arg pattern "$PATTERN" '
-            .projects | 
-            to_entries | 
-            map(select(.key | test($pattern))) | 
+            .projects |
+            to_entries |
+            map(select(.key | test($pattern))) |
             length
         ' "$CLAUDE_JSON" 2>/dev/null)
-        
+
         echo
         if [[ "$filtered_count" -eq 0 ]]; then
             print_warning "No projects found matching pattern: $PATTERN"
@@ -203,20 +346,122 @@ if [[ "$OPERATION" == "list" ]]; then
     else
         # Show all projects with history counts
         jq -r '
-            .projects | 
-            to_entries | 
-            map("\(.key)\t\(.value.history | length)")[] 
+            .projects |
+            to_entries |
+            map("\(.key)\t\(.value.history | length)")[]
         ' "$CLAUDE_JSON" 2>/dev/null | while IFS=$'\t' read -r project_path history_count; do
-            printf "  %-50s [%d conversations]\n" "$project_path" "$history_count"
+            # Get directory info
+            dir_info=$(get_project_dir_info "$project_path")
+            IFS='|' read -r size_bytes file_count last_activity <<< "$dir_info"
+
+            size_human=$(format_bytes "$size_bytes")
+            last_date=$(format_date "$last_activity")
+
+            if [[ $size_bytes -eq 0 ]]; then
+                printf "  %-60s [%d conv, no dir]\n" "$project_path" "$history_count"
+            else
+                printf "  %-60s [%d conv, %s, %d sessions, last: %s]\n" \
+                    "$project_path" "$history_count" "$size_human" "$file_count" "$last_date"
+            fi
         done
-        
+
         # Count total projects
         total_count=$(jq -r '.projects | length' "$CLAUDE_JSON" 2>/dev/null)
-        
+
         echo
         print_info "Total: $total_count project(s)"
     fi
-    
+
+    exit 0
+fi
+
+# Handle remove-orphans operation separately
+if [[ "$OPERATION" == "remove-orphans" ]]; then
+    print_info "Scanning for orphaned project directories..."
+    echo
+
+    if [[ ! -d "$CLAUDE_PROJECTS_DIR" ]]; then
+        print_warning "Projects directory does not exist: $CLAUDE_PROJECTS_DIR"
+        exit 0
+    fi
+
+    # Get all project paths from .claude.json and escape them for comparison
+    known_dir_names=()
+    while IFS= read -r project_path; do
+        escaped=$(escape_project_path "$project_path")
+        known_dir_names+=("$escaped")
+    done < <(jq -r '.projects | keys[]' "$CLAUDE_JSON" 2>/dev/null)
+
+    # Find all directories in projects directory
+    orphaned_dirs=()
+    total_orphaned_size=0
+
+    for dir in "$CLAUDE_PROJECTS_DIR"/*; do
+        if [[ ! -d "$dir" ]]; then
+            continue
+        fi
+
+        dir_name=$(basename "$dir")
+
+        # Check if this directory name matches any known project
+        is_orphan=true
+        for known_dir in "${known_dir_names[@]}"; do
+            if [[ "$dir_name" == "$known_dir" ]]; then
+                is_orphan=false
+                break
+            fi
+        done
+
+        if [[ "$is_orphan" == true ]]; then
+            orphaned_dirs+=("$dir")
+            dir_size=$(du -sk "$dir" 2>/dev/null | cut -f1)
+            total_orphaned_size=$((total_orphaned_size + dir_size))
+
+            size_human=$(du -sh "$dir" 2>/dev/null | cut -f1)
+            print_warning "  Orphaned: $dir_name ($size_human)"
+        fi
+    done
+
+    orphan_count=${#orphaned_dirs[@]}
+    echo
+
+    if [[ $orphan_count -eq 0 ]]; then
+        print_success "No orphaned directories found!"
+        exit 0
+    fi
+
+    print_info "Found $orphan_count orphaned director(ies)"
+    total_size_human=$(format_bytes $((total_orphaned_size * 1024)))
+    print_info "Total space: $total_size_human"
+    echo
+
+    if [[ "$DRY_RUN" == true ]]; then
+        print_warning "DRY RUN: Would delete $orphan_count orphaned director(ies)"
+        exit 0
+    fi
+
+    # Confirm deletion unless --force is used
+    if [[ "$FORCE" == false ]]; then
+        read -p "Delete these orphaned directories? (y/N): " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            print_info "Cancelled."
+            exit 0
+        fi
+    fi
+
+    # Delete orphaned directories
+    print_info "Deleting orphaned directories..."
+    for dir in "${orphaned_dirs[@]}"; do
+        size=$(du -sh "$dir" 2>/dev/null | cut -f1)
+        if rm -rf "$dir" 2>/dev/null; then
+            print_success "  Deleted: $dir ($size freed)"
+        else
+            print_error "  Failed to delete: $dir"
+        fi
+    done
+
+    print_success "Cleanup completed!"
     exit 0
 fi
 
@@ -254,21 +499,33 @@ fi
 case $OPERATION in
     "remove")
         print_info "Removing matching projects..."
-        
+
         if [[ "$VERBOSE" == true ]]; then
             print_info "jq command: del(.projects | to_entries[] | select(.key | test(\"$PATTERN\")) | .key)"
         fi
-        
+
         if [[ "$DRY_RUN" == true ]]; then
-            print_warning "DRY RUN: Would remove $project_count project(s)"
+            print_warning "DRY RUN: Would remove $project_count project(s) from .claude.json"
+            echo
+            print_info "Would also delete the following directories:"
+            echo "$matching_projects" | while read -r project; do
+                delete_project_directory "$project"
+            done
         else
-            # Remove projects matching the pattern
+            # Remove projects matching the pattern from .claude.json
             jq --arg pattern "$PATTERN" '
                 .projects |= with_entries(select(.key | test($pattern) | not))
             ' "$CLAUDE_JSON" > "${CLAUDE_JSON}.tmp"
-            
+
             if mv "${CLAUDE_JSON}.tmp" "$CLAUDE_JSON"; then
-                print_success "Successfully removed $project_count project(s)"
+                print_success "Successfully removed $project_count project(s) from .claude.json"
+
+                # Delete project directories
+                echo
+                print_info "Deleting project directories..."
+                echo "$matching_projects" | while read -r project; do
+                    delete_project_directory "$project"
+                done
             else
                 print_error "Failed to update configuration file"
                 # Restore backup
@@ -280,7 +537,7 @@ case $OPERATION in
             fi
         fi
         ;;
-        
+
     "clean-history")
         print_info "Cleaning history for matching projects..."
         

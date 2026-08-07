@@ -16,6 +16,9 @@ function ls-aliases
 end
 
 __alias c 'copy'
+__alias __cc 'claude --dangerously-skip-permissions'
+__alias cc '__cc --model sonnet[1m] --effort max'
+__alias ccm '__cc --model opus[1m] --effort max'
 __alias cat 'bat'
 __alias copy 'rsync -aP --filter=":- .gitignore"'
 __alias dc 'docker-compose'

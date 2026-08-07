@@ -44,10 +44,12 @@ if status -i
   if not set -q SKIP_TMUX
     # startup tmux or connect to existing session
     if exists tmux; and test -z $TMUX
-      if tmux ls | grep -q main
-        exec tmux -u a -t (whoami)/main
+      if tmux has-session -t main 2>/dev/null
+        exec tmux -u a -t main
+      else if tmux ls 2>/dev/null | head -1 | string replace -r ':.*' '' | read -l first_session
+        exec tmux -u a -t $first_session
       else
-        exec tmux -u new -s (whoami)/main
+        exec tmux -u new -s main
       end
     end
   end

@@ -33,3 +33,33 @@ end
 
 __setup_autoenv
 
+function __setup_nvm_auto_use --on-variable PWD
+    set -l nvmrc_path ""
+    set -l dir $PWD
+
+    while test "$dir" != "/"
+        if test -f "$dir/.nvmrc"
+            set nvmrc_path "$dir/.nvmrc"
+            break
+        end
+        set dir (dirname $dir)
+    end
+
+    if test -z "$nvmrc_path"
+        return
+    end
+
+    set -l nvmrc_version (string trim (cat $nvmrc_path))
+
+    if test "$nvmrc_path" = "$__NVM_LAST_NVMRC_PATH" \
+    -a "$nvmrc_version" = "$__NVM_LAST_NVMRC_VERSION"
+        return
+    end
+
+    nvm use $nvmrc_version
+    set -g __NVM_LAST_NVMRC_PATH $nvmrc_path
+    set -g __NVM_LAST_NVMRC_VERSION $nvmrc_version
+end
+
+__setup_nvm_auto_use
+

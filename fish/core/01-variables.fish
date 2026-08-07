@@ -17,7 +17,13 @@ set PATH \
   /opt/homebrew/opt/libpq/bin \
   $DOTFILES/bin \
   ./node_modules/.bin \
+  ~/go/bin \
   $PATH
+
+# codex needs a dummy key when no real OpenAI key is set
+if type -q codex; and not set -q OPENAI_API_KEY
+  set -gx OPENAI_API_KEY dummy
+end
 
 # macOS specific vars
 if test (uname) = 'Darwin'

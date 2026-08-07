@@ -1,3 +1,7 @@
+# Machine-managed proxy config, if present — must stay first
+[include]
+    path = ~/.gitconfig-proxy
+
 [alias]
   # my aliases
   a = add
@@ -93,17 +97,22 @@
   insteadOf = aur:
 
 [user]
-  email = jeremyasuncion808@gmail.com
+	email = jeremyasuncion808@gmail.com
   name = Jeremy
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAr5xGcZUnm371sT72acNK+2CtNRXYALA3XpkRgtxg6n
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHIPy0r8inDZlr9p41/XOrE1WTxByOV137BcTQFdGp5L
 
 [gpg "ssh"]
   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [http]
 	sslbackend = openssl
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
+
+# Conditional/machine-local overrides (never tracked here — see secrets/) —
+# must come last so they win over the defaults above
+[include]
+    path = ~/.gitconfig-local

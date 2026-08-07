@@ -1,9 +1,7 @@
-#!/opt/homebrew/bin/fish
-
-alias create_link 'ln -svf'
+#!/usr/bin/env fish
 
 function create_link
-  ln -svF $argv \
+  ln -svf $argv \
     | string replace $HOME '~' \
     | string replace $PWD "$(basename $PWD)" \
       | sed 's/^/  /'
@@ -39,13 +37,13 @@ function setup_fish
 end
 
 function setup_vscode
-  set -l vscode_path 'vscode'
-
-  if test (uname) = 'Darwin'
-    set vscode_path ~/Library/Application\ Support/Code/User
+  # No desktop VS Code to link settings into on a headless box — Remote-SSH
+  # keeps its own config under ~/.vscode-server/, unrelated to this.
+  if test (uname) != 'Darwin'
+    return
   end
 
-  create_link $PWD/vscode/*.json $vscode_path
+  create_link $PWD/vscode/*.json ~/Library/Application\ Support/Code/User
 end
 
 function setup_nvim

@@ -13,6 +13,11 @@ for core_script in $DOTFILES/fish/core/*.fish
   source $core_script
 end
 
+# Optional machine-local overrides, restored by setup.fish's secrets step — never tracked here
+if test -f ~/.config/fish/local.fish
+  source ~/.config/fish/local.fish
+end
+
 # keep only unique paths
 set PATH (paths | awk '!x[$0]++')
 

@@ -1,3 +1,7 @@
 node_modules
 yarn-error.log
 __pycache__
+
+# only encrypted blobs may be committed from secrets/
+secrets/*
+!secrets/*.diff

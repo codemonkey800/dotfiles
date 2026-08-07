@@ -53,13 +53,51 @@ function setup_nvim
   create_link $PWD/nvim/* ~/etc/nvim
 end
 
+function setup_tmux
+  create_link $PWD/tmux/{*,.*} ~
+  if not test -d ~/.tmux/plugins/tpm
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  end
+end
+
+# .npmrc needs machine-local additions appended (see setup_secrets), which a
+# symlink back into the repo can't safely hold — keep it a real, regenerated copy
+function setup_npmrc
+  if test -L ~/.npmrc
+    rm ~/.npmrc
+  end
+  cp $PWD/core/.npmrc ~/.npmrc
+end
+
+# Decrypts and runs secrets/*.diff (age-encrypted despite the extension — see
+# .gitignore) if this machine has the private key. No-ops otherwise, so the
+# repo stays fully usable without it.
+function setup_secrets
+  set -l key ~/.config/age/dotfiles.key
+
+  if not test -f $key
+    return
+  end
+
+  if not type -q age
+    echo "setup_secrets: age not installed, skipping $key-gated secrets"
+    return
+  end
+
+  for enc in $PWD/secrets/*.diff
+    age -d -i $key $enc | bash
+  end
+end
+
 function setup
   setup_dirs
   create_link $PWD/core/{*,.*} ~
+  setup_npmrc
   setup_fish
-  create_link $PWD/tmux/{*,.*} ~
+  setup_tmux
   setup_vscode
   setup_nvim
+  setup_secrets
 end
 
 setup | sort

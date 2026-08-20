@@ -22,25 +22,6 @@ end
 set PATH (paths | awk '!x[$0]++')
 
 if status -i
-  # Don't use keychain for macOS
-  if test (uname) != 'Darwin'
-    set -l keys (
-      for f in ~/.ssh/*.pub
-        echo ~/.ssh/(basename $f .pub)
-      end
-    )
-
-    if test (count $keys) -gt 0
-      env SHELL=fish keychain \
-        --agents ssh \
-        --eval \
-        --nogui \
-        --quick \
-        --quiet \
-        $keys | source
-    end
-  end
-
   if test "$TERM_PROGRAM" = vscode
     set -g SKIP_TMUX 1
   end

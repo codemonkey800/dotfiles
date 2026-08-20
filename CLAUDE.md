@@ -54,7 +54,7 @@ Custom Fish functions in `fish/functions/` provide utilities like:
 - **Editor**: Neovim (`$EDITOR`)
 - **Python**: pyenv integration for version management
 - **Tmux**: Auto-starts main session for interactive shells
-- **GPG/SSH**: Keychain integration on Linux, native on macOS
+- **GPG/SSH**: Native agent integration
 - **Theme**: bobthefish with Nerd Fonts support
 
 ## Platform Differences

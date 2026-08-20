@@ -41,6 +41,10 @@ if status -i
     end
   end
 
+  if test "$TERM_PROGRAM" = vscode
+    set -g SKIP_TMUX 1
+  end
+
   if not set -q SKIP_TMUX
     # startup tmux or connect to existing session
     if exists tmux; and test -z $TMUX

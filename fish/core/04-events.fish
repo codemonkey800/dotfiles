@@ -26,7 +26,7 @@ function __setup_autoenv --on-variable PWD
   end
 
   if test $env_script != ''
-    echo "Using env script $env_script"
+    # echo "Using env script $env_script"
     source $env_script
   end
 end

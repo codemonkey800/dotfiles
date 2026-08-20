@@ -99,7 +99,6 @@
 [user]
 	email = jeremyasuncion808@gmail.com
   name = Jeremy
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHIPy0r8inDZlr9p41/XOrE1WTxByOV137BcTQFdGp5L
 
 [gpg "ssh"]
   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"

@@ -13,8 +13,6 @@ set -g theme_nerd_fonts yes
 
 # PATH stuff
 set PATH \
-  /opt/homebrew/bin \
-  /opt/homebrew/opt/libpq/bin \
   $DOTFILES/bin \
   ./node_modules/.bin \
   ~/go/bin \
@@ -32,7 +30,7 @@ if test (uname) = 'Darwin'
   set PATH \
       $PATH \
       ~/Library/Python/*/bin \
-      $ANDROID_HOME/emulator \
-      $ANDROID_HOME/platform-tools \
+      /opt/homebrew/bin \
+      /opt/homebrew/opt/libpq/bin \
       ~/.claude/local
 end

@@ -75,41 +75,15 @@
 [gpg]
 	format = ssh
 
-[hub]
-  protocol = ssh
-
 [tar "xz"]
   command = xz -c
-
-[url "git@github.com:"]
-  insteadOf = gh:
-
-[url "git@gitlab.com:"]
-  insteadOf = gl:
-
-[url "git@github.com:codemonkey800/"]
-  insteadOf = gh:me/
-
-[url "git@gitlab.com:codemonkey800/"]
-  insteadOf = gl:me/
-
-[url "ssh://aur@aur.archlinux.org/"]
-  insteadOf = aur:
 
 [user]
 	email = jeremyasuncion808@gmail.com
   name = Jeremy
 
-[gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [http]
 	sslbackend = openssl
-[credential "https://github.com"]
-	helper =
-	helper = !/opt/homebrew/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper =
-	helper = !/opt/homebrew/bin/gh auth git-credential
 
 # Conditional/machine-local overrides (never tracked here — see secrets/) —
 # must come last so they win over the defaults above

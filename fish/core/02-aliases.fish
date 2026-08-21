@@ -15,6 +15,9 @@ function ls-aliases
   end
 end
 
+if type -q batcat
+  __alias bat 'batcat'
+end
 __alias c 'copy'
 __alias __cc 'claude --dangerously-skip-permissions'
 __alias cc '__cc --model sonnet[1m] --effort max'
@@ -61,4 +64,3 @@ switch (uname)
 end
 
 functions -e __alias
-

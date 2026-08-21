@@ -16,6 +16,7 @@ set PATH \
   $DOTFILES/bin \
   ./node_modules/.bin \
   ~/go/bin \
+  ~/.local/bin \
   $PATH
 
 # codex needs a dummy key when no real OpenAI key is set

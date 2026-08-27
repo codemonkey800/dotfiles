@@ -99,17 +99,22 @@ than silently dropping it.
 
 | # | Section | Carries |
 |---|---|---|
-| 1 | **Title + framing** | What this delivers, in a table of one-sentence rows, plus a mermaid overview |
-| 2 | **How to work this plan** | The execution protocol — checkboxes, `/commit`, status markers |
-| 3 | **Instructions for the orchestrator** | Delegation rules, if this plan is orchestrated |
-| 4 | **Design decisions** | What was chosen, why, and what was ruled out |
-| 5 | **Shared Context Pack** | Everything a sub-agent needs pasted into its prompt |
-| 6 | **Task List** | Grouped checkboxes — the body of the plan |
-| 7 | **Sequencing** | DAG, waves, dependency table, critical path, human checkpoints |
-| 8 | **Final report** | What the executor reports when the last box is checked |
+| 1 | **TL;DR** | 3–6 plain-language bullets — what's changing and why, for a human deciding whether to read on |
+| 2 | **Title + framing** | What this delivers, in a table of one-sentence rows, plus a mermaid overview |
+| 3 | **How to work this plan** | The execution protocol — checkboxes, `/commit`, status markers |
+| 4 | **Instructions for the orchestrator** | Delegation rules, if this plan is orchestrated |
+| 5 | **Design decisions** | What was chosen, why, and what was ruled out |
+| 6 | **Shared Context Pack** | Everything a sub-agent needs pasted into its prompt |
+| 7 | **Task List** | Grouped checkboxes — the body of the plan |
+| 8 | **Sequencing** | DAG, waves, dependency table, critical path, human checkpoints |
+| 9 | **Final report** | What the executor reports when the last box is checked |
 
-`reference/template.md` is the fill-in skeleton, with sections 2, 3, 5's Definition of
-Done, and 8 written out verbatim — copy them, adapt the placeholders.
+The TL;DR is the one section written for a human, not the executor — no task IDs, no
+file paths, no execution jargon. Just what's changing and why, in sentences that stand
+on their own for someone who never reads past it.
+
+`reference/template.md` is the fill-in skeleton, with sections 3, 4, 6's Definition of
+Done, and 9 written out verbatim — copy them, adapt the placeholders.
 
 Write the prose per the `bruh` skill's compose mode: bullets over walls, mermaid for
 anything with shape, bold the key term not the sentence.

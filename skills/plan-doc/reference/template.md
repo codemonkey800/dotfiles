@@ -13,6 +13,18 @@ either way.
 
 # {{ Title — what this delivers }} — `{{ package or area }}`
 
+## TL;DR
+
+{{ 3–6 bullets, plain language, for a human deciding whether to read on — not the
+executor. No task IDs, no file paths, no jargon that needs the rest of the doc to
+parse. What's changing, why, and the scope. }}
+
+- {{ bullet }}
+- {{ bullet }}
+- {{ bullet }}
+
+---
+
 {{ One paragraph: what changes, and what's true when it's done. Link the spec, the
 parent plan, or the phase this implements. }}
 

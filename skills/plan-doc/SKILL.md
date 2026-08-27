@@ -99,22 +99,27 @@ than silently dropping it.
 
 | # | Section | Carries |
 |---|---|---|
-| 1 | **TL;DR** | 3–6 plain-language bullets — what's changing and why, for a human deciding whether to read on |
-| 2 | **Title + framing** | What this delivers, in a table of one-sentence rows, plus a mermaid overview |
-| 3 | **How to work this plan** | The execution protocol — checkboxes, `/commit`, status markers |
-| 4 | **Instructions for the orchestrator** | Delegation rules, if this plan is orchestrated |
-| 5 | **Design decisions** | What was chosen, why, and what was ruled out |
-| 6 | **Shared Context Pack** | Everything a sub-agent needs pasted into its prompt |
-| 7 | **Task List** | Grouped checkboxes — the body of the plan |
-| 8 | **Sequencing** | DAG, waves, dependency table, critical path, human checkpoints |
-| 9 | **Final report** | What the executor reports when the last box is checked |
+| 1 | **Overview** | The human's map of the plan — what's changing, why, its shape, and the key decisions in brief, with links down into every section below |
+| 2 | **How to work this plan** | The execution protocol — checkboxes, `/commit`, status markers |
+| 3 | **Instructions for the orchestrator** | Delegation rules, if this plan is orchestrated |
+| 4 | **Design decisions** | What was chosen, why, and what was ruled out |
+| 5 | **Shared Context Pack** | Everything a sub-agent needs pasted into its prompt |
+| 6 | **Task List** | Grouped checkboxes — the body of the plan |
+| 7 | **Sequencing** | DAG, waves, dependency table, critical path, human checkpoints |
+| 8 | **Final report** | What the executor reports when the last box is checked |
 
-The TL;DR is the one section written for a human, not the executor — no task IDs, no
-file paths, no execution jargon. Just what's changing and why, in sentences that stand
-on their own for someone who never reads past it.
+The doc is a mix of two audiences: a human deciding whether this is the right plan, and
+an executor that needs every file path and edge case spelled out. The Overview is where
+the human's read ends and the executor's detail begins — concise and plain language, but
+not thin. A reader who stops there should still know what's changing, why, how it's
+structured, and what was decided. Anything that needs more gets a link down to where the
+detail actually lives — `[Design decisions](#design-decisions)` for the why,
+`[Task List](#task-list)` for the what, `[Sequencing](#sequencing)` for the order and the
+human checkpoints — so the reader chooses their own depth instead of scrolling past detail
+built for a sub-agent.
 
-`reference/template.md` is the fill-in skeleton, with sections 3, 4, 6's Definition of
-Done, and 9 written out verbatim — copy them, adapt the placeholders.
+`reference/template.md` is the fill-in skeleton, with sections 2, 3, 5's Definition of
+Done, and 8 written out verbatim — copy them, adapt the placeholders.
 
 Write the prose per the `bruh` skill's compose mode: bullets over walls, mermaid for
 anything with shape, bold the key term not the sentence.

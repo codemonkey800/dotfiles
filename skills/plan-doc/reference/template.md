@@ -13,20 +13,14 @@ either way.
 
 # {{ Title — what this delivers }} — `{{ package or area }}`
 
-## TL;DR
+## Overview
 
-{{ 3–6 bullets, plain language, for a human deciding whether to read on — not the
-executor. No task IDs, no file paths, no jargon that needs the rest of the doc to
-parse. What's changing, why, and the scope. }}
+> This section is written for a human, not the executor — plain language, no task IDs,
+> no file paths. Everything below it is written for whoever (or whatever) implements
+> the plan. If a claim here needs more, it links to where the detail lives.
 
-- {{ bullet }}
-- {{ bullet }}
-- {{ bullet }}
-
----
-
-{{ One paragraph: what changes, and what's true when it's done. Link the spec, the
-parent plan, or the phase this implements. }}
+{{ One paragraph: what's changing, and why. Link the spec, the parent plan, or the phase
+this implements. }}
 
 | Feature | In one sentence |
 | --- | --- |
@@ -39,7 +33,20 @@ graph LR
   A --> B[{{ outcome }}]
 ```
 
+**Shape:** {{ one line — e.g. "One doc, groups A–D, 2 waves" or "4 phases, orchestrated,
+worktree-isolated sub-agents" }}
+
+**Key decisions:**
+- {{ decision, one line, no jargon }} — why: {{ one line }}
+- {{ decision, one line, no jargon }} — why: {{ one line }}
+
+  See [Design decisions](#design-decisions) for the full reasoning and what was ruled out.
+
 > **Accepted gap:** {{ what this deliberately does not solve, and why that's fine }}
+
+**Read next:** [Design decisions](#design-decisions) for the why · [Task
+List](#task-list) for the work itself · [Sequencing](#sequencing) for the order and the
+human checkpoints · [Final report](#final-report) for what "done" reports back.
 
 ---
 

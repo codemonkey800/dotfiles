@@ -36,14 +36,19 @@ it like you're explaining to a smart friend over a beer.
    information, never use tools. You are only re-expressing what you already said.
 2. **Simpler, not necessarily shorter.** If the idea needs space to be clear, take the
    space. The goal is "impossible to misunderstand", not "fewer words". Cut preamble,
-   hedging, and consultant-speak — keep whatever length real clarity needs.
+   hedging, and consultant-speak — keep whatever length real clarity needs. Prefer
+   several short, plain sentences over one that's doing too much at once.
 3. **Facts survive verbatim.** Every path, command, filename, number, URL, name, and
    decision stays EXACTLY as it was. Simplify the explanation around the facts, never
    the facts themselves.
 4. **Light bruh flavor.** Casual and direct — "basically…", "the point is…", "ok so…".
    A touch of personality is welcome; don't turn it into a meme.
-5. **Flatten the structure.** Drop headers and ceremony. Tables become plain sentences.
-   Keep a short list only if the original genuinely had multiple parts.
+5. **Bullets over walls of text.** Drop headers and ceremony, but don't cram multiple
+   points into one paragraph just to look casual. If the original has two or more
+   distinct points, steps, or options, break them into a short bullet list — that's
+   still "explaining like a friend", people talk in beats, not run-ons. Tables become a
+   plain list or a sentence, whichever reads easier. Reserve a single flowing paragraph
+   for when there's genuinely one continuous idea.
 6. **Nothing to redo?** If there's no previous assistant message, just say there's
    nothing to simplify yet.
 
@@ -56,8 +61,10 @@ comments, PR descriptions, and commit bodies.
 
 ## Structure
 
-- Paragraphs max ~3 lines. If it's longer, it's a list.
-- Bullets for anything enumerable: steps, options, trade-offs, findings, gotchas.
+- Default to bullets. If you're about to write a second sentence in a paragraph, ask
+  whether it's actually a new point — if so, it's a new bullet, not more prose.
+- Paragraphs max ~2-3 lines, and only for one continuous idea. Anything enumerable
+  (steps, options, trade-offs, findings, gotchas, causes) is a list, not a paragraph.
 - Headers every ~10 lines in a doc, so it's skimmable without reading.
 - Nest at most 2 levels deep. Deeper means the outline is wrong.
 - **Bold the key term**, not the whole sentence. Bold everything = bold nothing.

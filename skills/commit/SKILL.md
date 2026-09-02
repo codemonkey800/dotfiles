@@ -1,27 +1,28 @@
 ---
 name: commit
 description: |
-  Create git commits with surgical, line-level staging via the hunk CLI. Use when the
+  Create git commits with surgical, hunk-level staging via the git-hunk CLI. Use when the
   user says "commit", "commit this", "save my changes", "create a commit", or types
   /commit. By default, commits the current session's uncommitted changes if it made
   any, otherwise every uncommitted change on the branch — split into coherent commits
-  by staging specific line ranges rather than whole files. Accepts an optional scope to
-  commit only part of the work, or "everything" to force branch-wide instead of the
-  session default. Counts edits made by sub-agents as session work. Takes an optional
-  `in:<path>` to commit inside a specific worktree rather than the current directory.
-  Falls back to file-level staging when hunk is unavailable.
+  by staging specific hunks (or specific lines within a hunk) rather than whole files.
+  Accepts an optional scope to commit only part of the work, or "everything" to force
+  branch-wide instead of the session default. Counts edits made by sub-agents as session
+  work. Takes an optional `in:<path>` to commit inside a specific worktree rather than
+  the current directory. Falls back to file-level staging when git-hunk is unavailable.
 user-invocable: true
 argument-hint: "[optional scope — e.g. 'only the auth changes', 'just src/api.ts', 'one commit', 'everything'; optional 'in:<abs worktree path>']"
 ---
 
 # Commit
 
-Create well-scoped git commits from the working tree, staging **specific lines** rather
-than whole files.
+Create well-scoped git commits from the working tree, staging **specific hunks** — or
+specific lines within a hunk — rather than whole files.
 
 A single file's changes often contain several unrelated concerns — sometimes written by
-different agent sessions. File-level staging collapses them into one commit. `hunk`
-(`~/go/bin/hunk`) is a line-level staging CLI that splits them properly.
+different agent sessions. File-level staging collapses them into one commit. `git-hunk`
+is a non-interactive, hunk-level staging CLI (installed via `uv tool install git-hunk`,
+on `$PATH`) that splits them properly.
 
 ## Input
 
@@ -49,11 +50,11 @@ cd "$WORK_DIR" || exit 1
 git rev-parse --show-toplevel   # sanity: confirm this is a work tree at all
 ```
 
-**Every `git` and `hunk` invocation in this skill runs against `$WORK_DIR`.** A `cd`
+**Every `git` and `git-hunk` invocation in this skill runs against `$WORK_DIR`.** A `cd`
 does not persist between `Bash` tool calls, so **each Bash block below must begin by
 re-entering it**. Without that, an `in:` caller gets a skill that silently operates on
 the wrong tree: it finds that tree clean, reports "nothing to commit," and the work it
-was asked to commit stays uncommitted (Gotcha #12).
+was asked to commit stays uncommitted (Gotcha #11).
 
 Callers that hand off work done in a worktree — the `plan` skill, anything driving
 sub-agents — must pass `in:` explicitly. A harness that "enters" a worktree generally
@@ -72,9 +73,12 @@ One deliberate asymmetry: `$PROJECT_KEY` in Step 1 is derived from **ambient `pw
    way is expected and fine, as long as it's reported. What's never fine, no matter how
    scope was set: silently skipping something in scope, or sweeping leftovers into an
    unexplained catch-all commit.
-2. **Dry-run before every real stage.** `hunk stage` can stage a **superset** of your
-   selection (Gotcha #3). The dry-run is the only way to know what you are about to
-   commit. This is the single most important rule in this skill.
+2. **Preview before every risky operation.** Whole-hunk and whole-path selections are
+   safe to commit directly — the `show` output from Step 2 already **is** the preview.
+   But a *partial* selection within a hunk (`-l`, `--include-matching`,
+   `--exclude-matching`) has no preview built into `git-hunk commit` (Gotcha #7) — run
+   the equivalent `git-hunk stage ... --dry-run` first and compare its output against
+   your intent before committing for real.
 
 There is deliberately **no protected-branch check** — committing directly to `main` is a
 normal workflow here. Do not warn, do not prompt.
@@ -87,7 +91,7 @@ Run both guards:
 
 ```bash
 cd "$WORK_DIR" || exit 1
-~/go/bin/hunk version || echo "HUNK_UNAVAILABLE"
+git-hunk --version || echo "HUNK_UNAVAILABLE"
 git diff --cached --quiet || echo "INDEX_DIRTY"
 ```
 
@@ -95,12 +99,13 @@ The `||` marker idiom is used instead of `$?` because it behaves identically in 
 zsh, and fish — `$?` is invalid in fish and would fail silently.
 
 - **`HUNK_UNAVAILABLE`** printed → the binary is missing or broken. Jump to
-  [Fallback](#fallback-no-hunk) and use file-level staging.
-- **`INDEX_DIRTY`** printed → content is **already staged**. `hunk stage` reads *unstaged*
-  changes only and is blind to the index (Gotcha #4), so anything pre-staged would land
-  in the first commit regardless of how you group. Run `git reset` to unstage it, then
-  plan from the full working-tree diff. This is lossless under commit-everything — the
-  content still gets committed, just in the right commit. **Report that you did this.**
+  [Fallback](#fallback-no-git-hunk) and use file-level staging.
+- **`INDEX_DIRTY`** printed → content is **already staged**. `git-hunk stage` tolerates a
+  dirty index fine (it staged content sits alongside whatever it adds), but
+  `git-hunk commit` **refuses to run at all** while anything is pre-staged (Gotcha #4) —
+  every commit call in Step 5 would abort. Run `git reset` to unstage it, then plan from
+  the full working-tree diff. This is lossless under commit-everything — the content
+  still gets committed, just in the right commit. **Report that you did this.**
 
 ## Step 1 — Resolve scope
 
@@ -127,7 +132,7 @@ fi
 
 # Sub-agent turns are NOT in $TRANSCRIPT. They live one per worker in a sibling
 # directory named after the session id, so a top-level-only read misses every edit a
-# sub-agent made (Gotcha #11). Same schema, and jq accepts multiple files, so the
+# sub-agent made (Gotcha #10). Same schema, and jq accepts multiple files, so the
 # filter below is unchanged. Deriving the directory by stripping `.jsonl` keeps this
 # working under the newest-mtime fallback above. `*.jsonl` also correctly skips the
 # `agent-<id>.meta.json` sidecars.
@@ -207,34 +212,36 @@ One batched command:
 ```bash
 cd "$WORK_DIR" || exit 1
 printf '=== STATUS ===\n'; git status --short
-printf '\n=== STAGED STAT ===\n'; git diff --cached --stat
 printf '\n=== BRANCH ===\n'; git branch --show-current
 printf '\n=== LOG ===\n'; git log --oneline -10
 ```
 
-Then the line-level view:
+Then the hunk-level view — **do this once**, per git-hunk's own bundled workflow:
 
 ```bash
 cd "$WORK_DIR" || exit 1
-~/go/bin/hunk diff                # compact, line-numbered
-~/go/bin/hunk diff --stage-hints  # ready-to-run candidate stage commands
+git-hunk list   # inventory: every unstaged/staged hunk's ID + header, plus untracked files
+git-hunk show   # full diff body for every hunk, with IDs and 1-based line positions
 ```
 
-`hunk` reads the tree it is run in and takes no `-C`-style flag, which is exactly why
-`$WORK_DIR` is entered with `cd` rather than threaded through per-command options.
+`show`'s output **is** the preview for whole-hunk work: read it once, plan every commit
+from it, and record the IDs you intend to use. Do not also run `git diff`, `cat`, or a
+single-ID `show` unless information is genuinely missing — and never run `git diff
+HEAD`; git-hunk's output supersedes it and is what carries stable, addressable IDs.
 
-`--stage-hints` prints commands like `hunk stage src/App.tsx:86,151-163` — the best
-starting point for building selections. Use `~/go/bin/hunk diff --json` only when you
-need precise line math; its shape is:
+Use `git-hunk list --json` / `git-hunk show --json` only when you need precise
+programmatic access. Shape (`schema_version: 2`):
 
 ```
-{ files: [ { path, status(modified|new|deleted|renamed), old_path?, binary?,
-             hunks: [ { header, section,
-                        lines: [ { op(add|delete|context), content, old_line?, new_line? } ] } ] } ],
-  untracked: [ paths ] }
+list --json: { schema_version, hunks: [ { id, id_stability, file: {text},
+               status(unstaged|staged|untracked), change_kind(M|D|A|...),
+               a_mode, b_mode, binary, header, context_before, additions, deletions } ] }
+show --json: same per-hunk shape, plus lines: [ { n, op(" "|"-"|"+"), content: {text} } ]
+             — `n` is the 1-based body position `-l` addresses (counts context lines)
 ```
 
-**Do not run `git diff HEAD`.** Hunk's output supersedes it and is line-addressable.
+Untracked files appear in `list`/`show` with `status: "untracked"` and `id: ""` — they
+have no Hunk ID (Gotcha #2).
 
 - **Clean tree** (no staged, modified, or untracked files) → report nothing to commit and
   stop.
@@ -253,28 +260,34 @@ Priority order:
 3. **Default** — conventional commits: `type(scope): description`, where type is one of
    `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `perf`, `ci`, `style`, `build`.
 
-## Step 4 — Group at line level
+## Step 4 — Group at hunk level
 
-Build an inventory from the hunk diff: file → hunk → line ranges. **Every changed line
-must be assigned to exactly one group.** That assignment is the completeness invariant.
+Build an inventory from the `list`/`show` output: file → hunk ID → (optionally) line
+positions within it. **Every changed hunk, line, and untracked file must be assigned to
+exactly one group.** That assignment is the completeness invariant.
 
-- **Group by concern, not by file.** One file may contribute lines to several commits;
-  one commit may span several files.
+- **Group by concern, not by file.** One file may contribute several hunks to several
+  commits; one commit may span several files (`git-hunk commit` accepts multiple
+  IDs/paths at once).
 - **Session-vs-foreign origin is a hint for drawing boundaries, not a filter.** Changes
   you did not make are still committed — they just tend to belong in their own commit.
-- **Untracked files** (the `untracked[]` array): hunk cannot stage these at all
-  (Gotcha #2). Use `git add <explicit path>` — all-or-nothing, never `git add -A` or
-  `git add .`. Included by default.
+- **A whole file is a valid unit.** A Repository path selects every hunk in that file at
+  once, and beats an ID when the entire file belongs in one commit.
+- **Untracked files**: git-hunk cannot stage or commit these at all — `stage`/`commit`
+  on an untracked path fails with `no changed file matches` (Gotcha #2). Use
+  `git add <explicit path>` — all-or-nothing, never `git add -A` or `git add .`. Included
+  by default.
   - **Safety carve-out:** paths matching `.env*`, `*.pem`, `*.key`, `*credential*`,
     `*secret*` are **surfaced and confirmed, not silently added.** This is the one place
     the skill will not blindly commit everything.
-- **Binary, deleted, and renamed files** cannot be line-staged. Use `git add` / `git rm`
-  by explicit path.
-  - ⚠️ **The dry-run lies about deletions** (Gotcha #10). For a deleted file,
-    `--stage-hints` will suggest `hunk stage legacy.py:1-3` and `--dry-run` will print a
-    clean, plausible patch — but the real `hunk stage` fails with
-    `error: /dev/null: does not exist in index`. Never route a deletion through hunk;
-    reach straight for `git rm <path>`.
+  - **Combining an untracked file with tracked hunks in the same commit** needs a
+    different finishing move than the normal loop — see Step 5, case C.
+- **Deleted and binary files stage normally** — a deletion is an ordinary whole hunk
+  (`change_kind: "D"`) and stages/commits cleanly by ID or by path, same as any other
+  hunk. No special-casing needed here (unlike some other hunk-staging tools).
+- **Renames, copies, and unmerged states are rejected outright** by git-hunk (a clear
+  `unsupported file changes: rename: ...` error) — resolve these with plain `git mv` /
+  `git add` / `git rm` by explicit path instead of routing them through `git-hunk`.
 - **If scope is narrower than the whole branch** — an explicit `<scope>`, or Step 1's
   session-default narrowing — restrict to matching changes and state plainly what is
   being left uncommitted. This is the one intentional relaxation of the invariant,
@@ -283,56 +296,89 @@ must be assigned to exactly one group.** That assignment is the completeness inv
   ambiguous. Do not over-slice into many tiny commits.
 
 **Confirm only when unsure.** Proceed automatically when the grouping is unambiguous.
-Stop and ask only when the dry-run patch does not match your selection and you cannot
+Stop and ask only when a dry-run patch does not match your selection and you cannot
 re-scope it cleanly, or when concerns are so entangled that any split would be arbitrary.
 
-## Step 5 — Per-group stage → verify → commit loop
+## Step 5 — Per-group commit loop
 
-Run this loop for each group, in order. **Do not skip step 1.**
+Run this loop for each group, in order, using whichever case fits it.
 
-```bash
-cd "$WORK_DIR" || exit 1
-# 1. Dry-run FIRST — read the emitted patch
-~/go/bin/hunk stage --dry-run FILE:LINES [FILE:LINES...]
-```
-
-**2. Compare the patch against your intent.** If it contains lines you did not select
-(Gotcha #3):
-- Accept only if those lines are genuinely inseparable and belong in *this* commit.
-- Otherwise re-scope the selection and repeat from step 1.
-- Either way, **reassign any swept-in lines** in your inventory so they are not
-  double-counted in a later group.
+**Case A — whole hunk(s) and/or whole path(s), nothing partial, no untracked files.**
+This is the common case. No dry-run needed — the `show` output from Step 2 already told
+you exactly what's in these hunks:
 
 ```bash
 cd "$WORK_DIR" || exit 1
-# 3. Stage for real — check the exit code
-~/go/bin/hunk stage FILE:LINES [FILE:LINES...]
-
-# 4. Confirm the index holds exactly what you expect
-~/go/bin/hunk preview
-
-# 5. Commit
-git commit -m "$(cat <<'EOF'
+git-hunk commit <id-or-path> [<id-or-path>...] -m "$(cat <<'EOF'
 type(scope): subject line here
 
 Optional body explaining why this change was made, not just what changed.
 EOF
 )"
-
-# 6. Re-check remaining work before the next group
-~/go/bin/hunk diff
 ```
 
-If step 3 exits non-zero, **nothing was staged** — a clean dry-run does not guarantee the
-real stage will succeed (Gotcha #10). Fix the selection, or route that change through
-plain `git add` / `git rm` instead.
+`-m` is an ordinary shell string argument, so the heredoc trick works exactly like plain
+`git commit` — no need to fall back to `git commit` for a multi-line body.
 
-On any mismatch at step 4: `~/go/bin/hunk reset`, then re-plan from Step 4
-(Group at line level).
+**Case B — a partial selection within exactly one hunk** (`-l`, `--include-matching`, or
+`--exclude-matching`). `git-hunk commit` has no `--dry-run` (Gotcha #7), so preview with
+the equivalent `stage` call first:
 
-Use `git commit` with a heredoc rather than `hunk commit -m` — hunk's commit is a
-self-described thin wrapper taking a single `-m` string, while the heredoc gives reliable
-multi-line bodies. `hunk commit -m "..."` is fine for short one-line messages.
+```bash
+cd "$WORK_DIR" || exit 1
+# 1. Dry-run FIRST — git-hunk commit itself can't preview
+git-hunk stage <id> -l 3,5-7 --dry-run
+# (or --include-matching / --exclude-matching, matching literal substrings by default;
+#  add --regex to treat the pattern as a regular expression)
+```
+
+**2. Compare the preview against your intent.** Selecting only one side of a
+one-for-one replacement is a hard error (`cannot select one side of lines N-M`) unless
+you pass `--allow-one-sided` — prefer matching text both sides share, or select both
+line positions, over reaching for that flag. Line numbers for `-l` are **1-based body
+positions from `show`, counting context lines** — not source file line numbers.
+
+```bash
+cd "$WORK_DIR" || exit 1
+# 3. Same flags, for real — stage and commit in one atomic call
+git-hunk commit <id> -l 3,5-7 -m "$(cat <<'EOF'
+type(scope): subject line here
+EOF
+)"
+```
+
+A partial-line or matching operation can invalidate other recorded IDs and body
+positions **for that file** (git-hunk's `list`/`show` re-numbers "Conditional" Hunk IDs —
+duplicate-hunk group members — after such an operation). Re-run `git-hunk list`/`show`
+before planning further work in that file rather than trusting earlier notes.
+
+**Case C — the group mixes tracked hunks with untracked files.** `git-hunk commit`
+refuses to run once anything is staged that it didn't select itself (Gotcha #4), so this
+case must finish with plain `git commit`, not `git-hunk commit`:
+
+```bash
+cd "$WORK_DIR" || exit 1
+git-hunk stage <tracked-id-or-path> [<tracked-id-or-path>...]   # skip if untracked-only
+git --literal-pathspecs add -- '<untracked-path>' ['<untracked-path>'...]
+git diff --cached --stat   # confirm the index holds exactly this group
+git commit -m "$(cat <<'EOF'
+type(scope): subject line here
+EOF
+)"
+```
+
+**After every group**, re-check what remains:
+
+```bash
+cd "$WORK_DIR" || exit 1
+git-hunk list
+```
+
+If any `git-hunk` call above exits non-zero, nothing was changed by that call — `stage`
+and `commit` are transactional (confirmed: a refused `commit` leaves the index and
+working tree untouched). Fix the selection and retry, or route that particular change
+through plain `git add`/`git rm`/`git mv` if it's a structural case (rename, copy,
+unmerged) that git-hunk rejects outright.
 
 **Message style:**
 - **Subject** — concise, imperative mood, focused on *why* not *what*. Follow the Step 3
@@ -344,7 +390,7 @@ multi-line bodies. `hunk commit -m "..."` is fine for short one-line messages.
 
 ```bash
 cd "$WORK_DIR" || exit 1
-~/go/bin/hunk diff --summary
+git-hunk list
 git status --short
 ```
 
@@ -367,15 +413,15 @@ Then report:
 
 ---
 
-## Fallback (no hunk)
+## Fallback (no git-hunk)
 
-If `~/go/bin/hunk` is missing or errors out, degrade to file-level staging:
+If `git-hunk` is missing or errors out, degrade to file-level staging:
 
-- Group by **file**, not by line. Do not attempt `git add -p`.
+- Group by **file**, not by hunk. Do not attempt `git add -p`.
 - `git add <explicit filename>` — never `-A` or `.`.
 - Keep the commit-everything default and the same message conventions.
 - `$WORK_DIR` still applies: `cd "$WORK_DIR"` at the top of each block, or use
-  `git -C "$WORK_DIR"` throughout. Losing hunk does not make the tree ambiguous.
+  `git -C "$WORK_DIR"` throughout. Losing git-hunk does not make the tree ambiguous.
 - **Tell the user surgical staging was unavailable**, so they know commits may be coarser
   than usual.
 
@@ -383,28 +429,31 @@ If `~/go/bin/hunk` is missing or errors out, degrade to file-level staging:
 
 ## Gotchas
 
-Empirically verified against hunk v1.0.0. Each maps to a rule above.
+Empirically verified against git-hunk 0.3.0 (a couple items are documented by the tool's
+own bundled `core` skill rather than independently reproduced here — flagged below).
+Each maps to a rule above.
 
 | # | Gotcha | Rule |
 |---|---|---|
-| 1 | `hunk` is **not on `$PATH`** | Always invoke as `~/go/bin/hunk` |
-| 2 | Cannot stage **untracked** files — they land in a top-level `untracked[]` array marked *"use git add"* | `git add <explicit path>`; all-or-nothing, no partial staging |
-| 3 | **The staged patch can be a SUPERSET of your selection.** Real repro: selecting one added line also pulled in nearby deletions and 8 unrelated added lines | ⚠️ `--dry-run` before every real stage, always; then reassign swept-in lines |
-| 4 | `hunk stage` reads **unstaged changes only** — blind to the index | Reset a dirty index at preflight (Step 0) |
-| 5 | Deleted lines carry only `old_line`, no `new_line` | Deletions can't be addressed by line number; they attach to neighbouring additions |
-| 6 | A **context-only** selection errors: `no matching lines found for selection` | Every selection must contain actual additions |
-| 7 | Exit codes are reliable: `0` success, `1` on error (context-only, out-of-range, bad syntax, missing file), `127` binary absent | Check exit status after each hunk call |
-| 8 | `hunk diff --stage-hints` prints **ready-to-run** stage commands — but see #10, it also suggests deletion commands that cannot work | Good starting point for selections; ignore its hints for deleted files |
-| 9 | Line numbers refer to the **NEW (post-edit) file** | Matches what the editor and the agent already see |
-| 10 | **For deleted files the dry-run lies.** `--dry-run` prints a clean patch and exits 0; the real `hunk stage` then fails with `error: /dev/null: does not exist in index` (malformed `+++ b//dev/null`). Fails safely — nothing is staged | Never stage a deletion through hunk; use `git rm <path>`. A successful dry-run is *not* proof a stage will succeed |
-| 11 | **Sub-agent edits are written to a different file than the session transcript** — one `agent-<id>.jsonl` per worker under `<session-id>/subagents/`, a *subdirectory* beside `<session-id>.jsonl`. A top-level-only read sees none of them. Because session scope is an **intersection**, an unseen writer doesn't widen scope, it shrinks it: an orchestrator that dispatches workers and then makes one edit of its own narrows to *that one file* and silently abandons every worker's output, reporting it as intentional | Read `$TRANSCRIPT` **and** `"$SUBAGENT_DIR"/*.jsonl` together. Same schema, and `jq` takes multiple files, so the filter is unchanged. Pass `everything` whenever an untracked writer may have touched the tree |
-| 12 | **A harness that "enters" a worktree does not move the running process's cwd** — it redirects its own file tree, diff view, and terminal defaults only. Unqualified `git` therefore runs against the **main checkout**, finds it clean, and reports success-by-vacuity while the work stays uncommitted. `pwd` cannot detect this, and passing absolute paths as *scope* does not fix it — scope is not a tree | Callers pass `in:<abs path>`; every Bash block starts with `cd "$WORK_DIR"`, since `cd` does not persist between tool calls |
+| 1 | `git-hunk` is installed via `uv tool install git-hunk` and lands on `$PATH` directly — no `~/go/bin`-style workaround needed | Invoke it as plain `git-hunk`; Step 0's `git-hunk --version` check both confirms availability and gives a clean `HUNK_UNAVAILABLE` fallback trigger |
+| 2 | Cannot stage or commit **untracked** files at all — `git-hunk stage <untracked-path>` fails with `error: no changed file matches '<path>'`. They appear in `list`/`show` only as inventory entries (`status: "untracked"`, `id: ""`) | `git add <explicit path>`; all-or-nothing, no partial staging |
+| 3 | Selecting only **one side of a one-for-one replacement** (`-l`, `--include-matching`, `--exclude-matching`) is a **hard error**: `cannot select one side of lines N-M; ... or pass --allow-one-sided` — the opposite failure mode of tools that silently over-select | Prefer text both sides share, or select both positions; reach for `--allow-one-sided` only when a one-sided result is genuinely the goal |
+| 4 | `git-hunk commit` **aborts** (exit 1, clear error) if the index already holds staged content it didn't select — even content `git-hunk stage` itself just placed there. `git-hunk stage`/`unstage`/`discard` do **not** have this restriction; they work fine alongside a dirty index | Reset a dirty index at preflight (Step 0) so mid-loop `commit` calls don't fail; when a commit must include a pre-staged mix (Case C), finish with plain `git commit`, not `git-hunk commit` |
+| 5 | **Deletions stage/commit cleanly** as an ordinary whole hunk (`change_kind: "D"`) by ID or by path — confirmed end-to-end, no special-casing or workaround needed | Treat a deleted file exactly like any other hunk/path group in Step 4/5 |
+| 6 | **Renames, copies, and unmerged states are rejected outright**: `error: unsupported file changes: rename: 'a' -> 'b'` with a tip to use Git directly | Resolve these with plain `git mv` / `git add` / `git rm` by explicit path, never through `git-hunk` |
+| 7 | `-l` line numbers are **1-based body positions from `show`, counting context lines** — not source file line numbers. `git-hunk commit` has **no `--dry-run`** (only `stage`/`unstage`/`discard` do) | Preview a partial selection with the equivalent `git-hunk stage ... --dry-run` before running the same flags through `git-hunk commit` for real |
+| 8 | Hunk IDs accept unambiguous, case-insensitive prefixes; an unknown one errors clearly and lists the currently valid IDs (`error: hunk 'x' not found ... tip: available hunk ids: ...`) | Re-derive IDs from a fresh `git-hunk list`/`show` rather than reusing stale ones across a long session |
+| 9 | *(Documented by git-hunk's bundled `core` skill, not independently reproduced here.)* Hunks that would otherwise collide on their short ID are marked `conditional` — members of a "Duplicate Hunk group" — and acting on one member **renumbers the group** | After any partial-line operation, re-run `git-hunk list`/`show` for that file before trusting a previously recorded ID or body position in it |
+| 10 | **Sub-agent edits are written to a different file than the session transcript** — one `agent-<id>.jsonl` per worker under `<session-id>/subagents/`, a *subdirectory* beside `<session-id>.jsonl`. A top-level-only read sees none of them. Because session scope is an **intersection**, an unseen writer doesn't widen scope, it shrinks it: an orchestrator that dispatches workers and then makes one edit of its own narrows to *that one file* and silently abandons every worker's output, reporting it as intentional | Read `$TRANSCRIPT` **and** `"$SUBAGENT_DIR"/*.jsonl` together. Same schema, and `jq` takes multiple files, so the filter is unchanged. Pass `everything` whenever an untracked writer may have touched the tree |
+| 11 | **A harness that "enters" a worktree does not move the running process's cwd** — it redirects its own file tree, diff view, and terminal defaults only. Unqualified `git`/`git-hunk` therefore run against the **main checkout**, find it clean, and report success-by-vacuity while the work stays uncommitted. `pwd` cannot detect this, and passing absolute paths as *scope* does not fix it — scope is not a tree | Callers pass `in:<abs path>`; every Bash block starts with `cd "$WORK_DIR"`, since `cd` does not persist between tool calls |
 
-Gotchas #3 and #10 are v1.0.0 quirks that may change between versions. The guards here
-are behavioral — always dry-run and compare, always check the exit code of the real
-stage — so they stay correct either way.
+Gotchas #1–#8 were verified directly against a scratch repo running git-hunk 0.3.0 and
+may shift between versions — the guards here are behavioral (check exit codes, dry-run
+partial selections, re-list after anything partial), so they stay correct either way. If
+behavior seems to have drifted, `git-hunk skills get core logical-commits` loads the
+tool's own current, version-matched workflow guidance.
 
-Gotchas #11 and #12 are harness behaviors rather than hunk behaviors, and both fail
-**silently in the direction of looking successful** — #11 reports a deliberate-looking
-narrowing, #12 reports a clean tree. Neither surfaces as an error, which is why both are
+Gotchas #10 and #11 are harness behaviors rather than git-hunk behaviors, and both fail
+**silently in the direction of looking successful** — #10 reports a deliberate-looking
+narrowing, #11 reports a clean tree. Neither surfaces as an error, which is why both are
 guarded structurally above rather than left to be noticed.

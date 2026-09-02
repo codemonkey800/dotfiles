@@ -33,9 +33,10 @@ what to plan — **one** question, then get to work.
 
 ```mermaid
 flowchart LR
-  R[1 · Research<br/>read the real code] --> D[2 · Decide<br/>size + open questions]
-  D --> W[3 · Write<br/>the doc]
-  W --> V[4 · Verify<br/>every claim + the DAG]
+  R[1 · Research<br/>read the real code] --> I[2 · Interview<br/>loop until dry]
+  I --> D[3 · Decide<br/>size]
+  D --> W[4 · Write<br/>the doc]
+  W --> V[5 · Verify<br/>every claim + the DAG]
   V --> H[Hand off]
 ```
 
@@ -59,8 +60,10 @@ Read before you write:
 - **Adjacent consumers** — anything that breaks when this changes, and whether it's in
   scope or held compiling by a shim.
 
-Fan out with parallel `Explore` sub-agents when the surface is wide. Ask the user only
-about decisions the code genuinely cannot answer.
+Fan out with parallel `Explore` sub-agents when the surface is wide. Every ambiguity
+you surface here — a fork with no obviously-correct answer, a scope boundary the
+request didn't state, a tradeoff the code doesn't settle — is raw material for
+Interview, next. Don't resolve it yourself and don't skip past it.
 
 > **Phase 0 pattern.** When a plan rests on an assumption you can cheaply test — a
 > library behaves a certain way, an upstream field is populated, a generated client
@@ -70,7 +73,52 @@ about decisions the code genuinely cannot answer.
 
 ---
 
-## 2 · Decide the size
+## 2 · Interview
+
+Research tells you what the code will and won't answer. Everything left over is a
+design decision, and design decisions belong to the person asking for the plan — not to
+a guess that gets discovered wrong three phases in.
+
+**Skip this entirely** for the no-doc tier (1–3 obvious changes, see Decide the size
+below). Ceremony on a four-line fix is its own anti-pattern.
+
+For everything else, don't ask once and move on. Loop:
+
+1. From what research turned up, list every open question — scope boundaries the
+   request didn't state, edge-case behavior, error-handling philosophy, a tradeoff
+   where more than one approach is viable, naming or API shape that's user-facing,
+   ordering when more than one sequencing is defensible, a default that isn't
+   obviously correct, anything you'd otherwise have written into "Accepted gap"
+   without actually checking it was accepted.
+2. Ask them, batched by kind. **Closed decisions** — a handful of concrete, mutually
+   exclusive options — go through `AskUserQuestion`: lead with the option you'd
+   recommend, name the real tradeoff in its description, let "Other" catch what you
+   didn't anticipate. **Open decisions** — anything that needs explanation, doesn't
+   reduce to 2–4 options, or is really "tell me what should happen here" — ask directly
+   in conversation and wait for a real answer instead of forcing it into a
+   multiple-choice shape.
+3. Every answer can open new questions — a chosen approach implies a new edge case, a
+   scope cut raises "so what happens to the callers of the thing we're cutting."
+   Re-derive the open-question list from what just got decided and go again.
+4. Stop when a round produces **zero** new questions — not after a fixed number of
+   rounds, and not because the questions are getting tedious. That's what "relentless"
+   means here: the interview ends when the design is actually settled.
+
+**Don't ask about:**
+- Anything research already answered by reading the code.
+- Anything the request or conversation already stated.
+- Anything the repo's existing conventions already settle — copy the convention, don't
+  re-litigate it.
+- Anything genuinely inconsequential to the plan's shape — a question whose every
+  answer produces the same tasks isn't a design decision, it's noise.
+
+**The answers aren't thrown away.** Each one — decision plus the "why" the person
+gave — becomes an entry in Design decisions once the doc gets written. An interview
+that doesn't change the doc's content wasn't a real interview.
+
+---
+
+## 3 · Decide the size
 
 | Scope | Shape |
 |---|---|
@@ -92,7 +140,7 @@ free number — `docs/features/<area>/plans/004-<slug>.md`. Otherwise fall back 
 
 ---
 
-## 3 · Write the doc
+## 4 · Write the doc
 
 Sections, in this order. Skip a section only when it is genuinely empty; say so rather
 than silently dropping it.
@@ -310,6 +358,10 @@ Close the doc with what the executor reports when the last box is checked:
 - **Unverifiable tasks** — "improve error handling." Against what assertion?
 - **Ceremony** — phases, waves, and a context pack for four hours of work.
 - **The stale plan** — checked boxes describing code that shipped differently.
+- **The rubber-stamp interview** — asking questions the code already answered, or
+  questions where every possible answer produces the same tasks. Padding, not design.
+- **The single-pass interview** — stopping after the first round of answers when they
+  opened three more questions. "Relentless" means loop until a round comes back empty.
 
 ---
 
@@ -318,6 +370,10 @@ Close the doc with what the executor reports when the last box is checked:
 The doc should be as long as the work is complicated and no longer. A four-task plan
 gets one page: framing, tasks, a wave line, done. A thirty-task migration earns the full
 structure — because at that size, the sequencing *is* the plan.
+
+The interview scales the same way — a four-task plan might resolve in one round of
+two questions; a thirty-task migration can take several rounds before the design is
+actually settled.
 
 Related: `bruh` for how the prose should read · `commit` for the commit step every task
 ends in.

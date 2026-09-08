@@ -2,9 +2,11 @@
 name: gh-cli
 description: |
   Use the gh CLI to interact with GitHub from the terminal — repos, issues,
-  pull requests, GitHub Actions, raw API calls, search, and releases.
+  pull requests, GitHub Actions, raw API calls, search, and releases. Also
+  covers the gh-stack extension for stacked branches/PRs.
   Use when the user wants to list/create/manage GitHub resources, check CI,
-  review PRs, query the GitHub API, or automate GitHub workflows.
+  review PRs, query the GitHub API, automate GitHub workflows, or manage a
+  stack of dependent branches/PRs.
 user-invocable: true
 ---
 
@@ -344,6 +346,75 @@ gh pr create --fill --web
 # Watch a workflow run until it finishes
 gh run watch $(gh run list --limit 1 --json databaseId --jq '.[0].databaseId')
 ```
+
+## Stacked PRs (`gh-stack` extension)
+
+The `gh-stack` extension (https://github.com/github/gh-stack) manages stacks
+of dependent branches/PRs — each branch built on top of the previous one,
+each with its own PR based on the branch below it. Install with
+`gh extension install github/gh-stack`.
+
+```bash
+# Start a new stack (prompts for/creates the first branch; trunk defaults to
+# the repo's default branch)
+gh stack init
+gh stack init -p feature-x -n          # numbered branch names off a prefix
+gh stack init -a                       # adopt existing branches into a stack
+
+# Add a new branch on top of the current stack, with a commit
+gh stack add -A -m "add validation layer"
+gh stack add my-branch -u -m "wip"     # stage tracked changes only
+
+# Push every branch in the stack and open/update a PR per branch
+gh stack submit
+gh stack submit --auto --open          # skip title prompts, mark ready for review
+
+# Inspect the stack
+gh stack view
+gh stack view --short
+gh stack view --json
+
+# Move around the stack
+gh stack up / gh stack down            # one branch at a time
+gh stack top / gh stack bottom         # jump to either end
+gh stack switch                        # interactive picker
+gh stack checkout 123                  # pull down a stack by PR number or branch name
+
+# Keep it current: fetch, fast-forward trunk, cascade-rebase, force-push
+# (--force-with-lease --atomic), and resync PR state — all non-interactive
+gh stack sync
+
+# If sync hits a conflict it restores prior state and tells you to resolve
+# interactively instead
+gh stack rebase
+
+# Restructure interactively (drop/fold/reorder/rename), Ctrl+S to apply,
+# then `gh stack submit` to push the new shape
+gh stack modify
+gh stack modify --continue             # after resolving a conflict mid-modify
+gh stack modify --abort                # bail out, restore pre-modify state
+
+# Merge a PR and everything below it in the stack
+gh stack merge
+gh stack merge 99
+
+# Tear down a stack locally and on GitHub
+gh stack unstack
+
+# Adopt PRs from another tool (jj, Sapling, git-town, ghstack, …) into a
+# GitHub stack without local tracking — args are bottom-to-top branch names
+# or PR numbers
+gh stack link base-branch middle-branch 42
+```
+
+Notes:
+- `gh stack sync` is the everyday command — run it instead of manually
+  rebasing each branch after trunk moves.
+- `submit`/`link`/`sync` all take `--remote` if the auto-detected remote is
+  wrong.
+- `link` is the escape hatch when branches are managed by something other
+  than `gh-stack` itself; everything else assumes `gh-stack`'s own local
+  tracking state (created by `init`/`add`, or `checkout`/`adopt`).
 
 ## Authentication Scopes
 

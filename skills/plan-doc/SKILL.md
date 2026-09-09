@@ -132,6 +132,30 @@ contract changes, an integration point needs to be exercised, or the change beco
 independently shippable. Number from **Phase 0 — Prep** when there are assumptions to
 verify first.
 
+### Decide the branching strategy
+
+Isolation earns its cost only when there's something to isolate. The gate is **commit
+count, not task count**: a plan that collapses to one commit is atomic and one
+`git revert` away from undone — there's nothing a branch buys it. A plan landing as
+several commits, possibly over more than one sitting, with review and bugfix cycles in
+between, is exactly what a branch and an isolated worktree are for: the developer's main
+checkout stays put on its current branch while the plan executes, instead of an agent
+session pulling it out from under them mid-task.
+
+| Size tier (above) | Branch + worktree? |
+|---|---|
+| No doc | No. Direct edit, direct commit, on whatever branch is already checked out. |
+| One doc, groups A–F, genuinely one commit | No — say so in the Overview and skip [Branch and worktree](#branch-and-worktree) and [Rollout](#rollout) entirely. |
+| One doc, groups A–F, multiple commits | Yes. |
+| Phased or multi-doc | Yes, always — this tier never collapses to one commit. |
+
+When the answer is yes: check the repo for an existing worktree mechanism (an MCP tool,
+a script, a documented convention) before defaulting to plain `git worktree add` — the
+wrong mechanism can leave a session's file tree, terminal, or tooling still pointed at
+the old root. Mirror the repo's existing branch-naming scheme (scan `git branch -a`
+rather than inventing one), and write [Branch and worktree](#branch-and-worktree) plus
+[Rollout](#rollout) into the doc. When the answer is no, omit both sections.
+
 ### Where the file goes
 
 Follow the repo's existing convention. If `docs/**/plans/` exists, use it with the next
@@ -148,13 +172,15 @@ than silently dropping it.
 | # | Section | Carries |
 |---|---|---|
 | 1 | **Overview** | The human's map of the plan — what's changing, why, its shape, and the key decisions in brief, with links down into every section below |
-| 2 | **How to work this plan** | The execution protocol — checkboxes, `/commit`, status markers |
-| 3 | **Instructions for the orchestrator** | Delegation rules, if this plan is orchestrated |
-| 4 | **Design decisions** | What was chosen, why, and what was ruled out |
-| 5 | **Shared Context Pack** | Everything a sub-agent needs pasted into its prompt |
-| 6 | **Task List** | Grouped checkboxes — the body of the plan |
-| 7 | **Sequencing** | DAG, waves, dependency table, critical path, human checkpoints |
-| 8 | **Final report** | What the executor reports when the last box is checked |
+| 2 | **Branch and worktree** | Branch name, worktree path, base, and the rules for working in it — only when [the branching strategy](#decide-the-branching-strategy) calls for isolation |
+| 3 | **How to work this plan** | The execution protocol — checkboxes, `/commit`, status markers |
+| 4 | **Instructions for the orchestrator** | Delegation rules, if this plan is orchestrated |
+| 5 | **Design decisions** | What was chosen, why, and what was ruled out |
+| 6 | **Shared Context Pack** | Everything a sub-agent needs pasted into its prompt |
+| 7 | **Task List** | Grouped checkboxes — the body of the plan |
+| 8 | **Sequencing** | DAG, waves, dependency table, critical path, human checkpoints |
+| 9 | **Rollout** | How the branch lands — pre-merge checks, the human approval gate, merge steps, cleanup — only when [Branch and worktree](#branch-and-worktree) exists |
+| 10 | **Final report** | What the executor reports when the last box is checked |
 
 The doc is a mix of two audiences: a human deciding whether this is the right plan, and
 an executor that needs every file path and edge case spelled out. The Overview is where
@@ -166,8 +192,8 @@ detail actually lives — `[Design decisions](#design-decisions)` for the why,
 human checkpoints — so the reader chooses their own depth instead of scrolling past detail
 built for a sub-agent.
 
-`reference/template.md` is the fill-in skeleton, with sections 2, 3, 5's Definition of
-Done, and 8 written out verbatim — copy them, adapt the placeholders.
+`reference/template.md` is the fill-in skeleton, with sections 2, 3, 4, 6's Definition of
+Done, 9, and 10 written out verbatim — copy them, adapt the placeholders.
 
 Write the prose per the `bruh` skill's compose mode: bullets over walls, mermaid for
 anything with shape, bold the key term not the sentence.
@@ -273,6 +299,88 @@ Two tasks with no DAG edge still can't run together if they:
 
 ---
 
+## Branch and worktree
+
+Write this section only when [the branching strategy](#decide-the-branching-strategy)
+called for isolation; drop it entirely otherwise. State, up front, in a table: the
+branch name (mirroring the repo's existing scheme), the worktree location (the repo's
+own tooling if it has any, otherwise plain `git worktree add`), and the base branch.
+
+**Why it matters, and say so in the doc:** the main checkout is the developer's live
+workspace. An agent session switching its branch mid-task, or interleaving commits from
+unrelated work, is a real cost — a dedicated worktree avoids both.
+
+**Carry over what the worktree won't inherit.** A fresh worktree is a checkout of
+*committed* history — anything sitting uncommitted or untracked in the main checkout,
+including the plan doc itself, is invisible there until someone puts it there. So the
+setup step that creates the branch and worktree also copies across, to the same
+relative path:
+
+- **The plan doc.** It was almost certainly just written and is still uncommitted in the
+  main checkout — that's the file the executor needs to check boxes in.
+- **Anything the plan cites that isn't yet committed to the base branch** — mockups,
+  screenshots, specs, PRDs, design docs. A task that references
+  `docs/design/mockups/foo.png` is unactionable if that file only exists in the main
+  checkout.
+
+Copy, don't move — the main checkout's copy stays put until the branch's finished
+version replaces it at [rollout](#rollout); deleting it early just to avoid a duplicate
+risks losing it if the branch is abandoned. List the concrete paths to carry over in
+this section (a small table works), and do the copy once, before Wave 1 — not as a
+delegated task; see [Orchestration](#orchestration) for why this is the one thing an
+otherwise hands-off orchestrator does itself.
+
+Spell out the rules while work is in flight:
+
+- ❌ Never `git checkout` / `git switch` the main checkout.
+- ❌ Never rebase, force-push, or reset the base branch.
+- ❌ Never merge, rename, or delete the branch before [Rollout](#rollout) clears.
+- ✅ Every commit targets the feature worktree — name the mechanism (e.g. `/commit`'s
+  `in:<path>`).
+- ✅ Note any isolation bonus the worktree buys for free — a per-worktree dev instance,
+  port, or DB state for verification tasks — when the repo has that convention. It's
+  often the concrete reason isolation matters, beyond the abstract one above.
+
+---
+
+## Rollout
+
+Pairs with [Branch and worktree](#branch-and-worktree) — write both or neither. This is
+where the doc says how the branch lands, and it exists precisely so an executor (or an
+orchestrator) never treats the last checkbox as permission to merge.
+
+**The gate, stated explicitly:** when every task is done, the executor stops and
+reports ([Final report](#final-report)). It does not merge, push, rename, or delete. A
+human reads the report and gives — or withholds — explicit approval before any of that
+happens. Approval covers exactly what the human said, not everything a "yes" could be
+read to imply.
+
+Cover, in the doc:
+
+- **Pre-merge checks**, run before asking for approval — the repo's build/lint/
+  typecheck/test commands re-run at the final commit, the repo's pre-merge review
+  skill or process if it has one, confirmation every checkbox is `[x]` / `⚠️ PARTIAL` /
+  `⏭️ DROPPED` with a reason, and confirmation every human checkpoint cleared.
+- **Merge steps, once approved** — the actual commands (squash merge is the sane
+  default unless the repo's convention is a PR), in order, naming ordering hazards
+  explicitly (most git tooling refuses to delete a branch a live worktree still has
+  checked out — remove the worktree first).
+- **The merge/PR message convention** — scanned from the repo's actual recent history,
+  plus any repo rule about trailers.
+- **What happens if the plan doesn't finish intact** — if a phase or spike can
+  legitimately fail and still leave a shippable subset (a spike comes back negative, a
+  phase gets cut), say so: which tasks get marked `⏭️ DROPPED` and why, and that the same
+  rollout path applies to the partial result rather than improvising a different split.
+- **After rollout** — the doc stays as the record (never delete it); verify the worktree
+  is gone and the main checkout is back on its base branch; sweep for anything else the
+  worktree's isolation was hiding.
+
+Nothing here pushes to a remote unless the human's approval explicitly said so —
+landing locally and opening a PR are different decisions, and the doc shouldn't
+conflate them.
+
+---
+
 ## Orchestration
 
 If the plan will be executed by an orchestrator delegating to sub-agents, the doc says
@@ -284,6 +392,13 @@ so up front, in its own section. The rules that make it work:
 - ❌ It does not read or edit source, tests, or config. The **only** file it may edit is
   the plan, to check boxes and record outcomes.
 - ❌ It does not fix a failing task itself. It re-delegates with the failure details.
+- ❌ When the doc has a [Rollout](#rollout) section, it does not merge, rename, delete,
+  or push the branch. Reaching the last checkbox is not approval — it stops and reports.
+- ✅ **One exception:** when the doc has a [Branch and worktree](#branch-and-worktree)
+  section, the orchestrator itself creates the branch and worktree and copies over the
+  plan doc plus any cited artifacts, once, before delegating Wave 1. This is
+  infrastructure setup, not implementation — it still doesn't touch source, tests, or
+  config.
 
 **Delegation prompts are self-contained.**
 
@@ -307,6 +422,11 @@ the code is the truth.
 The doc must tell its executor how to interact with it. This section goes **in the
 generated doc**, near the top — it's the first thing someone opening it six weeks from
 now needs.
+
+**Before task 1:** if the doc has a [Branch and worktree](#branch-and-worktree)
+section, that setup — creating the branch and worktree, then copying in the plan doc and
+any cited artifacts — happens once, first. State this explicitly so the executor
+doesn't discover Wave 1's first task can't find the mockup it needs.
 
 **Per task:**
 
@@ -343,6 +463,9 @@ Close the doc with what the executor reports when the last box is checked:
 3. Deviations from the plan, and why
 4. Deferred items, including every human checkpoint still outstanding
 5. Open questions discovered during implementation
+6. When [Rollout](#rollout) exists: branch state (commit, commits ahead of base,
+   worktree still live, pre-merge checks green) — then **stop and ask for rollout
+   approval.** Do not merge, delete, rename, or push anything.
 
 ---
 
@@ -362,6 +485,9 @@ Close the doc with what the executor reports when the last box is checked:
   questions where every possible answer produces the same tasks. Padding, not design.
 - **The single-pass interview** — stopping after the first round of answers when they
   opened three more questions. "Relentless" means loop until a round comes back empty.
+- **The self-merged plan** — an executor or orchestrator treats the last checkbox as
+  permission to merge, rename, push, or delete the branch. Landing is always a human
+  decision, stated as its own gate in [Rollout](#rollout).
 
 ---
 

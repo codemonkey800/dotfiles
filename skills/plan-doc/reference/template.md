@@ -9,6 +9,12 @@ Drop the whole **Instructions for the orchestrator** section when the plan will 
 worked directly by one session instead of delegated. Keep **How to work this plan**
 either way.
 
+Drop **Branch and worktree** and **Rollout** together when the plan-doc SKILL's
+branching-strategy step says this plan doesn't need isolation (a genuinely one-commit
+plan). Keep both together otherwise — a branch with no rollout gate is a plan that can
+get silently merged; a rollout gate with no branch section is instructions for a branch
+nobody set up.
+
 ---
 
 # {{ Title — what this delivers }} — `{{ package or area }}`
@@ -44,13 +50,65 @@ worktree-isolated sub-agents" }}
 
 > **Accepted gap:** {{ what this deliberately does not solve, and why that's fine }}
 
-**Read next:** [Design decisions](#design-decisions) for the why · [Task
+**Read next:** {{ "[Branch and worktree](#branch-and-worktree) to set up ·" — only when
+that section exists }} [Design decisions](#design-decisions) for the why · [Task
 List](#task-list) for the work itself · [Sequencing](#sequencing) for the order and the
-human checkpoints · [Final report](#final-report) for what "done" reports back.
+human checkpoints · {{ "[Rollout](#rollout) for how it lands ·" — only when that section
+exists }} [Final report](#final-report) for what "done" reports back.
+
+---
+
+## Branch and worktree
+
+> Include this section only when the plan-doc SKILL's branching-strategy step calls for
+> isolation. Drop it — and [Rollout](#rollout) — together otherwise.
+
+**All tasks land on one branch, in one worktree, and never touch the main checkout.**
+The main checkout at `{{ path }}` stays on `{{ its current branch }}` for the duration —
+it's the developer's live workspace, and an agent session switching its branch out from
+under them is a real cost.
+
+| | Value |
+| --- | --- |
+| Branch | `{{ type/slug, matching the repo's existing branch names }}` |
+| Worktree | `{{ path — use the repo's own worktree tooling if it has any, else a plain }}` |
+| Base | `{{ usually main }}` |
+
+**Create it with {{ the repo's worktree mechanism }}**, not a bare `git worktree add`
+unless that's genuinely all the repo has. {{ Name the reason if the repo's tool matters
+for a specific reason — e.g. a session needs to track the new root. }}
+
+**Then, before Wave 1, copy these into the worktree** — the worktree is a checkout of
+*committed* history, so anything uncommitted in the main checkout, including this doc,
+is otherwise invisible there:
+
+| File (main checkout) | Same path in the worktree |
+| --- | --- |
+| `{{ this plan doc's own path }}` | {{ so the executor can check boxes in it }} |
+| `{{ mockup / spec / design doc path, if any }}` | {{ what task cites it }} |
+
+Copy, don't move — the main checkout's copy stays put until the branch's finished
+version replaces it at [rollout](#rollout).
+
+**Rules while the work is in flight:**
+
+- ❌ Never `git checkout` / `git switch` in the main checkout.
+- ❌ Never rebase, force-push, or reset `{{ base branch }}`.
+- ❌ Never merge, rename, or delete this branch before the [rollout gate](#rollout)
+  clears.
+- ✅ Every `/commit` targets the feature worktree — pass `in:{{ worktree path }}` when
+  the session isn't already rooted there.
+- ✅ {{ Any isolation bonus the worktree buys for free — its own dev instance, port, or
+  DB state for verification tasks — if the repo has such a convention. }}
 
 ---
 
 ## How to work this plan
+
+{{ Only if [Branch and worktree](#branch-and-worktree) exists: }} **Before task 1:**
+create the branch and worktree, then copy in the files listed in
+[Branch and worktree](#branch-and-worktree) — the plan doc and any cited mockups/specs.
+Do this once, first.
 
 **Per task:**
 
@@ -86,6 +144,10 @@ nothing else.
 
 **Do**
 
+- {{ Only if [Branch and worktree](#branch-and-worktree) exists: }} Before delegating
+  Wave 1, create the branch and worktree yourself and copy in the files listed in that
+  section. One-time setup, not implementation — do it directly rather than delegating
+  it.
 - Delegate every task to a sub-agent — implementation, testing, and committing
   included. One sub-agent per task, or per parallel group where
   [Sequencing](#sequencing) allows batching.
@@ -260,6 +322,79 @@ credential rotation, a real-data delete, a judgment call. }}
 
 ---
 
+## Rollout
+
+> Include this section only alongside [Branch and worktree](#branch-and-worktree) —
+> both or neither.
+
+**Nothing in this section happens automatically.** Every step below is blocked until a
+human explicitly says to proceed. Finishing the last task means the branch is *ready*,
+not that it lands.
+
+```mermaid
+flowchart TD
+    A[Last checkbox checked] --> B[Report final status]
+    B --> C{{"⛔ HUMAN APPROVAL GATE"}}
+    C -->|Approved| D[{{ Squash merge / open PR }} → {{ base branch }}]
+    C -->|Changes wanted| E[More commits on the branch]
+    E --> B
+    D --> F[Delete branch]
+    F --> G[Remove worktree]
+```
+
+### The gate
+
+When the last box is checked, the executor **stops and reports**
+([Final report](#final-report)). It does not merge, does not push, does not rename,
+does not delete. The human reads the report and gives — or withholds — explicit
+approval to roll out. Approval covers **any** mutation of the branch; if a step below
+isn't covered by what the human actually said, stop and ask rather than inferring it.
+
+### Pre-merge checks
+
+Run these *before* asking for approval, so the human is deciding on a green branch:
+
+1. `{{ build/lint/typecheck/test commands }}` from the worktree root, re-run at the
+   final commit.
+2. {{ The repo's pre-merge review skill or process, if it has one. }}
+3. Confirm every checkbox is `[x]`, `⚠️ PARTIAL`, or `⏭️ DROPPED` with a reason. No bare
+   `[ ]`.
+4. Confirm every [human checkpoint](#human-checkpoints) cleared.
+
+### Steps, once approved
+
+```bash
+# 1. {{ Squash merge into base, or push + open a PR — whichever the repo does }}
+{{ commands }}
+
+# 2. Remove the worktree. {{ Note if order matters — most git tooling refuses to
+#    delete a branch a live worktree still has checked out. }}
+git worktree remove {{ worktree path }}
+
+# 3. Delete the branch.
+git branch -D {{ branch }}
+```
+
+**The commit/PR message** follows the repo's existing style — scan recent history for
+the convention. {{ Note any repo rule about trailers, e.g. no `Co-Authored-By`. }}
+
+### If the plan doesn't finish intact
+
+{{ If a phase or spike can fail and still leave a shippable subset, say so: which tasks
+get marked ⏭️ DROPPED and why, and that the same rollout path applies to the partial
+result — don't improvise a different split. Omit this subsection if every task in the
+plan is load-bearing for every other. }}
+
+### After rollout
+
+- The plan doc stays in `{{ plans dir }}` with every box checked. It's the record;
+  don't delete it.
+- Verify the worktree is gone and the main checkout is back on `{{ base branch }}`.
+- {{ Sweep for anything else the worktree's isolation was hiding — a leaked dev
+  instance, a stray port — if applicable. }}
+
+---
+
 ## Final report
 
 When every box is checked, report:
@@ -269,3 +404,7 @@ When every box is checked, report:
 3. **Deviations** from this plan, and why
 4. **Deferred** — human checkpoints outstanding, and everything tagged 🚧 or ⏳
 5. **Open questions** discovered during implementation
+6. {{ **Branch state** — branch name at commit `<hash>`, N commits ahead of the base,
+   worktree still live, pre-merge checks green. Only when
+   [Rollout](#rollout) exists — and if it does, end here: "Then stop and ask for
+   rollout approval." }}

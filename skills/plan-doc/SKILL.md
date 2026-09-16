@@ -281,7 +281,10 @@ Two tasks with no DAG edge still can't run together if they:
 ### Publish three views
 
 1. **Waves table** — `Wave | Run | Why it works`. One row per wave; the "why" names the
-   isolation that makes it safe.
+   isolation that makes it safe. When a wave exists to **pair** tasks rather than merely
+   to parallelise them — two tasks that must settle a shared decision between them — say
+   that in the "why" too. It is the one thing the orchestrator needs and a task-level
+   prompt cannot carry.
 2. **Dependency table** — `Task | Depends on | Parallel with`. Redundant with the DAG on
    purpose: it's the one an executor actually reads mid-run.
 3. **Critical path** — the single chain that sets the floor on wall-clock, called out by
@@ -396,6 +399,20 @@ conflate them.
 If the plan will be executed by an orchestrator delegating to sub-agents, the doc says
 so up front, in its own section. The rules that make it work:
 
+**One orchestrator, one wave, one session.** The orchestrator is a *session*; sub-agents
+are spawned **inside** it and report back to it. ❌ **Never one session per task** —
+sibling sessions are peers with no reporting relationship, which means no orchestrator,
+nobody holding the wave, and nobody to notice when two tasks collide or a task runs past
+its scope. When a human asks to "start a session for the next wave," that is **one**
+session: the orchestrator for that wave.
+
+**The orchestrator exists to hold what no single task can.** A task that defers a
+decision to a later one ("whoever builds X picks the mount point"), two tasks that
+collide on a shared file, a finding that invalidates a downstream task — all of these
+need someone holding the whole wave. Without that, the hand-off gets made twice,
+differently, or not at all. This is the layer's purpose; checking boxes is the
+bookkeeping around it.
+
 **The orchestrator delegates and nothing else.**
 
 - Every task goes to a sub-agent — implementation, tests, and the commit included.
@@ -488,6 +505,9 @@ Close the doc with what the executor reports when the last box is checked:
   task is underspecified, not the sub-agent.
 - **The orchestrator who codes** — starts with "I'll just fix this one lint error,"
   ends holding a context full of implementation detail and no idea what's delegated.
+- **One session per task** — the wave's tasks become peers with no orchestrator, so
+  nothing catches a scope overrun, a shared-file collision, or a deferred decision
+  landing twice. Sub-agents belong *inside* the orchestrator's session, not beside it.
 - **Unverifiable tasks** — "improve error handling." Against what assertion?
 - **Ceremony** — phases, waves, and a context pack for four hours of work.
 - **The stale plan** — checked boxes describing code that shipped differently.

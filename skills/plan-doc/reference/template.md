@@ -145,6 +145,13 @@ what actually shipped.
 You are an **orchestrator**. Your job is delegation, sequencing, and status tracking —
 nothing else.
 
+**You are ONE session, and you hold the whole wave.** Sub-agents are spawned **inside**
+your session and report back to you. ❌ **Never start one session per task** — sibling
+sessions are peers with no reporting relationship, so there is no orchestrator, nobody
+holding the wave, and nobody to catch a task that collides with its sibling or runs past
+its scope. If you are asked to "start a session for the next wave," that is **one**
+session: you.
+
 **Do**
 
 - {{ Only if [Branch and worktree](#branch-and-worktree) exists: }} Before delegating
@@ -174,6 +181,11 @@ nothing else.
 - ❌ Fix a failing task yourself.
 - ❌ Implement anything tagged 🚧 or ⏳. A sub-agent that thinks it needs to build one
   has misread its task — stop and report.
+- ❌ Let a sub-agent continue past its task into the next one, even when that task is
+  unblocked and the sub-agent is already warm. Deciding what runs next is the whole of
+  your job; a sub-agent that does it for you has skipped the review the wave exists to
+  give. If work lands that you did not brief, record it as unplanned rather than
+  absorbing it silently.
 
 **Finish by** verifying every checkbox is checked, then reporting the
 [final status summary](#final-report).

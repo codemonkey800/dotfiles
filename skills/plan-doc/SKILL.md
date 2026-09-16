@@ -313,7 +313,7 @@ unrelated work, is a real cost — a dedicated worktree avoids both.
 **Carry over what the worktree won't inherit.** A fresh worktree is a checkout of
 *committed* history — anything sitting uncommitted or untracked in the main checkout,
 including the plan doc itself, is invisible there until someone puts it there. So the
-setup step that creates the branch and worktree also copies across, to the same
+setup step that creates the branch and worktree also **moves** across, to the same
 relative path:
 
 - **The plan doc.** It was almost certainly just written and is still uncommitted in the
@@ -323,12 +323,22 @@ relative path:
   `docs/design/mockups/foo.png` is unactionable if that file only exists in the main
   checkout.
 
-Copy, don't move — the main checkout's copy stays put until the branch's finished
-version replaces it at [rollout](#rollout); deleting it early just to avoid a duplicate
-risks losing it if the branch is abandoned. List the concrete paths to carry over in
-this section (a small table works), and do the copy once, before Wave 1 — not as a
-delegated task; see [Orchestration](#orchestration) for why this is the one thing an
-otherwise hands-off orchestrator does itself.
+Move, don't copy — one file, one live version. A duplicate left in the main checkout
+goes stale the moment the executor checks its first box, and a stale plan doc sitting in
+the developer's live workspace is worse than no plan doc: the next reader can't tell
+which one is real. The branch's version is the only one that matters, and it lands in
+the base branch at [rollout](#rollout).
+
+> **The one precondition:** moving makes the feature branch the sole home of a file
+> that exists in no commit anywhere. Commit the carried-over files on the branch early —
+> in the setup step itself, or as part of the first task that touches them — so the
+> branch, not one directory, is what holds them. Until that first commit, `git worktree
+> remove --force` or a `git branch -D` would take the plan with it.
+
+List the concrete paths to carry over in this section (a small table works), and do the
+move once, before Wave 1 — not as a delegated task; see
+[Orchestration](#orchestration) for why this is the one thing an otherwise hands-off
+orchestrator does itself.
 
 Spell out the rules while work is in flight:
 
@@ -395,7 +405,7 @@ so up front, in its own section. The rules that make it work:
 - ❌ When the doc has a [Rollout](#rollout) section, it does not merge, rename, delete,
   or push the branch. Reaching the last checkbox is not approval — it stops and reports.
 - ✅ **One exception:** when the doc has a [Branch and worktree](#branch-and-worktree)
-  section, the orchestrator itself creates the branch and worktree and copies over the
+  section, the orchestrator itself creates the branch and worktree and moves over the
   plan doc plus any cited artifacts, once, before delegating Wave 1. This is
   infrastructure setup, not implementation — it still doesn't touch source, tests, or
   config.
@@ -424,7 +434,7 @@ generated doc**, near the top — it's the first thing someone opening it six we
 now needs.
 
 **Before task 1:** if the doc has a [Branch and worktree](#branch-and-worktree)
-section, that setup — creating the branch and worktree, then copying in the plan doc and
+section, that setup — creating the branch and worktree, then moving in the plan doc and
 any cited artifacts — happens once, first. State this explicitly so the executor
 doesn't discover Wave 1's first task can't find the mockup it needs.
 

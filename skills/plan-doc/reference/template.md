@@ -78,7 +78,7 @@ under them is a real cost.
 unless that's genuinely all the repo has. {{ Name the reason if the repo's tool matters
 for a specific reason — e.g. a session needs to track the new root. }}
 
-**Then, before Wave 1, copy these into the worktree** — the worktree is a checkout of
+**Then, before Wave 1, move these into the worktree** — the worktree is a checkout of
 *committed* history, so anything uncommitted in the main checkout, including this doc,
 is otherwise invisible there:
 
@@ -87,8 +87,11 @@ is otherwise invisible there:
 | `{{ this plan doc's own path }}` | {{ so the executor can check boxes in it }} |
 | `{{ mockup / spec / design doc path, if any }}` | {{ what task cites it }} |
 
-Copy, don't move — the main checkout's copy stays put until the branch's finished
-version replaces it at [rollout](#rollout).
+Move, don't copy — one file, one live version. A duplicate left behind goes stale at the
+first checked box, and the branch's version lands in `{{ base branch }}` at
+[rollout](#rollout) anyway. **Commit these files on the branch early** — they exist in no
+commit anywhere until you do, so until that first commit a forced worktree removal takes
+them with it.
 
 **Rules while the work is in flight:**
 
@@ -106,7 +109,7 @@ version replaces it at [rollout](#rollout).
 ## How to work this plan
 
 {{ Only if [Branch and worktree](#branch-and-worktree) exists: }} **Before task 1:**
-create the branch and worktree, then copy in the files listed in
+create the branch and worktree, then move in the files listed in
 [Branch and worktree](#branch-and-worktree) — the plan doc and any cited mockups/specs.
 Do this once, first.
 
@@ -145,7 +148,7 @@ nothing else.
 **Do**
 
 - {{ Only if [Branch and worktree](#branch-and-worktree) exists: }} Before delegating
-  Wave 1, create the branch and worktree yourself and copy in the files listed in that
+  Wave 1, create the branch and worktree yourself and move in the files listed in that
   section. One-time setup, not implementation — do it directly rather than delegating
   it.
 - Delegate every task to a sub-agent — implementation, testing, and committing
